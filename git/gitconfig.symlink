@@ -1,0 +1,55 @@
+[user]
+	name = Christopher Peplin
+	email = peplin@bueda.com
+	signingkey = "D963BFAF"
+[color]
+	diff = auto
+	status = auto
+	ui = auto
+    branch = auto
+[color "branch"]
+	current = yellow reverse
+	local = yellow
+	remote = green
+[color "diff"]
+	meta = yellow bold
+	frag = magenta bold
+	old = red bold
+	new = green bold
+	whitespace = red reverse
+[color "status"]
+	added = yellow
+	changed = green
+	untracked = cyan
+[core]
+	whitespace=fix,-indent-with-non-tab,trailing-space,-cr-at-eol
+	autocrlf=input
+	excludesfile = ~/.gitignore
+	editor = vim
+[alias]
+	st = status
+	ci = commit
+	co = checkout
+	br = branch
+	lg = log -p
+	last = 'log -1 HEAD'
+	unstage = 'reset HEAD --'
+	stash-unapply = '!git stash show -p | git apply -R'
+	promote = !~/.dotfiles/zsh/functions/git-promote
+	wtf	 = !~/.dotfiles/zsh/functions/git-wtf
+	rank-contributers = !~/.dotfiles/zsh/functions/git-rank-contributers
+[apply]
+	whitespace = nowarn
+[branch]
+	autosetupmerge = true
+[github]
+	user = peplin
+[push]
+	default = current
+[help]
+	autocorrect = 1
+[merge]
+	tool = meld
+[giggle]
+	main-window-maximized = true
+	main-window-geometry = 1160x1019+1127+33

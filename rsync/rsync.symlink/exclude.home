@@ -1,0 +1,13 @@
+*~
+.dropbox/
+.dropbox-dist/
+.dropbox-dist-new/
+.adobe/
+.cache/
+.VirtualBox/
+.gvfs/
+.macromedia/
+.thumbnails/
+*Cache/
+*global-messages-db.sqlite
+ImapMail/

@@ -8,3 +8,7 @@
 :backtrace: false
 :benchmark: false
 gem: --no-ri --no-rdoc
+gemhome: ~/.gem
+gempath:
+- ~/.gem
+- /usr/lib/ruby/gems/1.8

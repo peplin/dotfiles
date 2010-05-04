@@ -1,0 +1,6 @@
+*.vdi
+dev/
+4store/
+downloads/
+downloaded_programs/
+podcasts/

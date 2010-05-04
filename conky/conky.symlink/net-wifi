@@ -1,0 +1,66 @@
+# UBUNTU-CONKY
+# A comprehensive conky script, configured for use on
+# Ubuntu / Debian Gnome, without the need for any external scripts.
+
+# Create own window instead of using desktop (required in nautilus)
+background yes
+use_xft yes
+xftfont Liberation\ Mono:size=9
+xftalpha 1
+update_interval 2.0
+
+own_window yes
+own_window_transparent yes
+own_window_type normal
+own_window_hints undecorated,below,sticky,skip_taskbar,skip_pager
+
+# Use double buffering (reduces flicker, may not work for everyone)
+double_buffer yes
+
+# fiddle with window
+#use_spacer right
+
+# Minimum size of text area
+minimum_size 400 5
+maximum_width 300
+
+draw_shades no
+draw_outline no
+draw_borders no
+uppercase no
+
+# Default colors
+default_color white
+default_shade_color red
+default_outline_color 97b767
+
+# Text alignment
+alignment bottom_right
+
+# Gap between borders of screen and text
+gap_x 670
+gap_y 30
+
+maximum_width 300
+
+short_units yes
+pad_percents 2
+top_name_width 20
+
+# Subtract file system buffers from used memory?
+no_buffers yes
+
+# number of cpu samples to average
+# set to 1 to disable averaging
+cpu_avg_samples 2
+
+# stuff after 'TEXT' will be formatted on screen
+TEXT
+Down: $color${downspeed wlan0} KB/s ${alignr}Up: ${upspeed wlan0} KB/s
+${downspeedgraph wlan0 25,140 000000 lightgray} ${alignr}${upspeedgraph wlan0 
+25,140 000000 lightgray}$color
+Total: ${totaldown wlan0} ${alignr}Total: ${totalup wlan0}
+Inbound: ${tcp_portmon 1 32767 count} Outbound: ${tcp_portmon 32768 
+61000 count}${alignr}Total: ${tcp_portmon 1 65535 count}
+
+${color 97b767}NETWORK (${addr wlan0}, ${execi 3600 dig +short myip.opendns.com @resolver1.opendns.com}) ${hr 2}$color

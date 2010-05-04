@@ -1,0 +1,71 @@
+# UBUNTU-CONKY
+# A comprehensive conky script, configured for use on
+# Ubuntu / Debian Gnome, without the need for any external scripts.
+
+# Create own window instead of using desktop (required in nautilus)
+background yes
+use_xft yes
+xftfont Liberation\ Mono:size=9
+xftalpha 1
+update_interval 2.0
+
+own_window yes
+own_window_transparent yes
+own_window_type normal
+own_window_hints undecorated,below,sticky,skip_taskbar,skip_pager
+
+# Use double buffering (reduces flicker, may not work for everyone)
+double_buffer yes
+
+# fiddle with window
+#use_spacer right
+
+# Minimum size of text area
+minimum_size 400 5
+maximum_width 300
+
+draw_shades no
+draw_outline no
+draw_borders no
+uppercase no
+
+# Default colors
+default_color white
+default_shade_color red
+default_outline_color 97b767
+
+# Text alignment
+alignment bottom_right
+
+# Gap between borders of screen and text
+gap_x 15
+gap_y 20
+
+
+# Subtract file system buffers from used memory?
+no_buffers yes
+
+short_units yes
+pad_percents 2
+top_name_width 20
+
+# number of cpu samples to average
+# set to 1 to disable averaging
+cpu_avg_samples 2
+
+TEXT
+${execi 1000 cat /proc/cpuinfo | grep -m 1 'model name' | sed -e 's/model name.*: //' | sed -e 's/       / /'}
+${freq}MHz
+Load: ${loadavg}
+${color lightgray}${cpubar cpu1}$color
+${color lightgray}${cpubar cpu2}$color
+${cpugraph 000000 ffffff}
+Name${goto 170}CPU${goto 250}MEM${color}
+${top name 1}${goto 150}${top cpu 1}${goto 230}${top mem 1}
+${top name 2}${goto 150}${top cpu 2}${goto 230}${top mem 2}
+${top name 3}${goto 150}${top cpu 3}${goto 230}${top mem 3}
+${top name 4}${goto 150}${top cpu 4}${goto 230}${top mem 4}
+
+${color 97b767}CPU ${hr 2}$color
+$nodename $sysname $kernel on $machine
+Uptime: $uptime

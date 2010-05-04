@@ -1,48 +1,70 @@
-if [[ -n $SSH_CONNECTION ]]; then
-  export PS1='%m:%3~$(git_info_for_prompt)%# '
-else
-  export PS1='%3~$(git_info_for_prompt)%# '
-fi
-
-export EDITOR='mate -w'
-export PATH="~/bin:/usr/local/bin:/usr/local/sbin:$ZSH/bin:$PATH"
-export MANPATH="/usr/local/man:/usr/local/mysql/man:/usr/local/git/man:$MANPATH"
-export LSCOLORS="exfxcxdxbxegedabagacad"
-export CLICOLOR=true
-export RAILS_ENV=development
-
 fpath=($ZSH/zsh/functions $fpath)
 
-autoload -U $ZSH/zsh/functions/*(:t)
+if [ "$shell" = "/bin/zsh" ]; then
+    autoload -U $ZSH/zsh/functions/*(:t)
 
+    # Autoload zsh modules when they are referenced
+    zmodload -a zsh/stat stat
+    zmodload -a zsh/zpty zpty
+    zmodload -a zsh/zprof zprof
+    zmodload -ap zsh/mapfile mapfile
+    zmodload zsh/complist
+
+    autoload colors
+    autoload zsh/terminfo
+fi
+
+DIRSTACKSIZE=15
 HISTFILE=~/.zsh_history
 HISTSIZE=1000
 SAVEHIST=1000
 
-setopt NO_BG_NICE # don't nice background tasks
-setopt NO_HUP
-setopt NO_LIST_BEEP
-setopt LOCAL_OPTIONS # allow functions to have local options
-setopt LOCAL_TRAPS # allow functions to have local traps
-setopt HIST_VERIFY
-setopt SHARE_HISTORY # share history between sessions ???
-setopt EXTENDED_HISTORY # add timestamps to history
-setopt PROMPT_SUBST
-setopt CORRECT
-setopt COMPLETE_IN_WORD
-setopt IGNORE_EOF
+if [ "$SHELL" = "/bin/zsh" ]; then
+    # Set/unset shell options (case and underscore insensitive)
+    setopt append_history
+    setopt hist_ignore_dups
+    setopt hist_no_store # don't save 'history' cmd in history
+    setopt extended_history # add timestamps to history
+    setopt hist_verify
+    setopt hist_ignore_all_dups  # don't record dupes in history
+    setopt hist_reduce_blanks
 
-setopt APPEND_HISTORY # adds history
-setopt INC_APPEND_HISTORY SHARE_HISTORY  # adds history incrementally and share it across sessions
-setopt HIST_IGNORE_ALL_DUPS  # don't record dupes in history
-setopt HIST_REDUCE_BLANKS
+    setopt auto_cd
+    setopt extended_glob
+    setopt notify
+    setopt pushd_to_home
+    setopt cdable_vars
+    setopt auto_list
+    setopt rec_exact
+    setopt long_list_jobs
+    setopt auto_resume
+    setopt pushd_silent
+    setopt auto_pushd
+    setopt pushd_minus
+    setopt rcquotes
+    setopt mail_warning
+    setopt auto_param_slash # adds slash at end of tabbed dirs
+    setopt glob_dots # find dotfiles easier
+    setopt hash_cmds # save cmd location to skip PATH lookup
+    setopt list_rows_first # completion options left-to-right, top-to-bottom
+    setopt list_types # show file types in list
+    setopt mark_dirs # adds slash to end of completed dirs
 
-zle -N newtab
+    setopt no_hup
+    setopt local_options # allow functions to have local options
+    setopt local_traps # allow functions to have local traps
+    setopt prompt_subst
+    setopt complete_in_word
 
-bindkey '^[^[[D' backward-word
-bindkey '^[^[[C' forward-word
-bindkey '^[[5D' beginning-of-line
-bindkey '^[[5C' end-of-line
-bindkey '^[[3~' delete-char
-bindkey '^[^N' newtab
-bindkey '^?' backward-delete-char 
+    unsetopt bgnice
+    unsetopt beep
+    unsetopt list_beep
+
+    bindkey -e
+    bindkey ';5A' vi-beginning-of-line
+    bindkey ';5B' vi-end-of-line
+    bindkey ';5C' forward-word
+    bindkey ';5D' backward-word
+
+    source /etc/zsh_command_not_found
+fi
