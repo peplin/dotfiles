@@ -49,7 +49,7 @@ need_push () {
   fi
 }
  
-export PROMPT=$'%{\e[0;36m%}%1/%{\e[0m%}/ '
+export PROMPT=$'%{\e[1;32m%}%2~%{\e[0m%}/ '
 set_prompt () {
   export RPROMPT="$(project_name_color)$(git_dirty)$(need_push)"
 }
