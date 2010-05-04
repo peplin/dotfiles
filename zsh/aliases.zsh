@@ -1,4 +1,4 @@
-alias dotvim='mate $ZSH'
+alias dotvim='vim $ZSH'
 alias dotcd='cd $ZSH'
 
 alias reload='. ~/.zshrc'
