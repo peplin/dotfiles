@@ -1,5 +1,5 @@
 alias pyweb='python -m SimpleHTTPServer'
-alias rs='./manage.py rundevserver'
+alias rs='./manage.py runserver'
 alias rc='./manage.py shell'
 
 validatejson() {

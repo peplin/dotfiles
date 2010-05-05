@@ -1,6 +1,6 @@
 fpath=($ZSH/zsh/functions $fpath)
 
-if [ "$shell" = "/bin/zsh" ]; then
+if [ "$SHELL" = "/bin/zsh" ]; then
     autoload -U $ZSH/zsh/functions/*(:t)
 
     # Autoload zsh modules when they are referenced
