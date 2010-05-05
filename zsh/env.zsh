@@ -6,7 +6,7 @@ fi
 
 export EDITOR='vi'
 export PAGER="less"
-export PATH="~/bin:/usr/local/bin:/usr/local/sbin:$ZSH/bin:$PATH"
+export PATH="$HOME/bin:/usr/local/bin:/usr/local/sbin:$ZSH/bin:$PATH"
 export LSCOLORS="exfxcxdxbxegedabagacad"
 export CLICOLOR=true
 
