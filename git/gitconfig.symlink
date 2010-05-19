@@ -23,7 +23,6 @@
 	untracked = cyan
 [core]
 	whitespace=fix,-indent-with-non-tab,trailing-space,-cr-at-eol
-	autocrlf=input
 	excludesfile = ~/.gitignore
 	editor = vim
 [alias]
