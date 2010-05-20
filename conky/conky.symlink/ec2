@@ -1,0 +1,29 @@
+background yes
+use_xft yes
+xftfont Dejavu Sans:size=8
+xftalpha 0.5
+update_interval 1
+total_run_times 0
+override_utf8_locale no
+double_buffer yes
+
+own_window yes
+own_window_type normal
+own_window_transparent 1
+own_window_hints undecorated,below,sticky,skip_taskbar,skip_pager
+
+draw_shades no
+draw_outline no
+draw_borders no
+uppercase no
+use_spacer yes
+
+alignment top_right
+gap_x 25
+gap_y 25
+minimum_size 125 20
+maximum_width 160
+default_color FFFFFF
+
+TEXT
+${head /home/peplin/.conkec2 30 180}
