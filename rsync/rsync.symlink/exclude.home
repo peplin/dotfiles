@@ -11,3 +11,8 @@
 *Cache/
 *global-messages-db.sqlite
 ImapMail/
+*bueda/dbpedia
+*bueda/data-shiatsu/lace/inputs
+*bueda/data-shiatsu/lace/ouputs
+.vagrant/
+.gem/
