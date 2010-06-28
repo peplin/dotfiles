@@ -49,7 +49,10 @@
 [help]
 	autocorrect = 1
 [merge]
-	tool = meld
+	tool = vimdiff
+    keepBackup = false
+    keepTemporaries = false
+    prompt = false
 [giggle]
 	main-window-maximized = true
 	main-window-geometry = 1160x1019+1127+33
