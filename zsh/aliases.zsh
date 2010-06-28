@@ -10,6 +10,7 @@ alias fab='nocorrect fab'
 alias find='noglob find'
 alias knife='noglob knife'
 alias rake='noglob rake'
+alias ack='ack-grep'
 
 
 calc() { awk "BEGIN{ print $* }" ;}
