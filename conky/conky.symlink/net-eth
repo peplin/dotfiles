@@ -56,7 +56,7 @@ cpu_avg_samples 2
 
 # stuff after 'TEXT' will be formatted on screen
 TEXT
-Down: $color${downspeed eth0} KB/s ${alignr}Up: ${upspeed eth0} KB/s
+Down: $color${downspeed eth0}/s ${alignr}Up: ${upspeed eth0}/s
 ${downspeedgraph eth0 25,140 000000 lightgray} ${alignr}${upspeedgraph eth0 
 25,140 000000 lightgray}$color
 Total: ${totaldown eth0} ${alignr}Total: ${totalup eth0}

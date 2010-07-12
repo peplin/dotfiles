@@ -56,7 +56,7 @@ cpu_avg_samples 2
 
 # stuff after 'TEXT' will be formatted on screen
 TEXT
-Down: $color${downspeed wlan0} KB/s ${alignr}Up: ${upspeed wlan0} KB/s
+Down: $color${downspeed wlan0}/s ${alignr}Up: ${upspeed wlan0}/s
 ${downspeedgraph wlan0 25,140 000000 lightgray} ${alignr}${upspeedgraph wlan0 
 25,140 000000 lightgray}$color
 Total: ${totaldown wlan0} ${alignr}Total: ${totalup wlan0}
