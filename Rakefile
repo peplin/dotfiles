@@ -8,4 +8,7 @@ task :install do
     file = linkable.split('/').last.split('.').first
     `ln -fs "$PWD/#{linkable}" "$HOME/.#{file}"`
   end
+
+  `touch $HOME/.python_history`
+  `mkdir -p $HOME/bin`
 end
