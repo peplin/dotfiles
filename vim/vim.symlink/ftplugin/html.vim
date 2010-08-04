@@ -5,4 +5,4 @@ set formatoptions+=tl
 set makeprg=~/bin/validate-html.sh\ %
 set errorformat=%f:%l.%c-%m
 
-set shiftwidth=2
+set shiftwidth=4
