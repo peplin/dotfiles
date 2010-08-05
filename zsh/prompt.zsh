@@ -27,12 +27,12 @@ git_prompt_info () {
 }
  
 project_name () {
-  name=$(pwd | awk -F'Development/' '{print $2}' | awk -F/ '{print $1}')
+  name=$(pwd | awk -F'dev/' '{print $2}' | awk -F/ '{print $1}')
   echo $name
 }
  
 project_name_color () {
-#  name=$(project_name)
+  name=$(project_name)
   echo "%{\e[0;35m%}${name}%{\e[0m%}"
 }
  
