@@ -12,6 +12,8 @@ alias knife='noglob knife'
 alias rake='noglob rake'
 alias ack='ack-grep'
 
+alias alert='notify-send -i gnome-terminal \
+    "[$?] $(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/;\s*alert$//'\'')"'
 
 calc() { awk "BEGIN{ print $* }" ;}
 
