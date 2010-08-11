@@ -6,6 +6,7 @@ fi
 
 export EDITOR='vi'
 export PAGER="less"
+export LESS="-R"
 
 export PATH="$HOME/bin:/usr/local/bin:/usr/local/sbin:$ZSH/bin:$PATH"
 
