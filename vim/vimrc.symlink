@@ -183,3 +183,6 @@ map <leader>ws :%s/\s\+$//<CR>
 map <Leader>s <Plug>Vsurround
 map <Leader>S <Plug>Vsurround
 map <Leader>om :call PreviewMKD()<CR>
+
+" TODO ftdetect version of this isn't being picked up for some reason
+au BufRead,BufNewFile *.mkd,*.txt  set filetype=mkd

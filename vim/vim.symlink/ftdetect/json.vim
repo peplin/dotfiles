@@ -1,2 +1,2 @@
-au! BufRead,BufNewFile *.json		setfiletype json
+au BufRead,BufNewFile *.json		setfiletype json
 syntax on
