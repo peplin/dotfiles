@@ -19,6 +19,9 @@ let b:did_ftplugin = 1
 let s:cpo_save = &cpo
 set cpo&vim
 
+set shiftwidth=2
+set tabstop=2
+
 if has("gui_running") && !has("gui_win32")
   setlocal keywordprg=ri\ -T
 else
