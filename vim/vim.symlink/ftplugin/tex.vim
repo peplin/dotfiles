@@ -1,3 +1,3 @@
 set wrap
-set formatoptions +=a
+set formatoptions +=at
 set spell
