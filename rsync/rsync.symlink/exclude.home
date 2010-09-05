@@ -16,3 +16,4 @@ ImapMail/
 *bueda/data-shiatsu/lace/ouputs
 .vagrant/
 .gem/
+.virtualenvs
