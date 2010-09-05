@@ -26,7 +26,7 @@
 	excludesfile = ~/.gitignore
 	editor = vim
 [alias]
-	st = status -s
+	st = status -sb
 	ci = commit
 	co = checkout
 	br = branch
