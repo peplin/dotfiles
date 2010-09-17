@@ -3,3 +3,8 @@
 *~
 *.pyc
 .*.swp
+*blx.bib
+*.aux
+*.bbl
+*.blg
+*.log
