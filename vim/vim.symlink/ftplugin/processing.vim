@@ -6,7 +6,7 @@ let b:did_ftplugin = 1
 
 setlocal cindent
 setlocal cinkeys-=0#
-setlocal formatoptions-=t formatoptions+=croql
+setlocal formatoptions+=croql
 setlocal suffixesadd=.pde
 
 let b:undo_ftplugin = "set cin< cink< fo< sua< et< sw< ts<"
