@@ -58,9 +58,7 @@ set statusline+=%<%P                         " file position
 
 set hidden
 
-" normally don't automatically format `text' as it is typed, IE only do this
-" with comments, at 80 characters:
-set formatoptions-=t
+set formatoptions+=t
 set textwidth=80
 
 " get rid of the default style of C comments, and define a style with two stars
