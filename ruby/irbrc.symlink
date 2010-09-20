@@ -2,9 +2,12 @@
 require 'irb/completion'
 require 'irb/ext/save-history'
 require 'rubygems'
-require 'interactive_editor'
-has_hirb = require 'hirb'
-Hirb.enable unless has_hirb == nil
+begin
+  require 'hirb'
+  Hirb.enable
+rescue LoadError => err
+  warn "Couldn't load Hirb: #{err}"
+end
 
 IRB.conf[:SAVE_HISTORY] = 1000
 IRB.conf[:HISTORY_FILE] = "#{ENV['HOME']}/.irb_history"
@@ -42,4 +45,4 @@ def r
   reload!
 end
 
-load File.dirname(__FILE__) + '/.railsrc' if $0 == 'irb' && ENV['RAILS_ENV']
+load File.dirname(__FILE__) + '/.railsrc' if $0 == 'script/rails'
