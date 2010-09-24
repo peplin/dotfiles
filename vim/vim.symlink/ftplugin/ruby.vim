@@ -230,6 +230,8 @@ function! RubyCursorIdentifier()
   return stripped == '' ? expand("<cword>") : stripped
 endfunction
 
+map <F7> Odebugger # TODO<esc>
+
 "
 " Instructions for enabling "matchit" support:
 "
