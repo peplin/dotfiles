@@ -1,4 +1,4 @@
-alias sc='script/console'
-alias ss='script/server'
+alias rc='rails console'
+alias rs='rails server'
 alias tlog='tail -f log/development.log'
-alias s="ps aux | grep \"[r]uby\" | grep script/server || echo \"You're not running any, dawg.\""
+alias s="ps aux | grep \"[r]uby\" | grep \"rails server\" || echo \"You're not running any, dawg.\""
