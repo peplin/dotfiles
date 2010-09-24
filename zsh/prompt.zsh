@@ -1,5 +1,6 @@
 # cheers, @ehrenmurdick
 # http://github.com/ehrenmurdick/config/blob/master/zsh/prompt.zsh
+autoload colors && colors
 
 git_branch() {
   echo $(git symbolic-ref HEAD 2>/dev/null | awk -F/ {'print $NF'})
@@ -13,9 +14,9 @@ git_dirty() {
   else
     if [[ $st == "nothing to commit (working directory clean)" ]]
     then
-      echo "%{\033[1;38m%}$(git_prompt_info)%{\033[0m%}"
+      echo "%{$fg_bold[green]%}$(git_prompt_info)%{$reset_color%}"
     else
-      echo "%{\033[1;31m%}$(git_prompt_info)%{\033[0m%}"
+      echo "%{$fg_bold[red]%}$(git_prompt_info)%{$reset_color%}"
     fi
   fi
 }
@@ -54,10 +55,14 @@ need_push () {
     echo "%{\e[0;32m%}+%{\e[0m%}"
   fi
 }
- 
-export PROMPT=$'%{\e[1;32m%}%2~%{\e[0m%}/ '
+
+directory_name(){
+  echo "%{$fg_bold[green]%}%1/%\/%{$reset_color%}"
+}
+
+export PROMPT=$'$(directory_name) $(project_name_color)$(git_dirty)$(need_push)\n› '
 set_prompt () {
-  export RPROMPT="$(project_name_color)$(git_dirty)$(need_push)"
+    export RPROMPT=""
 }
  
 precmd() {
