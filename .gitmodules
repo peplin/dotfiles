@@ -1,3 +1,32 @@
 [submodule "vim/vim.symlink/bundle/fugitive"]
 	path = vim/vim.symlink/bundle/fugitive
 	url = http://github.com/tpope/vim-fugitive.git
+[submodule "vim/vim.symlink/bundle/gist"]
+	path = vim/vim.symlink/bundle/gist
+	url = http://github.com/mattn/gist-vim.git
+[submodule "vim/vim.symlink/bundle/lusty"]
+	path = vim/vim.symlink/bundle/lusty
+	url = http://github.com/sjbach/lusty.git
+[submodule "vim/vim.symlink/bundle/nerd"]
+	path = vim/vim.symlink/bundle/nerd
+	url = http://github.com/scrooloose/nerdtree.git
+[submodule "vim/vim.symlink/bundle/nerd_commenter"]
+	path = vim/vim.symlink/bundle/nerd_commenter
+	url = http://github.com/scrooloose/nerdcommenter.git
+[submodule "vim/vim.symlink/bundle/rails"]
+	path = vim/vim.symlink/bundle/rails
+	url = http://github.com/tpope/vim-rails.git
+[submodule "vim/vim.symlink/bundle/surround"]
+	path = vim/vim.symlink/bundle/surround
+	url = http://github.com/tpope/vim-surround.git
+    ignore = untracked
+[submodule "vim/vim.symlink/bundle/closetag"]
+	path = vim/vim.symlink/bundle/closetag
+	url = http://github.com/vim-scripts/closetag.vim.git
+[submodule "vim/vim.symlink/bundle/command-t"]
+	path = vim/vim.symlink/bundle/command-t
+	url = http://github.com/wincent/Command-T.git
+[submodule "vim/vim.symlink/bundle/snipmate"]
+	path = vim/vim.symlink/bundle/snipmate
+	url = http://github.com/msanders/snipmate.vim.git
+    ignore = untracked
