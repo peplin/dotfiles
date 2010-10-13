@@ -17,3 +17,4 @@ ImapMail/
 .vagrant/
 .gem/
 .virtualenvs
+.rvm/
