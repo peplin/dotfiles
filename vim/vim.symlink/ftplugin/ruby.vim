@@ -232,6 +232,8 @@ endfunction
 
 map <F7> Odebugger # TODO<esc>
 
+compiler ruby
+
 "
 " Instructions for enabling "matchit" support:
 "
