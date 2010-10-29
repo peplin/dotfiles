@@ -7,4 +7,5 @@
 *.aux
 *.bbl
 *.blg
+*.class
 *.log
