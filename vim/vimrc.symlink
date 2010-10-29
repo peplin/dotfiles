@@ -184,6 +184,7 @@ map <leader>ws :%s/\s\+$//<CR>
 map <Leader>s <Plug>Vsurround
 map <Leader>S <Plug>Vsurround
 map <Leader>om :call PreviewMKD()<CR>
+map <leader>m :make<CR><CR>:copen<CR>
 
 let NERDTreeIgnore=['\.pyc$', '\~$']
 
