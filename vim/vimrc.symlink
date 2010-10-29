@@ -190,3 +190,14 @@ let NERDTreeIgnore=['\.pyc$', '\~$']
 
 " TODO ftdetect version of this isn't being picked up for some reason
 au BufRead,BufNewFile *.mkd,*.md,*.txt  set filetype=mkd
+
+map <leader>q :call QFixToggle()<CR>
+function! QFixToggle()
+  if exists("g:qfix_win")
+    cclose
+    unlet g:qfix_win
+  else
+    copen 10
+    let g:qfix_win = bufnr("$")
+  endif
+endfunction
