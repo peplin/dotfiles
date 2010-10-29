@@ -33,5 +33,6 @@ task :install do
   end
   `touch $HOME/.python_history`
   `mkdir -p $HOME/bin`
+  `git submodule update --init --recursive`
 end
 task :default => 'install'
