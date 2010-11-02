@@ -1,6 +1,3 @@
-autoload -U compinit
-compinit
-
 # Completion Styles
 
 # list of completers to use

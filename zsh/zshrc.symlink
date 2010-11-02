@@ -11,5 +11,6 @@ for config_file ($ZSH/**/*.zsh) source $config_file
 # want in your public, versioned repo.
 [[ -f ~/.localrc ]] && .  ~/.localrc
 
-# initialize autocomplete just in case
+# initialize autocomplete here, otherwise functions won't be loaded
+autoload -U compinit
 compinit
