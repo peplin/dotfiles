@@ -12,9 +12,9 @@
 *global-messages-db.sqlite
 ImapMail/
 *bueda/dbpedia
-*bueda/data-shiatsu/lace/inputs
-*bueda/data-shiatsu/lace/ouputs
+*bueda/data-shiatsu/
 .vagrant/
 .gem/
 .virtualenvs
 .rvm/
+.quakelive/
