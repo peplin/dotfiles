@@ -14,6 +14,7 @@ alias rake='noglob rake'
 alias ack='ack-grep'
 alias curl='noglob curl'
 alias httparty='noglob httparty'
+alias wget='noglob wget'
 
 alias alert='notify-send -i gnome-terminal \
     "[$?] $(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/;\s*alert$//'\'')"'
