@@ -41,8 +41,7 @@ zstyle ':completion:*:*:kill:*:processes' list-colors '=(#b) #([0-9]#)*=0=01;31'
 #zstyle ':completion:*:processes' command 'ps ax -o pid,s,nice,stime,args | sed "/ps/d"'
 zstyle ':completion:*:*:kill:*:processes' command 'ps --forest -A -o pid,user,cmd'
 zstyle ':completion:*:processes-names' command 'ps axho command' 
-#zstyle ':completion:*:urls' local 'www' '/var/www/htdocs' 'public_html'
-#
+
 #NEW completion:
 # 1. All /etc/hosts hostnames are in autocomplete
 # 2. If you have a comment in /etc/hosts like #%foobar.domain,
@@ -50,7 +49,8 @@ zstyle ':completion:*:processes-names' command 'ps axho command'
 zstyle ':completion:*' hosts $(awk '/^[^#]/ {print $2 $3" "$4" "$5}' /etc/hosts | grep -v ip6- && grep "^#%" /etc/hosts | awk -F% '{print $2}') 
 # Filename suffixes to ignore during completion (except after rm command)
 zstyle ':completion:*:*:(^rm):*:*files' ignored-patterns '*?.o' '*?.c~' \
-    '*?.old' '*?.pro'
+    '*?.old' '*?.pro' '*?.aux' '*?.pyc' '*?.bbl' '*?.blg' '*?.toc' '*?.lof' \
+    '*?.lot' '*?.class'
 # the same for old style completion
 #fignore=(.o .c~ .old .pro)
 
