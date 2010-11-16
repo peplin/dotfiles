@@ -180,12 +180,14 @@ set grepformat=%f:%l:%m
 
 let mapleader=","
 map <leader>d :execute 'NERDTreeToggle ' . getcwd()<CR>
-map <leader>f :Ack
+map <leader>f :Ack\ 
 map <leader>ws :%s/\s\+$//<CR>
 map <Leader>s <Plug>Vsurround
 map <Leader>S <Plug>Vsurround
 map <Leader>om :call PreviewMKD()<CR>
 map <leader>m :make<CR><CR>:copen<CR>
+map <leader>v :vsp<CR>
+map <leader>s :sp<CR>
 
 let NERDTreeIgnore=['\.pyc$', '\~$', '\.aux$', '\.toc$', '\.png', '\.bbl', '\.blg', '\.lof', '\.log', '\.lot', '\.pdf', '-blx\.bib']
 
