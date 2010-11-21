@@ -24,7 +24,7 @@ set viminfo=/50,'50,r/mnt/zip,r/mnt/floppy,f0,h,\"100
 " first list the available options and complete the longest common part, then
 " have further <Tab>s cycle through the possibilities:
 set wildmode=list:longest,full
-set wildignore=*.o,*~,*.pyc,*.aux,*.jpg,*.png,*.bbl,*.toc
+set wildignore=*.o,*~,*.pyc
 
 " use "[RO]" for "[readonly]" to save space in the message line:
 set shortmess+=r
@@ -189,7 +189,7 @@ map <leader>m :make<CR><CR>:copen<CR>
 map <leader>v :vsp<CR>
 map <leader>s :sp<CR>
 
-let NERDTreeIgnore=['\.pyc$', '\~$', '\.aux$', '\.toc$', '\.png', '\.bbl', '\.blg', '\.lof', '\.log', '\.lot', '\.pdf', '-blx\.bib']
+let NERDTreeIgnore=['\.pyc$', '\~$', '\.png', '\.pdf']
 
 " TODO ftdetect version of this isn't being picked up for some reason
 au BufRead,BufNewFile *.mkd,*.md,*.txt  set filetype=mkd
