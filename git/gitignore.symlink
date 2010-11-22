@@ -3,6 +3,7 @@
 *~
 *.pyc
 .*.swp
+*.class
 *blx.bib
 *.aux
 *.bbl
@@ -10,5 +11,7 @@
 *.toc
 *.lof
 *.lot
-*.class
 *.log
+*.d
+*.fls
+*.make.temp
