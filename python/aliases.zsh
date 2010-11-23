@@ -1,6 +1,7 @@
 alias pyweb='python -m SimpleHTTPServer'
 alias mrs='./manage.py runserver'
 alias ms='./manage.py shell'
+alias ipython='python /usr/bin/ipython'
 
 validatejson() {
     cat $1 | python -m simplejson.tool
