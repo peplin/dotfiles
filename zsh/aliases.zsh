@@ -6,7 +6,6 @@ alias reload='. ~/.zshrc'
 alias mv='nocorrect mv'       # no spelling correction on mv
 alias cp='nocorrect cp'
 alias mkdir='nocorrect mkdir'
-alias fab='nocorrect fab'
 alias find='noglob find'
 alias scp='noglob scp'
 alias knife='noglob knife'
