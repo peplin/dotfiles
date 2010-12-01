@@ -50,7 +50,7 @@ zstyle ':completion:*' hosts $(awk '/^[^#]/ {print $2 $3" "$4" "$5}' /etc/hosts 
 # Filename suffixes to ignore during completion (except after rm command)
 zstyle ':completion:*:*:(^rm):*:*files' ignored-patterns '*?.o' '*?.c~' \
     '*?.old' '*?.pro' '*?.aux' '*?.pyc' '*?.bbl' '*?.blg' '*?.toc' '*?.lof' \
-    '*?.lot' '*?.class'
+    '*?.lot' '*?.class' '*?.make*' '*?.fls' '*?.d'
 # the same for old style completion
 #fignore=(.o .c~ .old .pro)
 
