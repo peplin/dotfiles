@@ -34,7 +34,7 @@ htmlize = ARGV.delete("-h")
 
 author = nil
 state = :pre_author
-`git log -M -C -C -p --no-color`.each do |l|
+`git log -M -C -C -p --no-color`.each_line do |l|
   case
   when (state == :pre_author || state == :post_author) && l =~ /Author: (.*)$/
     author = $1
@@ -42,7 +42,7 @@ state = :pre_author
     lines[author] ||= 0
   when state == :post_author && l =~ /^\+\+\+/
     state = :in_diff
-  when state == :in_diff && l =~ /^[\+\-]/
+  when state == :in_diff && l[0] =~ /^[\+\-]/
     lines[author] += 1
   when state == :in_diff && l =~ /^commit /
     state = :pre_author
