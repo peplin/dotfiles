@@ -185,7 +185,10 @@ map <leader>ws :%s/\s\+$//<CR>
 map <Leader>s <Plug>Vsurround
 map <Leader>S <Plug>Vsurround
 map <Leader>om :call PreviewMKD()<CR>
-map <leader>m :make<CR><CR>:copen<CR>
+map <leader>m :make<CR><CR>:copen<CR><CR>
+map <leader>n :cn<CR>
+map z :cn<CR>
+map <leader>p :cp<CR>
 map <leader>v :vsp<CR>
 map <leader>s :sp<CR>
 
