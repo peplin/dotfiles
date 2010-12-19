@@ -37,10 +37,6 @@ class Object
   end
 end
 
-def me
-  User.find_by_login('peplin')
-end
-
 def r
   reload!
 end

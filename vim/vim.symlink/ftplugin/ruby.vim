@@ -230,7 +230,7 @@ function! RubyCursorIdentifier()
   return stripped == '' ? expand("<cword>") : stripped
 endfunction
 
-map <F7> Odebugger # TODO<esc>
+map <F7> Orequire 'debug'; debugger # TODO<esc>
 
 compiler ruby
 
