@@ -1,5 +1,0 @@
-import timeit
-import startup
-
-def t(*args):
-    return timeit.Timer(*args).timeit()
