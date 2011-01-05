@@ -1,3 +1,4 @@
+--ignore-dir=coverage
 --type-add=ruby=.haml,.rake
 --type-set=markdown=.md,.mkd,.markdown
 --type-set=json=.json
