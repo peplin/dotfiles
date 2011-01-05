@@ -30,3 +30,6 @@
 	path = vim/vim.symlink/bundle/snipmate
 	url = http://github.com/msanders/snipmate.vim.git
     ignore = untracked
+[submodule "python/startup"]
+	path = python/startup
+	url = git@github.com:peplin/python-startup.git
