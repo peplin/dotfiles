@@ -33,3 +33,6 @@
 [submodule "python/startup"]
 	path = python/startup
 	url = git@github.com:peplin/python-startup.git
+[submodule "vim/vim.symlink/bundle/indent-guides"]
+	path = vim/vim.symlink/bundle/indent-guides
+	url = https://github.com/nathanaelkane/vim-indent-guides.git

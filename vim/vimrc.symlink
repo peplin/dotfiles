@@ -194,6 +194,9 @@ map <leader>s :sp<CR>
 
 let NERDTreeIgnore=['\.pyc$', '\~$', '\.png', '\.pdf']
 
+let g:indent_guides_start_level = 2
+let g:indent_guides_guide_size = 1
+
 " TODO ftdetect version of this isn't being picked up for some reason
 au BufRead,BufNewFile *.mkd,*.md,*.txt  set filetype=mkd
 
