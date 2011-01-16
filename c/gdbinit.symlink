@@ -57,7 +57,6 @@ List breakpoints
 end
 
 define bp
- set $SHOW_CONTEXT = 1
  break * $arg0
 end
 document bp
@@ -90,7 +89,6 @@ Usage: bpd num
 end
 
 define bpt
- set $SHOW_CONTEXT = 1
  tbreak $arg0
 end
 document bpt
@@ -99,7 +97,6 @@ Usage: bpt addr
 end
 
 define bpm
- set $SHOW_CONTEXT = 1
  awatch $arg0
 end
 document bpm
@@ -108,7 +105,6 @@ Usage: bpm addr
 end
 
 define bhb
- set $SHOW_CONTEXT = 1
  break * $arg0
 end
 document bhb
@@ -330,287 +326,15 @@ document hexdump
 Display a 16-byte hex/ASCII dump of arg0
 end
 
-# ________________data window__________________
-define ddump
- echo \033[36m
-
- printf "[%04X:%08X]------------------------", $ds, $data_addr
- printf "---------------------------------[ data]\n"
- echo \033[34m
- set $_count=0
- while ( $_count < $arg0 )
-  set $_i=($_count*0x10)
-  hexdump ($data_addr+$_i)
-  set $_count++
- end
-end
-document ddump
-Display $arg0 lines of hexdump for address $data_addr
-end
-
-define dd
- if ( ($arg0 & 0x40000000) || ($arg0 & 0x08000000) || ($arg0 & 0xBF000000) )
-  set $data_addr=$arg0
-  ddump 0x10
- else
-  printf "Invalid address: %08X\n", $arg0
- end
-end
-document dd
-Display 16 lines of a hex dump for $arg0
-end
-
-define datawin
- if ( ($esi & 0x40000000) || ($esi & 0x08000000) || ($esi & 0xBF000000) )
-  set $data_addr=$esi
- else
-  if ( ($edi & 0x40000000) || ($edi & 0x08000000) || ($edi & 0xBF000000) )
-   set $data_addr=$edi
-  else
-   if ( ($eax & 0x40000000) || ($eax & 0x08000000) || \
-        ($eax & 0xBF000000) )
-
-    set $data_addr=$eax
-   else
-    set $data_addr=$esp
-   end
-  end
- end
- ddump 2
-end
-document datawin
-Display esi, edi, eax, or esp in data window
-end
-
-# ________________process context______________
-define context
- echo \033[\033[36m\033]
- printf "----------------------------------------"
- printf "---------------------------------[ regs]\n"
- echo \033[32m
- reg
- echo \033[36m
- printf "[%04X:%08X]------------------------", $ss, $esp
- printf "---------------------------------[stack]\n"
- echo \033[34m
- hexdump $sp+0x30
- hexdump $sp+0x20
- hexdump $sp+0x10
- hexdump $sp
- datawin
- echo \033[36m
- printf "[%04X:%08X]------------------------", $cs, $eip
- printf "---------------------------------[ code]\n"
- echo \033[37m
- x /6i $pc
- echo \033[36m
- printf "---------------------------------------"
- printf "----------------------------------------\n"
- echo \033[0m
-end
-document context
-Print regs, stack, ds:esi, and disassemble cs:eip
-end
-
-define context-on
- set $SHOW_CONTEXT = 1
-end
-document context-on
-Enable display of context on every program stop
-end
-
-define context-off
- set $SHOW_CONTEXT = 1
-end
-document context-on
-Disable display of context on every program stop
-end
-
 # ________________process control______________
-define n
- ni
-end
-document n
-Step one instruction
-end
-
-define go
- stepi $arg0
-end
-document go
-Step # instructions
-end
-
-define pret
- finish
-end
-document pret
-Step out of current call
-end
-
-define init
- set $SHOW_CONTEXT = 1
- set $SHOW_NEST_INSN=0
- tbreak _init
- r
-end
-document init
-Run program; break on _init()
-end
-
-define start
- set $SHOW_CONTEXT = 1
- set $SHOW_NEST_INSN=0
- tbreak _start
- r
-end
-document start
-Run program; break on _start()
-end
-
-define sstart
- set $SHOW_CONTEXT = 1
- set $SHOW_NEST_INSN=0
- tbreak __libc_start_main
- r
-end
-document sstart
-Run program; break on __libc_start_main(). Useful for stripped executables.
-end
 
 define main
- set $SHOW_CONTEXT = 1
  set $SHOW_NEST_INSN=0
  tbreak main
  r
 end
 document main
 Run program; break on main()
-end
-
-# ________________eflags commands_______________
-define cfc
- if ($eflags & 1)
-  set $eflags = $eflags&~1
- else
-  set $eflags = $eflags|1
- end
-end
-document cfc
-change Carry Flag
-end
-
-define cfp
- if (($eflags >> 2) & 1 )
-  set $eflags = $eflags&~0x4
- else
-  set $eflags = $eflags|0x4
- end
-end
-document cfp
-change Carry Flag
-end
-
-define cfa
- if (($eflags >> 4) & 1 )
-  set $eflags = $eflags&~0x10
- else
-  set $eflags = $eflags|0x10
- end
-end
-document cfa
-change Auxiliary Carry Flag
-end
-
-define cfz
- if (($eflags >> 6) & 1 )
-  set $eflags = $eflags&~0x40
- else
-  set $eflags = $eflags|0x40
- end
-end
-document cfz
-change Zero Flag
-end
-
-define cfs
- if (($eflags >> 7) & 1 )
-  set $eflags = $eflags&~0x80
- else
-  set $eflags = $eflags|0x80
- end
-end
-document cfs
-change Sign Flag
-end
-
-define cft
- if (($eflags >>8) & 1 )
-  set $eflags = $eflags&100
- else
-  set $eflags = $eflags|100
- end
-end
-document cft
-change Trap Flag
-end
-
-define cfi
- if (($eflags >> 9) & 1 )
-  set $eflags = $eflags&~0x200
- else
-  set $eflags = $eflags|0x200
- end
-end
-document cfi
-change Interrupt Flag
-end
-
-define cfd
- if (($eflags >>0xA ) & 1 )
-  set $eflags = $eflags&~0x400
- else
-  set $eflags = $eflags|0x400
- end
-end
-document cfd
-change Direction Flag
-end
-
-define cfo
- if (($eflags >> 0xB) & 1 )
-  set $eflags = $eflags&~0x800
- else
-  set $eflags = $eflags|0x800
- end
-end
-document cfo
-change Overflow Flag
-end
-
-# --------------------patch---------------------
-define nop
- set * (unsigned char *) $arg0 = 0x90
-end
-document nop
-Patch byte at address arg0 to a NOP insn
-Usage: nop addr
-end
-
-define null
- set * (unsigned char *) $arg0 = 0
-end
-document null
-Patch byte at address arg0 to  NULL
-Usage: null addr
-end
-
-define int3
- set * (unsigned char *) $arg0 = 0xCC
-end
-document int3
-Patch byte at address arg0 to an INT3 insn
-Usage: int3 addr
 end
 
 # --------------------cflow---------------------
@@ -695,8 +419,6 @@ a conditional jump, a call, a return, or an interrupt.
 end
 
 define step_to_call
- set $_saved_ctx = $SHOW_CONTEXT
- set $SHOW_CONTEXT = 0
  set $SHOW_NEST_INSN=0
  set logging file /dev/null
  set logging on
@@ -711,13 +433,8 @@ define step_to_call
   end
  end
 
- if ( $_saved_ctx > 0 )
-  context
- else
-  x /i $pc
- end
+ x /i $pc
 
- set $SHOW_CONTEXT = 1
  set $SHOW_NEST_INSN=0
  set logging redirect off
  set logging off
@@ -729,7 +446,6 @@ the call is taken.
 end
 
 define trace_calls
- set $SHOW_CONTEXT = 0
  set $SHOW_NEST_INSN=0
  set $_nest = 1
  set listsize 0
@@ -765,7 +481,6 @@ define trace_calls
   #set logging file ~/gdb_trace_calls.txt
  end
 
- set $SHOW_CONTEXT = 1
  set $SHOW_NEST_INSN=0
  set logging redirect off
  set logging off
@@ -781,7 +496,6 @@ Note that this is very slow because gdb "set redirect on" does not work!
 end
 
 define trace_run
- set $SHOW_CONTEXT = 0
  set $SHOW_NEST_INSN=1
  set logging overwrite on
  set logging file ~/gdb_trace_run.txt
@@ -805,7 +519,6 @@ define trace_run
   stepi
  end
 
- set $SHOW_CONTEXT = 1
  set $SHOW_NEST_INSN=0
  set logging file gdb.txt
  set logging redirect off
@@ -825,9 +538,6 @@ end
 # _____________________misc_____________________
 # this makes 'context' be called at every BP/step
 define hook-stop
- if ( $SHOW_CONTEXT > 0 )
-  context
- end
  if ( $SHOW_NEST_INSN > 0 )
   set $x = $_nest
   while ($x > 0 )
@@ -1014,7 +724,6 @@ set input-radix 0x10
 set height 0
 set width 0
 # why do these not work???
-set $SHOW_CONTEXT = 1
 set $SHOW_NEST_INSN=0
 
 set disassembly-flavor intel
