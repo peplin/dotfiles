@@ -16,3 +16,4 @@
 *.fls
 *.make.temp
 .idea/
+*.o
