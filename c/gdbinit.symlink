@@ -837,6 +837,14 @@ define hook-stop
  end
 end
 
+define hook-backtrace
+    echo \033[01;33m
+end
+
+define hookpost-backtrace
+    echo \033[0m\n
+end
+
 define assemble
 printf "Hit Ctrl-D to start, type code to assemble, hit Ctrl-D when done.\n"
 printf "It is recommended to start with\n"
@@ -996,7 +1004,10 @@ end
 # __________________gdb options_________________
 set confirm off
 set verbose off
-set prompt \033[\033[31;m\033] gdb $ \033[0m
+# For regular gdb
+set prompt \033[01;31m\n> \033[0m
+set print array on
+set print pretty on
 set output-radix 0x10
 set input-radix 0x10
 # These make gdb never pause in its output
