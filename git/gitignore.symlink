@@ -3,6 +3,7 @@
 *~
 *.pyc
 .*.swp
+.*.swo
 *.class
 *blx.bib
 *.aux
