@@ -15,8 +15,6 @@ autocmd!
 
 
 " General {
-    " Assume a dark background
-    set background=dark
     set term=gnome-256color
     syntax on
 
@@ -56,18 +54,19 @@ autocmd!
 " }
 
 " Vim UI {
-    colors blackboard
+    colors ir_black
 
     " display the current mode and partially-typed commands in the status line:
     set showmode
     set showcmd
 
+    " disabled if the colorscheme takes care of it
     " highlight current line
-    set cursorline
+    "set cursorline
     " highlight bg color of current line
-    hi cursorline ctermbg=darkgrey guibg=#333333 cterm=NONE
+    "hi cursorline ctermbg=darkgrey guibg=#333333 cterm=NONE
     " highlight cursor
-    hi CursorColumn guibg=#333333
+    "hi CursorColumn guibg=#333333
 
     " show the ruler
     set ruler
