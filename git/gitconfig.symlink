@@ -27,7 +27,7 @@
 	editor = vim
 [alias]
 	st = status -sb
-	ci = commit
+	ci = commit -v
 	co = checkout
 	br = branch
 	lg = log -p
