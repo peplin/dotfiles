@@ -48,3 +48,6 @@
 [submodule "vim/vim.symlink/bundles/pydoc"]
 	path = vim/vim.symlink/bundles/pydoc
 	url = https://github.com/fs111/pydoc.vim.git
+[submodule "vim/vim.symlink/supertab"]
+	path = vim/vim.symlink/supertab
+    url = https://github.com/ervandew/supertab.git
