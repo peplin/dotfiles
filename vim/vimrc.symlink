@@ -44,10 +44,8 @@ set nowrap
 " use indents of 4 spaces, and have them copied down lines:
 set shiftwidth=4
 set tabstop=4
-set shiftround
 set expandtab
 set autoindent
-set smarttab
 
 set laststatus=2
 set statusline=
@@ -81,6 +79,7 @@ set comments+=b:\"
 " enable filetype detection:
 filetype on
 filetype plugin on
+filetype indent on
 
 " recognize anything at all with a .txt extension as being human-language text 
 " [this clobbers the `help' filetype, but that doesn't seem to prevent help
