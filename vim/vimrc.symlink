@@ -1,210 +1,366 @@
 " first clear any existing autocommands:
 autocmd!
 
-call pathogen#runtime_append_all_bundles()
-call pathogen#helptags()
+" Environment {
+    " Basics {
+        set nocompatible
+    " }
 
-colors blackboard
+    " Setup Bundle Support {
+    " The next two lines ensure that the ~/.vim/bundle/ system works
+        silent! call pathogen#runtime_append_all_bundles()
+        silent! call pathogen#helptags()
+    " }
+" }
 
-" * User Interface
 
-syntax on
+" General {
+    set background=dark         " Assume a dark background
+    set term=builtin_ansi       " Make arrow and other keys work
+    syntax on
 
-" have 100 lines of command-line (etc) history:
-set history=100
+    set virtualedit=onemore            " allow for cursor beyond last character
+    " have 100 lines of command-line (etc) history:
+    set history=1000
 
-" remember all of these between sessions, but only 50 search terms; also
-" remember info for 50 files, but never any on removable disks, don't remember
-" marks in files, don't rehighlight old search patterns, and only save up to
-" 100 lines of registers; including @10 in there should restrict input buffer
-" but it causes an error for me:
-set viminfo=/50,'50,r/mnt/zip,r/mnt/floppy,f0,h,\"100
+    " remember all of these between sessions, but only 50 search terms; also
+    " remember info for 50 files, but never any on removable disks, don't
+    " remember marks in files, don't rehighlight old search patterns, and only
+    " save up to 100 lines of registers; including @10 in there should restrict
+    " input buffer but it causes an error for me:
+    set viminfo=/50,'50,r/mnt/zip,r/mnt/floppy,f0,h,\"100
 
-" have command-line completion <Tab> (for filenames, help topics, option names)
-" first list the available options and complete the longest common part, then
-" have further <Tab>s cycle through the possibilities:
-set wildmode=list:longest,full
-set wildignore=*.o,*~,*.pyc
+    " use "[RO]" for "[readonly]" to save space in the message line:
+    set shortmess+=filmnrxoOtT
 
-" use "[RO]" for "[readonly]" to save space in the message line:
-set shortmess+=r
+    " don't have files trying to override this .vimrc:
+    set nomodeline
 
-" display the current mode and partially-typed commands in the status line:
-set showmode
-set showcmd
+    " Setting up the directories {
+        " backups are nice ...
+        set backup
+        set backupdir=$HOME/.vimbackup//  " but not when they clog .
+        set directory=$HOME/.vimswap//     " Same for swap files
+        set viewdir=$HOME/.vimviews//     " same for view files
 
-" don't have files trying to override this .vimrc:
-set nomodeline
+        "" Creating directories if they don't exist
+        silent execute '!mkdir -p $HOME/.vimbackup'
+        silent execute '!mkdir -p $HOME/.vimswap'
+        silent execute '!mkdir -p $HOME/.vimviews'
+        "make vim save view (state) (folds, cursor, etc)
+        au BufWinLeave * silent! mkview
+        au BufWinEnter * silent! loadview
+    " }
+" }
 
-" * Text Formatting -- General
+" Vim UI {
+    colors blackboard
 
-" don't make it look like there are line breaks where there aren't:
-set nowrap
+    " display the current mode and partially-typed commands in the status line:
+    set showmode
+    set showcmd
 
-" use indents of 4 spaces, and have them copied down lines:
-set shiftwidth=4
-set tabstop=4
-set expandtab
-set autoindent
+    " highlight current line
+    set cursorline
+    hi cursorline guibg=#333333     " highlight bg color of current line
+    hi CursorColumn guibg=#333333   " highlight cursor
 
-set laststatus=2
-set statusline=
-set statusline+=%-3.3n\                      " buffer number
-set statusline+=%f\                          " filename
-set statusline+=%h%m%r%w                     " status flags
-set statusline+=\[%{strlen(&ft)?&ft:'none'}] " file type
-set statusline+=\ %{fugitive#statusline()}     " fugitive
-set statusline+=%=                           " right align remainder
-set statusline+=%-14(%l,%c%V%)               " line, character
-set statusline+=%<%P                         " file position
+    " show the ruler
+    set ruler
+    set rulerformat=%30(%=\:b%n%y%m%r%w\ %l,%c%V\ %P%) " a ruler on steroids
 
-set hidden
+    " show partial commands in status line and selected characters/lines in
+    " visual mode
+    set showcmd
+    set laststatus=2
+    set statusline=
+    " buffer number
+    set statusline+=%-3.3n\
+    " filename
+    set statusline+=%f\
+    " status flags
+    set statusline+=%h%m%r%w
+    set statusline+=\[%{strlen(&ft)?&ft:'none'}] " file type
+    set statusline+=\ %{fugitive#statusline()}     " fugitive
+    " right align remainder
+    set statusline+=%=
+    set statusline+=%-14(%l,%c%V%)               " line, character
+    " file position
+    set statusline+=%<%P
 
-set formatoptions+=t
-set textwidth=80
+    set backspace=indent,eol,start     " backspace for dummys
+    " No extra spaces between rows
+    set linespace=0
+    " show matching brackets/parenthesis
+    set showmatch
 
-" get rid of the default style of C comments, and define a style with two stars
-" at the start of `middle' rows which (looks nicer and) avoids asterisks used
-" for bullet lists being treated like C comments; then define a bullet list
-" style for single stars (like already is for hyphens):
-set comments+=fb:*
+    " Search & Replace {
+        " show the `best match so far' as search strings are typed:
+        set incsearch
 
-" treat lines starting with a quote mark as comments (for `Vim' files, such as
-" this very one!), and colons as well so that reformatting usenet messages from
-" `Tin' users works OK:
-set comments+=b:\"
+        " highlight search results in the document
+        set hlsearch
 
-" * Text Formatting -- Specific File Formats
+        " make searches case-insensitive, unless they contain upper-case
+        " letters:
+        set ignorecase
+        set smartcase
 
-" enable filetype detection:
-filetype on
-filetype plugin on
-filetype indent on
+        " assume the /g flag on :s substitutions to replace all matches in a
+        " line:
+        set gdefault
 
-" recognize anything at all with a .txt extension as being human-language text 
-" [this clobbers the `help' filetype, but that doesn't seem to prevent help
-" from working properly]:
-augroup filetype
-  autocmd BufNewFile,BufRead *.txt set filetype=human
-augroup END
+    " }
 
-" * Search & Replace
+    " have command-line completion <Tab> (for filenames, help topics, option
+    " names) first list the available options and complete the longest common
+    " part, then have further <Tab>s cycle through the possibilities:
+    set wildmode=list:longest,full
+    set wildignore=*.o,*~,*.pyc
+    " show list instead of just completing
+    set wildmenu
 
-" make searches case-insensitive, unless they contain upper-case letters:
-set ignorecase
-set smartcase
+    " lines to scroll when cursor leaves screen
+    set scrolljump=5
+    " minimum lines to keep above and below cursor
+    set scrolloff=3
+    " auto fold code
+    set foldenable
+" }
 
-" show the `best match so far' as search strings are typed:
-set incsearch
+" Formatting {
+    " General {
+        " don't make it look like there are line breaks where there aren't:
+        set nowrap
+        " indent at the same level of the previous line
+        set autoindent
+        " use indents of 4 spaces
+        set shiftwidth=4
+        " tabs are spaces, not spaces
+        set expandtab
+        " an indentation every four columns
+        set tabstop=4
 
-" highlight search results in the document
-set hlsearch
+        " have % bounce between angled brackets, as well as t'other kinds:
+        set matchpairs+=<:>
 
-" assume the /g flag on :s substitutions to replace all matches in a line:
-set gdefault
+        set pastetoggle=<F4>
 
-" * Keystrokes -- Moving Around
+        " get rid of the default style of C comments, and define a style with
+        " two stars at the start of `middle' rows which (looks nicer and) avoids
+        " asterisks used for bullet lists being treated like C comments; then
+        " define a bullet list style for single stars (like already is for
+        " hyphens):
+        set comments+=fb:*
 
-" have the h and l cursor keys wrap between lines (like <Space> and <BkSpc> do
-" by default), and ~ covert case over line breaks; also have the cursor keys
-" wrap in insert mode:
-set whichwrap=h,l,~,[,]
+        " treat lines starting with a quote mark as comments (for `Vim' files,
+        " such as this very one!), and colons as well so that reformatting
+        " usenet messages from `Tin' users works OK:
+        set comments+=b:\"
 
-" scroll the window (but leaving the cursor in the same place) by a couple of
-" lines up/down with <Ins>/<Del> (like in `Lynx'):
-" [<Ins> by default is like i, and <Del> like x.]
-noremap <Ins> 2<C-Y>
-noremap <Del> 2<C-E>
+        set hidden
 
-" use <Ctrl>+N/<Ctrl>+P to cycle through files:
-" [<Ctrl>+N by default is like j, and <Ctrl>+P like k.]
-nnoremap <C-N> :next<CR>
-nnoremap <C-P> :prev<CR>
+        set formatoptions+=t
+        set textwidth=80
+    " }
+    " Specific File Formats {
+        " enable filetype detection:
+        filetype on
+        filetype plugin on
+        filetype indent on
 
-" have % bounce between angled brackets, as well as t'other kinds:
-set matchpairs+=<:>
+        " recognize anything at all with a .txt extension as being
+        " human-language text [this clobbers the `help' filetype, but that
+        " doesn't seem to prevent help from working properly]:
+        au BufNewFile,BufRead *.txt set filetype=human
 
-" * Keystrokes -- Formatting
+        " TODO ftdetect version of this isn't being picked up for some reason
+        au BufRead,BufNewFile *.mkd,*.md,*.txt  set filetype=mkd
+    " }
+" }
 
-" have Q reformat the current paragraph (or selected text if there is any):
-nnoremap Q gqap
-vnoremap Q gq
-
-" have Y behave analogously to D and C rather than to dd and cc (which is
-" already done by yy):
-noremap Y y$
-
-" * Keystrokes -- Toggles
-
-" Keystrokes to toggle options are defined here.  They are all set to normal
-" mode keystrokes beginning \t but some function keys (which won't work in all
-" terminals) are also mapped.
-
-" have \tp ("toggle paste") toggle paste on/off and report the change, and
-" where possible also have <F4> do this both in normal and insert mode:
-nnoremap \tp :set invpaste paste?<CR>
-nmap <F4> \tp
-imap <F4> <C-O>\tp
-set pastetoggle=<F4>
-
-" * Keystrokes -- Insert Mode
-
-" Hit F5 to highlight lines longer than 80 characters
-map <F5> /\%>80v.\+<CR>
-
-" Highlight whitespace errors
-" TODO enable this only for source code filetypes
-highlight rightMargin ctermbg=red
-highlight tabError ctermbg=red
-highlight trailingSpace ctermbg=red
-" TODO This isn't working at the moment
-match rightMargin /.\%>81v/
-"match trailingSpace /\s\+$/
-"match tabError /\t/
-match NonText /\s\s*$/
-
-let Tlist_GainFocus_On_ToggleOpen=1
-let Tlist_Process_File_Always=1
-let Tlist_Show_Menu=1
-let Tlist_Enable_Fold_Column=0
-let g:gist_detect_filetype = 1
-
-set grepprg=ack
-set grepformat=%f:%l:%m
+" Key Mappings {
 
 let mapleader=","
-map <leader>d :execute 'NERDTreeToggle ' . getcwd()<CR>
-map <leader>f :Ack\ 
-map <leader>ws :%s/\s\+$//<CR>
-map <leader>m :make<CR><CR>:copen<CR><CR>
-map <leader>n :cn<CR>
-map z :cn<CR>
-map <leader>p :cp<CR>
-map <leader>v :vsp<CR>
-map <leader>s :sp<CR>
-map <leader>e :FufFile **/<CR>
+
+    " Moving Around {
+
+        " have the h and l cursor keys wrap between lines (like <Space> and
+        " <BkSpc> do by default), and ~ covert case over line breaks; also have
+        " the cursor keys wrap in insert mode:
+        set whichwrap=h,l,~,[,]
+
+        " scroll the window (but leaving the cursor in the same place) by a
+        " couple of lines up/down with <Ins>/<Del> (like in `Lynx'): [<Ins> by
+        " default is like i, and <Del> like x.]
+        noremap <Ins> 2<C-Y>
+        noremap <Del> 2<C-E>
+
+        " use <Ctrl>+N/<Ctrl>+P to cycle through files:
+        " [<Ctrl>+N by default is like j, and <Ctrl>+P like k.]
+        nnoremap <C-N> :next<CR>
+        nnoremap <C-P> :prev<CR>
+
+        " Yank from the cursor to the end of the line, to be consistent with C
+        " and D.
+        nnoremap Y y$
+
+        map <leader>v :vsp<CR>
+        map <leader>s :sp<CR>
+
+        " Easier moving in tabs and windows
+        map <C-J> <C-W>j<C-W>_
+        map <C-K> <C-W>k<C-W>_
+        map <C-L> <C-W>l<C-W>_
+        map <C-H> <C-W>h<C-W>_
+        map <C-K> <C-W>k<C-W>_
+
+        " Shortcuts
+        " Change Working Directory to that of the current file
+        cmap cwd lcd %:p:h
+
+        " For when you forget to sudo.. Really Write the file.
+        cmap w!! w !sudo tee % >/dev/null
+    " }
+
+    " Formatting {
+
+        " have Q reformat the current paragraph (or selected text if there is
+        " any):
+        nnoremap Q gqap
+        vnoremap Q gq
+
+        " have Y behave analogously to D and C rather than to dd and cc (which
+        " is already done by yy):
+        noremap Y y$
+
+        " remove trailing whitespace and blank line whitespace
+        map <leader>ws :%s/\s\+$//<CR>
+
+    " }
+
+    " Toggles {
+        " Keystrokes to toggle options are defined here.  They are all set to
+        " normal mode keystrokes beginning \t but some function keys (which
+        " won't work in all terminals) are also mapped.
+
+        " have \tp ("toggle paste") toggle paste on/off and report the change,
+        " and where possible also have <F4> do this both in normal and insert
+        " mode:
+        nnoremap \tp :set invpaste paste?<CR>
+        nmap <F4> \tp
+        imap <F4> <C-O>\tp
+
+        " Hit F5 to highlight lines longer than 80 characters
+        map <F5> /\%>80v.\+<CR>
+    " }
+
+    " Compiling {
+        map <leader>m :make<CR><CR>:copen<CR><CR>
+        map <leader>n :cn<CR>
+        map z :cn<CR>
+        map <leader>p :cp<CR>
+    " }
+" }
+
+" Highlighting {
+    " Highlight whitespace errors
+    " TODO enable this only for source code filetypes
+    highlight rightMargin ctermbg=red
+    highlight tabError ctermbg=red
+    highlight trailingSpace ctermbg=red
+    " TODO This isn't working at the moment
+    match rightMargin /.\%>81v/
+    "match trailingSpace /\s\+$/
+    "match tabError /\t/
+    match NonText /\s\s*$/
+" }
 
 " Plugins {
+    " FuzzyFinder {
+        map <leader>e :FufFile **/<CR>
+    " }
+
+    " Gist {
+        let g:gist_detect_filetype = 1
+    " }
+
+    " Ack {
+        map <leader>f :Ack\
+        set grepprg=ack
+        set grepformat=%f:%l:%m
+    " }
     " NERDTree {
+        map <leader>d :execute 'NERDTreeToggle ' . getcwd()<CR>
         let NERDTreeIgnore=['\.pyc$', '\~$', '\.png', '\.pdf']
+    " }
+
+    " NERDComment {
+        "comment out line(s) in visual mode
+        vmap  o  :call NERDComment(1, 'toggle')<CR>
+        let g:NERDShutUp=1
     " }
 
     " indent-guide {
         let g:indent_guides_start_level = 2
         let g:indent_guides_guide_size = 1
     " }
-    
+
     " Supertab {
         let g:SuperTabDefaultCompletionType = "context"
-        "let g:SuperTabContextDefaultCompletionType = "&lt;c-x>&lt;c-o>"
+        let g:SuperTabContextDefaultCompletionType = "<c-x><c-o>"
         let g:SuperTabMappingForward = "<tab>"
         let g:SuperTabMappingBackward = "<s-tab>"
     " }
+
+    " TODO set up tags
+    " Ctags {
+        set tags=./tags;/,~/.vimtags
+    " }
+
+    " EasyTags {
+        let g:easytags_cmd = '/usr/local/bin/ctags'
+    " }
+
+    " SnipMate {
+        " Setting the author var
+        let g:snips_author = 'Christopher Peplin <chris.peplin@rhubarbtech.com>'
+        " Shortcut for reloading snippets, useful when developing
+        nnoremap ,smr <esc>:exec ReloadAllSnippets()<cr>
+    " }
+
+    " OmniComplete {
+        "if has("autocmd") && exists("+omnifunc")
+            "autocmd Filetype *
+                "\if &omnifunc == "" |
+                "\setlocal omnifunc=syntaxcomplete#Complete |
+                "\endif
+        "endif
+
+        " Popup menu hightLight Group
+        "highlight Pmenu     ctermbg=13     guibg=DarkBlue
+        "highlight PmenuSel     ctermbg=7     guibg=DarkBlue         guifg=LightBlue
+        ""highlight PmenuSbar ctermbg=7     guibg=DarkGray
+        ""highlight PmenuThumb             guibg=Black
+
+        "hi Pmenu  guifg=#000000 guibg=#F8F8F8 ctermfg=black ctermbg=Lightgray
+        "hi PmenuSbar  guifg=#8A95A7 guibg=#F8F8F8 gui=NONE ctermfg=darkcyan ctermbg=lightgray cterm=NONE
+        "hi PmenuThumb  guifg=#F8F8F8 guibg=#8A95A7 gui=NONE ctermfg=lightgray ctermbg=darkcyan cterm=NONE
+
+        "" some convenient mappings
+        "inoremap <expr> <Esc>      pumvisible() ? "\<C-e>" : "\<Esc>"
+        "inoremap <expr> <CR>       pumvisible() ? "\<C-y>" : "\<CR>"
+        "inoremap <expr> <Down>     pumvisible() ? "\<C-n>" : "\<Down>"
+        "inoremap <expr> <Up>       pumvisible() ? "\<C-p>" : "\<Up>"
+        "inoremap <expr> <C-d>        pumvisible() ? "\<PageDown>\<C-p>\<C-n>" : "\<C-d>"
+        "inoremap <expr> <C-u>      pumvisible() ? "\<PageUp>\<C-p>\<C-n>" : "\<C-u>"
+
+        "" automatically open and close the popup menu / preview window
+        "au CursorMovedI,InsertLeave * if pumvisible() == 0|silent! pclose|endif
+        "set completeopt=menu,longest,preview
+    " }
+
 " }
-
-
-" TODO ftdetect version of this isn't being picked up for some reason
-au BufRead,BufNewFile *.mkd,*.md,*.txt  set filetype=mkd
 
 map <leader>q :call QFixToggle()<CR>
 function! QFixToggle()
