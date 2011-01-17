@@ -15,11 +15,14 @@ autocmd!
 
 
 " General {
-    set background=dark         " Assume a dark background
-    set term=builtin_ansi       " Make arrow and other keys work
+    " Assume a dark background
+    set background=dark
+    " Make arrow and other keys work
+    set term=builtin_ansi
     syntax on
 
-    set virtualedit=onemore            " allow for cursor beyond last character
+    " allow for cursor beyond last character
+    set virtualedit=onemore
     " have 100 lines of command-line (etc) history:
     set history=1000
 
@@ -62,8 +65,10 @@ autocmd!
 
     " highlight current line
     set cursorline
-    hi cursorline guibg=#333333     " highlight bg color of current line
-    hi CursorColumn guibg=#333333   " highlight cursor
+    " highlight bg color of current line
+    hi cursorline ctermbg=darkgrey guibg=#333333 cterm=NONE
+    " highlight cursor
+    hi CursorColumn guibg=#333333
 
     " show the ruler
     set ruler
@@ -88,7 +93,8 @@ autocmd!
     " file position
     set statusline+=%<%P
 
-    set backspace=indent,eol,start     " backspace for dummys
+    " backspace for dummys
+    set backspace=indent,eol,start
     " No extra spaces between rows
     set linespace=0
     " show matching brackets/parenthesis
