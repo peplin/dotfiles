@@ -164,6 +164,7 @@ map <F5> /\%>80v.\+<CR>
 highlight rightMargin ctermbg=red
 highlight tabError ctermbg=red
 highlight trailingSpace ctermbg=red
+" TODO This isn't working at the moment
 match rightMargin /.\%>81v/
 "match trailingSpace /\s\+$/
 "match tabError /\t/
@@ -182,20 +183,19 @@ let mapleader=","
 map <leader>d :execute 'NERDTreeToggle ' . getcwd()<CR>
 map <leader>f :Ack\ 
 map <leader>ws :%s/\s\+$//<CR>
-map <Leader>s <Plug>Vsurround
-map <Leader>S <Plug>Vsurround
-map <Leader>om :call PreviewMKD()<CR>
 map <leader>m :make<CR><CR>:copen<CR><CR>
 map <leader>n :cn<CR>
 map z :cn<CR>
 map <leader>p :cp<CR>
 map <leader>v :vsp<CR>
 map <leader>s :sp<CR>
+map <leader>e :FufFile **/<CR>
 
 let NERDTreeIgnore=['\.pyc$', '\~$', '\.png', '\.pdf']
 
 let g:indent_guides_start_level = 2
 let g:indent_guides_guide_size = 1
+
 
 " TODO ftdetect version of this isn't being picked up for some reason
 au BufRead,BufNewFile *.mkd,*.md,*.txt  set filetype=mkd

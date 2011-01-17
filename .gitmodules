@@ -36,3 +36,9 @@
 [submodule "vim/vim.symlink/bundle/indent-guides"]
 	path = vim/vim.symlink/bundle/indent-guides
 	url = https://github.com/nathanaelkane/vim-indent-guides.git
+[submodule "vim/vim.symlink/bundle/fuzzyfinder"]
+	path = vim/vim.symlink/bundle/fuzzyfinder
+	url = https://github.com/vim-scripts/FuzzyFinder.git
+[submodule "vim/vim.symlink/bundle/l9"]
+	path = vim/vim.symlink/bundle/l9
+	url = https://github.com/vim-scripts/L9.git
