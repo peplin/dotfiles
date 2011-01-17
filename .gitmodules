@@ -45,3 +45,6 @@
 [submodule "vim/vim.symlink/bundles/nginx"]
 	path = vim/vim.symlink/bundles/nginx
 	url = https://github.com/vim-scripts/nginx.vim.git
+[submodule "vim/vim.symlink/bundles/pydoc"]
+	path = vim/vim.symlink/bundles/pydoc
+	url = https://github.com/fs111/pydoc.vim.git
