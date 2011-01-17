@@ -150,12 +150,6 @@ set pastetoggle=<F4>
 
 " * Keystrokes -- Insert Mode
 
-" have <Tab> (and <Shift>+<Tab> where it works) change the level of
-" indentation:
-inoremap <Tab> <C-T>
-inoremap <S-Tab> <C-D>
-" [<Ctrl>+V <Tab> still inserts an actual tab character.]
-
 " Hit F5 to highlight lines longer than 80 characters
 map <F5> /\%>80v.\+<CR>
 
@@ -191,10 +185,23 @@ map <leader>v :vsp<CR>
 map <leader>s :sp<CR>
 map <leader>e :FufFile **/<CR>
 
-let NERDTreeIgnore=['\.pyc$', '\~$', '\.png', '\.pdf']
+" Plugins {
+    " NERDTree {
+        let NERDTreeIgnore=['\.pyc$', '\~$', '\.png', '\.pdf']
+    " }
 
-let g:indent_guides_start_level = 2
-let g:indent_guides_guide_size = 1
+    " indent-guide {
+        let g:indent_guides_start_level = 2
+        let g:indent_guides_guide_size = 1
+    " }
+    
+    " Supertab {
+        let g:SuperTabDefaultCompletionType = "context"
+        "let g:SuperTabContextDefaultCompletionType = "&lt;c-x>&lt;c-o>"
+        let g:SuperTabMappingForward = "<tab>"
+        let g:SuperTabMappingBackward = "<s-tab>"
+    " }
+" }
 
 
 " TODO ftdetect version of this isn't being picked up for some reason
