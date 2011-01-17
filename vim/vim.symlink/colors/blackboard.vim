@@ -45,6 +45,10 @@ if has("gui_running")
   highlight Search guibg=#1C3B79
   highlight PreProc guifg=#FF5600
 
+  " StatusLine
+  highlight StatusLine  guifg=#000000 guibg=#ffffaf gui=italic
+  highlight StatusLineNC  guifg=#000000 guibg=#ffffff gui=NONE
+
   "Invisible character colors
   highlight NonText guifg=#4a4a59
   highlight SpecialKey guifg=#4a4a59
@@ -84,4 +88,12 @@ if has("gui_running")
   "Markdown colors
   highlight markdownCode guifg=#61CE3C guibg=#070a15
   highlight link markdownCodeBlock markdownCode
+
+  "Git colors
+  highlight gitcommitSelectedFile guifg=#61CE3C
+  highlight gitcommitDiscardedFile guifg=#C23621
+  highlight gitcommitWarning guifg=#C23621
+  highlight gitcommitBranch guifg=#FFDE00
+  highlight gitcommitHeader guifg=#84A7C1
+
 end

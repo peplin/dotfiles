@@ -17,8 +17,7 @@ autocmd!
 " General {
     " Assume a dark background
     set background=dark
-    " Make arrow and other keys work
-    set term=builtin_ansi
+    set term=gnome-256color
     syntax on
 
     " allow for cursor beyond last character
@@ -80,9 +79,9 @@ autocmd!
     set laststatus=2
     set statusline=
     " buffer number
-    set statusline+=%-3.3n\
+    set statusline+=%-3.3n
     " filename
-    set statusline+=%f\
+    set statusline+=%f
     " status flags
     set statusline+=%h%m%r%w
     set statusline+=\[%{strlen(&ft)?&ft:'none'}] " file type
