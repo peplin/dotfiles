@@ -13,8 +13,12 @@
 ImapMail/
 *bueda/dbpedia
 *bueda/data-shiatsu/
+*bueda/data-knowsiest/
 .vagrant/
 .gem/
 .virtualenvs
 .rvm/
 .quakelive/
+.config/chromium
+downloads
+*testdata/
