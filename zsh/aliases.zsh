@@ -15,6 +15,8 @@ alias curl='noglob curl'
 alias httparty='noglob httparty'
 alias wget='noglob wget'
 
+alias markdown2pdf='markdown2pdf -C ~/Dropbox/reference/markdown.tex'
+
 alias alert='notify-send -i gnome-terminal \
     "[$?] $(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/;\s*alert$//'\'')"'
 
