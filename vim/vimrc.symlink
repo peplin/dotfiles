@@ -51,6 +51,10 @@ autocmd!
         au BufWinLeave * silent! mkview
         au BufWinEnter * silent! loadview
     " }
+
+    ca Wq wq
+    ca W w
+    ca Q q
 " }
 
 " Vim UI {
