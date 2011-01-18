@@ -122,7 +122,7 @@ autocmd!
     set wildmode=list:longest,full
     set wildignore=*.o,*~,*.pyc
     " show list instead of just completing
-    set wildmenu
+    " set wildmenu
 
     " lines to scroll when cursor leaves screen
     set scrolljump=5
@@ -312,9 +312,9 @@ let mapleader=","
 
     " Supertab {
         let g:SuperTabDefaultCompletionType = "context"
-        let g:SuperTabContextDefaultCompletionType = "<c-x><c-o>"
-        let g:SuperTabMappingForward = "<tab>"
-        let g:SuperTabMappingBackward = "<s-tab>"
+        "let g:SuperTabContextDefaultCompletionType = "<c-x><c-n>"
+        "let g:SuperTabMappingForward = "<tab>"
+        "let g:SuperTabMappingBackward = "<s-tab>"
     " }
 
     " TODO set up tags
@@ -334,34 +334,25 @@ let mapleader=","
     " }
 
     " OmniComplete {
-        "if has("autocmd") && exists("+omnifunc")
-            "autocmd Filetype *
-                "\if &omnifunc == "" |
-                "\setlocal omnifunc=syntaxcomplete#Complete |
-                "\endif
-        "endif
+        if has("autocmd") && exists("+omnifunc")
+            autocmd Filetype *
+                \if &omnifunc == "" |
+                \setlocal omnifunc=syntaxcomplete#Complete |
+                \endif
+        endif
 
-        " Popup menu hightLight Group
-        "highlight Pmenu     ctermbg=13     guibg=DarkBlue
-        "highlight PmenuSel     ctermbg=7     guibg=DarkBlue         guifg=LightBlue
-        ""highlight PmenuSbar ctermbg=7     guibg=DarkGray
-        ""highlight PmenuThumb             guibg=Black
-
-        "hi Pmenu  guifg=#000000 guibg=#F8F8F8 ctermfg=black ctermbg=Lightgray
-        "hi PmenuSbar  guifg=#8A95A7 guibg=#F8F8F8 gui=NONE ctermfg=darkcyan ctermbg=lightgray cterm=NONE
-        "hi PmenuThumb  guifg=#F8F8F8 guibg=#8A95A7 gui=NONE ctermfg=lightgray ctermbg=darkcyan cterm=NONE
-
-        "" some convenient mappings
+        " some convenient mappings
+        " TODO this doesn't work at the moment - prints out pumvisible...
         "inoremap <expr> <Esc>      pumvisible() ? "\<C-e>" : "\<Esc>"
-        "inoremap <expr> <CR>       pumvisible() ? "\<C-y>" : "\<CR>"
+        "inoremap <expr> <CR>=pumvisible() ? "\<C-y>" : "\<CR>"
         "inoremap <expr> <Down>     pumvisible() ? "\<C-n>" : "\<Down>"
         "inoremap <expr> <Up>       pumvisible() ? "\<C-p>" : "\<Up>"
         "inoremap <expr> <C-d>        pumvisible() ? "\<PageDown>\<C-p>\<C-n>" : "\<C-d>"
         "inoremap <expr> <C-u>      pumvisible() ? "\<PageUp>\<C-p>\<C-n>" : "\<C-u>"
 
-        "" automatically open and close the popup menu / preview window
+        " automatically open and close the popup menu / preview window
         "au CursorMovedI,InsertLeave * if pumvisible() == 0|silent! pclose|endif
-        "set completeopt=menu,longest,preview
+        "set completeopt=longest,menu,preview
     " }
 
 " }
