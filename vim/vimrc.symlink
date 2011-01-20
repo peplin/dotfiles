@@ -299,7 +299,7 @@ let mapleader=","
         set grepformat=%f:%l:%m
     " }
     " NERDTree {
-        map <leader>d :execute 'NERDTreeToggle ' . getcwd()<CR>
+        map <leader>d :NERDTreeToggle<CR>
         let NERDTreeIgnore=['\.pyc$', '\~$', '\.png', '\.pdf']
     " }
 
