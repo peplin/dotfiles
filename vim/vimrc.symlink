@@ -294,7 +294,7 @@ let mapleader=","
     " }
 
     " Ack {
-        map <leader>f :Ack\
+        map <leader>f :Ack\  
         set grepprg=ack
         set grepformat=%f:%l:%m
     " }
