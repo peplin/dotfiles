@@ -170,6 +170,9 @@ autocmd!
 
         set formatoptions+=t
         set textwidth=80
+
+        " Don't insert two spaces after a sentence when joining lines.
+        set nojoinspaces
     " }
     " Specific File Formats {
         " enable filetype detection:
