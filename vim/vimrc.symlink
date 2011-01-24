@@ -58,7 +58,7 @@ autocmd!
 " }
 
 " Vim UI {
-    colors ir_black
+    colors wombat256mod
 
     " display the current mode and partially-typed commands in the status line:
     set showmode
@@ -170,6 +170,9 @@ autocmd!
 
         set formatoptions+=t
         set textwidth=80
+
+        " Don't insert two spaces after a sentence when joining lines.
+        set nojoinspaces
     " }
     " Specific File Formats {
         " enable filetype detection:
@@ -294,12 +297,12 @@ let mapleader=","
     " }
 
     " Ack {
-        map <leader>f :Ack\
+        map <leader>f :Ack\  
         set grepprg=ack
         set grepformat=%f:%l:%m
     " }
     " NERDTree {
-        map <leader>d :execute 'NERDTreeToggle ' . getcwd()<CR>
+        map <leader>d :NERDTreeToggle<CR>
         let NERDTreeIgnore=['\.pyc$', '\~$', '\.png', '\.pdf']
     " }
 
@@ -333,6 +336,7 @@ let mapleader=","
     " SnipMate {
         " Setting the author var
         let g:snips_author = 'Christopher Peplin <chris.peplin@rhubarbtech.com>'
+        let g:snippets_dir = '~/.vim/snippets'
         " Shortcut for reloading snippets, useful when developing
         nnoremap ,smr <esc>:exec ReloadAllSnippets()<cr>
     " }
