@@ -18,4 +18,5 @@
 *.make.temp
 .idea/
 *.o
+gmon.out
 .gdb_history
