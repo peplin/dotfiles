@@ -19,7 +19,7 @@ autocmd!
     syntax on
 
     " allow for cursor beyond last character
-    set virtualedit=onemore
+    " set virtualedit=onemore
     " have 100 lines of command-line (etc) history:
     set history=1000
 
