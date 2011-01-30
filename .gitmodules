@@ -62,3 +62,6 @@
 [submodule "vim/vim.symlink/snippets"]
 	path = vim/vim.symlink/snippets
 	url = git@github.com:peplin/snipmate-snippets.git
+[submodule "node/nvm.symlink"]
+	path = node/nvm.symlink
+	url = git://github.com/creationix/nvm.git
