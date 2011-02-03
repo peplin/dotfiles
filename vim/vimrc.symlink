@@ -15,7 +15,6 @@ autocmd!
 
 
 " General {
-    set term=gnome-256color
     syntax on
 
     " allow for cursor beyond last character
