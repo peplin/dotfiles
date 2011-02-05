@@ -57,7 +57,7 @@ autocmd!
 " }
 
 " Vim UI {
-    colors wombat256mod
+    colors wombat
 
     " display the current mode and partially-typed commands in the status line:
     set showmode
