@@ -77,3 +77,5 @@ termcapinfo xterm|xterms|xs|rxvt ti@:te@
 
 # Enable non-blocking mode to better cope with flaky ssh connections.
 defnonblock 5
+
+setenv SSH_AUTH_SOCK "/tmp/ssh-agent-$USER-screen"
