@@ -292,10 +292,6 @@ let mapleader=","
 " }
 
 " Plugins {
-    " FuzzyFinder {
-        map <leader>e :FufFile **/<CR>
-    " }
-
     " Gist {
         let g:gist_detect_filetype = 1
     " }
