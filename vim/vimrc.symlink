@@ -81,8 +81,10 @@ autocmd!
     set showcmd
     set laststatus=2
     set statusline=
-    " buffer number
-    set statusline+=%-3.3n
+    " syntastic
+    set statusline+=%#warningmsg#
+    set statusline+=%{SyntasticStatuslineFlag()}
+    set statusline+=%*
     " filename
     set statusline+=%f
     " status flags
@@ -294,6 +296,12 @@ let mapleader=","
 " Plugins {
     " Gist {
         let g:gist_detect_filetype = 1
+    " }
+
+    " Syntastic {
+        let g:syntastic_enable_signs=1
+        "let g:syntastic_auto_loc_list=1
+        "let g:syntastic_quiet_warnings=1
     " }
 
     " Ack {
