@@ -102,6 +102,10 @@ autocmd!
     " show matching brackets/parenthesis
     set showmatch
 
+    " turn the status line red when in insert mode
+    au InsertEnter * hi StatusLine ctermbg=16 ctermfg=1
+    au InsertLeave * hi StatusLine ctermbg=16 ctermfg=8
+
     " Search & Replace {
         " show the `best match so far' as search strings are typed:
         set incsearch
