@@ -371,6 +371,10 @@ let mapleader=","
         "set completeopt=longest,menu,preview
     " }
 
+    " Gundo {
+        nnoremap <F8> :GundoToggle<CR>
+    " }
+
 " }
 
 map <leader>q :call QFixToggle()<CR>

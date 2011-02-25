@@ -68,3 +68,7 @@
 	path = vim/vim.symlink/bundle/syntastic
 	url = https://github.com/scrooloose/syntastic.git
     ignore = untracked
+[submodule "vim/vim.symlink/bundle/gundo"]
+	path = vim/vim.symlink/bundle/gundo
+	url = http://github.com/sjl/gundo.vim.git
+    ignore = untracked
