@@ -374,6 +374,10 @@ let mapleader=","
     " Gundo {
         nnoremap <F8> :GundoToggle<CR>
     " }
+    
+    " Command-T {
+        let g:CommandTMatchWindowAtTop = 1
+    " }
 
 " }
 
