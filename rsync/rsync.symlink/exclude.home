@@ -22,3 +22,10 @@ ImapMail/
 .config/chromium
 downloads
 *testdata/
+.mythtv/
+.mozilla/
+Trash/
+.m2/
+.quakelive/
+.wine/
+podcasts/
