@@ -140,6 +140,13 @@ autocmd!
     set scrolloff=3
     " auto fold code
     set foldenable
+
+    " Window height and width minimums {
+        set winwidth=10
+        set winminwidth=10
+        set winheight=5
+        set winminheight=5
+    " }
 " }
 
 " Formatting {
