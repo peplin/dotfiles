@@ -29,3 +29,7 @@ Trash/
 .quakelive/
 .wine/
 podcasts/
+eclipse/
+.vimswap/
+.vimviews/
+.vimbackup/
