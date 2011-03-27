@@ -13,7 +13,6 @@
 *.lof
 *.lot
 *.log
-*.d
 *.fls
 *.make.temp
 .idea/
