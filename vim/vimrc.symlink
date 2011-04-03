@@ -386,6 +386,10 @@ let mapleader=","
         let g:CommandTMatchWindowAtTop = 1
     " }
 
+    " RopeVim {
+        let ropevim_guess_project = 1
+    " }
+
 " }
 
 map <leader>q :call QFixToggle()<CR>
