@@ -4,3 +4,7 @@ set guioptions-=T
 set lines=60
 set co=80
 tab all
+
+nmap <C-V> "+gP
+imap <C-V> <ESC><C-V>i
+vmap <C-C> "+y
