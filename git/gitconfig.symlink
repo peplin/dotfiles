@@ -33,6 +33,7 @@
 	lg = log -p
     ch = cherry -v
     unmerged = branch -a --no-merged
+    merged = branch -a --merged
 	last = 'log -1 HEAD'
 	unstage = 'reset HEAD --'
 	stash-unapply = '!git stash show -p | git apply -R'
