@@ -76,6 +76,13 @@ autocmd!
     set ruler
     set rulerformat=%30(%=\:b%n%y%m%r%w\ %l,%c%V\ %P%) " a ruler on steroids
 
+    " Vertical line at 80 characters
+    if exists('+colorcolumn')
+          set colorcolumn=81
+      else
+        au BufWinEnter * let w:m2=matchadd('ErrorMsg', '\%>81v.\+', -1)
+    endif
+
     " show partial commands in status line and selected characters/lines in
     " visual mode
     set showcmd
