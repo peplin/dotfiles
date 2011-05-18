@@ -4,6 +4,7 @@
 [submodule "vim/vim.symlink/bundle/gist"]
 	path = vim/vim.symlink/bundle/gist
 	url = http://github.com/mattn/gist-vim.git
+    ignore = untracked
 [submodule "vim/vim.symlink/bundle/lusty"]
 	path = vim/vim.symlink/bundle/lusty
 	url = http://github.com/sjbach/lusty.git
