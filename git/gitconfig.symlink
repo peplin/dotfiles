@@ -59,3 +59,5 @@
 [giggle]
 	main-window-maximized = true
 	main-window-geometry = 1160x1019+1127+33
+[interactive]
+	singlekey = true
