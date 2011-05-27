@@ -397,6 +397,11 @@ let mapleader=","
         let ropevim_guess_project = 1
     " }
 
+    " Notes {
+        let g:notes_directory = "~/Dropbox/notes"
+
+    " }
+
 " }
 
 map <leader>q :call QFixToggle()<CR>
