@@ -59,19 +59,15 @@ autocmd!
 " }
 
 " Vim UI {
-    colors wombat256mod
+    if &t_Co == 256
+        colors wombat256mod
+    else
+        colors wombat
+    end
 
     " display the current mode and partially-typed commands in the status line:
     set showmode
     set showcmd
-
-    " disabled if the colorscheme takes care of it
-    " highlight current line
-    "set cursorline
-    " highlight bg color of current line
-    "hi cursorline ctermbg=darkgrey guibg=#333333 cterm=NONE
-    " highlight cursor
-    "hi CursorColumn guibg=#333333
 
     " show the ruler
     set ruler
@@ -119,6 +115,18 @@ autocmd!
     " turn the status line red when in insert mode
     au InsertEnter * hi StatusLine ctermbg=16 ctermfg=1
     au InsertLeave * hi StatusLine ctermbg=16 ctermfg=8
+
+    set confirm
+
+    " Layout / Text formatting {{{
+        " Conflict markers {{{
+            " Highlight conflict markers
+            match ErrorMsg '^\(<\|=\|>\)\{7\}\([^=].\+\)\?$'
+
+            " Shortcut to jump to next conflict marker
+            nmap <silent> <leader>c /^\(<\\|=\\|>\)\{7\}\([^=].\+\)\?$<CR>
+        " }}}
+    " }}}
 
     " Search & Replace {
         " show the `best match so far' as search strings are typed:
