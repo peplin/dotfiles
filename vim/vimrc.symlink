@@ -350,11 +350,6 @@ autocmd!
         "let g:SuperTabMappingBackward = "<s-tab>"
     " }
 
-    " TODO set up tags
-    " Ctags {
-        set tags=./tags;/,~/.vimtags
-    " }
-
     " SnipMate {
         " Setting the author var
         let g:snips_author = 'Christopher Peplin <chris.peplin@rhubarbtech.com>'
