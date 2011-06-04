@@ -37,9 +37,10 @@ autocmd!
     set nomodeline
 
     " Setting up the directories {
-        " backups are nice ...
-        set backup
-        set backupdir=$HOME/.vimbackup//  " but not when they clog .
+        " backups cause the file to be deleted + recreated in Dropbox, so
+        " disable them
+        set nobackup
+        set nowritebackup
         set directory=$HOME/.vimswap//     " Same for swap files
         set viewdir=$HOME/.vimviews//     " same for view files
 
