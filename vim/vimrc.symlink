@@ -355,10 +355,6 @@ autocmd!
         set tags=./tags;/,~/.vimtags
     " }
 
-    " EasyTags {
-        let g:easytags_cmd = '/usr/local/bin/ctags'
-    " }
-
     " SnipMate {
         " Setting the author var
         let g:snips_author = 'Christopher Peplin <chris.peplin@rhubarbtech.com>'
