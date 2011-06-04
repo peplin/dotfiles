@@ -78,8 +78,8 @@ autocmd!
 
     " Vertical line at 80 characters
     if exists('+colorcolumn')
-          set colorcolumn=81
-      else
+        set colorcolumn=81
+    else
         au BufWinEnter * let w:m2=matchadd('ErrorMsg', '\%>81v.\+', -1)
     endif
 
@@ -90,14 +90,18 @@ autocmd!
     set statusline=
     " syntastic
     set statusline+=%#warningmsg#
-    set statusline+=%{SyntasticStatuslineFlag()}
+    if exists('SyntasticStatuslineFlag')
+        set statusline+=%{SyntasticStatuslineFlag()}
+    endif
     set statusline+=%*
     " filename
     set statusline+=%f
     " status flags
     set statusline+=%h%m%r%w
     set statusline+=\[%{strlen(&ft)?&ft:'none'}] " file type
-    set statusline+=\ %{fugitive#statusline()}     " fugitive
+    if exists('fugitive')
+        set statusline+=\ %{fugitive#statusline()}
+    endif
     " right align remainder
     set statusline+=%=
     set statusline+=%-14(%l,%c%V%)               " line, character
@@ -172,8 +176,6 @@ autocmd!
         " have % bounce between angled brackets, as well as t'other kinds:
         set matchpairs+=<:>
 
-        set pastetoggle=<F4>
-
         " get rid of the default style of C comments, and define a style with
         " two stars at the start of `middle' rows which (looks nicer and) avoids
         " asterisks used for bullet lists being treated like C comments; then
@@ -206,13 +208,13 @@ autocmd!
         au BufNewFile,BufRead *.txt set filetype=human
 
         " TODO ftdetect version of this isn't being picked up for some reason
-        au BufRead,BufNewFile *.mkd,*.md,*.txt  set filetype=mkd
+        au BufRead,BufNewFile *.mkd,*.md  set filetype=mkd
     " }
 " }
 
 " Key Mappings {
 
-let mapleader=","
+    let mapleader=","
 
     " Moving Around {
 
@@ -278,6 +280,7 @@ let mapleader=","
         " have \tp ("toggle paste") toggle paste on/off and report the change,
         " and where possible also have <F4> do this both in normal and insert
         " mode:
+        set pastetoggle=<F4>
         nnoremap \tp :set invpaste paste?<CR>
         nmap <F4> \tp
         imap <F4> <C-O>\tp
@@ -399,7 +402,6 @@ let mapleader=","
 
     " Notes {
         let g:notes_directory = "~/Dropbox/notes"
-
     " }
 
 " }
