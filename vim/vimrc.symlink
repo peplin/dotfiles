@@ -318,15 +318,14 @@ autocmd!
 
     " Syntastic {
         let g:syntastic_enable_signs=1
-        "let g:syntastic_auto_loc_list=1
-        "let g:syntastic_quiet_warnings=1
     " }
 
     " Ack {
-        map <leader>f :Ack\  
+        map <leader>f :Ack\ 
         set grepprg=ack
         set grepformat=%f:%l:%m
     " }
+
     " NERDTree {
         map <leader>d :NERDTreeToggle<CR>
         let NERDTreeIgnore=['\.pyc$', '\~$', '\.png', '\.pdf']
@@ -343,13 +342,6 @@ autocmd!
         let g:indent_guides_guide_size = 1
     " }
 
-    " Supertab {
-        "let g:SuperTabDefaultCompletionType = "context"
-        "let g:SuperTabContextDefaultCompletionType = "<c-x><c-n>"
-        "let g:SuperTabMappingForward = "<tab>"
-        "let g:SuperTabMappingBackward = "<s-tab>"
-    " }
-
     " SnipMate {
         " Setting the author var
         let g:snips_author = 'Christopher Peplin <chris.peplin@rhubarbtech.com>'
@@ -360,12 +352,6 @@ autocmd!
 
     " OmniComplete {
         set omnifunc=syntaxcomplete#Complete
-        if has("autocmd") && exists("+omnifunc")
-            "autocmd Filetype *
-            "    \if &omnifunc == "" |
-            "    \setlocal omnifunc=syntaxcomplete#Complete |
-            "    \endif
-        endif
 
         " some convenient mappings
         " TODO this doesn't work at the moment - prints out pumvisible...
@@ -384,7 +370,7 @@ autocmd!
     " Gundo {
         nnoremap <F8> :GundoToggle<CR>
     " }
-    
+
     " Command-T {
         let g:CommandTMatchWindowAtTop = 1
     " }
