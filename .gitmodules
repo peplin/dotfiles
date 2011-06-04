@@ -80,3 +80,6 @@
 	path = vim/vim.symlink/bundle/notes
 	url = https://github.com/xolox/vim-notes.git
     ignore = untracked
+[submodule "vim/vim.symlink/bundle/easymotion"]
+	path = vim/vim.symlink/bundle/easymotion
+	url = https://github.com/Lokaltog/vim-easymotion.git

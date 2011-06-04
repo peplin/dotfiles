@@ -390,6 +390,11 @@ autocmd!
     " Notes {
         let g:notes_directory = "~/Dropbox/notes"
     " }
+    
+    " EasyMotion {
+        hi link EasyMotionShade  Comment
+        let g:EasyMotion_leader_key = 'm'
+    " }
 
 " }
 
