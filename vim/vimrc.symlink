@@ -301,7 +301,7 @@ autocmd!
     " Compiling {
         map <leader>m :make<CR><CR>:copen<CR><CR>
         map <leader>n :cn<CR>
-        map z :cn<CR>
+        " map z :cn<CR>
         map <leader>p :cp<CR>
     " }
 " }
