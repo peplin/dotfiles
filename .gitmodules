@@ -31,7 +31,7 @@
     ignore = untracked
 [submodule "vim/vim.symlink/bundle/snipmate"]
 	path = vim/vim.symlink/bundle/snipmate
-	url = http://github.com/msanders/snipmate.vim.git
+	url = https://github.com/garbas/vim-snipmate.git
     ignore = untracked
 [submodule "python/startup"]
 	path = python/startup
@@ -86,3 +86,9 @@
 [submodule "vim/vim.symlink/bundle/markdown"]
 	path = vim/vim.symlink/bundle/markdown
 	url = https://github.com/plasticboy/vim-markdown.git
+[submodule "vim/vim.symlink/bundle/tlib"]
+	path = vim/vim.symlink/bundle/tlib
+	url = https://github.com/tomtom/tlib_vim.git
+[submodule "vim/vim.symlink/bundle/addon-mw-utils"]
+	path = vim/vim.symlink/bundle/addon-mw-utils
+	url = https://github.com/MarcWeber/vim-addon-mw-utils.git
