@@ -75,7 +75,7 @@
 	url = git@github.com:peplin/ropevim
 [submodule "vim/vim.symlink/bundle/notes"]
 	path = vim/vim.symlink/bundle/notes
-	url = https://github.com/xolox/vim-notes.git
+	url = git@github.com:peplin/vim-notes.git
     ignore = untracked
 [submodule "vim/vim.symlink/bundle/easymotion"]
 	path = vim/vim.symlink/bundle/easymotion
