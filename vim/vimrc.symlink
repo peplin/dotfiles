@@ -150,7 +150,7 @@ autocmd!
     " names) first list the available options and complete the longest common
     " part, then have further <Tab>s cycle through the possibilities:
     set wildmode=list:longest,full
-    set wildignore=*.o,*~,*.pyc
+    set wildignore=*.o,*~,*.pyc,*.class
     " show list instead of just completing
     " set wildmenu
 
