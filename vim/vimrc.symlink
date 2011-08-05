@@ -213,9 +213,6 @@ autocmd!
         " human-language text [this clobbers the `help' filetype, but that
         " doesn't seem to prevent help from working properly]:
         au BufNewFile,BufRead *.txt set filetype=human
-
-        " TODO ftdetect version of this isn't being picked up for some reason
-        au BufRead,BufNewFile *.mkd,*.md  set filetype=mkd
     " }
 " }
 
