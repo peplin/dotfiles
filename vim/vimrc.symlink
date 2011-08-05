@@ -338,6 +338,7 @@ autocmd!
         "comment out line(s) in visual mode
         vmap  o  :call NERDComment(1, 'toggle')<CR>
         let g:NERDShutUp=1
+        let NERDSpaceDelims = 1
     " }
 
     " indent-guide {
