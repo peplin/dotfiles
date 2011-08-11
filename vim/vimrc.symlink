@@ -295,9 +295,9 @@ autocmd!
 
     " Compiling {
         map <leader>m :make<CR><CR>:copen<CR><CR>
-        " map <leader>n :cn<CR>
+        map <leader>j :cn<CR>
         " map z :cn<CR>
-        " map <leader>p :cp<CR>
+        map <leader>k :cp<CR>
     " }
 " }
 
