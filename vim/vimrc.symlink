@@ -324,7 +324,7 @@ autocmd!
     " }
 
     " Ack {
-        map <leader>f :Ack\ 
+        map <leader>f :Ack\
         set grepprg=ack
         set grepformat=%f:%l:%m
     " }
@@ -386,12 +386,16 @@ autocmd!
     " Notes {
         let g:notes_directory = "~/Dropbox/notes"
         let g:notes_suffix = ".txt"
-        map <leader>n :Note 
+        map <leader>n :Note
     " }
 
     " EasyMotion {
         hi link EasyMotionShade  Comment
         let g:EasyMotion_leader_key = 'm'
+    " }
+
+    " Eclim {
+        let g:EclimXmlValidate = 0
     " }
 
 " }
