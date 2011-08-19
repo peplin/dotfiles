@@ -396,6 +396,7 @@ autocmd!
 
     " Eclim {
         let g:EclimXmlValidate = 0
+        let g:EclimHtmlValidate = 0
     " }
 
 " }
