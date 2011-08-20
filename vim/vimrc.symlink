@@ -386,7 +386,7 @@ autocmd!
     " Notes {
         let g:notes_directory = "~/Dropbox/notes"
         let g:notes_suffix = ".txt"
-        map <leader>n :Note
+        map <leader>n :Note<space>
     " }
 
     " EasyMotion {
