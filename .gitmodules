@@ -15,10 +15,6 @@
 	path = vim/vim.symlink/bundle/surround
 	url = http://github.com/tpope/vim-surround.git
     ignore = untracked
-[submodule "vim/vim.symlink/bundle/closetag"]
-	path = vim/vim.symlink/bundle/closetag
-	url = http://github.com/vim-scripts/closetag.vim.git
-    ignore = untracked
 [submodule "vim/vim.symlink/bundle/command-t"]
 	path = vim/vim.symlink/bundle/command-t
 	url = http://github.com/wincent/Command-T.git
