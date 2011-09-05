@@ -324,9 +324,8 @@ autocmd!
     " }
 
     " Ack {
-        map <leader>f :Ack\
-        set grepprg=ack
-        set grepformat=%f:%l:%m
+        map <leader>f :Ack<space>
+        let g:ackprg="/usr/bin/ack-grep -H --nocolor --nogroup --column"
     " }
 
     " NERDComment {
