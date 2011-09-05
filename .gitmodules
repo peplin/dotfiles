@@ -75,3 +75,6 @@
 [submodule "vim/vim.symlink/bundle/addon-mw-utils"]
 	path = vim/vim.symlink/bundle/addon-mw-utils
 	url = https://github.com/MarcWeber/vim-addon-mw-utils.git
+[submodule "vim/vim.symlink/bundle/ragtag"]
+	path = vim/vim.symlink/bundle/ragtag
+	url = https://github.com/tpope/vim-ragtag.git
