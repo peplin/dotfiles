@@ -42,6 +42,7 @@
 	unstage = reset HEAD --
 	stash-unapply = '!git stash show -p | git apply -R'
 	rank-contributers = !~/.dotfiles/zsh/functions/git-rank-contributers
+	ctags = !.git/hooks/ctags
 [apply]
 	whitespace = nowarn
 [branch]
@@ -63,3 +64,5 @@
 	main-window-geometry = 1160x1019+1127+33
 [interactive]
 	singlekey = true
+[init]
+	templatedir = ~/.git_template
