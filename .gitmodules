@@ -81,3 +81,6 @@
 [submodule "vim/vim.symlink/bundle/endwise"]
 	path = vim/vim.symlink/bundle/endwise
 	url = https://github.com/tpope/vim-endwise.git
+[submodule "vim/vim.symlink/bundle/repeat"]
+	path = vim/vim.symlink/bundle/repeat
+	url = https://github.com/tpope/vim-repeat.git
