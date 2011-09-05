@@ -329,11 +329,6 @@ autocmd!
         set grepformat=%f:%l:%m
     " }
 
-    " NERDTree {
-        map <leader>d :NERDTreeToggle<CR>
-        let NERDTreeIgnore=['\.pyc$', '\~$', '\.png', '\.pdf']
-    " }
-
     " NERDComment {
         "comment out line(s) in visual mode
         vmap  o  :call NERDComment(1, 'toggle')<CR>

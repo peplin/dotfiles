@@ -5,9 +5,6 @@
 	path = vim/vim.symlink/bundle/gist
 	url = http://github.com/mattn/gist-vim.git
     ignore = untracked
-[submodule "vim/vim.symlink/bundle/nerd"]
-	path = vim/vim.symlink/bundle/nerd
-	url = http://github.com/scrooloose/nerdtree.git
 [submodule "vim/vim.symlink/bundle/nerd_commenter"]
 	path = vim/vim.symlink/bundle/nerd_commenter
 	url = http://github.com/scrooloose/nerdcommenter.git
