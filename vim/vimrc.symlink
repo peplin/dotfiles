@@ -324,14 +324,8 @@ autocmd!
     " }
 
     " Ack {
-        map <leader>f :Ack\
-        set grepprg=ack
-        set grepformat=%f:%l:%m
-    " }
-
-    " NERDTree {
-        map <leader>d :NERDTreeToggle<CR>
-        let NERDTreeIgnore=['\.pyc$', '\~$', '\.png', '\.pdf']
+        map <leader>f :Ack<space>
+        let g:ackprg="/usr/bin/ack-grep -H --nocolor --nogroup --column"
     " }
 
     " NERDComment {
@@ -386,7 +380,7 @@ autocmd!
     " Notes {
         let g:notes_directory = "~/Dropbox/notes"
         let g:notes_suffix = ".txt"
-        map <leader>n :Note 
+        map <leader>n :Note<space>
     " }
 
     " EasyMotion {
