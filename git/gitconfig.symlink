@@ -56,7 +56,7 @@
 [help]
 	autocorrect = 1
 [merge]
-	tool = vimdiff
+	tool = fugitive
     keepBackup = false
     keepTemporaries = false
     prompt = false
@@ -67,3 +67,5 @@
 	singlekey = true
 [init]
 	templatedir = ~/.git_template
+[mergetool "fugitive"]
+	cmd = vim -f -c \"Gdiff\" \"$MERGED\"
