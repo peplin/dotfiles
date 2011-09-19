@@ -416,3 +416,5 @@ function! MyLastWindow()
     endif
   endif
 endfunction
+
+map <Leader>r :w\|:!%:p<CR>
