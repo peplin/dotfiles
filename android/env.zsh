@@ -1,1 +1,2 @@
-export PATH=$PATH:$HOME/dev/android/sdk/tools:$HOME/dev/android/sdk/platform-tools
+export ANDROID_HOME=$HOME/dev/android/sdk
+export PATH=$PATH:$ANDROID_HOME/tools:$ANDROID_HOME/paltform-tools
