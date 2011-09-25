@@ -56,9 +56,6 @@
 	path = vim/vim.symlink/bundle/gundo
 	url = http://github.com/sjl/gundo.vim.git
     ignore = untracked
-[submodule "vim/vim.symlink/bundle/ropevim"]
-	path = vim/vim.symlink/bundle/ropevim
-	url = git@github.com:peplin/ropevim
 [submodule "vim/vim.symlink/bundle/notes"]
 	path = vim/vim.symlink/bundle/notes
 	url = git@github.com:peplin/vim-notes.git
