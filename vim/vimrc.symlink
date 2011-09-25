@@ -16,8 +16,6 @@ autocmd!
     set term=gnome-256color
     syntax on
 
-    " allow for cursor beyond last character
-    " set virtualedit=onemore
     " have 100 lines of command-line (etc) history:
     set history=1000
 
@@ -66,8 +64,10 @@ autocmd!
     " display the current mode and partially-typed commands in the status line:
     set showmode
     set showcmd
+    set cursorline
 
-    " show the ruler
+    " show the ruler - because statusline is also set, this only effects the
+    " output of CTRL-G
     set ruler
     set rulerformat=%30(%=\:b%n%y%m%r%w\ %l,%c%V\ %P%) " a ruler on steroids
 
@@ -142,6 +142,9 @@ autocmd!
         " line:
         set gdefault
 
+        " clear the search buffer when hitting return
+        nnoremap <CR> :nohlsearch<cr>
+
     " }
 
     " have command-line completion <Tab> (for filenames, help topics, option
@@ -150,7 +153,7 @@ autocmd!
     set wildmode=list:longest,full
     set wildignore=*.o,*~,*.pyc
     " show list instead of just completing
-    " set wildmenu
+    set wildmenu
 
     " lines to scroll when cursor leaves screen
     set scrolljump=5
@@ -195,6 +198,8 @@ autocmd!
         " usenet messages from `Tin' users works OK:
         set comments+=b:\"
 
+        " Allow backgrounding buffers without writing them, and remember
+        " marks/undo for backgrounded buffers
         set hidden
 
         set formatoptions+=t
