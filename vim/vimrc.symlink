@@ -13,7 +13,10 @@ autocmd!
 
 
 " General {
-    set term=gnome-256color
+    if $COLORTERM == 'gnome-terminal'
+      set t_Co=256
+    endif
+
     syntax on
 
     " have 100 lines of command-line (etc) history:
