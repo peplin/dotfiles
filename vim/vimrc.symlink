@@ -29,7 +29,7 @@ autocmd!
     set viminfo=/50,'50,r/mnt/zip,r/mnt/floppy,f0,h,\"100
 
     " use "[RO]" for "[readonly]" to save space in the message line:
-    set shortmess+=filmnrxoOtT
+    set shortmess+=IfilmnrxoOtT
 
     " don't have files trying to override this .vimrc:
     set nomodeline
