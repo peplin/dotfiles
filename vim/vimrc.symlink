@@ -56,7 +56,9 @@ autocmd!
 
 " Vim UI {
     if &t_Co == 256
-        colors wombat256mod
+        "let g:solarized_termcolors=256
+        set background=dark
+        colors solarized
     else
         colors wombat
     end

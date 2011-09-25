@@ -87,3 +87,6 @@
 [submodule "vim/vim.symlink/bundle/git"]
 	path = vim/vim.symlink/bundle/git
 	url = https://github.com/tpope/vim-git.git
+[submodule "vim/vim.symlink/bundle/solarized"]
+	path = vim/vim.symlink/bundle/solarized
+	url = https://github.com/altercation/vim-colors-solarized.git
