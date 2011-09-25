@@ -271,8 +271,8 @@ autocmd!
         " is already done by yy):
         noremap Y y$
 
-        " remove trailing whitespace and blank line whitespace
-        map <leader>ws :%s/\s\+$//<CR>
+        " remove trailing whitespace and blank line whitespace on write
+        autocmd BufWritePre * :%s/\s\+$//e
 
     " }
 
