@@ -24,7 +24,7 @@
 [core]
 	whitespace=fix,-indent-with-non-tab,trailing-space,-cr-at-eol
 	excludesfile = ~/.gitignore
-	editor = vim
+	editor = /usr/bin/vim
 [alias]
     a = add
     aa = !git add -u && git add . && git status
