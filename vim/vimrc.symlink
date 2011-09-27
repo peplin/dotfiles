@@ -8,6 +8,7 @@ autocmd!
 
     " Setup Bundle Support {
         call pathogen#infect()
+        call pathogen#helptags()
     " }
 " }
 
