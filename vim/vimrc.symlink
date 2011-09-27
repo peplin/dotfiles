@@ -267,6 +267,8 @@ autocmd!
         map <C-L> <C-W>l<C-W>_
         map <C-H> <C-W>h<C-W>_
 
+        nnoremap <C-t> :tabnew<CR>
+
         " Shortcuts
         " Change Working Directory to that of the current file
         cmap cwd lcd %:p:h
