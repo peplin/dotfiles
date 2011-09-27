@@ -1,8 +1,3 @@
-if [ "$TERM" != "dumb" ]; then
-    eval "`dircolors -b`"
-    alias ls='ls --group-directories-first --color=auto'
-fi
-
 alias ll='ls -lh'
 alias la='ls -lha'
 
