@@ -75,6 +75,7 @@
 [submodule "vim/vim.symlink/bundle/ragtag"]
 	path = vim/vim.symlink/bundle/ragtag
 	url = https://github.com/tpope/vim-ragtag.git
+    ignore = untracked
 [submodule "vim/vim.symlink/bundle/endwise"]
 	path = vim/vim.symlink/bundle/endwise
 	url = https://github.com/tpope/vim-endwise.git
@@ -87,6 +88,7 @@
 [submodule "vim/vim.symlink/bundle/git"]
 	path = vim/vim.symlink/bundle/git
 	url = https://github.com/tpope/vim-git.git
+    ignore = untracked
 [submodule "vim/vim.symlink/bundle/solarized"]
 	path = vim/vim.symlink/bundle/solarized
 	url = https://github.com/altercation/vim-colors-solarized.git
