@@ -36,6 +36,7 @@
 	br = branch
 	lg = log -p
     ch = cherry -v
+    cp = cherry-pick -x
     unmerged = branch -a --no-merged
     merged = branch -a --merged
 	last = log -1 HEAD

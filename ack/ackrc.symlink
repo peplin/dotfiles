@@ -1,7 +1,10 @@
+--sort-files
+
 --ignore-dir=coverage
---type-add=ruby=.haml,.rake
---type-set=markdown=.md,.mkd,.markdown
---type-set=json=.json
---type-set=conf=.wsgi,.conf,*rc
+--type-add=ruby=haml,rake
+--type-add=vim=vimrc
+--type-add=js=json
+--type-set=markdown=md,mkd,markdown
+--type-set=conf=wsgi,conf,*rc
 --color
 -i
