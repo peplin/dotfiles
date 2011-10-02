@@ -28,12 +28,12 @@ git_prompt_info () {
 }
 
 project_name () {
-  in_bueda=$(pwd | grep 'bueda')
-  if [[ $in_bueda == "" ]]
+  in_ford=$(pwd | grep 'ford')
+  if [[ $in_ford == "" ]]
   then
     name=$(pwd | awk -F'dev/' '{print $2}' | awk -F/ '{print $1}')
   else
-    name=$(pwd | awk -F'dev/bueda/' '{print $2}' | awk -F/ '{print $1}')
+    name=$(pwd | awk -F'dev/ford/' '{print $2}' | awk -F/ '{print $1}')
   fi
   echo $name
 }
