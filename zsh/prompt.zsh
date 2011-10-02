@@ -7,17 +7,10 @@ git_branch() {
 }
 
 git_dirty() {
-  st=$(/usr/bin/git status 2>/dev/null | tail -n 1)
-  if [[ $st == "" ]]
-  then
-    echo ""
-  else
-    if [[ $st == "nothing to commit (working directory clean)" ]]
-    then
-      echo "%{$fg_no_bold[green]%}$(git_prompt_info)%{$reset_color%}"
-    else
+  if [[ -n $(/usr/bin/git status -s 2> /dev/null) ]]; then
       echo "%{$fg_no_bold[red]%}$(git_prompt_info)%{$reset_color%}"
-    fi
+  else
+      echo "%{$fg_no_bold[green]%}$(git_prompt_info)%{$reset_color%}"
   fi
 }
 
