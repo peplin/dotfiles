@@ -53,12 +53,11 @@ directory_name(){
   echo "%{$fg_no_bold[green]%}%1/%\/%{$reset_color%}"
 }
 
-export PROMPT=$'$(directory_name) $(project_name_color)$(git_dirty)$(need_push)\n› '
-set_prompt () {
-    export RPROMPT=""
-}
-
 precmd() {
   title "zsh" "$USER@%m" "%55<...<%~"
-  set_prompt
 }
+
+local return_code="%(?..%{$fg[red]%}%? ↵%{$reset_color%})"
+PROMPT=$'$(directory_name) $(project_name_color)$(git_dirty)$(need_push)
+› '
+RPS1="${return_code}"
