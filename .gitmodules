@@ -31,10 +31,6 @@
 	path = vim/vim.symlink/bundle/indent-guides
 	url = https://github.com/nathanaelkane/vim-indent-guides.git
     ignore = untracked
-[submodule "vim/vim.symlink/bundle/l9"]
-	path = vim/vim.symlink/bundle/l9
-	url = https://github.com/vim-scripts/L9.git
-    ignore = untracked
 [submodule "vim/vim.symlink/bundle/nginx"]
 	path = vim/vim.symlink/bundle/nginx
 	url = https://github.com/vim-scripts/nginx.vim.git
@@ -45,9 +41,6 @@
 [submodule "vim/vim.symlink/snippets"]
 	path = vim/vim.symlink/snippets
 	url = git@github.com:peplin/snipmate-snippets.git
-[submodule "vim/vim.symlink/bundle/commandt"]
-	path = vim/vim.symlink/bundle/commandt
-	url = https://github.com/wincent/Command-T.git
 [submodule "vim/vim.symlink/bundle/syntastic"]
 	path = vim/vim.symlink/bundle/syntastic
 	url = https://github.com/scrooloose/syntastic.git

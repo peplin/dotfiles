@@ -7,7 +7,6 @@ autocmd!
     " }
 
     " Setup Bundle Support {
-        call pathogen#infect()
     " }
 " }
 
@@ -21,13 +20,6 @@ autocmd!
 
     " have 100 lines of command-line (etc) history:
     set history=1000
-
-    " remember all of these between sessions, but only 50 search terms; also
-    " remember info for 50 files, but never any on removable disks, don't
-    " remember marks in files, don't rehighlight old search patterns, and only
-    " save up to 100 lines of registers; including @10 in there should restrict
-    " input buffer but it causes an error for me:
-    set viminfo=/50,'50,r/mnt/zip,r/mnt/floppy,f0,h,\"100
 
     " use "[RO]" for "[readonly]" to save space in the message line:
     set shortmess+=IfilmnrxoOtT
@@ -285,146 +277,3 @@ autocmd!
         autocmd BufWritePre * :%s/\s\+$//e
 
     " }
-
-    " Toggles {
-        " Keystrokes to toggle options are defined here.  They are all set to
-        " normal mode keystrokes beginning \t but some function keys (which
-        " won't work in all terminals) are also mapped.
-
-        " have \tp ("toggle paste") toggle paste on/off and report the change,
-        " and where possible also have <F4> do this both in normal and insert
-        " mode:
-        set pastetoggle=<F4>
-        nnoremap \tp :set invpaste paste?<CR>
-        nmap <F4> \tp
-        imap <F4> <C-O>\tp
-
-        " Hit F5 to highlight lines longer than 80 characters
-        map <F5> /\%>80v.\+<CR>
-    " }
-
-    " Compiling {
-        map <leader>m :make<CR><CR>:copen<CR><CR>
-        map <leader>j :cn<CR>
-        " map z :cn<CR>
-        map <leader>k :cp<CR>
-    " }
-" }
-
-" Highlighting {
-    " Highlight whitespace errors
-    " TODO enable this only for source code filetypes
-    highlight rightMargin ctermbg=red
-    highlight tabError ctermbg=red
-    highlight trailingSpace ctermbg=red
-    " TODO This isn't working at the moment
-    match rightMargin /.\%>81v/
-    "match trailingSpace /\s\+$/
-    "match tabError /\t/
-    match NonText /\s\s*$/
-" }
-
-" Plugins {
-    " Gist {
-        let g:gist_detect_filetype = 1
-    " }
-
-    " Syntastic {
-        let g:syntastic_enable_signs=1
-    " }
-
-    " Ack {
-        map <leader>f :Ack<space>
-        let g:ackprg="/usr/bin/ack-grep -H --nocolor --nogroup --column"
-    " }
-
-    " NERDComment {
-        "comment out line(s) in visual mode
-        vmap  o  :call NERDComment(1, 'toggle')<CR>
-        let g:NERDShutUp=1
-        let NERDSpaceDelims = 1
-    " }
-
-    " indent-guide {
-        let g:indent_guides_start_level = 2
-        let g:indent_guides_guide_size = 1
-    " }
-
-    " SnipMate {
-        " Setting the author var
-        let g:snips_author = 'Christopher Peplin <chris.peplin@rhubarbtech.com>'
-        let g:snippets_dir = '~/.vim/snippets'
-        " Shortcut for reloading snippets, useful when developing
-        nnoremap ,smr <esc>:exec ReloadAllSnippets()<cr>
-    " }
-
-    " OmniComplete {
-        set omnifunc=syntaxcomplete#Complete
-
-        " some convenient mappings
-        " TODO this doesn't work at the moment - prints out pumvisible...
-        "inoremap <expr> <Esc>      pumvisible() ? "\<C-e>" : "\<Esc>"
-        "inoremap <expr> <CR>=pumvisible() ? "\<C-y>" : "\<CR>"
-        "inoremap <expr> <Down>     pumvisible() ? "\<C-n>" : "\<Down>"
-        "inoremap <expr> <Up>       pumvisible() ? "\<C-p>" : "\<Up>"
-        "inoremap <expr> <C-d>        pumvisible() ? "\<PageDown>\<C-p>\<C-n>" : "\<C-d>"
-        "inoremap <expr> <C-u>      pumvisible() ? "\<PageUp>\<C-p>\<C-n>" : "\<C-u>"
-
-        " automatically open and close the popup menu / preview window
-        "au CursorMovedI,InsertLeave * if pumvisible() == 0|silent! pclose|endif
-        "set completeopt=longest,menu,preview
-    " }
-
-    " Gundo {
-        nnoremap <F8> :GundoToggle<CR>
-    " }
-
-    " Command-T {
-        let g:CommandTMatchWindowAtTop = 1
-    " }
-
-    " RopeVim {
-        let ropevim_guess_project = 1
-    " }
-
-    " Notes {
-        let g:notes_directory = "~/Dropbox/notes"
-        let g:notes_suffix = ".txt"
-        map <leader>n :Note<space>
-    " }
-
-    " EasyMotion {
-        hi link EasyMotionShade  Comment
-        let g:EasyMotion_leader_key = 'm'
-    " }
-
-    " Eclim {
-        let g:EclimXmlValidate = 0
-        let g:EclimHtmlValidate = 0
-    " }
-
-" }
-
-map <leader>q :call QFixToggle()<CR>
-function! QFixToggle()
-  if exists("g:qfix_win")
-    cclose
-    unlet g:qfix_win
-  else
-    copen 10
-    let g:qfix_win = bufnr("$")
-  endif
-endfunction
-
-au BufEnter * call MyLastWindow()
-function! MyLastWindow()
-  " if the window is quickfix go on
-  if &buftype=="quickfix"
-    " if this window is last on screen quit without warning
-    if winbufnr(2) == -1
-      quit!
-    endif
-  endif
-endfunction
-
-map <Leader>r :w\|:!%:p<CR>
