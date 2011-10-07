@@ -1,18 +1,6 @@
 alias dotvim='vim $ZSH'
 alias dotcd='cd $ZSH'
-
 alias reload='. ~/.zshrc'
-
-alias mv='nocorrect mv'       # no spelling correction on mv
-alias cp='nocorrect cp'
-alias mkdir='nocorrect mkdir'
-alias find='noglob find'
-alias knife='noglob knife'
-alias rake='noglob rake'
-alias ack='ack-grep'
-alias curl='noglob curl'
-alias httparty='noglob httparty'
-alias wget='noglob wget'
 
 alias markdown2pdf='/usr/bin/markdown2pdf --template ~/Dropbox/reference/markdown.tex'
 

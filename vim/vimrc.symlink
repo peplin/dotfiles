@@ -5,9 +5,6 @@ autocmd!
     " Basics {
         set nocompatible
     " }
-
-    " Setup Bundle Support {
-    " }
 " }
 
 
@@ -42,6 +39,9 @@ autocmd!
         "make vim save view (state) (folds, cursor, etc)
         au BufWinLeave * silent! mkview
         au BufWinEnter * silent! loadview
+
+        " Don't wait so long for ambiguous command prefixes
+        set timeoutlen=500
     " }
 
     ca Wq wq
@@ -148,7 +148,7 @@ autocmd!
     " names) first list the available options and complete the longest common
     " part, then have further <Tab>s cycle through the possibilities:
     set wildmode=list:longest,full
-    set wildignore=*.o,*~,*.pyc
+    set wildignore=*.o,*~,*.pyc,*.class
     " show list instead of just completing
     set wildmenu
 
@@ -179,6 +179,8 @@ autocmd!
         set expandtab
         " an indentation every four columns
         set tabstop=4
+
+        imap <S-Tab> <C-o><<
 
         " have % bounce between angled brackets, as well as t'other kinds:
         set matchpairs+=<:>
@@ -252,7 +254,9 @@ autocmd!
         map <C-K> <C-W>k<C-W>_
         map <C-L> <C-W>l<C-W>_
         map <C-H> <C-W>h<C-W>_
-        map <C-K> <C-W>k<C-W>_
+
+        nnoremap <C-t> :tabnew<CR>
+        nnoremap <C-q> :tabclose<CR>
 
         " Shortcuts
         " Change Working Directory to that of the current file
@@ -260,6 +264,8 @@ autocmd!
 
         " For when you forget to sudo.. Really Write the file.
         cmap w!! w !sudo tee % >/dev/null
+
+        nnoremap <silent> <Leader>w :w<CR>
     " }
 
     " Formatting {

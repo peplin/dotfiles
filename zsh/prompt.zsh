@@ -7,17 +7,10 @@ git_branch() {
 }
 
 git_dirty() {
-  st=$(/usr/bin/git status 2>/dev/null | tail -n 1)
-  if [[ $st == "" ]]
-  then
-    echo ""
-  else
-    if [[ $st == "nothing to commit (working directory clean)" ]]
-    then
-      echo "%{$fg_no_bold[green]%}$(git_prompt_info)%{$reset_color%}"
-    else
+  if [[ -n $(/usr/bin/git status -s 2> /dev/null) ]]; then
       echo "%{$fg_no_bold[red]%}$(git_prompt_info)%{$reset_color%}"
-    fi
+  else
+      echo "%{$fg_no_bold[green]%}$(git_prompt_info)%{$reset_color%}"
   fi
 }
 
@@ -28,12 +21,12 @@ git_prompt_info () {
 }
 
 project_name () {
-  in_bueda=$(pwd | grep 'bueda')
-  if [[ $in_bueda == "" ]]
+  in_ford=$(pwd | grep 'ford')
+  if [[ $in_ford == "" ]]
   then
     name=$(pwd | awk -F'dev/' '{print $2}' | awk -F/ '{print $1}')
   else
-    name=$(pwd | awk -F'dev/bueda/' '{print $2}' | awk -F/ '{print $1}')
+    name=$(pwd | awk -F'dev/ford/' '{print $2}' | awk -F/ '{print $1}')
   fi
   echo $name
 }
@@ -60,12 +53,11 @@ directory_name(){
   echo "%{$fg_no_bold[green]%}%1/%\/%{$reset_color%}"
 }
 
-export PROMPT=$'$(directory_name) $(project_name_color)$(git_dirty)$(need_push)\n› '
-set_prompt () {
-    export RPROMPT=""
-}
-
 precmd() {
   title "zsh" "$USER@%m" "%55<...<%~"
-  set_prompt
 }
+
+local return_code="%(?..%{$fg[red]%}%? ↵%{$reset_color%})"
+PROMPT=$'$(directory_name) $(project_name_color)$(git_dirty)$(need_push)
+› '
+RPS1="${return_code}"
