@@ -22,6 +22,8 @@ export GPGKEY=D963BFAF
 
 export HOSTNAME="`hostname`"
 
+export CDPATH=$CDPATH:$PROJECTS
+
 # workaround for Karmic - http://bit.ly/T8MIc
 export GDK_NATIVE_WINDOWS=true
 
