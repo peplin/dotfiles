@@ -162,7 +162,7 @@ autocmd!
     set wildmode=list:longest,full
     set wildignore=*.o,*~,*.pyc,*.class
     " show list instead of just completing
-    set wildmenu
+    "set wildmenu
 
     " lines to scroll when cursor leaves screen
     set scrolljump=5
@@ -381,7 +381,7 @@ autocmd!
 
         " automatically open and close the popup menu / preview window
         "au CursorMovedI,InsertLeave * if pumvisible() == 0|silent! pclose|endif
-        "set completeopt=longest,menu,preview
+        set completeopt=longest,menu,preview
     " }
 
     " Gundo {

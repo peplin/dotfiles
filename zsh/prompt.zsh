@@ -10,7 +10,7 @@ git_dirty() {
   if [[ -n $(/usr/bin/git status -s 2> /dev/null) ]]; then
       echo "%{$fg_no_bold[red]%}$(git_prompt_info)%{$reset_color%}"
   else
-      echo "%{$fg_no_bold[green]%}$(git_prompt_info)%{$reset_color%}"
+      echo "%{$fg[green]%}$(git_prompt_info)%{$reset_color%}"
   fi
 }
 
@@ -50,7 +50,7 @@ need_push () {
 }
 
 directory_name(){
-  echo "%{$fg_no_bold[green]%}%1/%\/%{$reset_color%}"
+  echo "%{$fg[green]%}%1/%\/%{$reset_color%}"
 }
 
 precmd() {
