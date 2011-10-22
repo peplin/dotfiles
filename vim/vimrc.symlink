@@ -14,7 +14,7 @@ autocmd!
 
 
 " General {
-    if $COLORTERM == 'gnome-terminal'
+    if $COLORTERM == 'gnome-terminal' || $COLORTERM == 'Terminal'
       set t_Co=256
     endif
 
