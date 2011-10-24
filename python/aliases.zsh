@@ -5,10 +5,10 @@ alias fab='nocorrect python /usr/local/bin/fab'
 alias pylint='python /usr/local/bin/pylint'
 
 validatejson() {
-    cat $1 | python -m simplejson.tool
+    cat $1 | python -m json.tool
 }
 
 function remote_shell() {
-    environment=$3 || "PRODUCTION" 
+    environment=$3 || "PRODUCTION"
     /usr/bin/env ssh $1 "( DEPLOYMENT_TYPE=$environment cd $2 && env/bin/python ./manage.py shell )"
 }
