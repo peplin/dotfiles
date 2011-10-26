@@ -2,6 +2,7 @@
 
 --ignore-dir=coverage
 --type-add=ruby=haml,rake
+--type-add=cpp=pde
 --type-add=vim=vimrc
 --type-add=js=json
 --type-set=markdown=md,mkd,markdown
