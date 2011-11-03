@@ -11,4 +11,6 @@ export PYTHONDONTWRITEBYTECODE=1
 
 if [ -x /usr/local/bin/virtualenvwrapper.sh ]; then
     source /usr/local/bin/virtualenvwrapper.sh
+elif [ -x /usr/bin/virtualenvwrapper.sh ]; then
+    source /usr/bin/virtualenvwrapper.sh
 fi
