@@ -229,6 +229,8 @@ autocmd!
         " human-language text [this clobbers the `help' filetype, but that
         " doesn't seem to prevent help from working properly]:
         au BufNewFile,BufRead *.txt set filetype=human
+
+        au BufNewFile,BufRead *.aidl set filetype=java
     " }
 " }
 
