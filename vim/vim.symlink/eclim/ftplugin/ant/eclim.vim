@@ -1,10 +1,11 @@
 " Author:  Eric Van Dewoestine
 "
 " Description: {{{
+"   see http://eclim.org/vim/java/ant/index.html
 "
 " License:
 "
-" Copyright (C) 2005 - 2011  Eric Van Dewoestine
+" Copyright (C) 2005 - 2009  Eric Van Dewoestine
 "
 " This program is free software: you can redistribute it and/or modify
 " it under the terms of the GNU General Public License as published by
@@ -21,13 +22,39 @@
 "
 " }}}
 
-" Parse(file, settings) {{{
-function! eclim#taglisttoo#lang#spring#Parse(file, settings)
-  return taglisttoo#util#Parse(a:file, a:settings, [
-      \ ['b', "<bean\\s+[^>]*?(?:name|id)=['\"](.*?)['\"]", 1],
-      \ ['i', "<import\\s+[^>]*?resource=['\"](.*?)['\"]", 1],
-      \ ['a', "<alias\\s+[^>]*?alias=['\"](.*?)['\"]", 1],
-    \ ])
-endfunction " }}}
+" Global Variables {{{
+
+if !exists("g:EclimAntValidate")
+  let g:EclimAntValidate = 1
+endif
+
+" }}}
+
+" Options {{{
+
+setlocal completefunc=eclim#java#ant#complete#CodeComplete
+
+" }}}
+
+" Autocmds {{{
+
+if g:EclimAntValidate
+  augroup eclim_xml
+    autocmd! BufWritePost <buffer>
+    autocmd BufWritePost <buffer> call eclim#lang#Validate('ant', 1)
+  augroup END
+endif
+
+" }}}
+
+" Command Declarations {{{
+
+if !exists(":AntDoc")
+  command -buffer -nargs=? AntDoc :call eclim#java#ant#doc#FindDoc('<args>')
+endif
+
+command! -nargs=0 -buffer Validate :call eclim#lang#Validate('ant', 0)
+
+" }}}
 
 " vim:ft=vim:fdm=marker

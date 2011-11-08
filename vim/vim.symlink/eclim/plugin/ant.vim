@@ -1,6 +1,7 @@
 " Author:  Eric Van Dewoestine
 "
 " Description: {{{
+"   see http://eclim.org/vim/java/ant/run.html
 "
 " License:
 "
@@ -21,13 +22,11 @@
 "
 " }}}
 
-" Parse(file, settings) {{{
-function! eclim#taglisttoo#lang#spring#Parse(file, settings)
-  return taglisttoo#util#Parse(a:file, a:settings, [
-      \ ['b', "<bean\\s+[^>]*?(?:name|id)=['\"](.*?)['\"]", 1],
-      \ ['i', "<import\\s+[^>]*?resource=['\"](.*?)['\"]", 1],
-      \ ['a', "<alias\\s+[^>]*?alias=['\"](.*?)['\"]", 1],
-    \ ])
-endfunction " }}}
+" Command Declarations {{{
+if !exists(":Ant")
+  command -bang -nargs=* -complete=customlist,eclim#java#ant#complete#CommandCompleteTarget
+    \ Ant :call eclim#util#MakeWithCompiler('eclim_ant', '<bang>', '<args>')
+endif
+" }}}
 
 " vim:ft=vim:fdm=marker

@@ -280,6 +280,8 @@ may use Vim's command line completion to complete the project name.
 
   - S - Opens the current file in a new split.
 
+  - | (pipe) - Opens the current file in a new vertical split.
+
   - T - Opens the current file in a new tab.
 
   - o - Toggles folding / unfolding of a directory, or opens a window
