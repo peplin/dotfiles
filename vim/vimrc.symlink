@@ -418,6 +418,9 @@ autocmd!
         let g:SuperTabLongestHighlight = 1
     " }
 
+    " Java syntax highlighting {
+        let g:java_allow_cpp_keywords = 1
+    " }
 " }
 
 map <leader>q :call QFixToggle()<CR>
