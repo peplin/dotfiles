@@ -65,7 +65,7 @@
 	url = https://github.com/Lokaltog/vim-easymotion.git
 [submodule "vim/vim.symlink/bundle/markdown"]
 	path = vim/vim.symlink/bundle/markdown
-	url = https://github.com/hallison/vim-markdown.git
+	url = git@github.com:peplin/vim-markdown.git
     ignore = untracked
 [submodule "vim/vim.symlink/bundle/tlib"]
 	path = vim/vim.symlink/bundle/tlib
