@@ -5,7 +5,7 @@
 # Create own window instead of using desktop (required in nautilus)
 background yes
 use_xft yes
-xftfont Liberation\ Mono:size=9
+xftfont Ubuntu\ Condensed:size=9
 xftalpha 1
 update_interval 2.0
 
@@ -57,10 +57,10 @@ cpu_avg_samples 2
 # stuff after 'TEXT' will be formatted on screen
 TEXT
 Down: $color${downspeed eth0}/s ${alignr}Up: ${upspeed eth0}/s
-${downspeedgraph eth0 25,140 000000 lightgray} ${alignr}${upspeedgraph eth0 
+${downspeedgraph eth0 25,140 000000 lightgray} ${alignr}${upspeedgraph eth0
 25,140 000000 lightgray}$color
 Total: ${totaldown eth0} ${alignr}Total: ${totalup eth0}
-Inbound: ${tcp_portmon 1 32767 count} Outbound: ${tcp_portmon 32768 
+Inbound: ${tcp_portmon 1 32767 count} Outbound: ${tcp_portmon 32768
 61000 count}${alignr}Total: ${tcp_portmon 1 65535 count}
 
 ${color 97b767}NETWORK (${addr eth0}, ${execi 3600 dig +short myip.opendns.com @resolver1.opendns.com}) ${hr 2}$color
