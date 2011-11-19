@@ -10,4 +10,5 @@
 --type-set=conf=wsgi,conf,*rc
 --type-set=txt=txt
 --color
+--follow
 -i
