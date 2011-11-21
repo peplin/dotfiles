@@ -43,6 +43,7 @@ autocmd!
         set nowritebackup
         set directory=$HOME/.vimswap//     " Same for swap files
         set viewdir=$HOME/.vimviews//     " same for view files
+        set undofile
 
         "" Creating directories if they don't exist
         silent execute '!mkdir -p $HOME/.vimbackup'
