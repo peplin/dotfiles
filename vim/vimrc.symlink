@@ -36,6 +36,13 @@ autocmd!
     " don't have files trying to override this .vimrc:
     set nomodeline
 
+    " save files when switching buffers or various other things
+    set autowrite
+
+    " reload files edited outside of vim automatically
+    set autoread
+
+
     " Setting up the directories {
         " backups cause the file to be deleted + recreated in Dropbox, so
         " disable them
@@ -119,6 +126,7 @@ autocmd!
     set linespace=0
     " show matching brackets/parenthesis
     set showmatch
+    set matchtime=3
 
     " turn the status line red when in insert mode
     au InsertEnter * hi StatusLine ctermbg=16 ctermfg=1
