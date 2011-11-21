@@ -5,8 +5,10 @@
 --type-add=cpp=pde
 --type-add=vim=vimrc
 --type-add=js=json
+--type-add=java=aidl
 --type-set=markdown=md,mkd,markdown
 --type-set=conf=wsgi,conf,*rc
 --type-set=txt=txt
 --color
+--follow
 -i
