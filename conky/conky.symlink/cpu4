@@ -5,7 +5,7 @@
 # Create own window instead of using desktop (required in nautilus)
 background yes
 use_xft yes
-xftfont Liberation\ Mono:size=9
+xftfont Ubuntu:size=9
 xftalpha 1
 update_interval 2.0
 

@@ -1,6 +1,6 @@
 background yes
 use_xft yes
-xftfont Dejavu Sans:size=8
+xftfont Ubuntu:size=9
 xftalpha 0.5
 update_interval 1
 total_run_times 0

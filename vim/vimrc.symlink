@@ -36,6 +36,13 @@ autocmd!
     " don't have files trying to override this .vimrc:
     set nomodeline
 
+    " save files when switching buffers or various other things
+    set autowrite
+
+    " reload files edited outside of vim automatically
+    set autoread
+
+
     " Setting up the directories {
         " backups cause the file to be deleted + recreated in Dropbox, so
         " disable them
@@ -43,6 +50,8 @@ autocmd!
         set nowritebackup
         set directory=$HOME/.vimswap//     " Same for swap files
         set viewdir=$HOME/.vimviews//     " same for view files
+        set undodir=~/.vimundo//
+        set undofile
 
         "" Creating directories if they don't exist
         silent execute '!mkdir -p $HOME/.vimbackup'
@@ -82,7 +91,7 @@ autocmd!
 
     " Vertical line at 80 characters
     if exists('+colorcolumn')
-        set colorcolumn=81
+        set colorcolumn=+1
     else
         au BufWinEnter * let w:m2=matchadd('ErrorMsg', '\%>81v.\+', -1)
     endif
@@ -118,6 +127,7 @@ autocmd!
     set linespace=0
     " show matching brackets/parenthesis
     set showmatch
+    set matchtime=3
 
     " turn the status line red when in insert mode
     au InsertEnter * hi StatusLine ctermbg=16 ctermfg=1
@@ -156,20 +166,19 @@ autocmd!
 
     " }
 
+    " show list instead of just completing
+    set wildmenu
+
     " have command-line completion <Tab> (for filenames, help topics, option
     " names) first list the available options and complete the longest common
     " part, then have further <Tab>s cycle through the possibilities:
-    set wildmode=list:longest,full
+    set wildmode=list:longest
     set wildignore=*.o,*~,*.pyc,*.class
-    " show list instead of just completing
-    "set wildmenu
 
     " lines to scroll when cursor leaves screen
     set scrolljump=5
     " minimum lines to keep above and below cursor
     set scrolloff=3
-    " auto fold code
-    set foldenable
 
     " Window height and width minimums {
         set winwidth=10
@@ -177,6 +186,16 @@ autocmd!
         set winheight=5
         set winminheight=5
     " }
+" }
+
+" Folding {
+    " auto fold code
+    set foldenable
+    set foldlevelstart=0
+
+    " Space to toggle folds.
+    nnoremap <Space> za
+    vnoremap <Space> za
 " }
 
 " Formatting {
@@ -321,6 +340,8 @@ autocmd!
         " map z :cn<CR>
         " map <leader>k :cp<CR>
     " }
+
+    nnoremap ; :
 " }
 
 " Highlighting {
@@ -334,6 +355,24 @@ autocmd!
     "match tabError /\t/
     match NonText /\s\s*$/
 " }
+
+
+" Error navigation {{{
+    "
+    "             Location List     QuickFix Window
+    "            (e.g. Syntastic)     (e.g. Ack)
+    "            ----------------------------------
+    " Next      |     M-k               M-Down     |
+    " Previous  |     M-l                M-Up      |
+    "            ----------------------------------
+    "
+    nnoremap j :lnext<cr>zvzz
+    nnoremap k :lprevious<cr>zvzz
+    inoremap j <esc>:lnext<cr>zvzz
+    inoremap k <esc>:lprevious<cr>zvzz
+    nnoremap <m-Down> :cnext<cr>zvzz
+    nnoremap <m-Up> :cprevious<cr>zvzz
+" }}}
 
 " Plugins {
     " Gist {
@@ -415,6 +454,7 @@ autocmd!
     " }
 
     " Supertab {
+        let g:SuperTabDefaultCompletionType = "<c-n>"
         let g:SuperTabLongestHighlight = 1
     " }
 

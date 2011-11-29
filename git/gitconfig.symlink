@@ -1,6 +1,6 @@
 [user]
 	name = Christopher Peplin
-	email = chris.peplin@rhubarbtech.com
+	email = cpeplin@ford.com
 	signingkey = "D963BFAF"
 [color]
 	diff = auto
@@ -65,6 +65,8 @@
 	main-window-geometry = 1160x1019+1127+33
 [interactive]
 	singlekey = true
+[http]
+	proxy = http://19.12.1.40:83/
 [init]
 	templatedir = ~/.git_template
 [mergetool "fugitive"]
