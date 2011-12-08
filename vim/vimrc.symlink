@@ -366,10 +366,10 @@ autocmd!
     " Previous  |     M-l                M-Up      |
     "            ----------------------------------
     "
-    nnoremap j :lnext<cr>zvzz
-    nnoremap k :lprevious<cr>zvzz
-    inoremap j <esc>:lnext<cr>zvzz
-    inoremap k <esc>:lprevious<cr>zvzz
+    " nnoremap j :lnext<cr>zvzz
+    " nnoremap k :lprevious<cr>zvzz
+    " inoremap j <esc>:lnext<cr>zvzz
+    " inoremap k <esc>:lprevious<cr>zvzz
     nnoremap <m-Down> :cnext<cr>zvzz
     nnoremap <m-Up> :cprevious<cr>zvzz
 " }}}
