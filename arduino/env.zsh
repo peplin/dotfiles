@@ -1,3 +1,10 @@
-export ARDUINO_HOME=$HOME/dev/arduino/mpide
-export ARDUINO_SKETCHBOOK=$ARDUINO_HOME/../sketchbook
+export ARDUINO_DIR=/Applications/Mpide.app/Contents/Resources/Java
+export ARDUINO_SKETCHBOOK=$HOME/dev/arduino/sketchbook
 export ARDUINO_MAKEFILE_HOME=$PROJECTS/arduino.mk
+export MCU=32MX795F512L
+export F_CPU=80000000L
+export ARDUINO_PORT="/dev/tty.usbserial*"
+export AVRDUDE=$ARDUINO_DIR/hardware/tools/avr/bin/avrdude
+export AVRDUDE_CONF=$ARDUINO_DIR/hardware/tools/avr/etc/avrdude.conf
+export AVRDUDE_ARD_PROGRAMMER=stk500v2
+export AVRDUDE_ARD_BAUDRATE=115200
