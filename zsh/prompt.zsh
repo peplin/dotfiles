@@ -20,6 +20,10 @@ git_prompt_info () {
  echo "${ref#refs/heads/}"
 }
 
+unpushed () {
+  /usr/bin/git cherry -v `/usr/bin/git config --get branch.master.remote`/$(git_branch) 2>/dev/null
+}
+
 project_name () {
   in_ford=$(pwd | grep 'ford')
   if [[ $in_ford == "" ]]
@@ -34,10 +38,6 @@ project_name () {
 project_name_color () {
   name=$(project_name)
   echo "%{\e[0;35m%}${name}%{\e[0m%}"
-}
-
-unpushed () {
-  /usr/bin/git cherry -v origin/$(git_branch) 2>/dev/null
 }
 
 need_push () {
