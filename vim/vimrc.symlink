@@ -356,24 +356,6 @@ autocmd!
     match NonText /\s\s*$/
 " }
 
-
-" Error navigation {{{
-    "
-    "             Location List     QuickFix Window
-    "            (e.g. Syntastic)     (e.g. Ack)
-    "            ----------------------------------
-    " Next      |     M-k               M-Down     |
-    " Previous  |     M-l                M-Up      |
-    "            ----------------------------------
-    "
-    " nnoremap j :lnext<cr>zvzz
-    " nnoremap k :lprevious<cr>zvzz
-    " inoremap j <esc>:lnext<cr>zvzz
-    " inoremap k <esc>:lprevious<cr>zvzz
-    nnoremap <m-Down> :cnext<cr>zvzz
-    nnoremap <m-Up> :cprevious<cr>zvzz
-" }}}
-
 " Plugins {
     " Gist {
         let g:gist_detect_filetype = 1
