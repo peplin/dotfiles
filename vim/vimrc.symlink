@@ -336,14 +336,6 @@ autocmd!
         " Hit F5 to highlight lines longer than 80 characters
         map <F5> /\%>80v.\+<CR>
     " }
-
-    " Compiling {
-        " map <leader>m :make<CR><CR>:copen<CR><CR>
-        " map <leader>j :cn<CR>
-        " map z :cn<CR>
-        " map <leader>k :cp<CR>
-    " }
-
     nnoremap ; :
 " }
 
@@ -469,5 +461,16 @@ function! MyLastWindow()
     endif
   endif
 endfunction
+
+function! RenameFile()
+    let old_name = expand('%')
+    let new_name = input('New file name: ', expand('%'))
+    if new_name != '' && new_name != old_name
+        exec ':saveas ' . new_name
+        exec ':silent !rm ' . old_name
+        redraw!
+    endif
+endfunction
+map <leader>m :call RenameFile()<cr>
 
 map <Leader>r :w\|:!%:p<CR>
