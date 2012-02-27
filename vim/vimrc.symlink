@@ -298,6 +298,9 @@ autocmd!
         " For when you forget to sudo.. Really Write the file.
         cmap w!! w !sudo tee % >/dev/null
 
+        " Map ,e to open file in the same directory as the current file
+        map <leader>e :edit %:p:h/
+
         nnoremap <silent> <Leader>w :w<CR>
     " }
 
