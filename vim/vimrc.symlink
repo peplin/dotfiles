@@ -402,10 +402,6 @@ autocmd!
         let g:CommandTMatchWindowAtTop = 1
     " }
 
-    " RopeVim {
-        let ropevim_guess_project = 1
-    " }
-
     " Notes {
         let g:notes_directory = "~/Dropbox/notes"
         let g:notes_suffix = ".txt"
