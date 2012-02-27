@@ -42,7 +42,6 @@ autocmd!
     " reload files edited outside of vim automatically
     set autoread
 
-
     " Setting up the directories {
         " backups cause the file to be deleted + recreated in Dropbox, so
         " disable them
@@ -346,8 +345,6 @@ autocmd!
     highlight tabError ctermbg=red
     highlight trailingSpace ctermbg=red
     match rightMargin /.\%>81v/
-    "match trailingSpace /\s\+$/
-    "match tabError /\t/
     match NonText /\s\s*$/
 " }
 
