@@ -377,14 +377,6 @@ autocmd!
         let g:indent_guides_guide_size = 1
     " }
 
-    " SnipMate {
-        " Setting the author var
-        let g:snips_author = 'Christopher Peplin <chris.peplin@rhubarbtech.com>'
-        let g:snippets_dir = '~/.vim/snippets'
-        " Shortcut for reloading snippets, useful when developing
-        nnoremap ,smr <esc>:exec ReloadAllSnippets()<cr>
-    " }
-
     " OmniComplete {
         set omnifunc=syntaxcomplete#Complete
 
