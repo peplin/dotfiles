@@ -1,6 +1,5 @@
 function git(){hub "$@"}
 alias gl='git pull'
-alias glog="git log --graph --pretty=format:'%Cred%h%Creset %an: %s - %Creset %C(yellow)%d%Creset %Cgreen(%cr)%Creset' --abbrev-commit --date=relative"
 alias glr='git pull --rebase'
 alias gp='git push origin HEAD'
 alias gd='git diff'

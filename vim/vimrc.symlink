@@ -42,7 +42,6 @@ autocmd!
     " reload files edited outside of vim automatically
     set autoread
 
-
     " Setting up the directories {
         " backups cause the file to be deleted + recreated in Dropbox, so
         " disable them
@@ -296,6 +295,9 @@ autocmd!
         " For when you forget to sudo.. Really Write the file.
         cmap w!! w !sudo tee % >/dev/null
 
+        " Map ,e to open file in the same directory as the current file
+        map <leader>e :edit %:p:h/
+
         nnoremap <silent> <Leader>w :w<CR>
     " }
 
@@ -331,14 +333,6 @@ autocmd!
         " Hit F5 to highlight lines longer than 80 characters
         map <F5> /\%>80v.\+<CR>
     " }
-
-    " Compiling {
-        " map <leader>m :make<CR><CR>:copen<CR><CR>
-        " map <leader>j :cn<CR>
-        " map z :cn<CR>
-        " map <leader>k :cp<CR>
-    " }
-
     nnoremap ; :
 " }
 
@@ -349,28 +343,8 @@ autocmd!
     highlight tabError ctermbg=red
     highlight trailingSpace ctermbg=red
     match rightMargin /.\%>81v/
-    "match trailingSpace /\s\+$/
-    "match tabError /\t/
     match NonText /\s\s*$/
 " }
-
-
-" Error navigation {{{
-    "
-    "             Location List     QuickFix Window
-    "            (e.g. Syntastic)     (e.g. Ack)
-    "            ----------------------------------
-    " Next      |     M-k               M-Down     |
-    " Previous  |     M-l                M-Up      |
-    "            ----------------------------------
-    "
-    " nnoremap j :lnext<cr>zvzz
-    " nnoremap k :lprevious<cr>zvzz
-    " inoremap j <esc>:lnext<cr>zvzz
-    " inoremap k <esc>:lprevious<cr>zvzz
-    nnoremap <m-Down> :cnext<cr>zvzz
-    nnoremap <m-Up> :cprevious<cr>zvzz
-" }}}
 
 " Plugins {
     " Gist {
@@ -398,14 +372,6 @@ autocmd!
         let g:indent_guides_guide_size = 1
     " }
 
-    " SnipMate {
-        " Setting the author var
-        let g:snips_author = 'Christopher Peplin <chris.peplin@rhubarbtech.com>'
-        let g:snippets_dir = '~/.vim/snippets'
-        " Shortcut for reloading snippets, useful when developing
-        nnoremap ,smr <esc>:exec ReloadAllSnippets()<cr>
-    " }
-
     " OmniComplete {
         set omnifunc=syntaxcomplete#Complete
 
@@ -429,10 +395,6 @@ autocmd!
 
     " Command-T {
         let g:CommandTMatchWindowAtTop = 1
-    " }
-
-    " RopeVim {
-        let ropevim_guess_project = 1
     " }
 
     " Notes {
@@ -482,5 +444,16 @@ function! MyLastWindow()
     endif
   endif
 endfunction
+
+function! RenameFile()
+    let old_name = expand('%')
+    let new_name = input('New file name: ', expand('%'))
+    if new_name != '' && new_name != old_name
+        exec ':saveas ' . new_name
+        exec ':silent !rm ' . old_name
+        redraw!
+    endif
+endfunction
+map <leader>m :call RenameFile()<cr>
 
 map <Leader>r :w\|:!%:p<CR>
