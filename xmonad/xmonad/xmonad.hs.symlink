@@ -87,6 +87,9 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
     -- close focused window
     , ((modMask .|. shiftMask, xK_c     ), kill)
 
+    -- preserve normal alt-f4 behavior to close focused window
+    , ((mod1Mask, xK_F4     ), kill)
+
      -- Rotate through the available layout algorithms
     , ((modMask,               xK_space ), sendMessage NextLayout)
 
