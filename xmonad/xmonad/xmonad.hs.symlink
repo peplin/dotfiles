@@ -241,6 +241,7 @@ myManageHook = composeAll
     , className =? "Xfce4-appfinder"  --> doFloat
     , className =? "Xfrun4"           --> doFloat
     , className =? "Synapse"           --> doFloat
+    , className =? "Skype"           --> doFloat
     , resource  =? "desktop_window" --> doIgnore
     , resource  =? "kdesktop"       --> doIgnore ]
 
