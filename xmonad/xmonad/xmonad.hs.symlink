@@ -14,8 +14,12 @@ import System.Exit
 import qualified XMonad.StackSet as W
 import qualified Data.Map        as M
 
+import Dzen
+import Utils
 import XMonad.Hooks.ManageDocks
 import XMonad.Hooks.EwmhDesktops
+import XMonad.Hooks.DynamicLog (dynamicLogWithPP, PP(..))
+import XMonad.Util.Run
 
 import XMonad.Layout.Maximize
 
@@ -249,19 +253,6 @@ myManageHook = composeAll
 myFocusFollowsMouse :: Bool
 myFocusFollowsMouse = True
 
-
-------------------------------------------------------------------------
--- Status bars and logging
-
--- Perform an arbitrary action on each internal state change or X event.
--- See the 'DynamicLog' extension for examples.
---
--- To emulate dwm's status bar
---
--- > logHook = dynamicLogDzen
---
--- myLogHook = return ()
-
 ------------------------------------------------------------------------
 -- Startup hook
 
@@ -277,32 +268,26 @@ myStartupHook = return ()
 
 -- Run xmonad with the settings you specify. No need to modify this.
 --
-main = xmonad defaults
+main = do
+    d <- spawnDzen defaultDzenXft
 
--- A structure containing your configuration settings, overriding
--- fields in the default config. Any you don't override, will
--- use the defaults defined in xmonad/XMonad/Config.hs
---
--- No need to modify this.
---
-defaults = defaultConfig {
-      -- simple stuff
-        terminal           = myTerminal,
-        focusFollowsMouse  = myFocusFollowsMouse,
-        borderWidth        = myBorderWidth,
-        modMask            = myModMask,
-        numlockMask        = myNumlockMask,
-        workspaces         = myWorkspaces,
-        normalBorderColor  = myNormalBorderColor,
-        focusedBorderColor = myFocusedBorderColor,
+    xmonad $ defaultConfig {
+            terminal           = myTerminal,
+            focusFollowsMouse  = myFocusFollowsMouse,
+            borderWidth        = myBorderWidth,
+            modMask            = myModMask,
+            numlockMask        = myNumlockMask,
+            workspaces         = myWorkspaces,
+            normalBorderColor  = myNormalBorderColor,
+            focusedBorderColor = myFocusedBorderColor,
 
-      -- key bindings
-        keys               = myKeys,
-        mouseBindings      = myMouseBindings,
+          -- key bindings
+            keys               = myKeys,
+            mouseBindings      = myMouseBindings,
 
-      -- hooks, layouts
-        layoutHook         = avoidStruts $ layoutHook defaultConfig,
-        manageHook         = manageDocks <+> myManageHook,
-        logHook            = ewmhDesktopsLogHook,
-        startupHook        = myStartupHook
-    }
+          -- hooks, layouts
+            layoutHook         = avoidStruts $ layoutHook defaultConfig,
+            manageHook         = manageDocks <+> myManageHook,
+            logHook            = dynamicLogWithPP $ pbPP { ppOutput = hPutStrLn d },
+            startupHook        = myStartupHook
+        }
