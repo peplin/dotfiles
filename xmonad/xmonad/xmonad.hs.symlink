@@ -114,6 +114,9 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
     -- Move focus to the master window
     , ((modMask .|. shiftMask, xK_m     ), windows W.focusMaster  )
 
+    -- Preserve traditional alt-tab behavior in reverse
+    , ((mod1Mask .|. shiftMask, xK_Tab  ), windows W.focusDown)
+
     -- Maximize the focused window temporarily
     , ((modMask,               xK_m     ), withFocused $ sendMessage . maximizeRestore)
 
