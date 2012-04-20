@@ -246,7 +246,8 @@ myManageHook = composeAll
     , className =? "Synapse"           --> doFloat
     , className =? "Skype"           --> doFloat
     , resource  =? "desktop_window" --> doIgnore
-    , resource  =? "kdesktop"       --> doIgnore ]
+    , resource  =? "kdesktop"       --> doIgnore
+    , className =? "Xfce4-notifyd" --> doIgnore ]
 
 -- Whether focus follows the mouse pointer.
 myFocusFollowsMouse :: Bool
