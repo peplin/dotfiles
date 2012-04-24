@@ -18,4 +18,9 @@ The install rake task will symlink the appropriate files in `.dotfiles` to your 
 
 ## thanks
 
-I forked [Zach Holman](http://github.com/holman)'s [dotfiles](http://github.com/holman/dotfiles), as I appreciate his respect of modularity. 
+I forked [Zach Holman](http://github.com/holman)'s [dotfiles](http://github.com/holman/dotfiles), as I appreciate his respect of modularity.
+
+## license
+
+Unless otherwise marked in a file, this configuration is released under the MIT
+open source license.

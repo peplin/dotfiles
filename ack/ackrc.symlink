@@ -1,6 +1,8 @@
 --sort-files
 
 --ignore-dir=coverage
+--ignore-dir=target
+--ignore-dir=gen
 --type-add=ruby=haml,rake
 --type-add=cpp=pde
 --type-add=vim=vimrc
