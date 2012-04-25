@@ -309,8 +309,7 @@ main = do
         layoutHook         = avoidStruts $ layoutHook defaultConfig,
         manageHook         = manageDocks <+> myManageHook,
         logHook            = ewmhDesktopsLogHook >> (dynamicLogWithPP xmobarPP
-                {ppOutput = hPutStrLn xmobar,
-                ppTitle = xmobarColor "green" "" . shorten 50
+                {ppOutput = hPutStrLn xmobar
                 }),
         startupHook        = myStartupHook
     }
