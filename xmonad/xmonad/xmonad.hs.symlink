@@ -9,11 +9,15 @@
 
 import XMonad
 import XMonad.Config.Xfce
+
 import System.Exit
+import System.IO
 
 import qualified XMonad.StackSet as W
 import qualified Data.Map        as M
 
+import XMonad.Hooks.DynamicLog
+import XMonad.Util.Run(spawnPipe)
 import XMonad.Hooks.ManageDocks
 import XMonad.Hooks.EwmhDesktops
 
@@ -284,15 +288,9 @@ myStartupHook = return ()
 
 -- Run xmonad with the settings you specify. No need to modify this.
 --
-main = xmonad defaults
-
--- A structure containing your configuration settings, overriding
--- fields in the default config. Any you don't override, will
--- use the defaults defined in xmonad/XMonad/Config.hs
---
--- No need to modify this.
---
-defaults = defaultConfig {
+main = do
+    xmobar <- spawnPipe "xmobar"
+    xmonad $ defaultConfig {
       -- simple stuff
         terminal           = myTerminal,
         focusFollowsMouse  = myFocusFollowsMouse,
@@ -310,6 +308,9 @@ defaults = defaultConfig {
       -- hooks, layouts
         layoutHook         = avoidStruts $ layoutHook defaultConfig,
         manageHook         = manageDocks <+> myManageHook,
-        logHook            = ewmhDesktopsLogHook,
+        logHook            = ewmhDesktopsLogHook >> (dynamicLogWithPP xmobarPP
+                {ppOutput = hPutStrLn xmobar,
+                ppTitle = xmobarColor "green" "" . shorten 50
+                }),
         startupHook        = myStartupHook
     }
