@@ -156,6 +156,9 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
 
     -- to hide/unhide the panel
     , ((modMask              , xK_b), sendMessage ToggleStruts)
+
+    -- lock the screen
+    , ((modMask, xK_z), spawn "xflock4")
     ]
     ++
 
