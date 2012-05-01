@@ -6,7 +6,7 @@
 "
 " License:
 "
-" Copyright (C) 2005 - 2010  Eric Van Dewoestine
+" Copyright (C) 2005 - 2012  Eric Van Dewoestine
 "
 " This program is free software: you can redistribute it and/or modify
 " it under the terms of the GNU General Public License as published by
@@ -31,13 +31,14 @@
 " CodeComplete(command, findstart, base, [options]) {{{
 " Handles code completion.
 function! eclim#lang#CodeComplete(command, findstart, base, ...)
-  if a:findstart
-    " update the file before vim makes any changes.
-    call eclim#util#ExecWithoutAutocmds('silent update')
+  if !eclim#project#util#IsCurrentFileInProject(0)
+    return a:findstart ? -1 : []
+  endif
 
-    if !eclim#project#util#IsCurrentFileInProject(0) || !filereadable(expand('%'))
-      return -1
-    endif
+  let options = a:0 ? a:1 : {}
+
+  if a:findstart
+    call eclim#lang#SilentUpdate(get(options, 'temp', 1))
 
     " locate the start of the word
     let line = getline('.')
@@ -55,29 +56,25 @@ function! eclim#lang#CodeComplete(command, findstart, base, ...)
 
     return start
   else
-    if !eclim#project#util#IsCurrentFileInProject(0) || !filereadable(expand('%'))
-      return []
-    endif
-
     let offset = eclim#util#GetOffset() + len(a:base)
     let project = eclim#project#util#GetCurrentProjectName()
-    let file = eclim#project#util#GetProjectRelativeFilePath()
+    let file = eclim#lang#SilentUpdate(get(options, 'temp', 1), 0)
+    if file == ''
+      return []
+    endif
 
     let command = a:command
     let command = substitute(command, '<project>', project, '')
     let command = substitute(command, '<file>', file, '')
     let command = substitute(command, '<offset>', offset, '')
     let command = substitute(command, '<encoding>', eclim#util#GetEncoding(), '')
-    if a:0
-      let options = a:1
-      if has_key(options, 'layout')
-        let command = substitute(command, '<layout>', options.layout, '')
-      endif
+    if has_key(options, 'layout')
+      let command = substitute(command, '<layout>', options.layout, '')
     endif
 
     let completions = []
-    let results = split(eclim#ExecuteEclim(command), '\n')
-    if len(results) == 1 && results[0] == '0'
+    let results = eclim#ExecuteEclim(command)
+    if type(results) != 3
       return
     endif
 
@@ -85,10 +82,7 @@ function! eclim#lang#CodeComplete(command, findstart, base, ...)
     let close_paren = getline('.') =~ '\%' . col('.') . 'c\s*(\s*)'
 
     for result in results
-      let word = substitute(result, '\(.\{-}\)|.*', '\1', '')
-      let menu = substitute(result, '.\{-}|\(.\{-}\)|.*', '\1', '')
-      let info = substitute(result, '.\{-}|.\{-}|\(.\{-}\)', '\1', '')
-      let info = eclim#html#util#HtmlToText(info)
+      let word = result.completion
 
       " strip off close paren if necessary.
       if word =~ ')$' && close_paren
@@ -99,6 +93,10 @@ function! eclim#lang#CodeComplete(command, findstart, base, ...)
       if word =~ '($' && open_paren
         let word = strpart(word, 0, strlen(word) - 1)
       endif
+
+      let menu = eclim#html#util#HtmlToText(result.menu)
+      let info = has_key(result, 'info') ?
+        \ eclim#html#util#HtmlToText(result.info) : ''
 
       let dict = {
           \ 'word': word,
@@ -155,7 +153,9 @@ function! eclim#lang#Search(command, singleResultAction, argline)
     let position = eclim#util#GetCurrentElementPosition()
     let offset = substitute(position, '\(.*\);\(.*\)', '\1', '')
     let length = substitute(position, '\(.*\);\(.*\)', '\2', '')
-    let search_cmd .= ' -f "' . file . '" -o ' . offset . ' -l ' . length
+    let encoding = eclim#util#GetEncoding()
+    let search_cmd .= ' -f "' . file . '"' .
+      \ ' -o ' . offset . ' -l ' . length . ' -e ' . encoding
   else
     " quote the search pattern
     let search_cmd = substitute(
@@ -170,9 +170,8 @@ function! eclim#lang#Search(command, singleResultAction, argline)
   endif
 
   let port = eclim#client#nailgun#GetNgPort(workspace)
-  let result =  eclim#ExecuteEclim(search_cmd, port)
-  let results = split(result, '\n')
-  if len(results) == 1 && results[0] == '0'
+  let results =  eclim#ExecuteEclim(search_cmd, port)
+  if type(results) != 3
     return
   endif
 
@@ -180,8 +179,8 @@ function! eclim#lang#Search(command, singleResultAction, argline)
     call eclim#util#SetLocationList(eclim#util#ParseLocationEntries(results))
     " if only one result and it's for the current file, just jump to it.
     " note: on windows the expand result must be escaped
-    if len(results) == 1 && results[0] =~ escape(expand('%:p'), '\') . '|'
-      if results[0] !~ '|1 col 1|'
+    if len(results) == 1 && results[0].filename =~ escape(expand('%:p'), '\') . '|'
+      if results[0].line != 1 && results[0].column != 1
         lfirst
       endif
 
@@ -195,7 +194,7 @@ function! eclim#lang#Search(command, singleResultAction, argline)
 
       call cursor(entry.lnum, entry.col)
     else
-      lopen
+      exec 'lopen ' . g:EclimLocationListHeight
     endif
     return 1
   else
@@ -227,22 +226,24 @@ function! eclim#lang#UpdateSrcFile(lang, validate)
     endif
 
     let result = eclim#ExecuteEclim(command)
-    if result =~ '|'
+    if type(result) == g:LIST_TYPE && len(result) > 0
       let errors = eclim#util#ParseLocationEntries(
-        \ split(result, '\n'), g:EclimValidateSortResults)
+        \ result, g:EclimValidateSortResults)
       call eclim#util#SetLocationList(errors)
     else
       call eclim#util#ClearLocationList('global')
     endif
 
     call eclim#project#problems#ProblemsUpdate()
+  elseif a:validate && expand('<amatch>') == ''
+    call eclim#project#util#IsCurrentFileInProject()
   endif
 endfunction " }}}
 
-" Validate(type, on_save) {{{
+" Validate(type, on_save, [filter]) {{{
 " Validates the current file. Used by languages which are not validated via
 " UpdateSrcFile (pretty much all the xml dialects and wst langs).
-function! eclim#lang#Validate(type, on_save)
+function! eclim#lang#Validate(type, on_save, ...)
   if eclim#util#WillWrittenBufferClose()
     return
   endif
@@ -259,13 +260,50 @@ function! eclim#lang#Validate(type, on_save)
   let command = substitute(command, '<file>', file, '')
 
   let result = eclim#ExecuteEclim(command)
-  if result =~ '|'
+  if type(result) == g:LIST_TYPE && len(result) > 0
     let errors = eclim#util#ParseLocationEntries(
-      \ split(result, '\n'), g:EclimValidateSortResults)
+      \ result, g:EclimValidateSortResults)
+    if a:0
+      let errors = function(a:1)(errors)
+    endif
     call eclim#util#SetLocationList(errors)
   else
     call eclim#util#ClearLocationList()
   endif
+endfunction " }}}
+
+" SilentUpdate([temp], [temp_write]) {{{
+" Silently updates the current source file w/out validation.
+function! eclim#lang#SilentUpdate(...)
+  " i couldn't reproduce the issue, but at least one person experienced the
+  " cursor moving on update and breaking code completion:
+  " http://sourceforge.net/tracker/index.php?func=detail&aid=1995319&group_id=145869&atid=763323
+  let pos = getpos('.')
+  let file = eclim#project#util#GetProjectRelativeFilePath()
+  if file != ''
+    try
+      if a:0 && a:1
+        " don't create temp files if no server is available to clean them up.
+        let project = eclim#project#util#GetCurrentProjectName()
+        let workspace = eclim#project#util#GetProjectWorkspace(project)
+        if workspace != '' && eclim#PingEclim(0, workspace)
+          let prefix = '__eclim_temp_'
+          let file = fnamemodify(file, ':h') . '/' . prefix . fnamemodify(file, ':t')
+          let tempfile = expand('%:p:h') . '/' . prefix . expand('%:t')
+          if a:0 < 2 || a:2
+            exec 'silent noautocmd write! ' . escape(tempfile, ' ')
+          endif
+        endif
+      else
+        if a:0 < 2 || a:2
+          silent noautocmd update
+        endif
+      endif
+    finally
+      call setpos('.', pos)
+    endtry
+  endif
+  return file
 endfunction " }}}
 
 " vim:ft=vim:fdm=marker
