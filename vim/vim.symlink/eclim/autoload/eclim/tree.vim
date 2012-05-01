@@ -35,6 +35,9 @@
   if !exists("g:TreeActionHighlight")
     let g:TreeActionHighlight = "Statement"
   endif
+  if !exists('g:TreeExpandSingleDirs')
+    let g:TreeExpandSingleDirs = 0
+  endif
 " }}}
 
 " Script Variables {{{
@@ -207,7 +210,7 @@ endfunction " }}}
 " GetFileInfo(file) {{{
 function! eclim#tree#GetFileInfo(file)
   if executable('ls')
-    return split(eclim#util#System('ls -ld ' . a:file), '\n')[0]
+    return split(eclim#util#System("ls -ld '" . a:file . "'"), '\n')[0]
   endif
   return ''
 endfunction "}}}
@@ -811,6 +814,11 @@ function! s:PathToAlias(path)
   return a:path
 endfunction " }}}
 
+" s:Depth() {{{
+function! s:Depth()
+  return len(split(eclim#tree#GetPath(), '/'))
+endfunction " }}}
+
 " ExpandDir() {{{
 function! eclim#tree#ExpandDir()
   let dir = eclim#tree#GetPath()
@@ -842,6 +850,10 @@ function! eclim#tree#ExpandDir()
   call map(files, 's:RewriteSpecial(v:val)')
 
   call eclim#tree#WriteContents(dir, dirs, files)
+  if g:TreeExpandSingleDirs && len(files) == 0 && len(dirs) == 1 && s:Depth() < 50
+    TreeNextPrevLine j
+    call eclim#tree#ExpandDir()
+  endif
 endfunction " }}}
 
 " ExpandPath(name, path) {{{
@@ -995,7 +1007,7 @@ function! eclim#tree#ListDir(dir, ...)
     if b:view_hidden
       let ls .= 'A'
     endif
-    let contents = split(eclim#util#System(ls . ' "' . a:dir . '"'), '\n')
+    let contents = split(eclim#util#System(ls . " '" . a:dir . "'"), '\n')
     if !b:view_hidden && &wildignore != ''
       let pattern = substitute(escape(&wildignore, '.'), '\*', '.*', 'g')
       let pattern = '\(' . join(split(pattern, ','), '\|') . '\)$'

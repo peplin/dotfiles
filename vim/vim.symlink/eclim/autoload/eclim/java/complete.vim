@@ -5,7 +5,7 @@
 "
 " License:
 "
-" Copyright (C) 2005 - 2010  Eric Van Dewoestine
+" Copyright (C) 2005 - 2012  Eric Van Dewoestine
 "
 " This program is free software: you can redistribute it and/or modify
 " it under the terms of the GNU General Public License as published by
@@ -44,13 +44,12 @@
 " CodeComplete(findstart, base) {{{
 " Handles java code completion.
 function! eclim#java#complete#CodeComplete(findstart, base)
-  if a:findstart
-    " update the file before vim makes any changes.
-    call eclim#java#util#SilentUpdate()
+  if !eclim#project#util#IsCurrentFileInProject(0)
+    return a:findstart ? -1 : []
+  endif
 
-    if !eclim#project#util#IsCurrentFileInProject(0) || !filereadable(expand('%'))
-      return -1
-    endif
+  if a:findstart
+    call eclim#lang#SilentUpdate(1)
 
     " locate the start of the word
     let line = getline('.')
@@ -68,13 +67,12 @@ function! eclim#java#complete#CodeComplete(findstart, base)
 
     return start
   else
-    if !eclim#project#util#IsCurrentFileInProject(0) || !filereadable(expand('%'))
-      return []
-    endif
-
     let offset = eclim#util#GetOffset() + len(a:base)
     let project = eclim#project#util#GetCurrentProjectName()
-    let file = eclim#project#util#GetProjectRelativeFilePath()
+    let file = eclim#lang#SilentUpdate(1, 0)
+    if file == ''
+      return []
+    endif
 
     let command = s:complete_command
     let command = substitute(command, '<project>', project, '')
@@ -84,8 +82,8 @@ function! eclim#java#complete#CodeComplete(findstart, base)
     let command = substitute(command, '<layout>', g:EclimJavaCompleteLayout, '')
 
     let completions = []
-    let results = split(eclim#ExecuteEclim(command), '\n')
-    if len(results) == 1 && results[0] == '0'
+    let results = eclim#ExecuteEclim(command)
+    if type(results) != 3
       return
     endif
 
@@ -103,13 +101,7 @@ function! eclim#java#complete#CodeComplete(findstart, base)
     let semicolon = getline('.') =~ '\%' . col('.') . 'c\s*;'
 
     for result in results
-      let kind = substitute(result, '\(.\{-}\)|.*', '\1', '')
-
-      let word = substitute(result, '.\{-}|\(.\{-}\)|.*', '\1', '')
-      let menu = substitute(result, '.\{-}|.\{-}|\(.\{-}\)|.*', '\1', '')
-
-      let info = substitute(result, '.\{-}|.\{-}|.\{-}|\(.*\)', '\1', '')
-      let info = eclim#html#util#HtmlToText(info)
+      let word = result.completion
 
       " strip off prefix if necessary.
       if word =~ '\.'
@@ -139,12 +131,16 @@ function! eclim#java#complete#CodeComplete(findstart, base)
         endif
       endif
 
+      let menu = result.menu
+      let info = eclim#html#util#HtmlToText(result.info)
+
       let dict = {
           \ 'word': word,
           \ 'menu': menu,
           \ 'info': info,
-          \ 'kind': kind,
-          \ 'dup': 1
+          \ 'kind': result.type,
+          \ 'dup': 1,
+          \ 'icase': !g:EclimJavaCompleteCaseSensitive,
         \ }
 
       call add(completions, dict)

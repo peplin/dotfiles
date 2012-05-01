@@ -5,7 +5,7 @@
 "
 " License:
 "
-" Copyright (C) 2005 - 2010  Eric Van Dewoestine
+" Copyright (C) 2005 - 2011  Eric Van Dewoestine
 "
 " This program is free software: you can redistribute it and/or modify
 " it under the terms of the GNU General Public License as published by
@@ -37,7 +37,7 @@ function! eclim#java#impl#Impl()
     return
   endif
 
-  call eclim#java#util#SilentUpdate()
+  call eclim#lang#SilentUpdate()
 
   let project = eclim#project#util#GetCurrentProjectName()
   let file = eclim#project#util#GetProjectRelativeFilePath()
@@ -59,17 +59,51 @@ function! eclim#java#impl#ImplWindow(command)
   let workspace = eclim#project#util#GetProjectWorkspace(project)
   let port = eclim#client#nailgun#GetNgPort(workspace)
 
-  if eclim#util#TempWindowCommand(a:command, name, port)
-    setlocal ft=java
-    call eclim#java#impl#ImplWindowFolding()
-
-    nnoremap <silent> <buffer> <cr>
-      \ :call eclim#java#impl#ImplAdd
-      \    (g:JavaImplCommandInsert, function("eclim#java#impl#ImplWindow"), 0)<cr>
-    vnoremap <silent> <buffer> <cr>
-      \ :<C-U>call eclim#java#impl#ImplAdd
-      \    (g:JavaImplCommandInsert, function("eclim#java#impl#ImplWindow"), 1)<cr>
+  let result = eclim#ExecuteEclim(a:command, port)
+  if type(result) != g:DICT_TYPE
+    return
   endif
+
+  let content = [result.type]
+  let notfound = []
+  for super in result.superTypes
+    if !super.exists
+      call add(notfound, super)
+      continue
+    endif
+
+    call add(content, '')
+    call add(content, 'package ' . super.packageName . ';')
+    call add(content, super.signature . ' {')
+    for method in super.methods
+      let signature = split(method.signature, '\n')
+      if method.implemented
+        let signature = map(signature, '"//" . v:val')
+      endif
+      let content += map(signature, '"\t" . v:val')
+    endfor
+    call add(content, '}')
+  endfor
+
+  if len(notfound)
+    call add(content, '')
+    call add(content, '// The following types were not found, either because they were not')
+    call add(content, '// imported or they were not found in the classpath:')
+  endif
+  for super in notfound
+    call add(content, '// ' . super.signature)
+  endfor
+
+  call eclim#util#TempWindow(name, content, {'preserveCursor': 1})
+  setlocal ft=java
+  call eclim#java#impl#ImplWindowFolding()
+
+  nnoremap <silent> <buffer> <cr>
+    \ :call eclim#java#impl#ImplAdd
+    \    (g:JavaImplCommandInsert, function("eclim#java#impl#ImplWindow"), 0)<cr>
+  vnoremap <silent> <buffer> <cr>
+    \ :<C-U>call eclim#java#impl#ImplAdd
+    \    (g:JavaImplCommandInsert, function("eclim#java#impl#ImplWindow"), 1)<cr>
 endfunction " }}}
 
 " ImplWindowFolding() {{{
@@ -78,7 +112,7 @@ function! eclim#java#impl#ImplWindowFolding()
   setlocal foldlevel=99
 endfunction " }}}
 
-" ImplAdd(command, function) {{{
+" ImplAdd(command, function, visual) {{{
 function! eclim#java#impl#ImplAdd(command, function, visual)
   let winnr = bufwinnr(bufnr('^' . b:filename))
   " src window is not longer open.
@@ -179,7 +213,7 @@ function! eclim#java#impl#ImplAdd(command, function, visual)
   let type = substitute(getline(1), '\$', '.', 'g')
   let impl_winnr = winnr()
   exec winnr . "winc w"
-  call eclim#java#util#SilentUpdate()
+  call eclim#lang#SilentUpdate()
 
   let project = eclim#project#util#GetCurrentProjectName()
   let file = eclim#project#util#GetProjectRelativeFilePath()

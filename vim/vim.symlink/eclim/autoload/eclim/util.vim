@@ -8,7 +8,7 @@
 "
 " License:
 "
-" Copyright (C) 2005 - 2011  Eric Van Dewoestine
+" Copyright (C) 2005 - 2012  Eric Van Dewoestine
 "
 " This program is free software: you can redistribute it and/or modify
 " it under the terms of the GNU General Public License as published by
@@ -232,11 +232,34 @@ function! eclim#util#GetEncoding()
   return encoding
 endfunction " }}}
 
-" GetOffset() {{{
-" Gets the byte offset for the current cursor position.
-function! eclim#util#GetOffset()
-  let offset = line2byte(line('.')) - 1
-  let offset += col('.') - 1
+" GetOffset([line, col]) {{{
+" Gets the byte offset for the current cursor position or supplied line, col.
+function! eclim#util#GetOffset(...)
+  let lnum = a:0 > 0 ? a:000[0] : line('.')
+  let cnum = a:0 > 1 ? a:000[1] : col('.')
+  let offset = 0
+
+  " handle case where display encoding differs from the underlying file
+  " encoding
+  if &fileencoding != '' && &encoding != '' && &fileencoding != &encoding
+    let prev = lnum - 1
+    if prev > 0
+      let lineEnding = &ff == 'dos' ? "\r\n" : "\n"
+      " convert each line to the file encoding and sum their lengths
+      let offset = eval(
+        \ join(
+        \   map(
+        \     range(1, prev),
+        \     'len(iconv(getline(v:val), &encoding, &fenc) . "' . lineEnding . '")'),
+        \   '+'))
+    endif
+
+  " normal case
+  else
+    let offset = line2byte(lnum) - 1
+  endif
+
+  let offset += cnum - 1
   return offset
 endfunction " }}}
 
@@ -463,7 +486,7 @@ endfunction " }}}
 " Focuses the window containing the supplied buffer name or buffer number.
 " Returns 1 if the window was found, 0 otherwise.
 function! eclim#util#GoToBufferWindow(buf)
-  if type(a:buf) == 0
+  if type(a:buf) == g:NUMBER_TYPE
     let winnr = bufwinnr(a:buf)
   else
     let name = eclim#util#EscapeBufferName(a:buf)
@@ -531,19 +554,40 @@ endfunction " }}}
 " To determine element equality both '==' and 'is' are tried as well as
 " ^element$ to support a regex supplied element string.
 function! eclim#util#ListContains(list, element)
-  let string = type(a:element) == 1 ? a:element : escape(string(a:element), '\')
+  let string = type(a:element) == g:STRING_TYPE ?
+    \ a:element : escape(string(a:element), '\')
   for element in a:list
     if element is a:element ||
         \ (type(element) == type(a:element) && element == a:element)
       return 1
     else
-      let estring = type(element) == 1 ? element : string(element)
+      let estring = type(element) == g:STRING_TYPE ? element : string(element)
       if estring =~ '^' . string . '$'
         return 1
       endif
     endif
   endfor
   return 0
+endfunction " }}}
+
+" Make(bang, args) {{{
+" Executes make using the supplied arguments.
+function! eclim#util#Make(bang, args)
+  let makefile = findfile('makefile', '.;')
+  let makefile2 = findfile('Makefile', '.;')
+  if len(makefile2) > len(makefile)
+    let makefile = makefile2
+  endif
+  let cwd = getcwd()
+  let save_mlcd = g:EclimMakeLCD
+  exec 'lcd ' . fnamemodify(makefile, ':h')
+  let g:EclimMakeLCD = 0
+  try
+    call eclim#util#MakeWithCompiler('eclim_make', a:bang, a:args)
+  finally
+    exec 'lcd ' . escape(cwd, ' ')
+    let g:EclimMakeLCD = save_mlcd
+  endtry
 endfunction " }}}
 
 " MakeWithCompiler(compiler, bang, args) {{{
@@ -650,6 +694,18 @@ function! eclim#util#MarkSave()
   return line("''")
 endfunction " }}}
 
+" Pad(string, length, [char]) {{{
+" Pad the supplied string.
+function! eclim#util#Pad(string, length, ...)
+  let char = a:0 > 0 ? a:1 : ' '
+
+  let string = a:string
+  while len(string) < a:length
+    let string .= char
+  endwhile
+  return string
+endfunction " }}}
+
 " ParseArgs(args) {{{
 " Parses the supplied argument line into a list of args, handling quoted
 " strings, escaped spaces, etc.
@@ -721,7 +777,7 @@ function! eclim#util#ParseLocationEntries(entries, ...)
     let dict = s:ParseLocationEntry(entry)
 
     " partition by severity
-    if type(entries) == 4 " dictionary
+    if type(entries) == g:DICT_TYPE
       " empty key not allowed
       let type = dict.type == '' ? ' ' : tolower(dict.type)
       if !has_key(entries, type)
@@ -736,7 +792,7 @@ function! eclim#util#ParseLocationEntries(entries, ...)
   endfor
 
   " re-assemble severity partitioned results
-  if type(entries) == 4 " dictionary
+  if type(entries) == g:DICT_TYPE
     let results = []
     if has_key(entries, 'e')
       let results += remove(entries, 'e')
@@ -763,13 +819,27 @@ endfunction " }}}
 " s:ParseLocationEntry(entry) {{{
 function! s:ParseLocationEntry(entry)
   let entry = a:entry
-  let file = substitute(entry, '\(.\{-}\)|.*', '\1', '')
-  let line = substitute(entry, '.*|\([0-9]\+\) col.*', '\1', '')
-  let col = substitute(entry, '.*col \([0-9]\+\)|.*', '\1', '')
-  let message = substitute(entry, '.*col [0-9]\+|\(.\{-}\)\(|.*\|$\)', '\1', '')
-  let type = substitute(entry, '.*|\(e\|w\)$', '\1', '')
-  if type == entry
+  if type(entry) == g:DICT_TYPE
+    let file = entry.filename
+    let line = entry.line
+    let col = entry.column
+    let message = entry.message
     let type = ''
+    if has_key(entry, 'warning')
+      let type = entry.warning ? 'w' : 'e'
+    endif
+
+  " FIXME: should be safe to remove this block after all commands have gone
+  " through the json conversion.
+  else
+    let file = substitute(entry, '\(.\{-}\)|.*', '\1', '')
+    let line = substitute(entry, '.*|\([0-9]\+\) col.*', '\1', '')
+    let col = substitute(entry, '.*col \([0-9]\+\)|.*', '\1', '')
+    let message = substitute(entry, '.*col [0-9]\+|\(.\{-}\)\(|.*\|$\)', '\1', '')
+    let type = substitute(entry, '.*|\(e\|w\)$', '\1', '')
+    if type == entry
+      let type = ''
+    endif
   endif
 
   if has('win32unix')
@@ -987,10 +1057,6 @@ function! eclim#util#ShowCurrentError()
     " remove any new lines
     let message = substitute(message, '\n', ' ', 'g')
 
-    if len(message) > (&columns - 1)
-      let message = strpart(message, 0, &columns - 4) . '...'
-    endif
-
     call eclim#util#WideMessage('echo', message)
     let s:show_current_error_displaying = 1
   else
@@ -1145,18 +1211,22 @@ function! eclim#util#System(cmd, ...)
   return result
 endfunction " }}}
 
-" TempWindow(name, lines, [readonly]) {{{
+" TempWindow(name, lines, [options]) {{{
 " Opens a temp window w/ the given name and contents which is readonly unless
 " specified otherwise.
 function! eclim#util#TempWindow(name, lines, ...)
+  let options = a:0 > 0 ? a:1 : {}
   let filename = expand('%:p')
   let winnr = winnr()
 
-  call eclim#util#TempWindowClear(a:name)
   let name = eclim#util#EscapeBufferName(a:name)
 
+  let line = 1
+  let col = 1
+
   if bufwinnr(name) == -1
-    silent! noautocmd exec "botright 10sview " . escape(a:name, ' []')
+    let height = get(options, 'height', 10)
+    silent! noautocmd exec "botright " . height . "sview " . escape(a:name, ' []')
     setlocal nowrap
     setlocal winfixheight
     setlocal noswapfile
@@ -1169,8 +1239,14 @@ function! eclim#util#TempWindow(name, lines, ...)
     if temp_winnr != winnr()
       exec temp_winnr . 'winc w'
       silent doautocmd WinEnter
+      if get(options, 'preserveCursor', 0)
+        let line = line('.')
+        let col = col('.')
+      endif
     endif
   endif
+
+  call eclim#util#TempWindowClear(a:name)
 
   setlocal modifiable
   setlocal noreadonly
@@ -1178,7 +1254,9 @@ function! eclim#util#TempWindow(name, lines, ...)
   retab
   silent 1,1delete _
 
-  if len(a:000) == 0 || a:000[0]
+  call cursor(line, col)
+
+  if get(options, 'readonly', 1)
     setlocal nomodified
     setlocal nomodifiable
     setlocal readonly
@@ -1218,15 +1296,6 @@ endfunction " }}}
 function! eclim#util#TempWindowCommand(command, name, ...)
   let name = eclim#util#EscapeBufferName(a:name)
 
-  let line = 1
-  let col = 1
-  " if the window is open, save the cursor position
-  if bufwinnr(name) != -1
-    exec bufwinnr(name) . "winc w"
-    let line = line('.')
-    let col = col('.')
-  endif
-
   if len(a:000) > 0
     let port = a:000[0]
     let result = eclim#ExecuteEclim(a:command, port)
@@ -1239,9 +1308,7 @@ function! eclim#util#TempWindowCommand(command, name, ...)
     return 0
   endif
 
-  call eclim#util#TempWindow(name, results)
-
-  call cursor(line, col)
+  call eclim#util#TempWindow(name, results, {'preserveCursor': 1})
 
   return 1
 endfunction " }}}
@@ -1258,8 +1325,9 @@ function! eclim#util#WideMessage(command, message)
 
   set noruler noshowcmd
   redraw
-  if len(message) > &columns
-    let remove = len(message) - &columns
+  let vimwidth = &columns * &cmdheight
+  if len(message) > vimwidth - 1
+    let remove = len(message) - vimwidth
     let start = (len(message) / 2) - (remove / 2) - 4
     let end = start + remove + 4
     let message = substitute(message, '\%' . start . 'c.*\%' . end . 'c', '...', '')

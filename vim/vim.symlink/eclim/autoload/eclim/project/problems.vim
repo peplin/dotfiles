@@ -4,7 +4,7 @@
 "
 " License:
 "
-" Copyright (C) 2005 - 2009  Eric Van Dewoestine
+" Copyright (C) 2005 - 2012  Eric Van Dewoestine
 "
 " This program is free software: you can redistribute it and/or modify
 " it under the terms of the GNU General Public License as published by
@@ -31,8 +31,8 @@
   let s:problems_command = '-command problems -p "<project>"'
 " }}}
 
-" Problems(project, open) {{{
-function! eclim#project#problems#Problems(project, open)
+" Problems(project, open, bang) {{{
+function! eclim#project#problems#Problems(project, open, bang)
   let project = a:project
   if project == ''
     let project = eclim#project#util#GetCurrentProjectName()
@@ -44,11 +44,14 @@ function! eclim#project#problems#Problems(project, open)
 
   let command = s:problems_command
   let command = substitute(command, '<project>', project, '')
+  if a:bang != ""
+    let command .= ' -e'
+  endif
   let result = eclim#ExecuteEclim(command)
   let errors = []
-  if result =~ '|'
+  if type(result) == g:LIST_TYPE && len(result) > 0
     let errors = eclim#util#ParseLocationEntries(
-          \ split(result, '\n'), g:EclimValidateSortResults)
+      \ result, g:EclimValidateSortResults)
   endif
 
   let action = eclim#project#problems#IsProblemsList() ? 'r' : ' '
@@ -57,6 +60,7 @@ function! eclim#project#problems#Problems(project, open)
   " generate a 'signature' to distinguish the problems list from other qf
   " lists.
   let s:eclim_problems_sig = s:QuickfixSignature()
+  let s:eclim_problems_bang = a:bang
 
   if a:open
     exec g:EclimProblemsQuickFixOpen
@@ -67,7 +71,33 @@ endfunction " }}}
 function! eclim#project#problems#ProblemsUpdate()
   if g:EclimProjectProblemsUpdateOnSave &&
    \ eclim#project#problems#IsProblemsList()
-    call eclim#project#problems#Problems('', 0)
+
+    " preserve the cursor position in the quickfix window
+    let qf_winnr = 0
+    let index = 1
+    while index <= winnr('$')
+      if getbufvar(winbufnr(index), '&ft') == 'qf'
+        let cur = winnr()
+        let qf_winnr = index
+        exec qf_winnr . 'winc w'
+        let pos = getpos('.')
+        exec cur . 'winc w'
+        break
+      endif
+      let index += 1
+    endwhile
+
+    let bang = exists('s:eclim_problems_bang') ? s:eclim_problems_bang : ''
+    call eclim#project#problems#Problems('', 0, bang)
+
+    " restore the cursor position
+    if qf_winnr
+      let cur = winnr()
+      exec qf_winnr . 'winc w'
+      call setpos('.', pos)
+      redraw
+      exec cur . 'winc w'
+    endif
   endif
 endfunction " }}}
 
@@ -78,6 +108,9 @@ function! eclim#project#problems#IsProblemsList()
   " :colder or :cnewer.
   if exists('s:eclim_problems_sig')
     return s:QuickfixSignature() == s:eclim_problems_sig
+  endif
+  if exists('s:eclim_problems_bang')
+    unlet s:eclim_problems_bang
   endif
   return 0
 endfunction " }}}

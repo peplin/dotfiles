@@ -6,7 +6,7 @@
 "
 " License:
 "
-" Copyright (C) 2005 - 2011  Eric Van Dewoestine
+" Copyright (C) 2005 - 2012  Eric Van Dewoestine
 "
 " This program is free software: you can redistribute it and/or modify
 " it under the terms of the GNU General Public License as published by
@@ -35,7 +35,7 @@ function! eclim#java#format#Format(first, last, typeDummy)
     return
   endif
 
-  call eclim#java#util#SilentUpdate()
+  call eclim#lang#SilentUpdate()
 
   let project = eclim#project#util#GetCurrentProjectName()
   let file = eclim#project#util#GetProjectRelativeFilePath()
@@ -43,10 +43,10 @@ function! eclim#java#format#Format(first, last, typeDummy)
   let command = s:command_properties
   let command = substitute(command, '<project>', project, '')
   let command = substitute(command, '<file>', file, '')
-  let begin = line2byte(a:first) - 1
-  let end = line2byte(a:last) - 1 + len(getline(a:last)) - 1
+  let begin = eclim#util#GetOffset(a:first, 1)
+  let end = eclim#util#GetOffset(a:last, 1) + len(getline(a:last)) - 1
   let command = substitute(command, '<boffset>', begin, '')
-  let command = substitute(command, '<eoffset>', line2byte(a:last) - 1, '')
+  let command = substitute(command, '<eoffset>', end, '')
 
   let result = eclim#ExecuteEclim(command)
   if result != "0"
