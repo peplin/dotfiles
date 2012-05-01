@@ -4,3 +4,8 @@
 # increase perm gen size
 -XX:PermSize=64m
 -XX:MaxPermSize=128m
+<<<<<<< HEAD
+=======
+
+osgi.instance.area.default=@user.home/.workspace
+>>>>>>> master
