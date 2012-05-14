@@ -157,10 +157,6 @@ autocmd!
         " assume the /g flag on :s substitutions to replace all matches in a
         " line:
         set gdefault
-
-        " clear the search buffer when hitting return
-        nnoremap <CR> :nohlsearch<cr>
-
     " }
 
     " show list instead of just completing

@@ -4,7 +4,7 @@
 "
 " License:
 "
-" Copyright (C) 2005 - 2011  Eric Van Dewoestine
+" Copyright (C) 2005 - 2012  Eric Van Dewoestine
 "
 " This program is free software: you can redistribute it and/or modify
 " it under the terms of the GNU General Public License as published by
@@ -54,7 +54,7 @@ function! eclim#project#tree#ProjectTree(...)
     let names = [name]
 
   " list of project names supplied
-  elseif type(a:000[0]) == 3
+  elseif type(a:000[0]) == g:LIST_TYPE
     let names = a:000[0]
     if len(names) == 1 && (names[0] == '0' || names[0] == '')
       return
@@ -256,6 +256,7 @@ function! s:Mappings()
   nnoremap <buffer> <silent> \| :call <SID>OpenFile('vsplit')<cr>
   nnoremap <buffer> <silent> T :call <SID>OpenFile('tablast \| tabnew')<cr>
   nnoremap <buffer> <silent> F :call <SID>OpenFileName()<cr>
+  nnoremap <buffer> <silent> Y :call <SID>YankFileName()<cr>
 
   " assign to buffer var to get around weird vim issue passing list containing
   " a string w/ a '<' in it on execution of mapping.
@@ -277,6 +278,7 @@ function! s:Mappings()
       \ 'K - set root to top most dir',
       \ 'F - open/create a file by name',
       \ 'D - create a new directory',
+      \ 'Y - yank current file/dir path to the clipboard',
       \ 'A - toggle hide/view hidden files',
       \ ':CD <dir> - set the root to <dir>',
     \ ]
@@ -294,15 +296,46 @@ function! s:InfoLine()
       exec lnum . ',' . lnum . 'delete _'
     endif
 
-    let GetInfo = function('vcs#util#GetInfo')
+    let info = ''
     try
-      let info = GetInfo(b:roots[0])
-      if info != ''
-        call append(line('$') - 1, '" ' . info)
-      endif
-    catch /E117/
-      " noop if the function wasn't found
+      let info = function('vcs#util#GetInfo')(b:roots[0])
+    catch /E\(117\|700\)/
+      " fall back to fugitive
+      try
+        " make sure fugitive has the git dir for the current project
+        if !exists('b:git_dir') || (b:git_dir !~ '^\M' . b:roots[0])
+          let cwd = ''
+          if getcwd() . '/' != b:roots[0]
+            let cwd = getcwd()
+            exec 'lcd ' . escape(b:roots[0], ' ')
+          endif
+
+          if exists('b:git_dir')
+            unlet b:git_dir
+          endif
+          silent! doautocmd fugitive BufReadPost %
+
+          if cwd != ''
+            exec 'lcd ' . escape(cwd, ' ')
+          endif
+        endif
+
+        let info = function('fugitive#statusline')()
+        if info != ''
+          let branch = substitute(info, '^\[\Git(\(.*\))\]$', '\1', 'g')
+          if branch != info
+            let info = 'git:' . branch
+          endif
+        endif
+      catch /E\(117\|700\)/
+        " noop if the neither function was found
+      endtry
     endtry
+
+    " &modifiable check for silly side effect of fugitive autocmd
+    if info != '' && &modifiable
+      call append(line('$') - 1, '" ' . info)
+    endif
   endif
   call setpos('.', pos)
   setlocal nomodifiable
@@ -345,8 +378,17 @@ function! s:OpenFileName()
   endif
 
   let response = input('file: ', path, 'file')
-  let actions = eclim#tree#GetFileActions(response)
-  call eclim#tree#ExecuteAction(response, actions[0].action)
+  if response != ''
+    let actions = eclim#tree#GetFileActions(response)
+    call eclim#tree#ExecuteAction(response, actions[0].action)
+  endif
+endfunction " }}}
+
+" s:YankFileName() " {{{
+function! s:YankFileName()
+  let path = eclim#tree#GetPath()
+  let [@*, @+, @"] = [path, path, path]
+  call eclim#util#Echo('Copied path to clipboard: ' . path)
 endfunction " }}}
 
 " ProjectTreeSettings() {{{
@@ -430,9 +472,8 @@ function! eclim#project#tree#InjectLinkedResources(dir, contents)
       let index += 1
     endfor
 
-    let index += 1
     for link in links
-      call insert(a:contents, a:dir . link . '/', index)
+      call add(a:contents, a:dir . link . '/')
     endfor
   endif
 endfunction " }}}

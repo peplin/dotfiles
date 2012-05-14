@@ -17,6 +17,7 @@
 *.make.temp
 .idea/
 *.o
+*.hi
 gmon.out
 .gdb_history
 .ropeproject/

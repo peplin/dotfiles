@@ -30,7 +30,6 @@ if [ "$SHELL" = "/bin/zsh" ]; then
     setopt hist_ignore_all_dups  # don't record dupes in history
     setopt hist_reduce_blanks
 
-    setopt auto_cd
     setopt extended_glob
     setopt notify
     setopt pushd_to_home

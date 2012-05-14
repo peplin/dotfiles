@@ -5,7 +5,7 @@
 "
 " License:
 "
-" Copyright (C) 2005 - 2011  Eric Van Dewoestine
+" Copyright (C) 2005 - 2012  Eric Van Dewoestine
 "
 " This program is free software: you can redistribute it and/or modify
 " it under the terms of the GNU General Public License as published by
@@ -221,24 +221,6 @@ function! eclim#java#util#IsValidIdentifier(word)
   return 1
 endfunction " }}}
 
-" SilentUpdate() {{{
-" Silently updates the current source file w/out validation.
-function! eclim#java#util#SilentUpdate()
-  " i couldn't reproduce the issue, but at least one person experienced the
-  " cursor moving on update and breaking code completion:
-  " http://sourceforge.net/tracker/index.php?func=detail&aid=1995319&group_id=145869&atid=763323
-  let pos = getpos('.')
-
-  let saved = g:EclimJavaSrcValidate
-  try
-    let g:EclimJavaSrcValidate = 0
-    silent update
-  finally
-    call setpos('.', pos)
-    let g:EclimJavaSrcValidate = saved
-  endtry
-endfunction " }}}
-
 " UpdateSrcFile(validate) {{{
 " Updates the src file on the server w/ the changes made to the current file.
 function! eclim#java#util#UpdateSrcFile(validate)
@@ -257,9 +239,9 @@ function! eclim#java#util#UpdateSrcFile(validate)
 
     let result = eclim#ExecuteEclim(command)
     if (g:EclimJavaSrcValidate || a:validate) && !eclim#util#WillWrittenBufferClose()
-      if result =~ '|'
+      if type(result) == g:LIST_TYPE && len(result) > 0
         let errors = eclim#util#ParseLocationEntries(
-          \ split(result, '\n'), g:EclimValidateSortResults)
+          \ result, g:EclimValidateSortResults)
         call eclim#display#signs#SetPlaceholder()
         call eclim#util#ClearLocationList('global')
         call eclim#util#SetLocationList(errors, 'a')
@@ -285,6 +267,8 @@ function! eclim#java#util#UpdateSrcFile(validate)
 
       call eclim#project#problems#ProblemsUpdate()
     endif
+  elseif a:validate
+    call eclim#project#util#IsCurrentFileInProject()
   endif
 endfunction " }}}
 
@@ -351,6 +335,11 @@ function! eclim#java#util#Java(classname, args)
     endfor
   endif
 
+  if has('win32') || has('win64') || has('win32unix')
+    " add trailing quote for windows like we do in eclim#client#nailgun#Execute
+    let command = command . ' "'
+  endif
+
   let results = split(eclim#util#Exec(command, 1), "\n")
   call eclim#util#TempWindow('[Java Output]', results)
   let b:project = project
@@ -385,14 +374,37 @@ endfunction " }}}
 " ListInstalls() {{{
 " Lists all installed jdks/jres.
 function! eclim#java#util#ListInstalls()
-  let installs = split(eclim#ExecuteEclim(s:command_list_installs), '\n')
+  let installs = eclim#ExecuteEclim(s:command_list_installs)
+  if type(installs) != g:LIST_TYPE
+    return
+  endif
   if len(installs) == 0
     call eclim#util#Echo("No jdk/jre installs found.")
   endif
-  if len(installs) == 1 && installs[0] == '0'
-    return
-  endif
-  call eclim#util#Echo(join(installs, "\n"))
+
+  let pad = 0
+  for install in installs
+    let name = install.name . ' ' . install.version
+    if install.default
+      let name .= ' (default)'
+    endif
+    let pad = len(name) > pad ? len(name) : pad
+  endfor
+
+  let output = []
+  let type = ''
+  for install in installs
+    if install.type != type
+      let type = install.type
+      call add(output, 'Type: ' . install.type)
+    endif
+    let name = install.name . ' ' . install.version
+    if install.default
+      let name .= ' (default)'
+    endif
+    call add(output, '  ' . eclim#util#Pad(name, pad) . ' - ' . install.dir)
+  endfor
+  call eclim#util#Echo(join(output, "\n"))
 endfunction " }}}
 
 " ReadClassPrototype() {{{
