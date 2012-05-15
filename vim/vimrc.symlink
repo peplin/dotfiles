@@ -391,10 +391,6 @@ autocmd!
         nnoremap <F8> :GundoToggle<CR>
     " }
 
-    " Command-T {
-        let g:CommandTMatchWindowAtTop = 1
-    " }
-
     " Notes {
         let g:notes_directory = "~/Dropbox/notes"
         let g:notes_suffix = ".txt"
