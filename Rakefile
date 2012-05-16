@@ -8,15 +8,17 @@ task :install do
   overwrite_all = false
   backup_all = false
 
+  puts linkables
   linkables.each do |linkable|
     overwrite = false
     backup = false
 
-    next if linkable.match(/.git/) != nil
+    next if linkable.match(/\.git/) != nil
 
     file = linkable.split('/', 2).last.split('.symlink').last
     target = "#{ENV["HOME"]}/.#{file}"
 
+    puts target
     if File.exists?(target) || File.symlink?(target)
       unless skip_all || overwrite_all || backup_all
         puts "File already exists: #{target}, what do you want to do? [s]kip, [S]kip all, [o]verwrite, [O]verwrite all, [b]ackup, [B]ackup all"
