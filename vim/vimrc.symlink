@@ -345,6 +345,10 @@ autocmd!
 " }
 
 " Plugins {
+    "CtrlP {
+        let g:ctrlp_map = '<leader>t'
+        let g:ctrlp_cmd = 'CtrlPMixed'
+    " }
     " Gist {
         let g:gist_detect_filetype = 1
     " }
