@@ -74,7 +74,7 @@ function! eclim#lang#CodeComplete(command, findstart, base, ...)
 
     let completions = []
     let results = eclim#ExecuteEclim(command)
-    if type(results) != 3
+    if type(results) != g:LIST_TYPE
       return
     endif
 
@@ -171,15 +171,16 @@ function! eclim#lang#Search(command, singleResultAction, argline)
 
   let port = eclim#client#nailgun#GetNgPort(workspace)
   let results =  eclim#ExecuteEclim(search_cmd, port)
-  if type(results) != 3
+  if type(results) != g:LIST_TYPE
     return
   endif
 
   if !empty(results)
     call eclim#util#SetLocationList(eclim#util#ParseLocationEntries(results))
+    let locs = getloclist(0)
     " if only one result and it's for the current file, just jump to it.
     " note: on windows the expand result must be escaped
-    if len(results) == 1 && results[0].filename =~ escape(expand('%:p'), '\') . '|'
+    if len(results) == 1 && locs[0].bufnr == bufnr('%')
       if results[0].line != 1 && results[0].column != 1
         lfirst
       endif
@@ -291,7 +292,10 @@ function! eclim#lang#SilentUpdate(...)
           let file = fnamemodify(file, ':h') . '/' . prefix . fnamemodify(file, ':t')
           let tempfile = expand('%:p:h') . '/' . prefix . expand('%:t')
           if a:0 < 2 || a:2
+            let savepatchmode = &patchmode
+            set patchmode=
             exec 'silent noautocmd write! ' . escape(tempfile, ' ')
+            let &patchmode = savepatchmode
           endif
         endif
       else
