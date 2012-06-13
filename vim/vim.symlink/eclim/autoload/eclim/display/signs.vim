@@ -5,7 +5,7 @@
 "
 " License:
 "
-" Copyright (C) 2005 - 2011  Eric Van Dewoestine
+" Copyright (C) 2005 - 2012  Eric Van Dewoestine
 "
 " This program is free software: you can redistribute it and/or modify
 " it under the terms of the GNU General Public License as published by
@@ -25,6 +25,18 @@
 " Global Variables {{{
 if !exists("g:EclimShowQuickfixSigns")
   let g:EclimShowQuickfixSigns = 1
+endif
+
+if !exists("g:EclimShowLoclistSigns")
+  let g:EclimShowLoclistSigns = 1
+endif
+
+if !exists("g:EclimQuickfixSignText")
+  let g:EclimQuickfixSignText = '> '
+endif
+
+if !exists("g:EclimLoclistSignText")
+  let g:EclimLoclistSignText = '>>'
 endif
 
 if !exists("g:EclimUserSignText")
@@ -84,7 +96,7 @@ endfunction " }}}
 " GetExisting()
 function! eclim#display#signs#UnplaceAll(list)
   for sign in a:list
-    if type(sign) == 4
+    if type(sign) == g:DICT_TYPE
       call eclim#display#signs#Unplace(sign['id'])
     else
       call eclim#display#signs#Unplace(sign)
@@ -256,57 +268,42 @@ function! eclim#display#signs#Update()
   let save_lazy = &lazyredraw
   set lazyredraw
 
-  call eclim#display#signs#Define('error', '>>', g:EclimErrorHighlight)
   let placeholder = eclim#display#signs#SetPlaceholder()
 
   " remove all existing signs
   let existing = eclim#display#signs#GetExisting()
   for exists in existing
-    if exists.name =~ '^\(error\|info\|warning\|qf_error\|qf_warning\)$'
+    if exists.name =~ '^\(qf_\)\?\(error\|info\|warning\)$'
       call eclim#display#signs#Unplace(exists.id)
     endif
   endfor
 
-  let qflist = getqflist()
+  let qflist = filter(g:EclimShowQuickfixSigns ? getqflist() : [],
+    \ 'bufnr("%") == v:val.bufnr')
+  let loclist = filter(g:EclimShowLoclistSigns ? getloclist(0) : [],
+    \ 'bufnr("%") == v:val.bufnr')
 
-  if g:EclimShowQuickfixSigns
-    let errors = filter(copy(qflist),
-      \ 'bufnr("%") == v:val.bufnr && (v:val.type == "" || v:val.type == "e")')
-    let warnings = filter(copy(qflist),
-      \ 'bufnr("%") == v:val.bufnr && v:val.type == "w"')
-    call map(errors, 'v:val.lnum')
-    call map(warnings, 'v:val.lnum')
-    call eclim#display#signs#Define("qf_error", "> ", g:EclimErrorHighlight)
-    call eclim#display#signs#Define("qf_warning", "> ", g:EclimWarningHighlight)
-    call eclim#display#signs#PlaceAll("qf_error", errors)
-    call eclim#display#signs#PlaceAll("qf_warning", warnings)
-  endif
+  for [list, marker, prefix] in [
+      \ [qflist, g:EclimQuickfixSignText, 'qf_'],
+      \ [loclist, g:EclimLoclistSignText, '']]
+    if g:EclimSignLevel >= 4
+      let info = filter(copy(list), 'v:val.type == "" || tolower(v:val.type) == "i"')
+      call eclim#display#signs#Define(prefix . 'info', marker, g:EclimInfoHighlight)
+      call eclim#display#signs#PlaceAll(prefix . 'info', map(info, 'v:val.lnum'))
+    endif
 
-  let list = filter(getloclist(0), 'bufnr("%") == v:val.bufnr')
+    if g:EclimSignLevel >= 3
+      let warnings = filter(copy(list), 'tolower(v:val.type) == "w"')
+      call eclim#display#signs#Define(prefix . 'warning', marker, g:EclimWarningHighlight)
+      call eclim#display#signs#PlaceAll(prefix . 'warning', map(warnings, 'v:val.lnum'))
+    endif
 
-  if g:EclimSignLevel >= 4
-    let info = filter(copy(qflist) + copy(list),
-      \ 'bufnr("%") == v:val.bufnr && v:val.type == "i"')
-    let locinfo = filter(copy(list),
-      \ 'bufnr("%") == v:val.bufnr && v:val.type == ""')
-    call extend(info, locinfo)
-    call map(info, 'v:val.lnum')
-    call eclim#display#signs#Define("info", ">>", g:EclimInfoHighlight)
-    call eclim#display#signs#PlaceAll("info", info)
-  endif
-
-  if g:EclimSignLevel >= 3
-    let warnings = filter(copy(list), 'v:val.type == "w"')
-    call map(warnings, 'v:val.lnum')
-    call eclim#display#signs#Define("warning", ">>", g:EclimWarningHighlight)
-    call eclim#display#signs#PlaceAll("warning", warnings)
-  endif
-
-  if g:EclimSignLevel >= 2
-    let errors = filter(copy(list), 'v:val.type == "e"')
-    call map(errors, 'v:val.lnum')
-    call eclim#display#signs#PlaceAll("error", errors)
-  endif
+    if g:EclimSignLevel >= 2
+      let errors = filter(copy(list), 'tolower(v:val.type) == "e"')
+      call eclim#display#signs#Define(prefix . 'error', marker, g:EclimErrorHighlight)
+      call eclim#display#signs#PlaceAll(prefix . 'error', map(errors, 'v:val.lnum'))
+    endif
+  endfor
 
   if placeholder
     call eclim#display#signs#RemovePlaceholder()
@@ -315,37 +312,21 @@ function! eclim#display#signs#Update()
   let &lazyredraw = save_lazy
 endfunction " }}}
 
-" Show(type, list, [delayed]) {{{
-" Set the type on each entry in the specified list ('qf' or 'loc') and mark
-" any matches in the current file.
-function! eclim#display#signs#Show(type, list, ...)
-  if a:type != ''
-    if a:list == 'qf'
-      let list = getqflist()
-    else
-      let list = getloclist(0)
-    endif
-
+" QuickFixCmdPost() {{{
+" Force 'make' results to be of type error if no type set.
+function! eclim#display#signs#QuickFixCmdPost()
+  if expand('<amatch>') == 'make'
     let newentries = []
-    for entry in list
-      let entry['type'] = a:type
+    for entry in getqflist()
+      if entry['type'] == ''
+        let entry['type'] = 'e'
+      endif
       call add(newentries, entry)
     endfor
-
-    if a:list == 'qf'
-      call setqflist(newentries, 'r')
-    else
-      call setloclist(0, newentries, 'r')
-    endif
+    call setqflist(newentries, 'r')
   endif
-
-  let delayed = a:0 > 0 && a:1
-  if delayed
-    " prevent gvim from redrawing immediately after a :make call
-    call eclim#util#DelayedCommand('call eclim#display#signs#Update() | redraw!')
-  else
-    call eclim#display#signs#Update() | redraw!
-  endif
+  call eclim#display#signs#Update()
+  redraw!
 endfunction " }}}
 
 " SetPlaceholder([only_if_necessary]) {{{

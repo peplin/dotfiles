@@ -9,7 +9,7 @@
 "
 " License:
 "
-" Copyright (C) 2005 - 2011  Eric Van Dewoestine
+" Copyright (C) 2005 - 2012  Eric Van Dewoestine
 "
 " This program is free software: you can redistribute it and/or modify
 " it under the terms of the GNU General Public License as published by
@@ -27,6 +27,13 @@
 " }}}
 
 " Global Variables {{{
+let g:NUMBER_TYPE = 0
+let g:STRING_TYPE = 1
+let g:FUNCREF_TYPE = 2
+let g:LIST_TYPE = 3
+let g:DICT_TYPE = 4
+let g:FLOAT_TYPE = 5
+
 if !exists("g:EclimLogLevel")
   let g:EclimLogLevel = 4
 endif
@@ -95,6 +102,10 @@ if !exists("g:EclimDefaultFileOpenAction")
   let g:EclimDefaultFileOpenAction = 'split'
 endif
 
+if !exists("g:EclimLocationListHeight")
+  let g:EclimLocationListHeight = 10
+endif
+
 if !exists("g:EclimMakeLCD")
   let g:EclimMakeLCD = 1
 endif
@@ -105,14 +116,14 @@ endif
 
 if !exists("g:EclimHome")
   " set at build/install time.
-  let g:EclimHome = '/Users/peplin/eclipse/plugins/org.eclim_1.7.2'
+  let g:EclimHome = '/home/peplin/eclipse/plugins/org.eclim_1.7.6'
   if has('win32unix')
     let g:EclimHome = eclim#cygwin#CygwinPath(g:EclimHome)
   endif
 endif
 if !exists("g:EclimEclipseHome")
   " set at build/install time.
-  let g:EclimEclipseHome = '/Users/peplin/eclipse'
+  let g:EclimEclipseHome = '/home/peplin/eclipse'
   if has('win32unix')
     let g:EclimEclipseHome = eclim#cygwin#CygwinPath(g:EclimEclipseHome)
   endif
@@ -120,6 +131,18 @@ endif
 
 if !exists("g:EclimMenus")
   let g:EclimMenus = 1
+endif
+
+if !exists("g:EclimTemplatesDisabled")
+  " Disabled for now.
+  let g:EclimTemplatesDisabled = 1
+endif
+
+if !exists('g:EclimLargeFileEnabled')
+  let g:EclimLargeFileEnabled = 1
+endif
+if !exists('g:EclimLargeFileSize')
+  let g:EclimLargeFileSize = 5
 endif
 " }}}
 
@@ -135,10 +158,6 @@ if !exists(":EclimSettings")
   command -nargs=? -complete=customlist,eclim#eclipse#CommandCompleteWorkspaces
     \ EclimSettings :call eclim#Settings('<args>')
 endif
-if !exists(":PatchEclim")
-  command -nargs=+ -complete=customlist,eclim#CommandCompleteScriptRevision
-    \ PatchEclim :call eclim#PatchEclim(<f-args>)
-endif
 if !exists(":EclimDisable")
   command EclimDisable :call eclim#Disable()
 endif
@@ -152,9 +171,87 @@ endif
 if !exists(':EclimHelpGrep')
   command -nargs=+ EclimHelpGrep :call eclim#help#HelpGrep(<q-args>)
 endif
+
+if !exists(":Buffers")
+  command Buffers :call eclim#common#buffers#Buffers()
+  command BuffersToggle :call eclim#common#buffers#BuffersToggle()
+endif
+
+if !exists(":Only")
+  command Only :call eclim#common#buffers#Only()
+endif
+
+if !exists(":DiffLastSaved")
+  command DiffLastSaved :call eclim#common#util#DiffLastSaved()
+endif
+
+if !exists(":SwapWords")
+  command SwapWords :call eclim#common#util#SwapWords()
+endif
+if !exists(":SwapTypedArguments")
+  command SwapTypedArguments :call eclim#common#util#SwapTypedArguments()
+endif
+if !exists(":LocateFile")
+  command -nargs=? LocateFile :call eclim#common#locate#LocateFile('', '<args>')
+  command -nargs=? LocateBuffer
+    \ :call eclim#common#locate#LocateFile('', '<args>', 'buffers')
+endif
+
+if !exists(":QuickFixClear")
+  command QuickFixClear :call setqflist([]) | call eclim#display#signs#Update()
+endif
+if !exists(":LocationListClear")
+  command LocationListClear :call setloclist(0, []) | call eclim#display#signs#Update()
+endif
+
+if !exists(":Tcd")
+  command -nargs=1 -complete=dir Tcd :call eclim#common#util#Tcd('<args>')
+endif
+
+if !exists(":History")
+  command History call eclim#common#history#History()
+  command -bang HistoryClear call eclim#common#history#HistoryClear('<bang>')
+endif
+
+if has('signs')
+  if !exists(":Sign")
+    command Sign :call eclim#display#signs#Toggle('user', line('.'))
+  endif
+  if !exists(":Signs")
+    command Signs :call eclim#display#signs#ViewSigns('user')
+  endif
+  if !exists(":SignClearUser")
+    command SignClearUser :call eclim#display#signs#UnplaceAll(
+      \ eclim#display#signs#GetExisting('user'))
+  endif
+  if !exists(":SignClearAll")
+    command SignClearAll :call eclim#display#signs#UnplaceAll(
+      \ eclim#display#signs#GetExisting())
+  endif
+endif
+
+if !exists(":OpenUrl")
+  command -bang -range -nargs=? OpenUrl
+    \ :call eclim#web#OpenUrl('<args>', '<bang>', <line1>, <line2>)
+endif
+
+if !exists(":Make")
+  command -bang -nargs=* Make :call eclim#util#Make('<bang>', '<args>')
+endif
 " }}}
 
 " Auto Commands{{{
+augroup eclim_archive_read
+  autocmd!
+  silent! autocmd! archive_read
+  autocmd BufReadCmd
+    \ jar:/*,jar:\*,jar:file:/*,jar:file:\*,
+    \tar:/*,tar:\*,tar:file:/*,tar:file:\*,
+    \tbz2:/*,tgz:\*,tbz2:file:/*,tbz2:file:\*,
+    \tgz:/*,tgz:\*,tgz:file:/*,tgz:file:\*,
+    \zip:/*,zip:\*,zip:file:/*,zip:file:\*
+    \ call eclim#common#util#ReadFile()
+augroup END
 
 if g:EclimShowCurrentError
   " forcing load of util, otherwise a bug in vim is sometimes triggered when
@@ -185,21 +282,14 @@ endif
 
 if g:EclimSignLevel
   augroup eclim_qf
-    autocmd QuickFixCmdPost *make* call eclim#display#signs#Show('', 'qf', 1)
-    autocmd QuickFixCmdPost grep*,vimgrep* call eclim#display#signs#Show('i', 'qf', 1)
-    autocmd QuickFixCmdPost lgrep*,lvimgrep* call eclim#display#signs#Show('i', 'loc', 1)
     autocmd WinEnter,BufWinEnter * call eclim#display#signs#Update()
-  augroup END
-endif
-
-if has('netbeans_intg')
-  augroup eclim_vimplugin
-    " autocommands used to work around the fact that the "unmodified" event in
-    " vim's netbean support is commentted out for some reason.
-    autocmd BufWritePost * call eclim#vimplugin#BufferWritten()
-    autocmd CursorHold,CursorHoldI * call eclim#vimplugin#BufferModified()
-    autocmd BufWinLeave * call eclim#vimplugin#BufferClosed()
-    autocmd BufEnter * call eclim#vimplugin#BufferEnter()
+    if has('gui_running')
+      " delayed to keep the :make output on the screen for gvim
+      autocmd QuickFixCmdPost * call eclim#util#DelayedCommand(
+        \ 'call eclim#display#signs#QuickFixCmdPost()')
+    else
+      autocmd QuickFixCmdPost * call eclim#display#signs#QuickFixCmdPost()
+    endif
   augroup END
 endif
 
@@ -207,6 +297,20 @@ if has('gui_running') && g:EclimMenus
   augroup eclim_menus
     autocmd BufNewFile,BufReadPost,WinEnter * call eclim#display#menu#Generate()
     autocmd VimEnter * if expand('<amatch>')=='' | call eclim#display#menu#Generate() | endif
+  augroup END
+endif
+
+if !g:EclimTemplatesDisabled
+  augroup eclim_template
+    autocmd!
+    autocmd BufNewFile * call eclim#common#template#Template()
+  augroup END
+endif
+
+if !exists('#LargeFile') && g:EclimLargeFileEnabled
+  augroup eclim_largefile
+    autocmd!
+    autocmd BufReadPre * call eclim#common#largefile#InitSettings()
   augroup END
 endif
 " }}}

@@ -12,7 +12,7 @@ task :install do
     overwrite = false
     backup = false
 
-    next if linkable.match(/.git/) != nil
+    next if linkable.match(/\.git/) != nil
 
     file = linkable.split('/', 2).last.split('.symlink').last
     target = "#{ENV["HOME"]}/.#{file}"

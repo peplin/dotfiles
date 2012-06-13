@@ -90,3 +90,10 @@
 	path = vim/vim.symlink/bundle/unimpaired
 	url = https://github.com/tpope/vim-unimpaired.git
     ignore = untracked
+[submodule "vim/vim.symlink/bundle/ctrlp"]
+	path = vim/vim.symlink/bundle/ctrlp
+	url = https://github.com/kien/ctrlp.vim.git
+[submodule "vim/vim.symlink/bundle/csv"]
+	path = vim/vim.symlink/bundle/csv
+	url = https://github.com/chrisbra/csv.vim.git
+    ignore = untracked
