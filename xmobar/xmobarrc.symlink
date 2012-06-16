@@ -10,11 +10,11 @@ Config { font = "xft:DejaVu Sans-9"
             , Run Network "eth0" ["-L","10","-H","200","--normal","green",
                 "--high","red"] 10
             , Run Com "cat /tmp/.volume" [] "vol" 10
-            , Run MultiCpu ["-t", "CPU: <total>","-L","30","-H","60","--normal",
+            , Run MultiCpu ["-t", "CPU: <autototal>","-L","30","-H","60","--normal",
                 "green","--high","red"] 10
             , Run Memory ["-t","Mem: <usedratio>%","-H","20078","-L","4096",
                 "--normal","green","--high","red"] 10
-            , Run BatteryP ["BAT0"] ["-t", "Power: <left>",
+            , Run BatteryP ["BAT0"] ["-t", "Power: <acstatus> <left>",
                 "-L", "10", "-H", "80", "-p", "3",
                 "--"] 600
             , Run Date "%a %b %_d %Y %H:%M:%S" "date" 10
