@@ -3,3 +3,7 @@ if [[ -f ~/.current_path~ ]]; then
   cd `cat ~/.current_path~`
   rm ~/.current_path~
 fi
+
+if [[ -z $DISPLAY ]] && ! [[ -e /tmp/.X11-unix/X0 ]] && (( EUID )); then
+    exec startx
+fi
