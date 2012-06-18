@@ -20,7 +20,7 @@ autocmd!
 
     syntax on
 
-    " have 100 lines of command-line (etc) history:
+    " have 1000 lines of command-line (etc) history:
     set history=1000
 
     " remember all of these between sessions, but only 50 search terms; also
@@ -47,13 +47,13 @@ autocmd!
         " disable them
         set nobackup
         set nowritebackup
-        set directory=$HOME/.vimswap//     " Same for swap files
-        set viewdir=$HOME/.vimviews//     " same for view files
-        set undodir=~/.vimundo//
+        set directory=$HOME/.vimswap//
+        set viewdir=$HOME/.vimviews//
+        set undodir=$HOME/.vimundo//
         set undofile
 
         "" Creating directories if they don't exist
-        silent execute '!mkdir -p $HOME/.vimbackup'
+        silent execute '!mkdir -p $HOME/.vimundo'
         silent execute '!mkdir -p $HOME/.vimswap'
         silent execute '!mkdir -p $HOME/.vimviews'
         "make vim save view (state) (folds, cursor, etc)
