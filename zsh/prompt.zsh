@@ -59,5 +59,5 @@ precmd() {
 
 local return_code="%(?..%{$fg[red]%}%? ↵%{$reset_color%})"
 PROMPT=$'$(directory_name) $(project_name_color)$(git_dirty)$(need_push)
-› '
+$ '
 RPS1="${return_code}"
