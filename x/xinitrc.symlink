@@ -1,5 +1,3 @@
 xmodmap $HOME/.dotfiles/x/modcapslock
-xrdb -merge ~/.Xresources
 xsetroot -cursor_name left_ptr
-unclutter &
 xmonad
