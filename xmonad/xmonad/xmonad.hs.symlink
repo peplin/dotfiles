@@ -23,10 +23,9 @@ import XMonad.Hooks.EwmhDesktops
 import XMonad.Layout.Maximize
 
 import XMonad.Prompt
-import XMonad.Prompt.Shell
-import XMonad.Prompt.XMonad
 import XMonad.Prompt.DirExec
 
+import XMonad.Actions.WindowBringer
 
 -- The preferred terminal program, which is used in a binding below and by
 -- certain contrib modules.
@@ -122,13 +121,10 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
     , ((modMask,               xK_k     ), windows W.focusUp  )
 
     -- Move focus to the master window
-    , ((modMask .|. shiftMask, xK_m     ), windows W.focusMaster  )
+    , ((modMask, xK_m     ), windows W.focusMaster  )
 
     -- Preserve traditional alt-tab behavior in reverse
     , ((mod1Mask .|. shiftMask, xK_Tab  ), windows W.focusDown)
-
-    -- Maximize the focused window temporarily
-    , ((modMask,               xK_m     ), withFocused $ sendMessage . maximizeRestore)
 
     -- Swap the focused window and the master window
     , ((modMask .|. shiftMask, xK_Return), windows W.swapMaster)
@@ -154,9 +150,6 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
     -- Deincrement the number of windows in the master area
     , ((modMask              , xK_period), sendMessage (IncMasterN (-1)))
 
-    -- toggle the status bar gap
-    -- TODO, update this binding with avoidStruts , ((modMask              , xK_b     ),
-
     -- Quit xmonad
     , ((modMask .|. shiftMask, xK_q     ), io (exitWith ExitSuccess))
 
@@ -168,6 +161,11 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
 
     -- lock the screen
     , ((modMask, xK_z), spawn "xscreensaver-command --lock")
+
+    -- window bringer
+    -- TODO not actually brining or going to workspace?
+    , ((modMask .|. shiftMask, xK_g     ), gotoMenu)
+    , ((modMask .|. shiftMask, xK_b     ), bringMenu)
     ]
     ++
 
@@ -229,7 +227,7 @@ myLayout = maximize (tiled) ||| Mirror tiled ||| Full
      nmaster = 1
 
      -- Default proportion of screen occupied by master pane
-     ratio   = 1/2
+     ratio   = 4/6
 
      -- Percent of screen to increment by when resizing panes
      delta   = 3/100
@@ -258,8 +256,6 @@ myManageHook = composeAll
     , className =? "vmplayer"     --> doShift "4:vm"
     , className =? "Gimp"           --> doFloat
     , className =? "gmrun"  --> doFloat
-    , className =? "Xfrun4"           --> doFloat
-    , className =? "Synapse"           --> doFloat
     , className =? "Skype"           --> doFloat
     , resource  =? "desktop_window" --> doIgnore ]
 
