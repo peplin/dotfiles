@@ -26,6 +26,7 @@ import XMonad.Prompt
 import XMonad.Prompt.DirExec
 
 import XMonad.Actions.WindowBringer
+import XMonad.Actions.UpdatePointer
 
 -- The preferred terminal program, which is used in a binding below and by
 -- certain contrib modules.
@@ -310,8 +311,8 @@ main = do
       -- hooks, layouts
         layoutHook         = avoidStruts $ layoutHook defaultConfig,
         manageHook         = manageDocks <+> myManageHook,
-        logHook            = ewmhDesktopsLogHook >> (dynamicLogWithPP xmobarPP
-                {ppOutput = hPutStrLn xmobar
-                }),
+        logHook            = ewmhDesktopsLogHook
+                >> (dynamicLogWithPP xmobarPP {ppOutput = hPutStrLn xmobar})
+                >> updatePointer Nearest,
         startupHook        = myStartupHook
     }
