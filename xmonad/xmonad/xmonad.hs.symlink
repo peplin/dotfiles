@@ -294,7 +294,7 @@ myStartupHook = return ()
 --
 main = do
     xmobar <- spawnPipe "xmobar"
-    xmonad $ defaultConfig {
+    xmonad $ ewmh defaultConfig {
       -- simple stuff
         terminal           = myTerminal,
         focusFollowsMouse  = myFocusFollowsMouse,
@@ -311,8 +311,7 @@ main = do
       -- hooks, layouts
         layoutHook         = avoidStruts $ layoutHook defaultConfig,
         manageHook         = manageDocks <+> myManageHook,
-        logHook            = ewmhDesktopsLogHook
-                >> (dynamicLogWithPP xmobarPP {ppOutput = hPutStrLn xmobar})
+        logHook            =  (dynamicLogWithPP xmobarPP {ppOutput = hPutStrLn xmobar})
                 >> updatePointer Nearest,
         startupHook        = myStartupHook
     }
