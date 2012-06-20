@@ -357,7 +357,6 @@ autocmd!
 
     " Ack {
         map <leader>f :Ack<space>
-        let g:ackprg="/usr/bin/ack-grep -H --nocolor --nogroup --column"
     " }
 
     " NERDComment {
