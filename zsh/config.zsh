@@ -69,6 +69,7 @@ if [ "$SHELL" = "/bin/zsh" ]; then
     bindkey '^[Oc' forward-word
     bindkey '^[[7~' beginning-of-line
     bindkey '^[[3~' delete-char
+    bindkey '^[[8~' end-of-line
 
     bindkey '^N' forward-word
     bindkey '^B' backward-word
