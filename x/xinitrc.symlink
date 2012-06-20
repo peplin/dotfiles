@@ -1,10 +1,10 @@
 xmodmap $HOME/.dotfiles/x/modcapslock
 xrdb -merge ~/.Xresources
 xsetroot -cursor_name left_ptr
-unclutter &
 xrandr --output HDMI1 --left-of VGA1
-trayer --edge top --align left --SetDockType true --SetPartialStrut true \
-    --expand true --width 10 --transparent true --tint 0x191970 --height 12 &
+sleep 2 && trayer --edge top --align left --SetDockType true --SetPartialStrut \
+    true --expand true --width 10 --transparent true --tint 0x191970 \
+    --height 12 &
 volumeicon &
 /usr/bin/xscreensaver -no-splash &
 exec ck-launch-session xmonad
