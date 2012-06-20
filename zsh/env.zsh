@@ -1,4 +1,5 @@
 export EDITOR='vi'
+export BROWSER=google-chrome
 export PAGER="less"
 export LESS="-R"
 
