@@ -7,4 +7,6 @@ sleep 2 && trayer --edge top --align left --SetDockType true --SetPartialStrut \
     --height 12 &
 volumeicon &
 /usr/bin/xscreensaver -no-splash &
+VOLUME_FILE=/tmp/.volume
+rm $VOLUME_FILE; mkfifo $VOLUME_FILE; echo "--" > $VOLUME_FILE
 exec ck-launch-session xmonad
