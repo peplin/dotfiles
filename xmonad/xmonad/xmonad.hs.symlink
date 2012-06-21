@@ -21,6 +21,8 @@ import XMonad.Hooks.ManageDocks
 import XMonad.Hooks.EwmhDesktops
 
 import XMonad.Layout.Maximize
+import XMonad.Layout.Reflect
+import XMonad.Layout.MultiToggle
 
 import XMonad.Prompt
 import XMonad.Prompt.DirExec
@@ -169,6 +171,9 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
 
     -- temporarily maximize a window
     , ((modMask, xK_backslash), withFocused (sendMessage . maximizeRestore))
+
+    -- toggle master pane on left/right
+    , ((modMask, xK_f), sendMessage $ Toggle REFLECTX)
     ]
     ++
 
@@ -221,7 +226,8 @@ myMouseBindings (XConfig {XMonad.modMask = modMask}) = M.fromList $
 -- The available layouts.  Note that each layout is separated by |||,
 -- which denotes layout choice.
 --
-myLayout = maximize (tiled) ||| mirrored ||| fullscreen
+myLayout = mkToggle(single REFLECTX) $ reflectHoriz $
+        maximize (tiled) ||| mirrored ||| fullscreen
   where
      -- default tiling algorithm partitions the screen into two panes
      tiled   = Tall nmaster delta ratio
