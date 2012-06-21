@@ -166,6 +166,9 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
     -- TODO not actually brining or going to workspace?
     , ((modMask .|. shiftMask, xK_g     ), gotoMenu)
     , ((modMask .|. shiftMask, xK_b     ), bringMenu)
+
+    -- temporarily maximize a window
+    , ((modMask, xK_backslash), withFocused (sendMessage . maximizeRestore))
     ]
     ++
 
@@ -218,10 +221,15 @@ myMouseBindings (XConfig {XMonad.modMask = modMask}) = M.fromList $
 -- The available layouts.  Note that each layout is separated by |||,
 -- which denotes layout choice.
 --
-myLayout = maximize (tiled) ||| Mirror tiled ||| Full
+myLayout = maximize (tiled) ||| mirrored ||| fullscreen
   where
      -- default tiling algorithm partitions the screen into two panes
      tiled   = Tall nmaster delta ratio
+
+     -- rotated 90 degrees
+     mirrored = Mirror tiled
+
+     fullscreen = Full
 
      -- The default number of windows in the master pane
      nmaster = 1
@@ -308,7 +316,7 @@ main = do
         mouseBindings      = myMouseBindings,
 
       -- hooks, layouts
-        layoutHook         = avoidStruts $ layoutHook defaultConfig,
+        layoutHook         = avoidStruts $ myLayout,
         manageHook         = manageDocks <+> myManageHook,
         logHook            =  (dynamicLogWithPP xmobarPP {ppOutput = hPutStrLn xmobar}),
         startupHook        = myStartupHook
