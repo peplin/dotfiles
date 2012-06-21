@@ -63,8 +63,14 @@ if [ "$SHELL" = "/bin/zsh" ]; then
     bindkey -e
     bindkey ';5A' vi-beginning-of-line
     bindkey ';5B' vi-end-of-line
-    bindkey ';5C' forward-word
-    bindkey ';5D' backward-word
+    bindkey ';5C' emacs-forward-word
+    bindkey ';5D' emacs-backward-word
+    bindkey '^[Od' backward-word
+    bindkey '^[Oc' forward-word
+    bindkey '^[[7~' beginning-of-line
+
+    bindkey '^N' forward-word
+    bindkey '^B' backward-word
 
     if [ -e /etc/zsh_command_not_found ]; then
         source /etc/zsh_command_not_found

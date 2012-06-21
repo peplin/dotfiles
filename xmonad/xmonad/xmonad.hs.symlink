@@ -27,7 +27,7 @@ import XMonad.Layout.Maximize
 -- The preferred terminal program, which is used in a binding below and by
 -- certain contrib modules.
 --
-myTerminal      = "xfce4-terminal"
+myTerminal      = "urxvt"
 
 -- Width of the window border in pixels.
 --
@@ -64,12 +64,12 @@ myNumlockMask   = mod2Mask
 --
 -- > workspaces = ["web", "irc", "code" ] ++ map show [4..9]
 --
-myWorkspaces    = ["web", "code", "email"] ++ map show [4..8]
+myWorkspaces    = ["1:web", "2:code", "3:email", "4:vm"] ++ map show [4..8]
 
 -- Border colors for unfocused and focused windows, respectively.
 
-myNormalBorderColor  = "#dddddd"
-myFocusedBorderColor = "#ff0000"
+myNormalBorderColor  = "#7C7C7C"
+myFocusedBorderColor = "#ffb6b0"
 
 ------------------------------------------------------------------------
 -- Key bindings. Add, modify or remove key bindings here.
@@ -247,13 +247,16 @@ myLayout = maximize (tiled) ||| Mirror tiled ||| Full
 --
 myManageHook = composeAll
     [ className =? "MPlayer"        --> doFloat
+    , className =? "google-chrome"       --> doShift "1:web"
+    , className =? "Firefox"       --> doShift "3:email"
+    , className =? "VirtualBox"     --> doShift "4:vm"
+    , className =? "vmplayer"     --> doShift "4:vm"
     , className =? "Gimp"           --> doFloat
     , className =? "Xfce4-appfinder"  --> doFloat
     , className =? "Xfrun4"           --> doFloat
     , className =? "Synapse"           --> doFloat
     , className =? "Skype"           --> doFloat
     , resource  =? "desktop_window" --> doIgnore
-    , resource  =? "kdesktop"       --> doIgnore
     , className =? "Xfce4-notifyd" --> doIgnore ]
 
 -- Whether focus follows the mouse pointer.
