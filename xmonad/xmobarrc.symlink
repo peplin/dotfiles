@@ -13,5 +13,5 @@ Config { font = "xft:DejaVu Sans-9"
                     ]
        , sepChar = "%"
        , alignSep = "}{"
-       , template = "%multicpu% | %memory% * | %eth0% | %vol% }%StdinReader%{ %KARB% | <fc=#ee9a00>%date%</fc>"
+       , template = "          %multicpu% | %memory% * | %eth0% | %vol% }%StdinReader%{ %KARB% | <fc=#ee9a00>%date%</fc>"
        }
