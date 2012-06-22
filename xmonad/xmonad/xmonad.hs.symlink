@@ -34,6 +34,16 @@ import XMonad.Actions.WindowBringer
 --
 myTerminal      = "urxvt"
 
+-- multimedia keys
+xK_XF86AudioLowerVolume = 0x1008ff11
+xK_XF86AudioRaiseVolume = 0x1008ff13
+xK_XF86AudioMute        = 0x1008ff12
+xK_XF86AudioNext        = 0x1008ff17
+xK_XF86AudioPrev        = 0x1008ff16
+xK_XF86AudioPlay        = 0x1008ff14
+xK_XF86AudioStop        = 0x1008ff15
+xK_XF86AudioMedia       = 0x1008ff32
+
 -- Width of the window border in pixels.
 --
 myBorderWidth   = 1
@@ -176,7 +186,10 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
     , ((modMask, xK_f), sendMessage $ Toggle REFLECTX)
 
     , ((modMask, xK_KP_Subtract), spawn "$HOME/.dotfiles/xmonad/bin/volume.sh -")
+    , ((0, xK_XF86AudioLowerVolume), spawn "$HOME/.dotfiles/xmonad/bin/volume.sh -")
     , ((modMask, xK_KP_Add), spawn "$HOME/.dotfiles/xmonad/bin/volume.sh +")
+    , ((0, xK_XF86AudioRaiseVolume), spawn "$HOME/.dotfiles/xmonad/bin/volume.sh +")
+    , ((0, xK_XF86AudioMute), spawn "$HOME/.dotfiles/xmonad/bin/mute.sh")
     ]
     ++
 
