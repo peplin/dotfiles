@@ -2,8 +2,6 @@ xmodmap $HOME/.dotfiles/x/modcapslock
 xrdb -merge $HOME/.Xresources
 xsetroot -cursor_name left_ptr
 xrandr --output HDMI1 --left-of VGA1
-sleep 2 && trayer --edge top --align left --SetDockType true --SetPartialStrut \
-    true --expand true --width 2 --transparent true --height 12 --tint 000000 &
 nm-applet &
 volumeicon &
 /usr/bin/xscreensaver -no-splash &
