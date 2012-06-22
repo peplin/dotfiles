@@ -88,7 +88,7 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
     , ((modMask,               xK_d     ), spawn "dmenu_run")
 
     , ((modMask,               xK_a     ), dirExecPromptNamed
-            defaultXPConfig spawn "~/.xmonad/actions/" "Scripts: ")
+            defaultXPConfig spawn "/home/peplin/.xmonad/actions" "Scripts: ")
 
 
     -- launch application launcher
