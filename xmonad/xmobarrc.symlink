@@ -3,15 +3,24 @@ Config { font = "xft:DejaVu Sans-9"
        , fgColor = "grey"
        , position = Top
        , lowerOnStart = False
-       , commands = [ Run Weather "KARB" ["-t","<station>: <tempF>F","-L","20","-H","75","--normal","green","--high","red","--low","lightblue"] 36000
-                    , Run Network "eth0" ["-L","10","-H","200","--normal","green","--high","red"] 10
-                    , Run Com "cat /tmp/.volume" [] "vol" 10
-                    , Run MultiCpu ["-t", "CPU: <total>","-L","30","-H","60","--normal","green","--high","red"] 10
-                    , Run Memory ["-t","Mem: <usedratio>%","-H","20078","-L","4096","--normal","green","--high","red"] 10
-                    , Run Date "%a %b %_d %Y %H:%M:%S" "date" 10
-                    , Run StdinReader
+       , commands = [
+            Run Weather "KARB" ["-t","<tempF>F","-L",
+                "20","-H","75","--normal","green","--high","red",
+                "--low","lightblue"] 36000
+            , Run Network "eth0" ["-L","10","-H","200","--normal","green",
+                "--high","red"] 10
+            , Run Com "cat /tmp/.volume" [] "vol" 10
+            , Run MultiCpu ["-t", "CPU: <total>","-L","30","-H","60","--normal",
+                "green","--high","red"] 10
+            , Run Memory ["-t","Mem: <usedratio>%","-H","20078","-L","4096",
+                "--normal","green","--high","red"] 10
+            , Run BatteryP ["BAT0"] ["-t", "Power: <left>",
+                "-L", "10", "-H", "80", "-p", "3",
+                "--"] 600
+            , Run Date "%a %b %_d %Y %H:%M:%S" "date" 10
+            , Run StdinReader
                     ]
        , sepChar = "%"
        , alignSep = "}{"
-       , template = "          %multicpu% | %memory% * | %eth0% | %vol% }%StdinReader%{ %KARB% | <fc=#ee9a00>%date%</fc>"
+       , template = "          %multicpu% | %memory% * | %eth0% | %battery% | Volume: %vol% }{%StdinReader% | %KARB% | <fc=#ee9a00>%date%</fc>"
        }
