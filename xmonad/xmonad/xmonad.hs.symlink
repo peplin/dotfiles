@@ -287,6 +287,7 @@ myManageHook = composeAll
     , className =? "Gimp"           --> doFloat
     , className =? "gmrun"  --> doFloat
     , className =? "Skype"           --> doFloat
+    , className =? "Xfce4-notifyd" --> doIgnore
     , resource  =? "desktop_window" --> doIgnore ]
 
 -- Whether focus follows the mouse pointer.
