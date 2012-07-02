@@ -90,3 +90,6 @@
 	path = vim/vim.symlink/bundle/csv
 	url = https://github.com/chrisbra/csv.vim.git
     ignore = untracked
+[submodule "vim/vim.symlink/bundle/golang"]
+	path = vim/vim.symlink/bundle/golang
+	url = https://github.com/jnwhiteh/vim-golang.git
