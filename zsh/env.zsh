@@ -23,9 +23,6 @@ export GPGKEY=D963BFAF
 
 export HOSTNAME="`hostname`"
 
-# workaround for Karmic - http://bit.ly/T8MIc
-export GDK_NATIVE_WINDOWS=true
-
 # if the command-not-found package is installed, use it
 if [ -x /usr/lib/command-not-found ]; then
 	function command_not_found_handle {
