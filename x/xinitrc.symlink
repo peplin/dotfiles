@@ -1,10 +1,16 @@
 xmodmap $HOME/.dotfiles/x/modcapslock
 xrdb -merge $HOME/.Xresources
+
 xsetroot -cursor_name left_ptr
+
 xrandr --output HDMI1 --left-of VGA1
-nm-applet &
-volumeicon &
+
+exec ck-launch-session xmonad & wmpid=$!
+
 /usr/bin/xscreensaver -no-splash &
+nm-applet &
+
 VOLUME_FILE=/tmp/.volume
 rm -f $VOLUME_FILE; echo "--" > $VOLUME_FILE
-exec ck-launch-session xmonad
+
+wait $wmpid
