@@ -12,6 +12,7 @@
 --type-set=markdown=md,mkd,markdown
 --type-set=conf=wsgi,conf,*rc
 --type-set=txt=txt
+--type-set=go=go
 --color
 --follow
 -i
