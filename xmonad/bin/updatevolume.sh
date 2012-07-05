@@ -19,4 +19,4 @@ case $vol in
   *)  bar='[----------]' ;;
 esac
 
-echo $bar > /tmp/.volume
+echo $bar

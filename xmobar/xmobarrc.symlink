@@ -9,7 +9,8 @@ Config { font = "xft:DejaVu Sans-9"
                 "--low","lightblue"] 36000
             , Run Network "eth0" ["-L","10","-H","200","--normal","green",
                 "--high","red"] 10
-            , Run Com "cat /tmp/.volume" [] "vol" 10
+            , Run Com "/home/peplin/.dotfiles/xmonad/bin/volume.sh" [] "vol" 10
+            , Run Com "/home/peplin/.dotfiles/xmonad/bin/wireless.sh" [] "wireless" 10
             , Run MultiCpu ["-t", "CPU: <autototal>","-L","30","-H","60","--normal",
                 "green","--high","red"] 10
             , Run Memory ["-t","Mem: <usedratio>%","-H","20078","-L","4096",
@@ -22,5 +23,5 @@ Config { font = "xft:DejaVu Sans-9"
                     ]
        , sepChar = "%"
        , alignSep = "}{"
-       , template = "          %multicpu% | %memory% * | %eth0% | %battery% | Volume: %vol% }{%StdinReader% | %KARB% | <fc=#ee9a00>%date%</fc>"
+       , template = "          %multicpu% | %memory% * | %eth0% | %battery% | Volume: %vol% | WiFi: %wireless% }{%StdinReader% | %KARB% | <fc=#ee9a00>%date%</fc>"
        }

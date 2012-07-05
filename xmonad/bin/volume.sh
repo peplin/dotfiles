@@ -3,4 +3,3 @@ DIRECTION=$1
 DIR=$(cd $(dirname "$0"); pwd)
 
 amixer -q set Master 5%$DIRECTION
-$DIR/updatevolume.sh
