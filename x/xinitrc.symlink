@@ -8,7 +8,5 @@ xrandr --output HDMI1 --left-of VGA1
 exec ck-launch-session xmonad & wmpid=$!
 
 /usr/bin/xscreensaver -no-splash &
-/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
-dbus-launch nm-applet &
 
 wait $wmpid
