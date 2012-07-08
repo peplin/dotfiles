@@ -185,10 +185,10 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
     -- toggle master pane on left/right
     , ((modMask, xK_f), sendMessage $ Toggle REFLECTX)
 
-    , ((modMask, xK_KP_Subtract), spawn "$HOME/.dotfiles/xmonad/bin/volume.sh -")
-    , ((0, xK_XF86AudioLowerVolume), spawn "$HOME/.dotfiles/xmonad/bin/volume.sh -")
-    , ((modMask, xK_KP_Add), spawn "$HOME/.dotfiles/xmonad/bin/volume.sh +")
-    , ((0, xK_XF86AudioRaiseVolume), spawn "$HOME/.dotfiles/xmonad/bin/volume.sh +")
+    , ((modMask, xK_KP_Subtract), spawn "$HOME/.dotfiles/xmonad/bin/updatevolume.sh -")
+    , ((0, xK_XF86AudioLowerVolume), spawn "$HOME/.dotfiles/xmonad/bin/updatevolume.sh -")
+    , ((modMask, xK_KP_Add), spawn "$HOME/.dotfiles/xmonad/bin/updatevolume.sh +")
+    , ((0, xK_XF86AudioRaiseVolume), spawn "$HOME/.dotfiles/xmonad/bin/updatevolume.sh +")
     , ((0, xK_XF86AudioMute), spawn "$HOME/.dotfiles/xmonad/bin/mute.sh")
     ]
     ++
