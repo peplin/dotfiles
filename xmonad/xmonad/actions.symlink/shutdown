@@ -1,2 +1,2 @@
 #!/bin/sh
-sudo shutdown -P now
+sudo poweroff
