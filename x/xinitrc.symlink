@@ -7,6 +7,7 @@ xrandr --output HDMI1 --left-of VGA1
 
 exec ck-launch-session xmonad & wmpid=$!
 
+dropboxd &
 /usr/bin/xscreensaver -no-splash &
 
 wait $wmpid
