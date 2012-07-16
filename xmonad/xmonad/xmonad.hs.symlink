@@ -79,7 +79,8 @@ myNumlockMask   = mod2Mask
 --
 -- > workspaces = ["web", "irc", "code" ] ++ map show [4..9]
 --
-myWorkspaces    = ["1:web", "2:code", "3:email", "4:vm"] ++ map show [4..8]
+myWorkspaces    = ["1:web", "2:code", "3:email", "4:music"]
+        ++ map show [5..8] ++ ["9:vm"]
 
 -- Border colors for unfocused and focused windows, respectively.
 
@@ -285,8 +286,8 @@ myManageHook = composeAll
     [ className =? "MPlayer"        --> doFloat
     , className =? "google-chrome"       --> doShift "1:web"
     , className =? "Firefox"       --> doShift "3:email"
-    , className =? "VirtualBox"     --> doShift "4:vm"
-    , className =? "vmplayer"     --> doShift "4:vm"
+    , className =? "VirtualBox"     --> doShift "9:vm"
+    , className =? "vmplayer"     --> doShift "9:vm"
     , className =? "Gimp"           --> doFloat
     , className =? "gmrun"  --> doFloat
     , className =? "Skype"           --> doFloat
