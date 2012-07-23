@@ -80,7 +80,7 @@ myNumlockMask   = mod2Mask
 -- > workspaces = ["web", "irc", "code" ] ++ map show [4..9]
 --
 myWorkspaces    = ["1:web", "2:code", "3:email", "4:music"]
-        ++ map show [5..8] ++ ["9:vm"]
+        ++ map show [5..7] ++ ["8:eclipse", "9:vm"]
 
 -- Border colors for unfocused and focused windows, respectively.
 
@@ -287,11 +287,12 @@ myManageHook = composeAll
     , className =? "google-chrome"       --> doShift "1:web"
     , className =? "Firefox"       --> doShift "3:email"
     , className =? "VirtualBox"     --> doShift "9:vm"
-    , className =? "vmplayer"     --> doShift "9:vm"
+    , className =? "VMware Player"     --> doShift "9:vm"
     , className =? "Gimp"           --> doFloat
     , className =? "gmrun"  --> doFloat
     , className =? "Skype"           --> doFloat
     , className =? "Xfce4-notifyd" --> doIgnore
+    , className =? "Eclipse" --> doShift "8:eclipse"
     , resource  =? "desktop_window" --> doIgnore ]
 
 -- Whether focus follows the mouse pointer.
