@@ -291,6 +291,7 @@ myManageHook = composeAll
     , className =? "Gimp"           --> doFloat
     , className =? "gmrun"  --> doFloat
     , className =? "Skype"           --> doFloat
+    , className =? "emulator-arm"           --> doFloat
     , className =? "Xfce4-notifyd" --> doIgnore
     , className =? "Eclipse" --> doShift "8:eclipse"
     , resource  =? "desktop_window" --> doIgnore ]
