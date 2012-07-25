@@ -16,7 +16,6 @@ git_dirty() {
 
 git_prompt_info () {
  ref=$(/usr/bin/git symbolic-ref HEAD 2>/dev/null) || return
-# echo "(%{\e[0;33m%}${ref#refs/heads/}%{\e[0m%})"
  echo "${ref#refs/heads/}"
 }
 
@@ -50,14 +49,10 @@ need_push () {
 }
 
 directory_name(){
-  echo "%{$fg[green]%}%1/%\/%{$reset_color%}"
+  echo "%{$fg[green]%}${PWD/#$HOME/~}%{$reset_color%}"
 }
 
-precmd() {
-  title "zsh" "$USER@%m" "%55<...<%~"
-}
+PROMPT=$'$(directory_name) $(project_name_color)$(git_dirty)$(need_push)\n> '
 
-local return_code="%(?..%{$fg[red]%}%? ↵%{$reset_color%})"
-PROMPT=$'$(directory_name) $(project_name_color)$(git_dirty)$(need_push)
-› '
+local return_code="%(?..%{$fg[red]%}%?%{$reset_color%})"
 RPS1="${return_code}"

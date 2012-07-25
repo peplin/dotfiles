@@ -1,5 +1,6 @@
 --sort-files
 
+--ignore-dir=_site
 --ignore-dir=build-cli
 --ignore-dir=coverage
 --ignore-dir=target
@@ -12,6 +13,7 @@
 --type-set=markdown=md,mkd,markdown
 --type-set=conf=wsgi,conf,*rc
 --type-set=txt=txt
+--type-set=go=go
 --color
 --follow
 -i

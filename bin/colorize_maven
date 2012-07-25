@@ -98,3 +98,4 @@ $M2_HOME/mvn $* | sed -e "s/\(\[INFO\]\) Building\( .*\)/${info}\1${projectname
     -e "s/\(\[ERROR.*\)/${error}\1${c_end}/g" \
     -e "s/\(<<< FAILURE!\)/${error}\1${c_end}/g" \
     -e "s/Tests run: \([0-9]*\), Failures: \([0-9]*\), Errors: \([0-9]*\), Skipped: \([0-9]*\)/${c_green}Tests run: \1 ${c_end}, Failures: ${warn}\2 ${c_end}, Errors: ${error}\3 ${c_end}, Skipped:  ${skipped}\4 ${c_end}/g"
+exit ${PIPESTATUS[0]}
