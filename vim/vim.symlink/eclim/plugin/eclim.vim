@@ -116,14 +116,14 @@ endif
 
 if !exists("g:EclimHome")
   " set at build/install time.
-  let g:EclimHome = '/home/peplin/eclipse/plugins/org.eclim_1.7.6'
+  let g:EclimHome = '/home/peplin/eclipse-indigo/plugins/org.eclim_1.7.6'
   if has('win32unix')
     let g:EclimHome = eclim#cygwin#CygwinPath(g:EclimHome)
   endif
 endif
 if !exists("g:EclimEclipseHome")
   " set at build/install time.
-  let g:EclimEclipseHome = '/home/peplin/eclipse'
+  let g:EclimEclipseHome = '/home/peplin/eclipse-indigo'
   if has('win32unix')
     let g:EclimEclipseHome = eclim#cygwin#CygwinPath(g:EclimEclipseHome)
   endif
