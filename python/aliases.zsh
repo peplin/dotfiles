@@ -1,8 +1,6 @@
 alias pyweb='python -m SimpleHTTPServer'
 alias mrs='./manage.py runserver'
 alias ms='./manage.py shell'
-alias fab='nocorrect python /usr/local/bin/fab'
-alias pylint='python /usr/local/bin/pylint'
 
 validatejson() {
     cat $1 | python -m json.tool
