@@ -77,3 +77,5 @@ zstyle ':completion:*:ssh:*' group-order \
    hosts-domain hosts-host users hosts-ipaddr
 zstyle ':completion::complete:cd::' tag-order '! users' -
 zstyle '*' single-ignored show
+
+FIGNORE=".o"

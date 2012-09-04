@@ -5,10 +5,9 @@ xsetroot -cursor_name left_ptr
 
 xrandr --output HDMI1 --left-of VGA1
 
-exec ck-launch-session xmonad & wmpid=$!
+exec ck-launch-session dbus-launch xmonad & wmpid=$!
 
+dropboxd &
 /usr/bin/xscreensaver -no-splash &
-/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
-dbus-launch nm-applet &
 
 wait $wmpid

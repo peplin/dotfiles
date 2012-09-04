@@ -79,7 +79,8 @@ myNumlockMask   = mod2Mask
 --
 -- > workspaces = ["web", "irc", "code" ] ++ map show [4..9]
 --
-myWorkspaces    = ["1:web", "2:code", "3:email", "4:vm"] ++ map show [4..8]
+myWorkspaces    = ["1:web", "2:code", "3:email", "4:music"]
+        ++ map show [5..7] ++ ["8:eclipse", "9:vm"]
 
 -- Border colors for unfocused and focused windows, respectively.
 
@@ -185,10 +186,13 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
     -- toggle master pane on left/right
     , ((modMask, xK_f), sendMessage $ Toggle REFLECTX)
 
-    , ((modMask, xK_KP_Subtract), spawn "$HOME/.dotfiles/xmonad/bin/volume.sh -")
-    , ((0, xK_XF86AudioLowerVolume), spawn "$HOME/.dotfiles/xmonad/bin/volume.sh -")
-    , ((modMask, xK_KP_Add), spawn "$HOME/.dotfiles/xmonad/bin/volume.sh +")
-    , ((0, xK_XF86AudioRaiseVolume), spawn "$HOME/.dotfiles/xmonad/bin/volume.sh +")
+    , ((mod4Mask, xK_c), spawn "ncmpcpp toggle")
+    , ((mod4Mask, xK_b), spawn "ncmpcpp next")
+    , ((mod4Mask, xK_z), spawn "ncmpcpp prev")
+    , ((modMask, xK_KP_Subtract), spawn "$HOME/.dotfiles/xmonad/bin/updatevolume.sh -")
+    , ((0, xK_XF86AudioLowerVolume), spawn "$HOME/.dotfiles/xmonad/bin/updatevolume.sh -")
+    , ((modMask, xK_KP_Add), spawn "$HOME/.dotfiles/xmonad/bin/updatevolume.sh +")
+    , ((0, xK_XF86AudioRaiseVolume), spawn "$HOME/.dotfiles/xmonad/bin/updatevolume.sh +")
     , ((0, xK_XF86AudioMute), spawn "$HOME/.dotfiles/xmonad/bin/mute.sh")
     ]
     ++
@@ -282,12 +286,14 @@ myManageHook = composeAll
     [ className =? "MPlayer"        --> doFloat
     , className =? "google-chrome"       --> doShift "1:web"
     , className =? "Firefox"       --> doShift "3:email"
-    , className =? "VirtualBox"     --> doShift "4:vm"
-    , className =? "vmplayer"     --> doShift "4:vm"
+    , className =? "VirtualBox"     --> doShift "9:vm"
+    , className =? "VMware Player"     --> doShift "9:vm"
     , className =? "Gimp"           --> doFloat
     , className =? "gmrun"  --> doFloat
     , className =? "Skype"           --> doFloat
+    , className =? "emulator-arm"           --> doFloat
     , className =? "Xfce4-notifyd" --> doIgnore
+    , className =? "Eclipse" --> doShift "8:eclipse"
     , resource  =? "desktop_window" --> doIgnore ]
 
 -- Whether focus follows the mouse pointer.
