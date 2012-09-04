@@ -4,6 +4,7 @@ if [[ -f ~/.current_path~ ]]; then
   rm ~/.current_path~
 fi
 
-if [[ -z $DISPLAY ]] && ! [[ -e /tmp/.X11-unix/X0 ]] && (( EUID )); then
+STARTX=`which startx`
+if [[ -z $STARTX ]] && [[ -z $DISPLAY ]] && ! [[ -e /tmp/.X11-unix/X0 ]] && (( EUID )); then
     exec startx
 fi
