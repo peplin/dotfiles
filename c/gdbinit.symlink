@@ -48,93 +48,14 @@ set history filename .gdb_history
 set history save on
 set history expansion on
 
-# ______________breakpoint aliases_____________
-define bpl
- info breakpoints
-end
-document bpl
-List breakpoints
-end
-
-define bp
- break * $arg0
-end
-document bp
-Set a breakpoint on address
-Usage: bp addr
-end
-
-define bpc
- clear $arg0
-end
-document bpc
-Clear breakpoint at function/address
-Usage: bpc addr
-end
-
-define bpe
- enable $arg0
-end
-document bpe
-Enable breakpoint #
-Usage: bpe num
-end
-
-define bpd
- disable $arg0
-end
-document bpd
-Disable breakpoint #
-Usage: bpd num
-end
-
-define bpt
- tbreak $arg0
-end
-document bpt
-Set a temporary breakpoint on address
-Usage: bpt addr
-end
-
-define bpm
- awatch $arg0
-end
-document bpm
-Set a read/write breakpoint on address
-Usage: bpm addr
-end
-
-define bhb
- break * $arg0
-end
-document bhb
-Set Hardware Assisted breakpoint on address
-Usage: bhb addr
-end
-
-# ______________process information____________
-define argv
- show args
-end
-document argv
-Print program arguments
-end
-
-define stack
- info stack
-end
-document stack
-Print call stack
-end
-
-define frame
- info frame
- info args
- info locals
-end
-document frame
-Print stack frame
-end
+# define frame
+ # info frame
+ # info args
+ # info locals
+# end
+# document frame
+# Print stack frame
+# end
 
 define flags
  if (($eflags >> 0xB) & 1 )
@@ -247,28 +168,6 @@ define sig
 end
 document sig
 Print signal actions for target
-end
-
-define thread
- info threads
-end
-document thread
-Print threads in target
-end
-
-define u
- info udot
-end
-document u
-Print kernel 'user' struct for target
-end
-
-define dis
- disassemble $arg0
-end
-document dis
-Disassemble address
-Usage: dis addr
 end
 
 # ________________hex/ascii dump an address______________
@@ -555,67 +454,6 @@ define hookpost-backtrace
     echo \033[0m\n
 end
 
-define assemble
-printf "Hit Ctrl-D to start, type code to assemble, hit Ctrl-D when done.\n"
-printf "It is recommended to start with\n"
-printf "\tBITS 32\n"
-printf "Note that this command uses NASM (Intel syntax) to assemble.\n"
-shell nasm -f bin -o /dev/stdout /dev/stdin | od -v -t x1 -w16 -A n
-end
-document assemble
-Assemble Intel x86 instructions to binary opcodes. Uses nasm.
-Usage: assemble
-end
-
-define gas_asm
-printf "Type code to assemble, hit Ctrl-D until results appear :)\n"
-printf "Note that this command uses GAS (AT&T syntax) to assemble.\n"
-shell as -o ~/__gdb_tmp.bin
-shell objdump -d -j .text --adjust-vma=$arg0 ~/__gdb_tmp.bin
-shell rm ~/__gdb_tmp.bin
-end
-document gas_asm
-Assemble Intel x86 instructions to binary opcodes using gas and objdump
-Usage: gas_asm address
-end
-
-# !scary bp_alloc macro!
-# The idea behind this macro is to break on the following code:
-#	0x4008e0aa <malloc+6>:  sub    $0xc,%esp
-#	0x4008e0ad <malloc+9>:  call   0x4008e0b2 <malloc+14>
-#	0x4008e0b2 <malloc+14>: pop    %ebx
-#	0x4008e0b3 <malloc+15>: add    $0xa3f6e,%ebx
-# At 0x4008e0b3, %ebx contains the address that has just been allocated
-# The bp_alloc macro generates this breakpoint and *should* work for
-# the forseeable future ... but if it breaks, set a breakpoint on
-# __libc_malloc and look for where where the return value gets popped.
-
-define bp_alloc
- tbreak *(*__libc_malloc + F) if $ebx == $arg0
-end
-document bp_alloc
-This sets a temporary breakpoint on the allocation of $arg0.
-It works by setting a breakpoint on a specific address in __libc_malloc().
-USE WITH CAUTION -- it is extremely platform dependent.
-Usage: bp_alloc addr
-end
-
-define dump_hexfile
- dump ihex memory $arg0 $arg1 $arg2
-end
-document dump_hexfile
-Write a range of memory to a file in Intel ihex (hexdump) format.
-Usage:	dump_hexfile filename start_addr end_addr
-end
-
-define dump_binfile
- dump memory $arg0 $arg1 $arg2
-end
-document dump_binfile
-Write a range of memory to a binary file.
-Usage:	dump_binfile filename start_addr end_addr
-end
-
 # _________________user tips_________________
 # The 'tips' command is used to provide tutorial-like info to the user
 define tips
@@ -726,9 +564,4 @@ set width 0
 # why do these not work???
 set $SHOW_NEST_INSN=0
 
-#set disassembly-flavor intel
-
 echo .gdbinit has been executed \n
-
-
-#EOF
