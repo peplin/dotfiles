@@ -373,6 +373,7 @@ autocmd!
         let g:ctrlp_map = '<leader>t'
         let g:ctrlp_cmd = 'CtrlPMixed'
     " }
+
     " Gist {
         let g:gist_detect_filetype = 1
     " }
@@ -392,11 +393,6 @@ autocmd!
         let NERDSpaceDelims = 1
     " }
 
-    " indent-guide {
-        let g:indent_guides_start_level = 2
-        let g:indent_guides_guide_size = 1
-    " }
-
     " OmniComplete {
         set omnifunc=syntaxcomplete#Complete
 
@@ -412,10 +408,6 @@ autocmd!
         " automatically open and close the popup menu / preview window
         "au CursorMovedI,InsertLeave * if pumvisible() == 0|silent! pclose|endif
         set completeopt=longest,menu,preview
-    " }
-
-    " Gundo {
-        nnoremap <F8> :GundoToggle<CR>
     " }
 
     " Notes {
