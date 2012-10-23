@@ -1,0 +1,12 @@
+[ui]
+username = Chris Peplin <chris.peplin@rhubarbtech.com>
+[extensions]
+record =
+color =
+pager =
+graphlog =
+fetch =
+purge =
+[pager]
+pager = LESS='FSRX' less
+ignore = version, help, update, serve, record
