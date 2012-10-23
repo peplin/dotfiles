@@ -5,6 +5,7 @@
 --ignore-dir=coverage
 --ignore-dir=target
 --ignore-dir=gen
+--ignore-dir=.tox
 --type-add=ruby=haml,rake
 --type-add=cpp=pde
 --type-add=vim=vimrc
