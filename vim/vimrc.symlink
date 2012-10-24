@@ -14,12 +14,12 @@ autocmd!
         Bundle 'gmarik/vundle'
         Bundle 'peplin/vim-notes'
         Bundle 'peplin/vim-markdown'
-        Bundle 'peplin/vim-git'
         Bundle 'tpope/vim-fugitive'
         Bundle 'tpope/vim-surround'
         Bundle 'tpope/vim-ragtag'
         Bundle 'tpope/vim-endwise'
         Bundle 'tpope/vim-repeat'
+        Bundle 'tpope/vim-git'
         Bundle 'tpope/vim-unimpaired'
         Bundle 'mattn/gist-vim'
         Bundle 'scrooloose/nerdcommenter'
@@ -431,10 +431,6 @@ autocmd!
 
     " Java syntax highlighting {
         let g:java_allow_cpp_keywords = 1
-    " }
-
-    " vim-git {
-        let g:gitcommit_jump_to_top = 0
     " }
 " }
 
