@@ -12,25 +12,28 @@ ACTION="/usr/sbin/pm-suspend"
  #display icon
 ICON="/usr/share/icons/gnome/48x48/devices/battery.png"
 
-if [ -e "/proc/acpi/battery/$BAT" ]; then
-    MAX_BATTERY=$(cat /proc/acpi/battery/BAT0/info | grep 'last full' | awk '{print$4}')
-    LOW_BATTERY=$(($LOW_BATTERY*$MAX_BATTERY/100))
-    CRITICAL_BATTERY=$(($CRITICAL_BATTERY*$MAX_BATTERY/100))
+BATTERY_PATH="/sys/class/power_supply/$BAT"
 
-    if [ -e "/proc/acpi/battery/$BAT/state" ]; then
-        PRESENT=$(grep "present:" /proc/acpi/battery/$BAT/state | awk '{print $2}')
-        if [ "$PRESENT" = "yes" ]; then
+if [ -e "$BATTERY_PATH" ]; then
+    MAX_BATTERY=$(cat $BATTERY_PATH/charge_full)
+    LOW_BATTERY=$(($LOW_BATTERY * $MAX_BATTERY / 100))
+    CRITICAL_BATTERY=$(($CRITICAL_BATTERY * $MAX_BATTERY/100))
 
-            STATE=$(grep "charging state" /proc/acpi/battery/$BAT/state | awk '{print $3}')
-            CAPACITY=$(grep "remaining capacity" /proc/acpi/battery/$BAT/state | awk '{print $3}')
+    PRESENT=$(cat "$BATTERY_PATH/present")
+    if [ "$PRESENT" = "1" ]; then
 
-            if [ "$CAPACITY" -lt "$LOW_BATTERY" ] && [ "$STATE" = "discharging" ]; then
-                DISPLAY=:0.0 notify-send -u critical -t 5000 -i "$ICON" "Battery IS low. Plug or Pray." "remaining $CAPACITY mah, shutdown @ $CRITICAL_BATTERY mah"
-            fi
+        STATE=$(cat "$BATTERY_PATH/status")
+        CAPACITY=$(cat "$BATTERY_PATH/charge_now")
+        PERCENTAGE=$(cat "$BATTERY_PATH/capacity")
 
-            if [ "$CAPACITY" -lt "$CRITICAL_BATTERY" ] && [ "$STATE" = "discharging" ]; then
-                $($ACTION)
-            fi
+        if [ "$CAPACITY" -lt "$LOW_BATTERY" ] && [ "$STATE" = "Discharging" ]; then
+            DISPLAY=:0.0 notify-send -u critical -t 5000 -i "$ICON" "Battery low at $PERCENTAGE%" "with $CAPACITY mah remaining, shutdown @ $CRITICAL_BATTERY mah"
+        fi
+
+        if [ "$CAPACITY" -lt "$CRITICAL_BATTERY" ] && [ "$STATE" = "Discharging" ]; then
+            DISPLAY=:0.0 notify-send -u critical -t 5000 -i "$ICON" "Battery critical, suspending now"
+            sleep 5
+            sudo $($ACTION)
         fi
     fi
 fi
