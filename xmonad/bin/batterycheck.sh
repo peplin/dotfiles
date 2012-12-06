@@ -1,4 +1,4 @@
-#!/bin/bash -ex
+#!/bin/bash
 # inspired by https://bbs.archlinux.org/viewtopic.php?id=67425
 #
 # low battery in %
