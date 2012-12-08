@@ -31,6 +31,7 @@ autocmd!
         Bundle 'altercation/vim-colors-solarized'
         Bundle 'kien/ctrlp.vim'
         Bundle 'jnwhiteh/vim-golang'
+        Bundle 'spolu/dwm.vim'
 
         filetype plugin indent on
     " }
