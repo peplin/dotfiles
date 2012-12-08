@@ -12,7 +12,6 @@ autocmd!
         call vundle#rc()
 
         Bundle 'gmarik/vundle'
-        Bundle 'peplin/vim-notes'
         Bundle 'peplin/vim-markdown'
         Bundle 'tpope/vim-fugitive'
         Bundle 'tpope/vim-surround'
@@ -21,6 +20,7 @@ autocmd!
         Bundle 'tpope/vim-repeat'
         Bundle 'tpope/vim-git'
         Bundle 'tpope/vim-unimpaired'
+        Bundle 'xolox/vim-notes'
         Bundle 'mattn/gist-vim'
         Bundle 'scrooloose/nerdcommenter'
         Bundle 'scrooloose/syntastic'
