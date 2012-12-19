@@ -4,7 +4,7 @@
 "
 " License:
 "
-" Copyright (C) 2005 - 2011  Eric Van Dewoestine
+" Copyright (C) 2005 - 2012  Eric Van Dewoestine
 "
 " This program is free software: you can redistribute it and/or modify
 " it under the terms of the GNU General Public License as published by
@@ -21,9 +21,9 @@
 "
 " }}}
 
-runtime ftplugin/xml.vim
-runtime indent/xml.vim
-runtime eclim/ftplugin/java.vim
+runtime! ftplugin/xml.vim
+runtime! indent/xml.vim
+runtime eclim/ftplugin/java-xml.vim
 
 if !exists("g:tlist_webxml_settings")
   let g:tlist_webxml_settings = {
@@ -61,14 +61,6 @@ endif
 augroup eclim_xml
   autocmd! BufWritePost <buffer>
 augroup END
-
-" }}}
-
-" Mappings {{{
-
-if g:EclimJavaSearchMapping
-  noremap <silent> <buffer> <cr> :call eclim#java#search#FindClassDeclaration()<cr>
-endif
 
 " }}}
 

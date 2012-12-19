@@ -1,6 +1,5 @@
 *vim-code_completion*
 
-
 Code Completion
 ***************
 
@@ -51,10 +50,13 @@ tweak this to your tastes):
 <
 
 
-To find out more about Vim's insert completion execute
+To find out more about Vim's insert completion execute the following
+from within Vim:
+
+>
 
    :h ins-completion
 
-from within Vim.
+<
 
 vim:ft=eclimhelp

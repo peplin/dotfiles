@@ -22,8 +22,8 @@
 " }}}
 
 " load any xml related functionality
-runtime ftplugin/xml.vim
-runtime indent/xml.vim
+runtime! ftplugin/xml.vim
+runtime! indent/xml.vim
 
 " turn off xml validation
 augroup eclim_xml
@@ -46,10 +46,6 @@ endif
 " }}}
 
 " Command Declarations {{{
-if !exists(":MvnRepo")
-  command -nargs=0 -buffer
-    \ MvnRepo :call eclim#java#maven#SetClasspathVariable('Mvn', 'M2_REPO')
-endif
 if !exists(":MvnDependencySearch")
   command -nargs=1 -buffer MvnDependencySearch
     \ :call eclim#java#maven#Search('<args>', 'mvn')

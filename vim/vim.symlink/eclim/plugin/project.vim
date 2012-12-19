@@ -34,10 +34,18 @@ if !exists("g:EclimProjectProblemsUpdateOnSave")
   let g:EclimProjectProblemsUpdateOnSave = 1
 endif
 
+if !exists("g:EclimProjectProblemsUpdateOnBuild")
+  let g:EclimProjectProblemsUpdateOnBuild = 1
+endif
+
 let g:EclimProjectTreeTitle = 'ProjectTree_'
 
 if !exists('g:EclimProjectTreeAutoOpen') || exists('g:vimplugin_running')
   let g:EclimProjectTreeAutoOpen = 0
+endif
+
+if !exists('g:EclimProjectTabTreeAutoOpen')
+  let g:EclimProjectTabTreeAutoOpen = 1
 endif
 
 if !exists('g:EclimProjectTreeExpandPathOnOpen')
@@ -57,8 +65,7 @@ endif
 
 " w/ external vim refresh is optional, w/ embedded gvim it is mandatory
 " disabling at all though is discouraged.
-if g:EclimProjectRefreshFiles ||
-\ (has('netbeans_enabled') && exists('g:vimplugin_running'))
+if g:EclimProjectRefreshFiles || exists('g:vimplugin_running')
   augroup eclim_refresh_files
     autocmd!
     autocmd BufWritePre * call eclim#project#util#RefreshFileBootstrap()
@@ -155,16 +162,14 @@ endif
 
 if !exists(":ProjectTree")
   command -nargs=*
-    \ -complete=customlist,eclim#project#util#CommandCompleteProject
+    \ -complete=customlist,eclim#project#util#CommandCompleteProjectOrDirectory
     \ ProjectTree :call eclim#project#tree#ProjectTree(<f-args>)
   command -nargs=0 ProjectTreeToggle :call eclim#project#tree#ProjectTreeToggle()
   command -nargs=0 ProjectsTree
     \ :call eclim#project#tree#ProjectTree(eclim#project#util#GetProjectNames())
   command -nargs=1
-    \ -complete=customlist,eclim#project#util#CommandCompleteProject
+    \ -complete=customlist,eclim#project#util#CommandCompleteProjectOrDirectory
     \ ProjectTab :call eclim#project#util#ProjectTab('<args>')
-  command! -nargs=1 -complete=dir TreeTab
-    \ :call eclim#project#util#TreeTab('', expand('<args>', ':p'))
 endif
 
 if !exists(":ProjectCD")

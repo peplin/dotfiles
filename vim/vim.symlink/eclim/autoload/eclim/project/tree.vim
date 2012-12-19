@@ -41,17 +41,21 @@
   let s:shared_instances_by_names = {}
 " }}}
 
-" ProjectTree(...) {{{
-" Open a tree view of the current or specified projects.
-function! eclim#project#tree#ProjectTree(...)
+function! eclim#project#tree#ProjectTree(...) " {{{
+  " Open a tree view of the current or specified projects.
+
   " no project dirs supplied, use current project
   if len(a:000) == 0
     let name = eclim#project#util#GetCurrentProjectName()
-    if name == ''
-      call eclim#project#util#UnableToDetermineProject()
-      return
-    endif
     let names = [name]
+    if name == ''
+      if exists('t:cwd')
+        let names = [t:cwd]
+      else
+        call eclim#project#util#UnableToDetermineProject()
+        return
+      endif
+    endif
 
   " list of project names supplied
   elseif type(a:000[0]) == g:LIST_TYPE
@@ -75,26 +79,33 @@ function! eclim#project#tree#ProjectTree(...)
     endif
 
     let dir = eclim#project#util#GetProjectRoot(name)
-    if dir != ''
-      call add(dirs, dir)
-      let index += 1
-    else
-      call eclim#util#EchoWarning('Project not found: ' . name)
-      call remove(names_copy, index)
+    if dir == ''
+      let dir = expand(name, ':p')
+      if !isdirectory(dir)
+        call eclim#util#EchoWarning('Project not found: ' . name)
+        call remove(names_copy, index)
+        continue
+      endif
+      let names_copy[index] = fnamemodify(substitute(dir, '/$', '', ''), ':t')
     endif
+    call add(dirs, dir)
+    let index += 1
   endfor
   let names = names_copy
 
   if len(dirs) == 0
-    "call eclim#util#Echo('ProjectTree: No directories found for requested projects.')
     return
   endif
 
   " for session reload
   let g:Eclim_project_tree_names = join(names, '|')
 
+  let display = len(names) == 1 ?
+    \ 'Project: ' . names[0] :
+    \ 'Projects: ' . join(names, ', ')
+
   call eclim#project#tree#ProjectTreeClose()
-  call eclim#project#tree#ProjectTreeOpen(names, dirs)
+  call eclim#project#tree#ProjectTreeOpen(display, names, dirs)
 endfunction " }}}
 
 function! eclim#project#tree#ProjectTreeToggle() " {{{
@@ -110,15 +121,10 @@ function! eclim#project#tree#ProjectTreeToggle() " {{{
   endif
 endfunction " }}}
 
-function! eclim#project#tree#ProjectTreeOpen(names, dirs, ...) " {{{
+function! eclim#project#tree#ProjectTreeOpen(display, names, dirs) " {{{
   let expandDir = ''
   if g:EclimProjectTreeExpandPathOnOpen
     let expandDir = substitute(expand('%:p:h'), '\', '/', 'g')
-  endif
-
-  " support supplied tree name
-  if a:0 > 0 && a:1 != ''
-    let t:project_tree_name = a:1
   endif
 
   " see if we should just use a shared tree
@@ -171,6 +177,7 @@ function! eclim#project#tree#ProjectTreeOpen(names, dirs, ...) " {{{
   endtry
 
   setlocal bufhidden=hide
+  exec 'setlocal statusline=' . escape(a:display, ' ')
 
   if expand && expandDir != ''
     call eclim#util#DelayedCommand(
@@ -370,7 +377,7 @@ function! s:OpenFile(action) " {{{
     endif
 
     call eclim#tree#ExecuteAction(path,
-      \ "call eclim#project#tree#OpenProjectFile('" . a:action . "', '<cwd>', '<file>')")
+      \ "call eclim#project#tree#OpenProjectFile('" . a:action . "', '<file>')")
   endif
 endfunction " }}}
 
@@ -396,8 +403,7 @@ endfunction " }}}
 function! eclim#project#tree#ProjectTreeSettings() " {{{
   for action in g:EclimProjectTreeActions
     call eclim#tree#RegisterFileAction(action.pattern, action.name,
-      \ "call eclim#project#tree#OpenProjectFile('" .
-      \   action.action . "', '<cwd>', '<file>')")
+      \ "call eclim#project#tree#OpenProjectFile('" . action.action . "', '<file>')")
   endfor
 
   call eclim#tree#RegisterDirAction(function('eclim#project#tree#InjectLinkedResources'))
@@ -415,21 +421,18 @@ function! eclim#project#tree#ProjectTreeSettings() " {{{
   augroup END
 endfunction " }}}
 
-" OpenProjectFile(cmd, cwd, file) {{{
+" OpenProjectFile(cmd, file) {{{
 " Execute the supplied command in one of the main content windows.
-function! eclim#project#tree#OpenProjectFile(cmd, cwd, file)
-  let cmd = a:cmd
-  let cwd = substitute(getcwd(), '\', '/', 'g')
-  let cwd = escape(cwd, ' &')
-
-  "exec 'cd ' . escape(a:cwd, ' ')
-  exec g:EclimProjectTreeContentWincmd
-
-  let file = cwd . '/' . a:file
-
-  if eclim#util#GoToBufferWindow(file)
+function! eclim#project#tree#OpenProjectFile(cmd, file)
+  if eclim#util#GoToBufferWindow(a:file)
     return
   endif
+
+  let file = a:file
+  let cmd = a:cmd
+  let cwd = getcwd()
+
+  exec g:EclimProjectTreeContentWincmd
 
   " if the buffer is a no name and action is split, use edit instead.
   if cmd =~ 'split' && expand('%') == '' &&
@@ -437,10 +440,20 @@ function! eclim#project#tree#OpenProjectFile(cmd, cwd, file)
     let cmd = 'edit'
   endif
 
+  " current file doesn't share same cwd as the project tree
+  let lcwd = getcwd()
+  if lcwd != cwd && !filereadable(file)
+    let file = escape(substitute(cwd, '\', '/', 'g'), ' &') . '/' . file
+  endif
+
   try
     exec cmd . ' ' file
   catch /E325/
-    " ignore attention error since the use should be prompted to handle it.
+    " ignore attention error since the user should be prompted to handle it.
+  finally
+    if lcwd != cwd
+      exec 'lcd ' . escape(cwd, ' ')
+    endif
   endtry
 endfunction " }}}
 
@@ -451,7 +464,8 @@ function! eclim#project#tree#InjectLinkedResources(dir, contents) " {{{
   endif
 
   " listing the project root, so inject our project links
-  if len(project.links) && substitute(a:dir, '/$', '', '') == project.path
+  if len(get(project, 'links', {})) &&
+   \ substitute(a:dir, '/$', '', '') == project.path
     if !exists('b:links')
       let b:links = {}
     endif

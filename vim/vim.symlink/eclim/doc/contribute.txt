@@ -1,3 +1,5 @@
+*contribute*
+
 Contribute
 **********
 
@@ -18,10 +20,6 @@ community.  There are several ways in which you can contribute:
 
    - Write new guides to be included in the "Guides" section of the
      site.
-
-   - Write translations.  Eclim gets visitors from all over the world
-     and it would be nice to be able to provide localized
-     documentation for them.
 
 2. Bug Reports: Some people are a bit shy about speaking up and
    reporting bugs.  I want to urge people not to be.  If something
@@ -56,7 +54,7 @@ community.  There are several ways in which you can contribute:
    feature.  The list would also afford me the ability to contact you
    should a change to eclim possibly affect what you are working on.
    If you plan on making any code contributes, please read the
-   developer guide (|guides-development|) first.
+   developer guide (|development-gettingstarted|) first.
 
 5. Monetary Contributions: I am not currently accepting any donations.
    My day job pays well, and I work on eclim for the love of it.  If

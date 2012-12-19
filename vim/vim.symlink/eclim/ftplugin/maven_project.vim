@@ -22,14 +22,10 @@
 " }}}
 
 " load any xml related functionality
-runtime ftplugin/xml.vim
-runtime indent/xml.vim
+runtime! ftplugin/xml.vim
+runtime! indent/xml.vim
 
 " Command Declarations {{{
-if !exists(":MavenRepo")
-  command -nargs=0 -buffer
-    \ MavenRepo :call eclim#java#maven#SetClasspathVariable('Maven', 'MAVEN_REPO')
-endif
 if !exists(":MavenDependencySearch")
   command -nargs=1 -buffer MavenDependencySearch
     \ :call eclim#java#maven#Search('<args>', 'maven')

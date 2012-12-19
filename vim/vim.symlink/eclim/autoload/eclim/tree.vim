@@ -5,7 +5,7 @@
 "
 " License:
 "
-" Copyright (C) 2005 - 2011  Eric Van Dewoestine
+" Copyright (C) 2005 - 2012  Eric Van Dewoestine
 "
 " This program is free software: you can redistribute it and/or modify
 " it under the terms of the GNU General Public License as published by
@@ -366,33 +366,19 @@ endfunction " }}}
 
 " ExecuteAction(file, command) {{{
 function! eclim#tree#ExecuteAction(file, command)
-  let path = fnamemodify(a:file, ':h')
-  let path = substitute(path, '\', '/', 'g')
-
-  let file = fnamemodify(a:file, ':t')
+  let file = eclim#util#Simplify(a:file)
   let file = escape(file, ' &()')
   let file = escape(file, ' &()') " need to double escape
   let file = escape(file, '&') " '&' needs to be escaped 3 times.
 
-  let cwd = substitute(getcwd(), '\', '/', 'g')
-  " not using lcd, because the executed command may change windows.
-  if has('win32unix')
-    let path = eclim#cygwin#CygwinPath(path)
-  endif
-  silent exec 'cd ' . escape(path, ' &#')
-  try
-    let command = a:command
-    let command = substitute(command, '<file>', file, 'g')
-    let command = substitute(command, '<cwd>', cwd, 'g')
-    if command =~ '^!\w'
-      silent call eclim#util#Exec(command)
-    else
-      call eclim#util#Exec(command)
-    endif
+  let command = a:command
+  let command = substitute(command, '<file>', file, 'g')
+  if command =~ '^!\w'
+    silent call eclim#util#Exec(command)
     redraw!
-  finally
-    silent exec 'cd ' . escape(cwd, ' &')
-  endtry
+  else
+    exec command
+  endif
 
   if command =~ '^!\w' && v:shell_error
     call eclim#util#EchoError('Error executing command: ' . command)
@@ -1009,9 +995,11 @@ function! eclim#tree#ListDir(dir, ...)
     endif
     let contents = split(eclim#util#System(ls . " '" . a:dir . "'"), '\n')
     if !b:view_hidden && &wildignore != ''
-      let pattern = substitute(escape(&wildignore, '.'), '\*', '.*', 'g')
+      let pattern = substitute(escape(&wildignore, '.~'), '\*', '.*', 'g')
       let pattern = '\(' . join(split(pattern, ','), '\|') . '\)$'
-      call filter(contents, 'v:val !~ pattern')
+      " Note: symlinks have a trailing @, so remove that before comparing
+      " against pattern
+      call filter(contents, 'substitute(v:val, "@$", "", "") !~ pattern')
     endif
     call map(contents, 'a:dir . v:val')
   else
@@ -1143,9 +1131,9 @@ function! eclim#tree#DisplayActionChooser(file, actions, executeFunc)
     call append(line('$'), action.name)
   endfor
 
-  exec 'nmap <buffer> <silent> <cr> ' .
+  exec 'nnoremap <buffer> <silent> <cr> ' .
     \ ':call eclim#tree#ActionExecute("' . a:executeFunc . '")<cr>'
-  nmap <buffer> q :q<cr>
+  nnoremap <buffer> q :q<cr>
 
   exec "hi link TreeAction " . g:TreeActionHighlight
   syntax match TreeAction /.*/
@@ -1175,35 +1163,35 @@ endfunction "}}}
 
 " s:Mappings() {{{
 function! s:Mappings()
-  nmap <buffer> <silent> <cr> :call eclim#tree#Execute(0)<cr>
-  nmap <buffer> <silent> o    :call eclim#tree#Execute(1)<cr>
+  nnoremap <buffer> <silent> <cr> :call eclim#tree#Execute(0)<cr>
+  nnoremap <buffer> <silent> o    :call eclim#tree#Execute(1)<cr>
 
-  nmap <buffer> <silent> i    :call eclim#util#Echo(
+  nnoremap <buffer> <silent> i    :call eclim#util#Echo(
     \ eclim#tree#GetFileInfo(eclim#tree#GetPath()))<cr>
-  nmap <buffer> <silent> I    :call eclim#util#Echo(
+  nnoremap <buffer> <silent> I    :call eclim#util#Echo(
     \ eclim#tree#GetFileInfo(eclim#tree#GetPath()))<cr>
 
-  nmap <buffer> <silent> s    :call eclim#tree#Shell(0)<cr>
-  nmap <buffer> <silent> S    :call eclim#tree#Shell(1)<cr>
+  nnoremap <buffer> <silent> s    :call eclim#tree#Shell(0)<cr>
+  nnoremap <buffer> <silent> S    :call eclim#tree#Shell(1)<cr>
 
-  nmap <buffer> <silent> R    :call eclim#tree#Refresh()<cr>
+  nnoremap <buffer> <silent> R    :call eclim#tree#Refresh()<cr>
 
-  nmap <buffer> <silent> A    :call eclim#tree#ToggleViewHidden()<cr>
+  nnoremap <buffer> <silent> A    :call eclim#tree#ToggleViewHidden()<cr>
 
-  nmap <buffer> <silent> ~    :call eclim#tree#SetRoot(eclim#UserHome())<cr>
-  nmap <buffer> <silent> C    :call eclim#tree#SetRoot(eclim#tree#GetPath())<cr>
-  nmap <buffer> <silent> K    :call eclim#tree#SetRoot(substitute(
+  nnoremap <buffer> <silent> ~    :call eclim#tree#SetRoot(eclim#UserHome())<cr>
+  nnoremap <buffer> <silent> C    :call eclim#tree#SetRoot(eclim#tree#GetPath())<cr>
+  nnoremap <buffer> <silent> K    :call eclim#tree#SetRoot(substitute(
     \ <SID>PathToAlias(eclim#tree#GetRoot()),
     \ '^\([^/]*/\).*', '\1', ''))<cr>
-  nmap <buffer> <silent> B    :call eclim#tree#SetRoot(
+  nnoremap <buffer> <silent> B    :call eclim#tree#SetRoot(
     \ fnamemodify(eclim#tree#GetRoot(), ':h:h'))<cr>
 
-  nmap <buffer> <silent> j    :TreeNextPrevLine j<cr>
-  nmap <buffer> <silent> k    :TreeNextPrevLine k<cr>
-  nmap <buffer> <silent> p    :call eclim#tree#MoveToParent()<cr>
-  nmap <buffer> <silent> P    :call eclim#tree#MoveToLastChild()<cr>
+  nnoremap <buffer> <silent> j    :TreeNextPrevLine j<cr>
+  nnoremap <buffer> <silent> k    :TreeNextPrevLine k<cr>
+  nnoremap <buffer> <silent> p    :call eclim#tree#MoveToParent()<cr>
+  nnoremap <buffer> <silent> P    :call eclim#tree#MoveToLastChild()<cr>
 
-  nmap <buffer> <silent> D    :call eclim#tree#Mkdir()<cr>
+  nnoremap <buffer> <silent> D    :call eclim#tree#Mkdir()<cr>
 
   let ctrl_l = escape(maparg('<c-l>'), '|')
   exec 'nnoremap <buffer> <silent> <c-l> :silent doautocmd eclim_tree User <buffer><cr>' . ctrl_l

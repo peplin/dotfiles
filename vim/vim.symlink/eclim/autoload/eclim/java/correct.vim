@@ -5,7 +5,7 @@
 "
 " License:
 "
-" Copyright (C) 2005 - 2011  Eric Van Dewoestine
+" Copyright (C) 2005 - 2012  Eric Van Dewoestine
 "
 " This program is free software: you can redistribute it and/or modify
 " it under the terms of the GNU General Public License as published by
@@ -125,20 +125,8 @@ function! eclim#java#correct#CorrectApply()
       let command = substitute(command, '<encoding>', eclim#util#GetEncoding(), '')
       let command = substitute(command, '<apply>', index, '')
 
-      let content = split(eclim#ExecuteEclim(command), '\n')
-
-      if len(content) == 1 && content[0] == '0'
-        return
-      endif
-
-      let pos = getpos('.')
-
-      1,$delete _
-      call append(1, content)
-      1,1delete _
-
-      call setpos('.', pos)
-      update
+      call eclim#lang#Refactor(command)
+      call eclim#lang#UpdateSrcFile('java', 1)
 
       exec winnr . "winc w"
       close
