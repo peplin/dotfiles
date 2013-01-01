@@ -54,6 +54,7 @@ need_push () {
 }
 
 directory_name(){
+  title "zsh" "%55<...<%~"
   echo "%{$fg[green]%}${PWD/#$HOME/~}%{$reset_color%}"
 }
 
