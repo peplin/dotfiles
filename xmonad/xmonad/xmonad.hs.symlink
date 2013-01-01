@@ -31,6 +31,7 @@ import XMonad.Prompt.DirExec
 import XMonad.Actions.WindowBringer
 import XMonad.Actions.Submap
 import XMonad.Actions.Search
+import XMonad.Actions.CycleRecentWS
 
 -- The preferred terminal program, which is used in a binding below and by
 -- certain contrib modules.
@@ -123,8 +124,9 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
     -- Resize viewed windows to the correct size
     , ((modMask,               xK_n     ), refresh)
 
-    -- Move focus to the next window
-    , ((modMask,               xK_Tab   ), windows W.focusDown)
+    -- Preserve traditional alt-tab like behavior but switch between
+    -- workspaces instead of windows
+    , ((mod1Mask, xK_Tab), cycleRecentWS [xK_Alt_L] xK_Tab xK_grave)
 
     -- Move focus to the next window
     , ((modMask,               xK_j     ), windows W.focusDown)
