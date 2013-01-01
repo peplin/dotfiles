@@ -20,6 +20,7 @@ import XMonad.Util.Run(spawnPipe)
 import XMonad.Hooks.ManageDocks
 import XMonad.Hooks.EwmhDesktops
 
+import XMonad.Layout.NoBorders
 import XMonad.Layout.Maximize
 import XMonad.Layout.Reflect
 import XMonad.Layout.MultiToggle
@@ -354,7 +355,7 @@ main = do
         mouseBindings      = myMouseBindings,
 
       -- hooks, layouts
-        layoutHook         = avoidStruts $ myLayout,
+        layoutHook         = smartBorders $ avoidStruts $ myLayout,
         manageHook         = manageDocks <+> myManageHook,
         logHook            =  (dynamicLogWithPP xmobarPP {ppOutput = hPutStrLn xmobar}),
         startupHook        = myStartupHook
