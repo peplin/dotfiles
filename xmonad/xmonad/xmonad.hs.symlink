@@ -126,9 +126,6 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
     -- Move focus to the next window
     , ((modMask,               xK_Tab   ), windows W.focusDown)
 
-    -- Preserve traditional alt-tab behavior
-    , ((mod1Mask,               xK_Tab   ), windows W.focusDown)
-
     -- Move focus to the next window
     , ((modMask,               xK_j     ), windows W.focusDown)
 
@@ -137,9 +134,6 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
 
     -- Move focus to the master window
     , ((modMask, xK_m     ), windows W.focusMaster  )
-
-    -- Preserve traditional alt-tab behavior in reverse
-    , ((mod1Mask .|. shiftMask, xK_Tab  ), windows W.focusDown)
 
     -- Swap the focused window and the master window
     , ((modMask .|. shiftMask, xK_Return), windows W.swapMaster)
