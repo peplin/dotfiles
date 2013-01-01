@@ -15,10 +15,12 @@ import System.IO
 import qualified XMonad.StackSet as W
 import qualified Data.Map        as M
 
-import XMonad.Hooks.DynamicLog
 import XMonad.Util.Run(spawnPipe)
+
+import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.ManageDocks
 import XMonad.Hooks.EwmhDesktops
+import XMonad.Hooks.Place
 
 import XMonad.Layout.NoBorders
 import XMonad.Layout.Maximize
@@ -354,7 +356,7 @@ main = do
 
       -- hooks, layouts
         layoutHook         = smartBorders $ avoidStruts $ myLayout,
-        manageHook         = manageDocks <+> myManageHook,
+        manageHook         = placeHook simpleSmart <+> manageDocks <+> myManageHook,
         logHook            =  (dynamicLogWithPP xmobarPP {ppOutput = hPutStrLn xmobar}),
         startupHook        = myStartupHook
     }
