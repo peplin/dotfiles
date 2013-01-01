@@ -174,7 +174,6 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
     , ((modMask, xK_z), spawn "xscreensaver-command --lock")
 
     -- window bringer
-    -- TODO not actually brining or going to workspace?
     , ((modMask .|. shiftMask, xK_g     ), gotoMenu)
     , ((modMask .|. shiftMask, xK_b     ), bringMenu)
 
