@@ -37,6 +37,7 @@ import XMonad.Actions.Submap
 import XMonad.Actions.Search
 import XMonad.Actions.CycleRecentWS
 import XMonad.Actions.GridSelect
+import XMonad.Actions.DynamicWorkspaces
 
 -- The preferred terminal program, which is used in a binding below and by
 -- certain contrib modules.
@@ -87,8 +88,8 @@ myNumlockMask   = mod2Mask
 --
 -- > workspaces = ["web", "irc", "code" ] ++ map show [4..9]
 --
-myWorkspaces    = ["1:web", "2:code", "3:email", "4:music"]
-        ++ map show [5..7] ++ ["8:eclipse", "9:vm"]
+myWorkspaces    = ["web", "code", "email", "music", "eclipse", "vm"]
+        ++ map show [7..9]
 
 -- Border colors for unfocused and focused windows, respectively.
 
@@ -125,9 +126,6 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
 
     --  Reset the layouts on the current workspace to default
     , ((modMask .|. shiftMask, xK_space ), setLayout $ XMonad.layoutHook conf)
-
-    -- Resize viewed windows to the correct size
-    , ((modMask,               xK_n     ), refresh)
 
     -- Preserve traditional alt-tab like behavior but switch between
     -- workspaces instead of windows
@@ -225,6 +223,14 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
     [((m .|. modMask, key), screenWorkspace sc >>= flip whenJust (windows . f))
         | (key, sc) <- zip [xK_w, xK_e, xK_r] [1,0,2]
         , (f, m) <- [(W.view, 0), (W.shift, shiftMask)]]
+    ++
+
+    -- dynamic workspaces
+    [((modMask .|. shiftMask, xK_BackSpace), removeWorkspace)
+      , ((modMask .|. shiftMask, xK_v      ), selectWorkspace defaultXPConfig)
+      , ((modMask, xK_m                    ), withWorkspace defaultXPConfig (windows . W.shift))
+      , ((modMask, xK_n                    ), addWorkspacePrompt defaultXPConfig)
+      , ((modMask .|. shiftMask, xK_r      ), renameWorkspace defaultXPConfig)]
 
 ------------------------------------------------------------------------
 -- Mouse bindings: default actions bound to mouse events
@@ -298,16 +304,16 @@ myLayout = mkToggle(single REFLECTX) $
 --
 myManageHook = composeAll
     [ className =? "MPlayer"        --> doFloat
-    , className =? "google-chrome"       --> doShift "1:web"
-    , className =? "Thunderbird"       --> doShift "3:email"
-    , className =? "VirtualBox"     --> doShift "9:vm"
-    , className =? "VMware Player"     --> doShift "9:vm"
+    , className =? "google-chrome"       --> doShift "web"
+    , className =? "Thunderbird"       --> doShift "email"
+    , className =? "VirtualBox"     --> doShift "vm"
+    , className =? "VMware Player"     --> doShift "vm"
     , className =? "Gimp"           --> doFloat
     , className =? "gmrun"  --> doFloat
     , className =? "Skype"           --> doFloat
     , className =? "emulator-arm"           --> doFloat
     , className =? "Xfce4-notifyd" --> doIgnore
-    , className =? "Eclipse" --> doShift "8:eclipse"
+    , className =? "Eclipse" --> doShift "eclipse"
     , resource  =? "desktop_window" --> doIgnore ]
 
 -- Whether focus follows the mouse pointer.
