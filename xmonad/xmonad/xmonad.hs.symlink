@@ -28,6 +28,8 @@ import XMonad.Prompt
 import XMonad.Prompt.DirExec
 
 import XMonad.Actions.WindowBringer
+import XMonad.Actions.Submap
+import XMonad.Actions.Search
 
 -- The preferred terminal program, which is used in a binding below and by
 -- certain contrib modules.
@@ -50,8 +52,7 @@ myBorderWidth   = 1
 
 -- modMask lets you specify which modkey you want to use. The default
 -- is mod1Mask ("left alt").  You may also consider using mod3Mask
--- ("right alt"), which does not conflict with emacs keybindings. The
--- "windows key" is usually mod4Mask.
+-- ("right alt"), which does not conflict with emacs keybindings.
 --
 myModMask       = mod3Mask
 
@@ -93,7 +94,7 @@ myNormalBorderColor = "#343d55"
 myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
 
     -- launch a terminal
-    [ ((modMask,		xK_Return), spawn $ XMonad.terminal conf)
+    [ ((modMask,        xK_Return), spawn $ XMonad.terminal conf)
 
     -- launch dmenu
     , ((modMask,               xK_d     ), spawn "dmenu_run")
@@ -158,19 +159,19 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
     , ((modMask,               xK_t     ), withFocused $ windows . W.sink)
 
     -- Increment the number of windows in the master area
-    , ((modMask              , xK_comma ), sendMessage (IncMasterN 1))
+    , ((modMask, xK_comma ), sendMessage (IncMasterN 1))
 
     -- Deincrement the number of windows in the master area
-    , ((modMask              , xK_period), sendMessage (IncMasterN (-1)))
+    , ((modMask, xK_period), sendMessage (IncMasterN (-1)))
 
     -- Quit xmonad
     , ((modMask .|. shiftMask, xK_q     ), io (exitWith ExitSuccess))
 
     -- Restart xmonad
-    , ((modMask              , xK_q     ), restart "xmonad" True)
+    , ((modMask, xK_q     ), restart "xmonad" True)
 
     -- to hide/unhide the panel
-    , ((modMask              , xK_b), sendMessage ToggleStruts)
+    , ((modMask, xK_b), sendMessage ToggleStruts)
 
     -- lock the screen
     , ((modMask, xK_z), spawn "xscreensaver-command --lock")
@@ -186,14 +187,22 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
     -- toggle master pane on left/right
     , ((modMask, xK_f), sendMessage $ Toggle REFLECTX)
 
-    , ((mod4Mask, xK_c), spawn "ncmpcpp toggle")
-    , ((mod4Mask, xK_b), spawn "ncmpcpp next")
-    , ((mod4Mask, xK_z), spawn "ncmpcpp prev")
+    -- music
+    , ((modMask, xK_c), spawn "ncmpcpp toggle")
+    , ((modMask, xK_b), spawn "ncmpcpp next")
+    , ((modMask, xK_z), spawn "ncmpcpp prev")
+
+    -- audio
     , ((modMask, xK_KP_Subtract), spawn "$HOME/.dotfiles/xmonad/bin/updatevolume.sh -")
     , ((0, xK_XF86AudioLowerVolume), spawn "$HOME/.dotfiles/xmonad/bin/updatevolume.sh -")
     , ((modMask, xK_KP_Add), spawn "$HOME/.dotfiles/xmonad/bin/updatevolume.sh +")
     , ((0, xK_XF86AudioRaiseVolume), spawn "$HOME/.dotfiles/xmonad/bin/updatevolume.sh +")
     , ((0, xK_XF86AudioMute), spawn "$HOME/.dotfiles/xmonad/bin/mute.sh")
+
+    -- Search commands
+    , ((modMask, xK_s), promptSearch defaultXPConfig google)
+    , ((modMask .|. shiftMask, xK_s), selectSearch google)
+
     ]
     ++
 
@@ -213,7 +222,6 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
     [((m .|. modMask, key), screenWorkspace sc >>= flip whenJust (windows . f))
         | (key, sc) <- zip [xK_w, xK_e, xK_r] [1,0,2]
         , (f, m) <- [(W.view, 0), (W.shift, shiftMask)]]
-
 
 ------------------------------------------------------------------------
 -- Mouse bindings: default actions bound to mouse events
