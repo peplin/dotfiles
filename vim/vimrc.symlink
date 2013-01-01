@@ -20,6 +20,7 @@ autocmd!
         Bundle 'tpope/vim-repeat'
         Bundle 'tpope/vim-git'
         Bundle 'tpope/vim-unimpaired'
+        Bundle 'tpope/vim-sleuth'
         Bundle 'xolox/vim-notes'
         Bundle 'mattn/gist-vim'
         Bundle 'scrooloose/nerdcommenter'
