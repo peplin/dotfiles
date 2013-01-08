@@ -180,7 +180,7 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
     , ((modMask .|. shiftMask, xK_g     ), gotoMenu)
     , ((modMask .|. shiftMask, xK_b     ), bringMenu)
 
-    , ((modMask, xK_z), goToSelected defaultGSConfig)
+    , ((modMask, xK_x), goToSelected defaultGSConfig)
 
     -- temporarily maximize a window
     , ((modMask, xK_backslash), withFocused (sendMessage . maximizeRestore))
