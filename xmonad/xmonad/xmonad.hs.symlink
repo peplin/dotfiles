@@ -263,7 +263,7 @@ myMouseBindings (XConfig {XMonad.modMask = modMask}) = M.fromList $
 -- which denotes layout choice.
 --
 myLayout = mkToggle(single REFLECTX) $
-        tiled ||| mirrored ||| fullscreen ||| autom ||| automMirrored
+        tiled ||| mirrored ||| fullscreen
   where
      -- default tiling algorithm partitions the screen into two panes
      tiled = renamed [Replace "Tiled"] $ maximize(reflectHoriz $ Tall nmaster delta ratio)
@@ -272,9 +272,6 @@ myLayout = mkToggle(single REFLECTX) $
      mirrored = Mirror tiled
 
      fullscreen = Full
-
-     autom = renamed [Prepend "AutoM "] $ autoMaster nmaster (3/100) tiled
-     automMirrored = Mirror autom
 
      -- The default number of windows in the master pane
      nmaster = 1
