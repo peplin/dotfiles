@@ -1,4 +1,4 @@
-export EDITOR='vi'
+export EDITOR='vim'
 export BROWSER=google-chrome
 export PAGER="less"
 export LESS="-R"
