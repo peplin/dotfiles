@@ -11,12 +11,12 @@ patches: <patches|join( → )|pre_applied(%{$fg[yellow]%})|post_applied(%{$reset
 }
 
 git_branch() {
-  echo $(/usr/bin/git symbolic-ref HEAD 2>/dev/null | awk -F/ {'print $NF'})
+  echo $(timeout 1 /usr/bin/git symbolic-ref HEAD 2>/dev/null | awk -F/ {'print $NF'})
 }
 
 git_prompt_info () {
-    ref=$(/usr/bin/git symbolic-ref HEAD 2>/dev/null) || return
-    if [[ -n $(/usr/bin/git status -s 2> /dev/null) ]]; then
+    ref=$(timeout 1 /usr/bin/git symbolic-ref HEAD 2>/dev/null) || return
+    if [[ -n $(timeout 1 /usr/bin/git status -s 2> /dev/null) ]]; then
         echo -n "%{$fg_no_bold[red]%}"
     else
         echo -n "%{$fg[green]%}"
@@ -25,7 +25,7 @@ git_prompt_info () {
 }
 
 unpushed () {
-  /usr/bin/git cherry -v `/usr/bin/git config --get branch.master.remote`/$(git_branch) 2>/dev/null
+  timeout 1 /usr/bin/git cherry -v `timeout 1 /usr/bin/git config --get branch.master.remote`/$(git_branch) 2>/dev/null
 }
 
 project_name () {
