@@ -9,5 +9,6 @@ dbus-launch xmonad & wmpid=$!
 
 dropboxd &
 /usr/bin/xscreensaver -no-splash &
+nm-applet > /dev/null 2>/dev/null &
 
 wait $wmpid
