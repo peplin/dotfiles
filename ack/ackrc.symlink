@@ -1,5 +1,7 @@
 --sort-files
 
+--ignore-dir=dependencies
+--ignore-dir=build
 --ignore-dir=_site
 --ignore-dir=build-cli
 --ignore-dir=coverage
