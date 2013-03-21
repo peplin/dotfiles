@@ -266,6 +266,8 @@ autocmd!
         au BufNewFile,BufRead *.txt set filetype=human
 
         au BufNewFile,BufRead *.aidl set filetype=java
+
+        au BufNewFile,BufRead *.ino set filetype=c
     " }
 " }
 
