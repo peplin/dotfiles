@@ -1,4 +1,4 @@
-alias pyweb='python -m SimpleHTTPServer'
+alias pyweb='python -m http.server'
 alias mrs='./manage.py runserver'
 alias ms='./manage.py shell'
 
