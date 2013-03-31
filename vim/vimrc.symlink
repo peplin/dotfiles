@@ -417,6 +417,8 @@ autocmd!
         let g:notes_directory = "~/Dropbox/notes"
         let g:notes_smart_quotes = 0
         let g:notes_suffix = ".txt"
+        let g:notes_title_sync = 'no'
+        let g:notes_list_bullets = ['*', '-', '+']
         map <leader>n :Note<space>
     " }
 
