@@ -430,6 +430,8 @@ autocmd!
     " Eclim {
         let g:EclimXmlValidate = 0
         let g:EclimHtmlValidate = 0
+        let g:EclimJavascriptValidate = 0
+        let g:eclim_javascript_jsl_warn = 1
     " }
 
     " Supertab {
