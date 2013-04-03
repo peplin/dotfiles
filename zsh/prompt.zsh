@@ -29,7 +29,7 @@ git_dirty() {
     else
         if [[ "$st" =~ ^nothing ]]
         then
-            echo "%{$fg_bold[green]%}$(git_prompt_info)%{$reset_color%}"
+            echo "%{$fg[green]%}$(git_prompt_info)%{$reset_color%}"
         else
             echo "%{$fg_bold[red]%}$(git_prompt_info)%{$reset_color%}"
         fi
