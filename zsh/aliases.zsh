@@ -1,5 +1,6 @@
 alias dotcd='cd $ZSH'
 alias reload='. ~/.zshrc'
+c() { cd $PROJECTS/$1 }
 
 alias markdown2pdf='/usr/bin/markdown2pdf --template ~/Dropbox/reference/markdown.tex'
 
