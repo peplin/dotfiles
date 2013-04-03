@@ -193,12 +193,12 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
     , ((mod4Mask, xK_b), spawn "ncmpcpp next")
     , ((mod4Mask, xK_z), spawn "ncmpcpp prev")
 
-    -- audio
-    , ((modMask, xK_KP_Subtract), spawn "$HOME/.dotfiles/xmonad/bin/updatevolume.sh -")
-    , ((0, xK_XF86AudioLowerVolume), spawn "$HOME/.dotfiles/xmonad/bin/updatevolume.sh -")
-    , ((modMask, xK_KP_Add), spawn "$HOME/.dotfiles/xmonad/bin/updatevolume.sh +")
-    , ((0, xK_XF86AudioRaiseVolume), spawn "$HOME/.dotfiles/xmonad/bin/updatevolume.sh +")
-    , ((0, xK_XF86AudioMute), spawn "$HOME/.dotfiles/xmonad/bin/mute.sh")
+    -- audi
+    , ((modMask, xK_KP_Subtract), spawn "$HOME/.dotfiles/bin/updatevolume.sh -")
+    , ((0, xK_XF86AudioLowerVolume), spawn "$HOME/.dotfiles/bin/updatevolume.sh -")
+    , ((modMask, xK_KP_Add), spawn "$HOME/.dotfiles/bin/updatevolume.sh +")
+    , ((0, xK_XF86AudioRaiseVolume), spawn "$HOME/.dotfiles/bin/updatevolume.sh +")
+    , ((0, xK_XF86AudioMute), spawn "$HOME/.dotfiles/bin/mute.sh")
 
     -- Search commands
     , ((modMask, xK_s), promptSearch defaultXPConfig google)
