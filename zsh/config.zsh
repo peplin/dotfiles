@@ -1,7 +1,7 @@
-fpath=($ZSH/zsh/functions $fpath)
+fpath=($ZSH/functions $fpath)
 
 if [ "$SHELL" = "/bin/zsh" ]; then
-    autoload -U $ZSH/zsh/functions/*(:t)
+    autoload -U $ZSH/functions/*(:t)
 
     # Autoload zsh modules when they are referenced
     zmodload -a zsh/stat stat
@@ -29,32 +29,38 @@ if [ "$SHELL" = "/bin/zsh" ]; then
     setopt extended_history # add timestamps to history
     setopt hist_ignore_all_dups  # don't record dupes in history
     setopt hist_reduce_blanks
+    setopt inc_append_history share_history  # adds history incrementally and share it across sessions
+    setopt hist_verify # allow confirmation before running with history subst.
 
     setopt extended_glob
     setopt notify
     setopt pushd_to_home
-    setopt cdable_vars
+    setopt pushd_silent
     setopt auto_list
     setopt rec_exact
     setopt long_list_jobs
     setopt auto_resume
-    setopt pushd_silent
     setopt auto_pushd
     setopt pushd_minus
     setopt rcquotes
-    setopt mail_warning
     setopt auto_param_slash # adds slash at end of tabbed dirs
+    setopt mark_dirs # adds slash to end of completed dirs
     setopt glob_dots # find dotfiles easier
     setopt hash_cmds # save cmd location to skip PATH lookup
     setopt list_rows_first # completion options left-to-right, top-to-bottom
     setopt list_types # show file types in list
-    setopt mark_dirs # adds slash to end of completed dirs
 
     setopt no_hup
     setopt local_options # allow functions to have local options
     setopt local_traps # allow functions to have local traps
     setopt prompt_subst
     setopt complete_in_word
+    setopt correct
+    unsetopt ignore_eof
+
+    # don't expand aliases _before_ completion has finished
+    #   like: git comm-[tab]
+    setopt complete_aliases
 
     unsetopt bgnice
     unsetopt beep

@@ -1,0 +1,1 @@
+alias screen='screen -xRR'
