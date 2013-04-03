@@ -2,7 +2,8 @@
 
 ## dotfiles
 
-These are my dotfiles - a customizer version of holman's. They are also prejudiced, but towards: Linux, zsh, Python, Django, git, vim.
+These are my dotfiles - a customizer version of holman's. They are also
+prejudiced, but towards: Linux, zsh, Python, Django, git, vim.
 
 ## dependencies
 
@@ -12,13 +13,16 @@ These are my dotfiles - a customizer version of holman's. They are also prejudic
 
 - `git clone git://github.com/holman/dotfiles ~/.dotfiles`
 - `cd ~/.dotfiles`
-- `rake install`
+- `script/bootstrap`
 
-The install rake task will symlink the appropriate files in `.dotfiles` to your home directory. Everything is configured and tweaked within `~/.dotfiles`, though.
+The will symlink the appropriate files in `.dotfiles` to your home directory.
+Everything is configured and tweaked within `~/.dotfiles`, though.
 
 ## thanks
 
-I forked [Zach Holman](http://github.com/holman)'s [dotfiles](http://github.com/holman/dotfiles), as I appreciate his respect of modularity.
+I forked [Zach Holman](http://github.com/holman)'s
+[dotfiles](http://github.com/holman/dotfiles), as I appreciate his respect of
+modularity.
 
 ## license
 
