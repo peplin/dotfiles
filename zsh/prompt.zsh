@@ -61,7 +61,7 @@ need_push () {
   then
     echo " "
   else
-    echo "%{$fg_bold[magenta]%}+%{$reset_color%}"
+    echo "%{$fg_bold[red]%}+%{$reset_color%}"
   fi
 }
 
@@ -69,7 +69,7 @@ directory_name(){
   echo "%{$fg[green]%}${PWD/#$HOME/~}%{$reset_color%}"
 }
 
-export PROMPT=$'$(directory_name) $(project_name_color)$(git_dirty)$(hg_prompt_info)\n> '
+export PROMPT=$'$(directory_name) $(project_name_color)$(git_dirty)$(need_push)$(hg_prompt_info)\n> '
 
 local return_code="%(?..%{$fg[red]%}%?%{$reset_color%})"
 export RPS1="${return_code}"
