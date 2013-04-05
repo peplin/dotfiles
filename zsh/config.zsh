@@ -1,3 +1,5 @@
+fpath=($ZSH/functions $fpath)
+
 if [ "$SHELL" = "/bin/zsh" ]; then
     autoload -U $ZSH/functions/*(:t)
 
