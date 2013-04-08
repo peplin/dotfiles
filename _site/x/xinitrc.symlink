@@ -1,0 +1,13 @@
+xmodmap $HOME/.dotfiles/x/modcapslock
+xrdb -merge $HOME/.Xresources
+
+xsetroot -cursor_name left_ptr
+
+xrandr --output HDMI1 --left-of VGA1
+
+dbus-launch xmonad & wmpid=$!
+
+dropboxd &
+/usr/bin/xscreensaver -no-splash &
+
+wait $wmpid
