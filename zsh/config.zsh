@@ -29,7 +29,6 @@ if [ "$SHELL" = "/bin/zsh" ]; then
     setopt extended_history # add timestamps to history
     setopt hist_ignore_all_dups  # don't record dupes in history
     setopt hist_reduce_blanks
-    setopt inc_append_history share_history  # adds history incrementally and share it across sessions
     setopt hist_verify # allow confirmation before running with history subst.
 
     setopt extended_glob
