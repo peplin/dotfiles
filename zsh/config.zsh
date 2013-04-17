@@ -30,6 +30,8 @@ if [ "$SHELL" = "/bin/zsh" ]; then
     setopt hist_ignore_all_dups  # don't record dupes in history
     setopt hist_reduce_blanks
     setopt hist_verify # allow confirmation before running with history subst.
+    setopt no_share_history
+    setopt no_inc_append_history
 
     setopt extended_glob
     setopt notify
