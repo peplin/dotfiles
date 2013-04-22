@@ -8,6 +8,7 @@ xrandr --output HDMI1 --left-of VGA1
 dbus-launch xmonad & wmpid=$!
 
 dropboxd &
+owncloud &
 /usr/bin/xscreensaver -no-splash &
 
 wait $wmpid
