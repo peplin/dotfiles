@@ -1,5 +1,3 @@
---sort-files
-
 --ignore-dir=dependencies
 --ignore-dir=build
 --ignore-dir=_site
