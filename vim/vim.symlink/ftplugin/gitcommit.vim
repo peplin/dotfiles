@@ -3,3 +3,4 @@ function! JumpToFirstLine()
     call setpos('.', [0, 1, 1, 0])
 endfunction
 au BufEnter * call JumpToFirstLine()
+set textwidth=72
