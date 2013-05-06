@@ -1,0 +1,483 @@
+" first clear any existing autocommands:
+autocmd!
+
+" Environment {
+    " Basics {
+        set nocompatible
+    " }
+
+    " Setup Vundle {
+        filetype off
+        set rtp+=~/.vim/bundle/vundle/
+        call vundle#rc()
+
+        Bundle 'gmarik/vundle'
+        Bundle 'peplin/vim-markdown'
+        Bundle 'tpope/vim-fugitive'
+        Bundle 'tpope/vim-surround'
+        Bundle 'tpope/vim-ragtag'
+        Bundle 'tpope/vim-endwise'
+        Bundle 'tpope/vim-repeat'
+        Bundle 'tpope/vim-git'
+        Bundle 'tpope/vim-unimpaired'
+        Bundle 'tpope/vim-sleuth'
+        Bundle 'xolox/vim-notes'
+        Bundle 'mattn/gist-vim'
+        Bundle 'scrooloose/nerdcommenter'
+        Bundle 'scrooloose/syntastic'
+        Bundle 'nathanaelkane/vim-indent-guides'
+        Bundle 'ervandew/supertab'
+        Bundle 'Lokaltog/vim-easymotion'
+        Bundle 'mileszs/ack.vim'
+        Bundle 'altercation/vim-colors-solarized'
+        Bundle 'kien/ctrlp.vim'
+        Bundle 'jnwhiteh/vim-golang'
+        Bundle 'spolu/dwm.vim'
+        Bundle "pangloss/vim-javascript"
+
+        filetype plugin indent on
+    " }
+" }
+
+
+" General {
+    if $COLORTERM == 'gnome-terminal' || $COLORTERM == 'Terminal'
+      set t_Co=256
+    endif
+
+    syntax on
+
+    " have 1000 lines of command-line (etc) history:
+    set history=1000
+
+    " remember all of these between sessions, but only 50 search terms; also
+    " remember info for 50 files, but never any on removable disks, don't
+    " remember marks in files, don't rehighlight old search patterns, and only
+    " save up to 100 lines of registers; including @10 in there should restrict
+    " input buffer but it causes an error for me:
+    set viminfo=/50,'50,r/mnt/zip,r/mnt/floppy,f0,h,\"100
+
+    " use "[RO]" for "[readonly]" to save space in the message line:
+    set shortmess+=IfilmnrxoOtT
+
+    " don't have files trying to override this .vimrc:
+    set nomodeline
+
+    " save files when switching buffers or various other things
+    set autowrite
+
+    " reload files edited outside of vim automatically
+    set autoread
+
+    " Setting up the directories {
+        " backups cause the file to be deleted + recreated in Dropbox, so
+        " disable them
+        set nobackup
+        set nowritebackup
+        set directory=$HOME/.vimswap//
+        set undodir=$HOME/.vimundo//
+        set undofile
+
+        "" Creating directories if they don't exist
+        silent execute '!mkdir -p $HOME/.vimundo'
+        silent execute '!mkdir -p $HOME/.vimswap'
+
+        " Don't wait so long for ambiguous command prefixes
+        set timeoutlen=500
+    " }
+
+    ca Wq wq
+    ca W w
+    ca Q q
+" }
+
+" Vim UI {
+    if &t_Co == 256
+        "let g:solarized_termcolors=256
+        set background=dark
+        colors solarized
+    else
+        colors wombat
+    end
+
+    " display the current mode and partially-typed commands in the status line:
+    set showmode
+    set showcmd
+    set cursorline
+
+    " show the ruler - because statusline is also set, this only effects the
+    " output of CTRL-G
+    set ruler
+    set rulerformat=%30(%=\:b%n%y%m%r%w\ %l,%c%V\ %P%) " a ruler on steroids
+
+    " Vertical line at 80 characters
+    if exists('+colorcolumn')
+        set colorcolumn=+1
+    else
+        au BufWinEnter * let w:m2=matchadd('ErrorMsg', '\%>81v.\+', -1)
+    endif
+
+    " show partial commands in status line and selected characters/lines in
+    " visual mode
+    set showcmd
+    set laststatus=2
+    set statusline=
+    " syntastic
+    set statusline+=%#warningmsg#
+    if exists('SyntasticStatuslineFlag')
+        set statusline+=%{SyntasticStatuslineFlag()}
+    endif
+    set statusline+=%*
+    " filename
+    set statusline+=%f
+    " status flags
+    set statusline+=%h%m%r%w
+    set statusline+=\[%{strlen(&ft)?&ft:'none'}] " file type
+    if exists('fugitive')
+        set statusline+=\ %{fugitive#statusline()}
+    endif
+    " right align remainder
+    set statusline+=%=
+    set statusline+=%-14(%l,%c%V%)               " line, character
+    " file position
+    set statusline+=%<%P
+
+    " backspace for dummys
+    set backspace=indent,eol,start
+    " No extra spaces between rows
+    set linespace=0
+    " show matching brackets/parenthesis
+    set showmatch
+    set matchtime=3
+
+    " turn the status line red when in insert mode
+    au InsertEnter * hi StatusLine ctermbg=16 ctermfg=1
+    au InsertLeave * hi StatusLine ctermbg=16 ctermfg=8
+
+    set confirm
+
+    " Layout / Text formatting {{{
+        " Conflict markers {{{
+            " Highlight conflict markers
+            match ErrorMsg '^\(<\|=\|>\)\{7\}\([^=].\+\)\?$'
+
+            " Shortcut to jump to next conflict marker
+            nmap <silent> <leader>c /^\(<\\|=\\|>\)\{7\}\([^=].\+\)\?$<CR>
+        " }}}
+    " }}}
+
+    " Search & Replace {
+        " show the `best match so far' as search strings are typed:
+        set incsearch
+
+        " highlight search results in the document
+        set hlsearch
+
+        " make searches case-insensitive, unless they contain upper-case
+        " letters:
+        set ignorecase
+        set smartcase
+
+        " assume the /g flag on :s substitutions to replace all matches in a
+        " line:
+        set gdefault
+    " }
+
+    " show list instead of just completing
+    set wildmenu
+
+    " have command-line completion <Tab> (for filenames, help topics, option
+    " names) first list the available options and complete the longest common
+    " part, then have further <Tab>s cycle through the possibilities:
+    set wildmode=list:longest
+    set wildignore=*.o,*~,*.pyc,*.class,__pycache__
+
+    " lines to scroll when cursor leaves screen
+    set scrolljump=5
+    " minimum lines to keep above and below cursor
+    set scrolloff=3
+
+    " Window height and width minimums {
+        set winwidth=10
+        set winminwidth=10
+        set winheight=5
+        set winminheight=5
+    " }
+" }
+
+" Folding {
+    " auto fold code
+    set foldenable
+    set foldlevelstart=0
+
+    " Space to toggle folds.
+    nnoremap <Space> za
+    vnoremap <Space> za
+" }
+
+" Formatting {
+    " General {
+        " don't make it look like there are line breaks where there aren't:
+        set nowrap
+        " indent at the same level of the previous line
+        set autoindent
+        " use indents of 4 spaces
+        set shiftwidth=4
+        " tabs are spaces, not spaces
+        set expandtab
+        " an indentation every four columns
+        set tabstop=4
+
+        imap <S-Tab> <C-o><<
+
+        " have % bounce between angled brackets, as well as t'other kinds:
+        set matchpairs+=<:>
+
+        " get rid of the default style of C comments, and define a style with
+        " two stars at the start of `middle' rows which (looks nicer and) avoids
+        " asterisks used for bullet lists being treated like C comments; then
+        " define a bullet list style for single stars (like already is for
+        " hyphens):
+        set comments+=fb:*
+
+        " treat lines starting with a quote mark as comments (for `Vim' files,
+        " such as this very one!), and colons as well so that reformatting
+        " usenet messages from `Tin' users works OK:
+        set comments+=b:\"
+
+        " Allow backgrounding buffers without writing them, and remember
+        " marks/undo for backgrounded buffers
+        set hidden
+
+        set formatoptions+=t
+        set textwidth=80
+
+        " Don't insert two spaces after a sentence when joining lines.
+        set nojoinspaces
+    " }
+    " Specific File Formats {
+        " enable filetype detection:
+        filetype on
+        filetype plugin on
+        filetype indent on
+
+        " recognize anything at all with a .txt extension as being
+        " human-language text [this clobbers the `help' filetype, but that
+        " doesn't seem to prevent help from working properly]:
+        au BufNewFile,BufRead *.txt set filetype=human
+
+        au BufNewFile,BufRead *.aidl set filetype=java
+
+        au BufNewFile,BufRead *.ino set filetype=c
+    " }
+" }
+
+" Key Mappings {
+
+    let mapleader=","
+
+    " Moving Around {
+
+        " have the h and l cursor keys wrap between lines (like <Space> and
+        " <BkSpc> do by default), and ~ covert case over line breaks; also have
+        " the cursor keys wrap in insert mode:
+        set whichwrap=h,l,~,[,]
+
+        " scroll the window (but leaving the cursor in the same place) by a
+        " couple of lines up/down with <Ins>/<Del> (like in `Lynx'): [<Ins> by
+        " default is like i, and <Del> like x.]
+        noremap <Ins> 2<C-Y>
+        noremap <Del> 2<C-E>
+
+        " use <Ctrl>+N/<Ctrl>+P to cycle through files:
+        " [<Ctrl>+N by default is like j, and <Ctrl>+P like k.]
+        nnoremap <C-N> :next<CR>
+        nnoremap <C-P> :prev<CR>
+
+        " Yank from the cursor to the end of the line, to be consistent with C
+        " and D.
+        nnoremap Y y$
+
+        map <leader>v :vsp<CR>
+        map <leader>s :sp<CR>
+
+        " Easier moving in tabs and windows
+        map <C-J> <C-W>j<C-W>_
+        map <C-K> <C-W>k<C-W>_
+        map <C-L> <C-W>l<C-W>_
+        map <C-H> <C-W>h<C-W>_
+
+        nnoremap <C-t> :tabnew<CR>
+        nnoremap <C-q> :tabclose<CR>
+
+        " Shortcuts
+        " Change Working Directory to that of the current file
+        cmap cwd lcd %:p:h
+
+        " For when you forget to sudo.. Really Write the file.
+        cmap w!! w !sudo tee % >/dev/null
+
+        " Map ,e to open file in the same directory as the current file
+        map <leader>e :edit %:p:h/
+
+        nnoremap <silent> <Leader>w :w<CR>
+    " }
+
+    " Formatting {
+
+        " have Q reformat the current paragraph (or selected text if there is
+        " any):
+        nnoremap Q gqap
+        vnoremap Q gq
+
+        " have Y behave analogously to D and C rather than to dd and cc (which
+        " is already done by yy):
+        noremap Y y$
+
+        " remove trailing whitespace and blank line whitespace on write
+        autocmd BufWritePre * :%s/\s\+$//e
+
+    " }
+
+    " Toggles {
+        " Keystrokes to toggle options are defined here.  They are all set to
+        " normal mode keystrokes beginning \t but some function keys (which
+        " won't work in all terminals) are also mapped.
+
+        " have \tp ("toggle paste") toggle paste on/off and report the change,
+        " and where possible also have <F4> do this both in normal and insert
+        " mode:
+        set pastetoggle=<F4>
+        nnoremap \tp :set invpaste paste?<CR>
+        nmap <F4> \tp
+        imap <F4> <C-O>\tp
+
+        " Hit F5 to highlight lines longer than 80 characters
+        map <F5> /\%>80v.\+<CR>
+    " }
+    nnoremap ; :
+" }
+
+" Highlighting {
+    " Highlight whitespace errors
+    " TODO enable this only for source code filetypes
+    highlight rightMargin ctermbg=red
+    highlight tabError ctermbg=red
+    highlight trailingSpace ctermbg=red
+    match rightMargin /.\%>81v/
+    match NonText /\s\s*$/
+" }
+
+" Plugins {
+    "CtrlP {
+        let g:ctrlp_map = '<leader>t'
+        let g:ctrlp_cmd = 'CtrlPMixed'
+    " }
+
+    " Gist {
+        let g:gist_detect_filetype = 1
+    " }
+
+    " Syntastic {
+        let g:syntastic_enable_signs=1
+        let g:syntastic_mode_map = {'mode': 'active',
+                    \ 'active_filetypes': [],
+                    \ 'passive_filetypes': ["java"] }
+        let g:syntastic_html_checkers=['tidy']
+        let g:syntastic_javascript_checkers=['jslint']
+        let g:syntastic_auto_loc_list=1
+    " }
+
+    " Ack {
+        map <leader>f :Ack<space>
+    " }
+
+    " NERDComment {
+        "comment out line(s) in visual mode
+        vmap  o  :call NERDComment(1, 'toggle')<CR>
+        let g:NERDShutUp=1
+        let NERDSpaceDelims = 1
+    " }
+
+    " OmniComplete {
+        set omnifunc=syntaxcomplete#Complete
+
+        " some convenient mappings
+        " TODO this doesn't work at the moment - prints out pumvisible...
+        "inoremap <expr> <Esc>      pumvisible() ? "\<C-e>" : "\<Esc>"
+        "inoremap <expr> <CR>=pumvisible() ? "\<C-y>" : "\<CR>"
+        "inoremap <expr> <Down>     pumvisible() ? "\<C-n>" : "\<Down>"
+        "inoremap <expr> <Up>       pumvisible() ? "\<C-p>" : "\<Up>"
+        "inoremap <expr> <C-d>        pumvisible() ? "\<PageDown>\<C-p>\<C-n>" : "\<C-d>"
+        "inoremap <expr> <C-u>      pumvisible() ? "\<PageUp>\<C-p>\<C-n>" : "\<C-u>"
+
+        " automatically open and close the popup menu / preview window
+        "au CursorMovedI,InsertLeave * if pumvisible() == 0|silent! pclose|endif
+        set completeopt=longest,menu,preview
+    " }
+
+    " Notes {
+        let g:notes_directory = "~/Dropbox/notes"
+        let g:notes_smart_quotes = 0
+        let g:notes_suffix = ".txt"
+        let g:notes_title_sync = 'no'
+        let g:notes_list_bullets = ['*', '-', '+']
+        map <leader>n :Note<space>
+    " }
+
+    " EasyMotion {
+        hi link EasyMotionShade  Comment
+        let g:EasyMotion_leader_key = 'm'
+    " }
+
+    " Eclim {
+        let g:EclimXmlValidate = 0
+        let g:EclimHtmlValidate = 0
+        let g:EclimJavascriptValidate = 0
+        let g:eclim_javascript_jsl_warn = 1
+    " }
+
+    " Supertab {
+        let g:SuperTabDefaultCompletionType = "<c-n>"
+        let g:SuperTabLongestHighlight = 1
+    " }
+
+    " Java syntax highlighting {
+        let g:java_allow_cpp_keywords = 1
+    " }
+" }
+
+map <leader>q :call QFixToggle()<CR>
+function! QFixToggle()
+  if exists("g:qfix_win")
+    cclose
+    unlet g:qfix_win
+  else
+    copen 10
+    let g:qfix_win = bufnr("$")
+  endif
+endfunction
+
+au BufEnter * call MyLastWindow()
+function! MyLastWindow()
+  " if the window is quickfix go on
+  if &buftype=="quickfix"
+    " if this window is last on screen quit without warning
+    if winbufnr(2) == -1
+      quit!
+    endif
+  endif
+endfunction
+
+function! RenameFile()
+    let old_name = expand('%')
+    let new_name = input('New file name: ', expand('%'))
+    if new_name != '' && new_name != old_name
+        exec ':saveas ' . new_name
+        exec ':silent !rm ' . old_name
+        redraw!
+    endif
+endfunction
+map <leader>m :call RenameFile()<cr>
+
+map <Leader>r :w\|:!%:p<CR>

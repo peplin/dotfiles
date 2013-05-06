@@ -12,7 +12,6 @@ autocmd!
         call vundle#rc()
 
         Bundle 'gmarik/vundle'
-        Bundle 'peplin/vim-notes'
         Bundle 'peplin/vim-markdown'
         Bundle 'tpope/vim-fugitive'
         Bundle 'tpope/vim-surround'
@@ -21,6 +20,8 @@ autocmd!
         Bundle 'tpope/vim-repeat'
         Bundle 'tpope/vim-git'
         Bundle 'tpope/vim-unimpaired'
+        Bundle 'tpope/vim-sleuth'
+        Bundle 'xolox/vim-notes'
         Bundle 'mattn/gist-vim'
         Bundle 'scrooloose/nerdcommenter'
         Bundle 'scrooloose/syntastic'
@@ -31,6 +32,8 @@ autocmd!
         Bundle 'altercation/vim-colors-solarized'
         Bundle 'kien/ctrlp.vim'
         Bundle 'jnwhiteh/vim-golang'
+        Bundle 'spolu/dwm.vim'
+        Bundle "pangloss/vim-javascript"
 
         filetype plugin indent on
     " }
@@ -72,15 +75,12 @@ autocmd!
         set nobackup
         set nowritebackup
         set directory=$HOME/.vimswap//
-        set viewdir=$HOME/.vimviews//
+        set undodir=$HOME/.vimundo//
+        set undofile
 
         "" Creating directories if they don't exist
         silent execute '!mkdir -p $HOME/.vimundo'
         silent execute '!mkdir -p $HOME/.vimswap'
-        silent execute '!mkdir -p $HOME/.vimviews'
-        "make vim save view (state) (folds, cursor, etc)
-        au BufWinLeave * silent! mkview
-        au BufWinEnter * silent! loadview
 
         " Don't wait so long for ambiguous command prefixes
         set timeoutlen=500
@@ -267,6 +267,8 @@ autocmd!
         au BufNewFile,BufRead *.txt set filetype=human
 
         au BufNewFile,BufRead *.aidl set filetype=java
+
+        au BufNewFile,BufRead *.ino set filetype=c
     " }
 " }
 
@@ -378,6 +380,12 @@ autocmd!
 
     " Syntastic {
         let g:syntastic_enable_signs=1
+        let g:syntastic_mode_map = {'mode': 'active',
+                    \ 'active_filetypes': [],
+                    \ 'passive_filetypes': ["java"] }
+        let g:syntastic_html_checkers=['tidy']
+        let g:syntastic_javascript_checkers=['jslint']
+        let g:syntastic_python_checkers=['pyflakes']
     " }
 
     " Ack {
@@ -410,7 +418,10 @@ autocmd!
 
     " Notes {
         let g:notes_directory = "~/Dropbox/notes"
-        let g:notes_suffix = ".txt"
+        let g:notes_smart_quotes = 0
+        let g:notes_suffix = ".md"
+        let g:notes_title_sync = 'no'
+        let g:notes_list_bullets = ['*', '-', '+']
         map <leader>n :Note<space>
     " }
 
@@ -422,6 +433,8 @@ autocmd!
     " Eclim {
         let g:EclimXmlValidate = 0
         let g:EclimHtmlValidate = 0
+        let g:EclimJavascriptValidate = 0
+        let g:eclim_javascript_jsl_warn = 1
     " }
 
     " Supertab {

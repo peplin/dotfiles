@@ -2,7 +2,7 @@
 # http://github.com/ehrenmurdick/config/blob/master/zsh/prompt.zsh
 autoload colors && colors
 
-function hg_prompt_info {
+hg_prompt_info() {
     hg prompt --angle-brackets "\
 <%{$fg[green]%}<branch>%{$reset_color%}>\
 <@%{$fg[yellow]%}<tags|%{$reset_color%}, %{$fg[yellow]%}>%{$reset_color%}>\
@@ -10,22 +10,34 @@ function hg_prompt_info {
 patches: <patches|join( → )|pre_applied(%{$fg[yellow]%})|post_applied(%{$reset_color%})|pre_unapplied(%{$fg_bold[black]%})|post_unapplied(%{$reset_color%})>>" 2>/dev/null
 }
 
+git="/usr/bin/git"
+
 git_branch() {
-  echo $(/usr/bin/git symbolic-ref HEAD 2>/dev/null | awk -F/ {'print $NF'})
+  echo $(timeout 1 $git symbolic-ref HEAD 2>/dev/null | awk -F/ {'print $NF'})
 }
 
-git_prompt_info () {
-    ref=$(/usr/bin/git symbolic-ref HEAD 2>/dev/null) || return
-    if [[ -n $(/usr/bin/git status -s 2> /dev/null) ]]; then
-        echo -n "%{$fg_no_bold[red]%}"
+git_prompt_info() {
+  ref=$(timeout 1 $git symbolic-ref HEAD 2> /dev/null) || return
+  echo "${ref#refs/heads/}"
+}
+
+git_dirty() {
+    st=$(timeout 1 $git status 2>/dev/null | tail -n 1)
+    if [[ $st == "" ]]
+    then
+        echo ""
     else
-        echo -n "%{$fg[green]%}"
+        if [[ "$st" =~ clean ]]
+        then
+            echo "%{$fg[green]%}$(git_prompt_info)%{$reset_color%}"
+        else
+            echo "%{$fg_bold[red]%}$(git_prompt_info)%{$reset_color%}"
+        fi
     fi
-    echo "${ref#refs/heads/}%{$reset_color%}$(need_push)"
 }
 
 unpushed () {
-  /usr/bin/git cherry -v `/usr/bin/git config --get branch.master.remote`/$(git_branch) 2>/dev/null
+  timeout 1 $git cherry -v @{upstream} 2>/dev/null
 }
 
 project_name () {
@@ -49,7 +61,7 @@ need_push () {
   then
     echo " "
   else
-    echo "%{\e[0;32m%}+%{\e[0m%}"
+    echo "%{$fg_bold[red]%}+%{$reset_color%}"
   fi
 }
 
@@ -57,7 +69,11 @@ directory_name(){
   echo "%{$fg[green]%}${PWD/#$HOME/~}%{$reset_color%}"
 }
 
-PROMPT=$'$(directory_name) $(project_name_color)$(git_prompt_info)$(hg_prompt_info)\n> '
+export PROMPT=$'$(directory_name) $(project_name_color)$(git_dirty)$(need_push)$(hg_prompt_info)\n> '
 
 local return_code="%(?..%{$fg[red]%}%?%{$reset_color%})"
-RPS1="${return_code}"
+export RPS1="${return_code}"
+
+precmd() {
+  title "zsh" "%55<...<%~"
+}

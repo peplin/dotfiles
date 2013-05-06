@@ -1,5 +1,5 @@
---sort-files
-
+--ignore-dir=dependencies
+--ignore-dir=build
 --ignore-dir=_site
 --ignore-dir=build-cli
 --ignore-dir=coverage
@@ -7,7 +7,7 @@
 --ignore-dir=gen
 --ignore-dir=.tox
 --type-add=ruby=haml,rake
---type-add=cpp=pde
+--type-add=cpp=pde,ino
 --type-add=vim=vimrc
 --type-add=js=json
 --type-add=java=aidl

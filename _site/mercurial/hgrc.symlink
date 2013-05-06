@@ -1,0 +1,14 @@
+[ui]
+username = Chris Peplin <chris.peplin@rhubarbtech.com>
+[extensions]
+record =
+color =
+pager =
+graphlog =
+fetch =
+purge =
+prompt = /home/peplin/.dotfiles/mercurial/hg-prompt/prompt.py
+hgshelve= /home/peplin/.dotfiles/mercurial/hgshelve/hgshelve.py
+[pager]
+pager = LESS='FSRX' less
+ignore = version, help, update, serve, record

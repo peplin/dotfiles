@@ -5,9 +5,11 @@ xsetroot -cursor_name left_ptr
 
 xrandr --output HDMI1 --left-of VGA1
 
-exec ck-launch-session dbus-launch xmonad & wmpid=$!
+dbus-launch xmonad & wmpid=$!
 
+pulseaudio &
 dropboxd &
+owncloud &
 /usr/bin/xscreensaver -no-splash &
 
 wait $wmpid
