@@ -1,7 +1,0 @@
-# Start a local SOCKS proxy
-
-browsesecure() {
-    echo 'SOCKS proxy starting on localhost:8080'
-    ssh -ND 8080 $SOCKS_PROXY_TARGET
-    echo 'Disabled SOCKS proxy'
-}

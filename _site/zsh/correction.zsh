@@ -1,9 +1,0 @@
-alias mv='nocorrect mv'       # no spelling correction on mv
-alias cp='nocorrect cp'
-alias mkdir='nocorrect mkdir'
-alias find='noglob find'
-alias knife='noglob knife'
-alias rake='noglob rake'
-alias curl='noglob curl'
-alias httparty='noglob httparty'
-alias wget='noglob wget'
