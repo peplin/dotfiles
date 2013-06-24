@@ -1,5 +1,5 @@
 export PYTHONSTARTUP=$HOME/.dotfiles/python/startup/startup.py
-export PYTHONPATH=$PYTHONPATH:$PROJECTS/bueda/ops
+export PYTHONPATH=$PYTHONPATH
 export PYTHONUSERDIR=$HOME/.dotfiles/python/startup
 
 export PROJECT_HOME=$PROJECTS
