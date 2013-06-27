@@ -70,3 +70,5 @@
 	cmd = vim -f -c \"Gdiff\" \"$MERGED\"
 [fetch]
     recurseSubmodules = on-demand
+[credential]
+	helper = cache
