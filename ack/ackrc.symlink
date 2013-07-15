@@ -19,4 +19,4 @@
 --type-set=ld=ld
 --color
 --follow
--i
+--smart-case

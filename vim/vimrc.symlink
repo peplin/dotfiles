@@ -22,6 +22,7 @@ autocmd!
         Bundle 'tpope/vim-unimpaired'
         Bundle 'tpope/vim-sleuth'
         Bundle 'xolox/vim-notes'
+        Bundle 'xolox/vim-misc'
         Bundle 'mattn/gist-vim'
         Bundle 'scrooloose/nerdcommenter'
         Bundle 'scrooloose/syntastic'
@@ -34,6 +35,7 @@ autocmd!
         Bundle 'jnwhiteh/vim-golang'
         Bundle 'spolu/dwm.vim'
         Bundle "pangloss/vim-javascript"
+        Bundle "uarun/vim-protobuf"
 
         filetype plugin indent on
     " }
@@ -417,7 +419,7 @@ autocmd!
     " }
 
     " Notes {
-        let g:notes_directory = "~/Dropbox/notes"
+        let g:notes_directories = ["~/Dropbox/notes"]
         let g:notes_smart_quotes = 0
         let g:notes_suffix = ".md"
         let g:notes_title_sync = 'no'

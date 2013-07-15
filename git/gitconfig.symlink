@@ -35,7 +35,7 @@
     head = !git l -1
     h = !git head
     s = !git l -20
-    l = "!/home/peplin/.dotfiles/git/functions/glog"
+    l = "!. /home/peplin/.dotfiles/git/functions/glog && glog"
     unmerged = branch -a --no-merged
     merged = branch -a --merged
 	last = log -1 HEAD
@@ -70,3 +70,5 @@
 	cmd = vim -f -c \"Gdiff\" \"$MERGED\"
 [fetch]
     recurseSubmodules = on-demand
+[credential]
+	helper = cache
