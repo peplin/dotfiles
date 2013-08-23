@@ -11,6 +11,7 @@ Config { font = "xft:DejaVu Sans-9"
                 "--high","red"] 10
             , Run Com "/home/peplin/.dotfiles/bin/volume.sh" [] "vol" 10
             , Run Com "/home/peplin/.dotfiles/bin/wireless.sh" [] "wireless" 10
+            , Run Com "/home/peplin/.dotfiles/bin/batterycheck.sh" [] "batcheck" 60
             , Run MultiCpu ["-t", "CPU: <autototal>","-L","30","-H","60","--normal",
                 "green","--high","red"] 10
             , Run Memory ["-t","Mem: <usedratio>%","-H","20078","-L","4096",
