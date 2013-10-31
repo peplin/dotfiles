@@ -1,5 +1,12 @@
+
+if command -v brew >/dev/null 2>&1; then
+PATH="$(brew --prefix coreutils)/libexec/gnubin:$PATH"
+fi
+
 if [ "$TERM" != "dumb" ]; then
-    eval "`dircolors -b`"
+    if command -v dircolors >/dev/null 2>&1; then
+        eval "`dircolors -b`"
+    fi
     alias ls='ls --group-directories-first --color=auto'
 fi
 
