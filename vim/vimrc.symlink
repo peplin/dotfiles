@@ -36,6 +36,7 @@ autocmd!
         Bundle 'spolu/dwm.vim'
         Bundle "pangloss/vim-javascript"
         Bundle "uarun/vim-protobuf"
+        Bundle "Rykka/riv.vim"
 
         filetype plugin indent on
     " }
@@ -84,9 +85,10 @@ autocmd!
         silent execute '!mkdir -p $HOME/.vimundo'
         silent execute '!mkdir -p $HOME/.vimswap'
 
-        " Don't wait so long for ambiguous command prefixes
-        set timeoutlen=500
     " }
+
+    " Don't wait so long for ambiguous command prefixes
+    set timeoutlen=500
 
     ca Wq wq
     ca W w
@@ -386,6 +388,7 @@ autocmd!
                     \ 'active_filetypes': [],
                     \ 'passive_filetypes': ["java"] }
         let g:syntastic_html_checkers=['tidy']
+        let g:syntastic_rst_checkers=[]
         let g:syntastic_javascript_checkers=['jslint']
         let g:syntastic_python_checkers=['pyflakes']
     " }

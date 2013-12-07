@@ -35,7 +35,7 @@
     head = !git l -1
     h = !git head
     s = !git l -20
-    l = "!. /home/peplin/.dotfiles/git/functions/glog && glog"
+    l = "!. ~/.dotfiles/git/functions/glog && glog"
     unmerged = branch -a --no-merged
     merged = branch -a --merged
 	last = log -1 HEAD
@@ -43,6 +43,11 @@
 	stash-unapply = '!git stash show -p | git apply -R'
 	rank-contributers = !~/.dotfiles/zsh/functions/git-rank-contributers
 	ctags = !.git/hooks/ctags
+    pr = "!f() { git fetch -fu origin refs/pull/$1/head:pr/$1; } ; f"
+    prr = "!f() { git fetch -fu $1 refs/pull/$2/head:pr/$2; } ; f"
+    pru = "!f() { git fetch -fu upstream refs/pull/$1/head:pr/$1; } ; f"
+    pr-clean = "!git for-each-ref refs/heads/pr/* --format='%(refname)' | while read ref ; do branch=${ref#refs/heads/} ; git branch -D $branch ; done"
+
 [apply]
 	whitespace = nowarn
 [branch]
