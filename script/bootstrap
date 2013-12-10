@@ -2,6 +2,8 @@
 #
 # bootstrap installs things.
 
+git submodule update --init
+
 DOTFILES_ROOT="`pwd`"
 
 set -e
