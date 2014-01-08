@@ -36,7 +36,6 @@ autocmd!
         Bundle 'spolu/dwm.vim'
         Bundle "pangloss/vim-javascript"
         Bundle "uarun/vim-protobuf"
-        Bundle "Rykka/riv.vim"
 
         filetype plugin indent on
     " }
