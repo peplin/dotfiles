@@ -1,5 +1,5 @@
 export EDITOR='vim'
-export BROWSER=google-chrome
+export BROWSER=google-chrome-stable
 export PAGER="less"
 export LESS="-R"
 
