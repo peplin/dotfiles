@@ -16,13 +16,10 @@ Config { font = "xft:DejaVu Sans-9"
                 "green","--high","red"] 10
             , Run Memory ["-t","Mem: <usedratio>%","-H","20078","-L","4096",
                 "--normal","green","--high","red"] 10
-            , Run BatteryP ["BAT0"] ["-t", "Power: <acstatus> <left>",
-                "-L", "10", "-H", "80", "-p", "3",
-                "--"] 600
             , Run Date "%a %b %_d %Y %H:%M:%S" "date" 10
             , Run StdinReader
                     ]
        , sepChar = "%"
        , alignSep = "}{"
-       , template = "                  %multicpu% | %memory% * | %eth0% | %battery% | Volume: %vol% | WiFi: %wireless% }{%StdinReader% | %KARB% | <fc=#ee9a00>%date%</fc>"
+       , template = "                       %multicpu% | %memory% * | %eth0% | Volume: %vol% | WiFi: %wireless% }{%StdinReader% | %KARB% | <fc=#ee9a00>%date%</fc>"
        }

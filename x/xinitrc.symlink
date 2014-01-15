@@ -9,9 +9,17 @@ $HOME/.screenlayout/dual.sh
 
 dbus-launch xmonad & wmpid=$!
 
+if [ -f /sys/class/power_supply/BAT ]; then
+batti &
+fi
+
 pulseaudio &
 dropboxd &
+
+if [ ! -f $HOME/.noowncloud ]; then
 owncloud &
+fi
+
 /usr/bin/xscreensaver -no-splash &
 
 wait $wmpid
