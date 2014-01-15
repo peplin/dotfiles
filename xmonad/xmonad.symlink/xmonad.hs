@@ -345,7 +345,7 @@ myStartupHook = return ()
 --
 main = do
     xmobar <- spawnPipe "xmobar"
-    trayproc <- spawnPipe "killall trayer; sleep 5; trayer --edge top --align left --SetDockType true --SetPartialStrut true --expand true --width 3 --alpha 0 --transparent true --height 18 --tint 000000"
+    trayproc <- spawnPipe "killall trayer; sleep 5; trayer --edge top --align left --SetDockType true --SetPartialStrut true --expand true --width 5 --alpha 0 --transparent true --height 18 --tint 000000"
     xmonad $ ewmh defaultConfig {
       -- simple stuff
         terminal           = myTerminal,
