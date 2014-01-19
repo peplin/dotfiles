@@ -37,6 +37,7 @@ autocmd!
         Bundle "pangloss/vim-javascript"
         Bundle "uarun/vim-protobuf"
         Bundle "airblade/vim-gitgutter"
+        Bundle "bling/vim-airline"
 
         filetype plugin indent on
     " }
@@ -126,26 +127,6 @@ autocmd!
     " visual mode
     set showcmd
     set laststatus=2
-    set statusline=
-    " syntastic
-    set statusline+=%#warningmsg#
-    if exists('SyntasticStatuslineFlag')
-        set statusline+=%{SyntasticStatuslineFlag()}
-    endif
-    set statusline+=%*
-    " filename
-    set statusline+=%f
-    " status flags
-    set statusline+=%h%m%r%w
-    set statusline+=\[%{strlen(&ft)?&ft:'none'}] " file type
-    if exists('fugitive')
-        set statusline+=\ %{fugitive#statusline()}
-    endif
-    " right align remainder
-    set statusline+=%=
-    set statusline+=%-14(%l,%c%V%)               " line, character
-    " file position
-    set statusline+=%<%P
 
     " backspace for dummys
     set backspace=indent,eol,start
@@ -154,10 +135,6 @@ autocmd!
     " show matching brackets/parenthesis
     set showmatch
     set matchtime=3
-
-    " turn the status line red when in insert mode
-    au InsertEnter * hi StatusLine ctermbg=16 ctermfg=1
-    au InsertLeave * hi StatusLine ctermbg=16 ctermfg=8
 
     set confirm
 
@@ -437,6 +414,11 @@ autocmd!
 
     " gitgutter {
       let g:gitgutter_escape_grep = 1
+    " }
+
+    " airline (statusbar) {
+      let g:airline#extensions#tabline#enabled = 1
+      let g:airline_powerline_fonts = 1
     " }
 
     " Eclim {
