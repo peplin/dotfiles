@@ -38,6 +38,7 @@ autocmd!
         Bundle "uarun/vim-protobuf"
         Bundle "airblade/vim-gitgutter"
         Bundle "bling/vim-airline"
+        Bundle "jmcantrell/vim-virtualenv"
 
         filetype plugin indent on
     " }
