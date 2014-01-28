@@ -2183,23 +2183,6 @@ end
 
 
 # _______________process control______________
-define n
-    if $argc == 0
-        nexti
-    end
-    if $argc == 1
-        nexti $arg0
-    end
-    if $argc > 1
-        help n
-    end
-end
-document n
-Syntax: n <NUM>
-| Step one instruction, but proceed through subroutine calls.
-| If NUM is given, then repeat it NUM times or till program stops.
-| This is alias for nexti.
-end
 
 
 define go
@@ -3962,3 +3945,4 @@ end
 #
 #   Version 2
 #     Radix bugfix by elaine
+add-auto-load-safe-path /home/peplin/dev/ford/vi-firmware/src/.gdbinit
