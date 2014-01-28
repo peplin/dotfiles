@@ -9,7 +9,7 @@ $HOME/.screenlayout/dual.sh
 
 dbus-launch xmonad & wmpid=$!
 
-if [ -f /sys/class/power_supply/BAT ]; then
+if [ -d /sys/class/power_supply/BAT0 ]; then
 batti &
 fi
 
