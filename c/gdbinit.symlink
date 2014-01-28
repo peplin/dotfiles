@@ -3945,4 +3945,7 @@ end
 #
 #   Version 2
 #     Radix bugfix by elaine
+
+set print array on
+set print pretty on
 add-auto-load-safe-path /home/peplin/dev/ford/vi-firmware/src/.gdbinit
