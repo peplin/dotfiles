@@ -8,18 +8,18 @@ Config { font = "xft:Ubuntu Mono-11"
                 "20","-H","75","--normal","green","--high","red",
                 "--low","lightblue"] 36000
             , Run DynNetwork ["-L","10","-H","200","--normal","green",
-                "--high","red","--minwidth", "5"] 20
+                "--high","red","--minwidth", "5","-t","<rx>KB | <tx>KB"] 20
             , Run Wireless "wlan0" ["-L","10","-H","200","--normal","green",
                 "--high","red","--minwidth", "5"] 20
             , Run Com "/home/peplin/.dotfiles/bin/volume.sh" [] "vol" 20
-            , Run MultiCpu ["-t", "CPU: <autototal>","-L","30","-H","60","--normal",
+            , Run MultiCpu ["-t", "<autototal>","-L","30","-H","60","--normal",
                 "green","--high","red","-p","3","--suffix","True"] 20
-            , Run Memory ["-t","Mem: <usedratio>%","-H","20078","-L","4096",
+            , Run Memory ["-t","<usedratio>%","-H","20078","-L","4096",
                 "--normal","green","--high","red"] 20
             , Run Date "%a %b %_d %Y %H:%M:%S" "date" 20
             , Run StdinReader
        ]
        , sepChar = "%"
        , alignSep = "}{"
-       , template = "             %multicpu% | %memory% | %dynnetwork% (%wlan0wi%) | Volume: %vol%}{%StdinReader% | %KARB% | <fc=#ee9a00>%date%</fc>"
+       , template = "         %multicpu% %memory% | %wlan0wi% %dynnetwork% %vol%}{%StdinReader% | %KARB% | <fc=#ee9a00>%date%</fc>"
        }
