@@ -1,4 +1,4 @@
-Config { font = "xft:DejaVu Sans Mono-9"
+Config { font = "xft:Ubuntu Mono-11"
        , bgColor = "black"
        , fgColor = "grey"
        , position = Top
