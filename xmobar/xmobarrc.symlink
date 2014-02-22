@@ -1,4 +1,4 @@
-Config { font = "xft:DejaVu Sans-9"
+Config { font = "xft:DejaVu Sans Mono-9"
        , bgColor = "black"
        , fgColor = "grey"
        , position = Top
@@ -7,19 +7,19 @@ Config { font = "xft:DejaVu Sans-9"
             Run Weather "KARB" ["-t","<tempF>F","-L",
                 "20","-H","75","--normal","green","--high","red",
                 "--low","lightblue"] 36000
-            , Run Network "eth0" ["-L","10","-H","200","--normal","green",
-                "--high","red"] 10
-            , Run Com "/home/peplin/.dotfiles/bin/volume.sh" [] "vol" 10
-            , Run Com "/home/peplin/.dotfiles/bin/wireless.sh" [] "wireless" 10
-            , Run Com "/home/peplin/.dotfiles/bin/batterycheck.sh" [] "batcheck" 60
+            , Run DynNetwork ["-L","10","-H","200","--normal","green",
+                "--high","red","--minwidth", "5"] 20
+            , Run Wireless "wlan0" ["-L","10","-H","200","--normal","green",
+                "--high","red","--minwidth", "5"] 20
+            , Run Com "/home/peplin/.dotfiles/bin/volume.sh" [] "vol" 20
             , Run MultiCpu ["-t", "CPU: <autototal>","-L","30","-H","60","--normal",
-                "green","--high","red"] 10
+                "green","--high","red","-p","3","--suffix","True"] 20
             , Run Memory ["-t","Mem: <usedratio>%","-H","20078","-L","4096",
-                "--normal","green","--high","red"] 10
-            , Run Date "%a %b %_d %Y %H:%M:%S" "date" 10
+                "--normal","green","--high","red"] 20
+            , Run Date "%a %b %_d %Y %H:%M:%S" "date" 20
             , Run StdinReader
-                    ]
+       ]
        , sepChar = "%"
        , alignSep = "}{"
-       , template = "                       %multicpu% | %memory% * | %eth0% | Volume: %vol% | WiFi: %wireless% }{%StdinReader% | %KARB% | <fc=#ee9a00>%date%</fc>"
+       , template = "             %multicpu% | %memory% | %dynnetwork% (%wlan0wi%) | Volume: %vol%}{%StdinReader% | %KARB% | <fc=#ee9a00>%date%</fc>"
        }
