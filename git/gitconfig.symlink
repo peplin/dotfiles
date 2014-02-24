@@ -21,7 +21,7 @@
 	editor = vim
 [alias]
     a = add
-    aa = !git add -u && git add . && git status
+    aa = !git add --all && git add . && git status
 	st = status -sb
 	ci = commit -v
     c = commit -m
