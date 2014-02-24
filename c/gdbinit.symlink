@@ -3949,3 +3949,4 @@ end
 set print array on
 set print pretty on
 add-auto-load-safe-path /home/peplin/dev/ford/vi-firmware/src/.gdbinit
+add-auto-load-safe-path /home/peplin/dev/vi-firmware/src/.gdbinit
