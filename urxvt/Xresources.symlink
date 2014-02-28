@@ -93,7 +93,7 @@ xscreensaver.dateFormat:    %I:%M%P %a %b %d, %Y
 
 *background:              S_base03
 *foreground:              S_base0
-*fading:                  40
+*fading:                  10
 *fadeColor:               S_base03
 *cursorColor:             S_base1
 *pointerColorBackground:  S_base01
