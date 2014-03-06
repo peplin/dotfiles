@@ -3,7 +3,7 @@
 set $COLOUREDPROMPT = 1
 
 set confirm off
-set verbose on
+set verbose off
 
 set output-radix 0x10
 set input-radix 0x10
