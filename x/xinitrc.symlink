@@ -3,11 +3,11 @@ xrdb -merge $HOME/.Xresources
 
 xsetroot -cursor_name left_ptr
 
-if [ `hostname` -eq "secant" ]; then
+if [ "`hostname`" = "secant" ]; then
 $HOME/.screenlayout/workdual.sh
 fi
 
-if [ `hostname` -eq "curve" ]; then
+if [ "`hostname`" = "curve" ]; then
 $HOME/.screenlayout/dual.sh
 fi
 
