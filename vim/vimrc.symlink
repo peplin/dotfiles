@@ -34,7 +34,7 @@ autocmd!
         Bundle 'kien/ctrlp.vim'
         Bundle 'JazzCore/ctrlp-cmatcher'
         Bundle 'jnwhiteh/vim-golang'
-        Bundle 'spolu/dwm.vim'
+        "Bundle 'spolu/dwm.vim'
         Bundle "pangloss/vim-javascript"
         Bundle "uarun/vim-protobuf"
         Bundle "airblade/vim-gitgutter"
