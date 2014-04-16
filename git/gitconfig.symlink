@@ -19,6 +19,7 @@
 	whitespace=fix,-indent-with-non-tab,trailing-space,-cr-at-eol
 	excludesfile = ~/.gitignore
 	editor = vim
+	autocrlf = input
 [alias]
     a = add
     aa = !git add --all && git add . && git status
