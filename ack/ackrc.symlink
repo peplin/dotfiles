@@ -1,5 +1,6 @@
 --ignore-dir=dependencies
 --ignore-dir=build
+--ignore-dir=objs
 --ignore-dir=_site
 --ignore-dir=build-cli
 --ignore-dir=coverage
