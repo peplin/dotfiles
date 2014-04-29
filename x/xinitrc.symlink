@@ -3,6 +3,9 @@ xrdb -merge $HOME/.Xresources
 
 xsetroot -cursor_name left_ptr
 
+# Disable tap to click on touchpad
+synclient MaxTapTime=0
+
 if [ "`hostname`" = "secant" ]; then
 $HOME/.screenlayout/workdual.sh
 fi
