@@ -1,16 +1,7 @@
 #!/usr/bin/env bash
 
-name_test=$(amixer | grep Master)
-if [[ $? == 0 ]]; then
-    mixer_name="Master"
-else
-    mixer_name="PCM"
-fi
-
-vol=$(amixer get $mixer_name | awk -F'[]%[]' '/%/ {if ($7 == "off") \
-    { print "MM" } else { print $2/10 }}' | head -n 1 | cut -d . -f 1)
-
-case $vol in
+CURVOL=$(pacmd list-sinks|grep -A 15 '* index'| awk '/volume: front/{ print $5/10 }' | cut -d . -f 1 | sed 's/%//g')
+case $CURVOL in
   0)     bar='[----------]' ;;
   1)   bar='[#---------]' ;;
   2)   bar='[##--------]' ;;
