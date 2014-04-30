@@ -39,20 +39,12 @@ import XMonad.Actions.CycleRecentWS
 import XMonad.Actions.GridSelect
 import XMonad.Actions.DynamicWorkspaces
 
+import Graphics.X11.ExtraTypes.XF86
+
 -- The preferred terminal program, which is used in a binding below and by
 -- certain contrib modules.
 --
 myTerminal      = "urxvt"
-
--- multimedia keys
-xK_XF86AudioLowerVolume = 0x1008ff11
-xK_XF86AudioRaiseVolume = 0x1008ff13
-xK_XF86AudioMute        = 0x1008ff12
-xK_XF86AudioNext        = 0x1008ff17
-xK_XF86AudioPrev        = 0x1008ff16
-xK_XF86AudioPlay        = 0x1008ff14
-xK_XF86AudioStop        = 0x1008ff15
-xK_XF86AudioMedia       = 0x1008ff32
 
 -- Width of the window border in pixels.
 --
@@ -194,10 +186,14 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
 
     -- audi
     , ((modMask, xK_KP_Subtract), spawn "$HOME/.dotfiles/bin/updatevolume.sh -")
-    , ((0, xK_XF86AudioLowerVolume), spawn "$HOME/.dotfiles/bin/updatevolume.sh -")
+    , ((0, xF86XK_AudioLowerVolume), spawn "$HOME/.dotfiles/bin/updatevolume.sh -")
     , ((modMask, xK_KP_Add), spawn "$HOME/.dotfiles/bin/updatevolume.sh +")
-    , ((0, xK_XF86AudioRaiseVolume), spawn "$HOME/.dotfiles/bin/updatevolume.sh +")
-    , ((0, xK_XF86AudioMute), spawn "$HOME/.dotfiles/bin/mute.sh")
+    , ((0, xF86XK_AudioRaiseVolume), spawn "$HOME/.dotfiles/bin/updatevolume.sh +")
+    , ((0, xF86XK_AudioMute), spawn "$HOME/.dotfiles/bin/mute.sh")
+
+    -- lcd brightness
+    , ((0, xF86XK_MonBrightnessUp), spawn "/usr/bin/xbacklight -inc 5")
+    , ((0, xF86XK_MonBrightnessDown), spawn "/usr/bin/xbacklight -dec 5")
 
     -- Search commands
     , ((modMask, xK_s), promptSearch defaultXPConfig google)
