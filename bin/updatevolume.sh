@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
 
 DIRECTION=$1
-pactl set-sink-volume 0 -- $DIRECTION"5%"
+SINK=$(pacmd list-sinks | grep index | head -n 1 | cut -f 2 -d :)
+pactl set-sink-volume $SINK -- $DIRECTION"5%"
