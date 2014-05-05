@@ -192,8 +192,8 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
     , ((0, xF86XK_AudioMute), spawn "$HOME/.dotfiles/bin/mute.sh")
 
     -- lcd brightness
-    , ((0, xF86XK_MonBrightnessUp), spawn "/usr/bin/xbacklight -inc 5")
-    , ((0, xF86XK_MonBrightnessDown), spawn "/usr/bin/xbacklight -dec 5")
+    , ((0, xF86XK_MonBrightnessUp), spawn "/usr/bin/xbacklight -inc 10")
+    , ((0, xF86XK_MonBrightnessDown), spawn "/usr/bin/xbacklight -dec 10")
 
     -- Search commands
     , ((modMask, xK_s), promptSearch defaultXPConfig google)
