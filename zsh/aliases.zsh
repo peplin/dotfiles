@@ -1,5 +1,6 @@
 alias dotcd='cd $ZSH'
 alias reload='. ~/.zshrc'
+alias xclip='xclip -sel clip'
 
 alias markdown2pdf='/usr/bin/markdown2pdf --template ~/Dropbox/reference/markdown.tex'
 
