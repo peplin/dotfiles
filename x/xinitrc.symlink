@@ -17,7 +17,7 @@ fi
 dbus-launch xmonad & wmpid=$!
 
 if [ -d /sys/class/power_supply/BAT0 ]; then
-cbatticon &
+batti &
 fi
 
 pulseaudio &
