@@ -9,6 +9,7 @@
 --ignore-dir=coverage
 --ignore-dir=target
 --ignore-dir=gen
+--ignore-dir=bin
 --ignore-dir=.tox
 --type-add=ruby=haml,rake
 --type-add=cpp=pde,ino
