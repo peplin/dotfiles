@@ -1,3 +1,4 @@
+--ignore-file=match:map
 --ignore-file=match:sdb
 --ignore-file=match:lst
 --ignore-dir=dependencies
