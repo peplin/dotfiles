@@ -23,10 +23,6 @@ fi
 pulseaudio &
 dropboxd &
 
-if [ ! -f $HOME/.noowncloud ]; then
-owncloud &
-fi
-
 /usr/bin/xscreensaver -no-splash &
 
 wait $wmpid
