@@ -42,7 +42,7 @@
 	last = log -1 HEAD
 	unstage = reset HEAD --
 	stash-unapply = '!git stash show -p | git apply -R'
-	rank-contributers = !~/.dotfiles/zsh/functions/git-rank-contributers
+	rank-contributors = !~/.dotfiles/zsh/functions/git-rank-contributors
 	ctags = !.git/hooks/ctags
     pr = "!f() { git fetch -fu origin refs/pull/$1/head:pr/$1; } ; f"
     prr = "!f() { git fetch -fu $1 refs/pull/$2/head:pr/$2; } ; f"
