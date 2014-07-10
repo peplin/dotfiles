@@ -27,6 +27,6 @@ if [ ! -f $HOME/.noowncloud ]; then
 owncloud &
 fi
 
-/usr/bin/xscreensaver -no-splash &
+xautolock -time 5 -locker slock
 
 wait $wmpid
