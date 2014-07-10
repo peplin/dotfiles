@@ -85,7 +85,7 @@ The following is a list of some of the common Vim variables available.
 
 *g:EclimLogLevel*
 
-- g:EclimLogLevel (Default: 5)
+- g:EclimLogLevel (Default: 4)
 
   Much like the Vim 'verbose' option, this variable allows you to
   control the level of output from eclim as follows:

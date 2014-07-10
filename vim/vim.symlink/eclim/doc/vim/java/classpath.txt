@@ -26,7 +26,7 @@ Note: All of the commands described below are only available while editing
   also provides a means to auto update the eclipse classpath when
   saving changes to your ivy.xml.
 
-*:NewSrcEntry*
+*:NewSrcEntry_java*
 
 - :NewSrcEntry <dir> [<dir> ...] - Adds a new entry for one or more
   source code directories relative to the project's root directory.
@@ -39,7 +39,7 @@ Note: All of the commands described below are only available while editing
   This command supports command completion of directories relative to
   the .classpath file.
 
-*:NewProjectEntry*
+*:NewProjectEntry_java*
 
 - :NewProjectEntry <project> [<project> ...] - Adds a new entry for
   one or more dependencies on other projects.
@@ -51,7 +51,7 @@ Note: All of the commands described below are only available while editing
 
   This command supports command completion of project names.
 
-*:NewJarEntry*
+*:NewJarEntry_java*
 
 - :NewJarEntry <file> [<file> ...] - Adds a new entry for one or more
   jar file dependencies.  If the jar file is not in a folder under the
@@ -63,7 +63,7 @@ Note: All of the commands described below are only available while editing
 
   <
 
-*:NewVarEntry*
+*:NewVarEntry_java*
 
 - :NewVarEntry <VAR/file> [<VAR/file> ...] - Just like NewJarEntry
   except an Eclipse "var" entry is created.  When a jar entry

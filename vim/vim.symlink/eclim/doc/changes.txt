@@ -3,6 +3,45 @@
 History of Changes
 ******************
 
+*2.2.6* *1.7.14*
+
+
+2.2.6 / 1.7.14 (May 18, 2013)
+=============================
+
+Bug Fixes:
+   - Fixed eclimd to prevent incorrect addition of -d32 on 64bit
+     systems, which prevents eclimd from starting.
+
+   - Fix potential conflicts between syntastic validation vs eclim
+     validation (syntastic validation will be diabled if eclim
+     validation is available for the current file type).
+
+   - Many more fixes.
+
+Android:
+   - Updated for ADT 22.0.0
+
+C/C++:
+   - |:CCallHierarchy| now support showing callee tree.
+
+Java:
+   - |:JavaImpl| now supports anonymous inner classes and will also
+     properly handle suggesting methods from a nested superclass.
+
+Php:
+   - Eclim will no longer run php files through html validation by
+     default (see the Php Validation (|vim-php-validate|) doc for
+     settings to enable html validation).
+
+Scala:
+   - Scala support updated for Scala IDE 3.0.0.
+
+   - Scala now supported on both versions of eclim (Juno and Indigo).
+
+Git Log (2.2.6) (https://github.com/ervandew/eclim/compare/2.2.5...2.2.6)
+Git Log (1.7.14) (https://github.com/ervandew/eclim/compare/1.7.13...1.7.14)
+
 *2.2.5* *1.7.13*
 
 
@@ -16,6 +55,9 @@ Eclim:
      project's links as well.
 
    - Other minor bug fixes.
+
+Git Log (2.2.5) (https://github.com/ervandew/eclim/compare/2.2.4...2.2.5)
+Git Log (1.7.13) (https://github.com/ervandew/eclim/compare/1.7.12...1.7.13)
 
 *2.2.4* *1.7.12*
 
@@ -42,6 +84,9 @@ C/C++:
 Php:
    - Some indentation fixes.
 
+Git Log (2.2.4) (https://github.com/ervandew/eclim/compare/2.2.3...2.2.4)
+Git Log (1.7.12) (https://github.com/ervandew/eclim/compare/1.7.11...1.7.12)
+
 *2.2.3* *1.7.11*
 
 
@@ -51,6 +96,9 @@ Php:
 Eclim:
    - Fixes execution of eclim commands from vim on Windows when using
      the external nailgun client (vs the python client).
+
+Git Log (2.2.3) (https://github.com/ervandew/eclim/compare/2.2.2...2.2.3)
+Git Log (1.7.11) (https://github.com/ervandew/eclim/compare/1.7.10...1.7.11)
 
 *2.2.2* *1.7.10*
 
@@ -114,6 +162,9 @@ Java:
    - Added |:JavaDocPreview| to display the javadoc of the element
      under the cursor in vim's preview window.
 
+Git Log (2.2.2) (https://github.com/ervandew/eclim/compare/2.2.1...2.2.2)
+Git Log (1.7.10) (https://github.com/ervandew/eclim/compare/1.7.9...1.7.10)
+
 *1.7.9*
 
 
@@ -124,6 +175,9 @@ Scala:
    - Add support for scala code completion (|vim-scala-complete|),
      code validation (|vim-scala-validate|), and element definition
      searches (|vim-scala-search|).
+
+Git Log (1.7.9)
+(https://github.com/ervandew/eclim/compare/1.7.8...1.7.9)
 
 *2.2.1* *1.7.8*
 
@@ -157,6 +211,9 @@ Vimplugin:
    - Fixed disabling of conflicting Eclipse keybindings on Juno while
      the embedded vim has focus (fixes usage of Ctrl+V for blockwise
      visual selections).
+
+Git Log (2.2.1) (https://github.com/ervandew/eclim/compare/2.2.0...2.2.1)
+Git Log (1.7.8) (https://github.com/ervandew/eclim/compare/1.7.7...1.7.8)
 
 *2.2.0* *1.7.7*
 
@@ -208,6 +265,9 @@ Vimplugin:
      tab, using "Save As" from eclipse, and jumping to a line number
      from the project tree etc.)
 
+Git Log (2.2.0) (https://github.com/ervandew/eclim/compare/1.7.6...2.2.0)
+Git Log (1.7.7) (https://github.com/ervandew/eclim/compare/1.7.6...1.7.7)
+
 *1.7.6*
 
 
@@ -220,6 +280,9 @@ Bug Fixes:
 Installer:
    - Fixed install location of eclim's vim help files (broken in the
      previous release).
+
+Git Log (1.7.6)
+(https://github.com/ervandew/eclim/compare/1.7.5...1.7.6)
 
 *1.7.5*
 
@@ -250,6 +313,9 @@ Java:
    - Improved location of a project's main class for the |:Java|
      command, when not explicitly set.
 
+Git Log (1.7.5)
+(https://github.com/ervandew/eclim/compare/1.7.4...1.7.5)
+
 *1.7.4*
 
 
@@ -267,6 +333,9 @@ C/C++:
 Java:
    - Fixed :Java on windows as well as handling of stdin for ant
      1.8.2+.
+
+Git Log (1.7.4)
+(https://github.com/ervandew/eclim/compare/1.7.3...1.7.4)
 
 *1.7.3*
 
@@ -306,6 +375,9 @@ Maven:
 
 Php:
    - Now handles completion from within php short tags.
+
+Git Log (1.7.3)
+(https://github.com/ervandew/eclim/compare/1.7.2...1.7.3)
 
 Eclim Changes Archive (|archive-changes|)
 

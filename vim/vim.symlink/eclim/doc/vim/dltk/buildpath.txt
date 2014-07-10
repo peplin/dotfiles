@@ -18,7 +18,7 @@ via vim's location list (:help location-list).
 The following is a list of commands that eclim provides while editing
 your .buildpath.
 
-*:NewSrcEntry*
+*:NewSrcEntry_dltk*
 
 - :NewSrcEntry <dir> [<dir> ...] - Adds one or more new entries which
   reference source directories in your project.
@@ -31,7 +31,7 @@ your .buildpath.
   This command supports command completion of project relative
   directories.
 
-*:NewLibEntry*
+*:NewLibEntry_dltk*
 
 - :NewLibEntry <dir> [<dir> ...] - Adds one or more new entries which
   reference external source directories.
@@ -43,7 +43,7 @@ your .buildpath.
 
   This command supports command completion of directories.
 
-*:NewProjectEntry*
+*:NewProjectEntry_dltk*
 
 - :NewProjectEntry <project> [<project> ...] - Adds one or more new
   entries which reference other projects.

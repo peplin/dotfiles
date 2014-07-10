@@ -159,6 +159,44 @@ Eclim Settings (|vim-settings|)
 
   <
 
+*org.eclim.java.junit.jvmargs*
+
+- org.eclim.java.junit.jvmargs - Json formatted list of strings to
+  supply as args to the jvm when forking to run unit tests.
+
+  Ex.
+
+  >
+     org.eclim.java.junit.jvmargs=["-Xmx512m", "-XX:MaxPermSize=128m"]
+
+  <
+
+*org.eclim.java.junit.sysprops*
+
+- org.eclim.java.junit.sysprops - Json formatted list of strings to
+  supply as system properties to the jvm when forking to run unit
+  tests.
+
+  Ex.
+
+  >
+     org.eclim.java.junit.sysprops=["file.encoding=UTF8", "foo.bar=baz"]
+
+  <
+
+*org.eclim.java.junit.envvars*
+
+- org.eclim.java.junit.envvars - Json formatted list of strings to
+  supply as environment variables to the jvm when forking to run unit
+  tests.
+
+  Ex.
+
+  >
+     org.eclim.java.junit.envvars=["FOO=bar"]
+
+  <
+
 
 TestNG
 ======

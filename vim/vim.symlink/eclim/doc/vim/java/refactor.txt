@@ -163,7 +163,7 @@ Configuration
 
 Vim Settings (|vim-settings|)
 
-*g:EclimRefactorDiffOrientation*
+*g:EclimRefactorDiffOrientation_java*
 
 - g:EclimRefactorDiffOrientation (Default: 'vertical') - Specifies the
   orientation used when previewing a refactoring and performing a diff

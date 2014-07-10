@@ -153,7 +153,7 @@ location of that script in the Vimplugin preferences:
 
 Eclipse ‣ Preferences ‣ Vimplugin
 
-Note: If you have non-eclim version of vimplugin installed you should
+Note: If you have a non-eclim version of vimplugin installed you should
   remove it prior to using the eclim version.
 
 Note: Some users have reported issues with the embedded gvim's command
@@ -176,6 +176,8 @@ Note: Some users have reported issues with the embedded gvim's command
 
   <
 
+
+*eclim-gvim-embedded-shortcuts*
 
 Eclipse/Vim key shortcuts in embedded gvim
 
@@ -220,6 +222,10 @@ focus, you will fall into one of two groups:
 
      - Ctrl+W: in eclipse this closes a tab, but in gvim this is
        needed to switch windows (ex. ctrl-w j).
+
+     - Ctrl+X: in eclipse this cuts a selection to the clipboard, but
+       in gvim this is needed to start various insert completions (ex.
+       ctrl-x ctrl-u).
 
 *FeedKeys*
 
@@ -298,8 +304,8 @@ Ex.
 The eclim client will also utilize this file, but only to determine
 the nailgun server port should you choose to change the default.
 
-Note: Your system must have sed available so that eclim can process your
-  .eclimrc file.
+Note: Your system must have perl and sed available so that eclim can
+  process your .eclimrc file.
 
 Both the eclim and eclimd scripts also support a -f argument allowing
 you to specify an alternate location for your .eclimrc:

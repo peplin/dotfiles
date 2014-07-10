@@ -2,7 +2,7 @@
 "
 " License: {{{
 "
-" Copyright (C) 2005 - 2012  Eric Van Dewoestine
+" Copyright (C) 2005 - 2013  Eric Van Dewoestine
 "
 " This program is free software: you can redistribute it and/or modify
 " it under the terms of the GNU General Public License as published by
@@ -121,7 +121,7 @@ endfunction " }}}
 " Echos the supplied message at the supplied level with the specified
 " highlight.
 function! s:EchoLevel(message, level, highlight)
-  " don't echo if the message is 0, which signals an ExecuteEclim failure.
+  " don't echo if the message is 0, which signals an eclim#Execute failure.
   if type(a:message) == g:NUMBER_TYPE && a:message == 0
     return
   endif
@@ -432,16 +432,11 @@ endfunction " }}}
 " Gets a global setting from eclim.  Returns '' if the setting does not
 " exist, 0 if an error occurs communicating with the server.
 function! eclim#util#GetSetting(setting, ...)
-  let workspace = a:0 > 0 ? a:1 : eclim#eclipse#ChooseWorkspace()
-  if workspace == '0'
-    return
-  endif
-
   let command = s:command_setting
   let command = substitute(command, '<setting>', a:setting, '')
 
-  let port = eclim#client#nailgun#GetNgPort(workspace)
-  let result = eclim#ExecuteEclim(command, port)
+  let workspace = a:0 > 0 ? a:1 : ''
+  let result = eclim#Execute(command, {'workspace': workspace})
   if result == '0'
     return result
   endif
@@ -609,9 +604,19 @@ function! eclim#util#ListContains(list, element)
   return 0
 endfunction " }}}
 
-" Make(bang, args) {{{
-" Executes make using the supplied arguments.
-function! eclim#util#Make(bang, args)
+function! eclim#util#Make(bang, args) " {{{
+  " Executes make using the supplied arguments.
+
+  " tpope/vim-rake/plugin/rake.vim will execute :Make if it exists, so mimic
+  " Rake's behavior here if that's the case.
+  if b:current_compiler == 'rake'
+    " See tpope/vim-rage/plugin/rake.vim s:Rake(bang,arg)
+    exec 'make! ' . a:args
+    if a:bang !=# '!'
+      exec 'cwindow'
+    endif
+    return
+  endif
   let makefile = findfile('makefile', '.;')
   let makefile2 = findfile('Makefile', '.;')
   if len(makefile2) > len(makefile)
@@ -1041,18 +1046,19 @@ function! eclim#util#Reload(options) " {{{
   " Reload the current file using ':edit' and perform other operations based on
   " the options supplied.
   " Supported Options:
-  "   retab: Issue a retab of the file taking care of preserving &expandtab
-  "     before executing the edit to keep indent detection plugins from always
-  "     setting it to 0 if eclipse inserts some tabbed code that the indent
-  "     detection plugin uses for its calculations.
+  "   retab: Issue a retab of the file.
   "   pos: A line/column pair indicating the new cursor position post edit. When
   "     this pair is supplied, this function will attempt to preserve the
   "     current window's viewport.
 
   let winview = winsaveview()
+  " save expand tab in case an indent detection plugin changes it based on code
+  " inserted by eclipse, which may not yet match the user's actual settings.
   let save_expandtab = &expandtab
 
   edit!
+
+  let &expandtab = save_expandtab
 
   if has_key(a:options, 'pos') && len(a:options.pos) == 2
     let lnum = a:options.pos[0]
@@ -1067,9 +1073,16 @@ function! eclim#util#Reload(options) " {{{
     endif
   endif
 
-  if has_key(a:options, 'retab') && a:options.retab
-    let &expandtab = save_expandtab
-    retab
+  if has_key(a:options, 'retab') && a:options.retab && &expandtab
+    " set tabstop to the same value as shiftwidth if we may be expanding tabs
+    let save_tabstop = &tabstop
+    let &tabstop = &shiftwidth
+
+    try
+      retab
+    finally
+      let &tabstop = save_tabstop
+    endtry
   endif
 endfunction " }}}
 
@@ -1444,29 +1457,6 @@ function! eclim#util#TempWindowClear(name)
     silent 1,$delete _
     exec curwinnr . "winc w"
   endif
-endfunction " }}}
-
-" TempWindowCommand(command, name, [port]) {{{
-" Opens a temp window w/ the given name and contents from the result of the
-" supplied command.
-function! eclim#util#TempWindowCommand(command, name, ...)
-  let name = eclim#util#EscapeBufferName(a:name)
-
-  if len(a:000) > 0
-    let port = a:000[0]
-    let result = eclim#ExecuteEclim(a:command, port)
-  else
-    let result = eclim#ExecuteEclim(a:command)
-  endif
-
-  let results = split(result, '\n')
-  if len(results) == 1 && results[0] == '0'
-    return 0
-  endif
-
-  call eclim#util#TempWindow(name, results, {'preserveCursor': 1})
-
-  return 1
 endfunction " }}}
 
 " WideMessage(command, message) {{{

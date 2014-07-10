@@ -39,6 +39,16 @@ under the cursor using one of the following key bindings:
 
 - ? - view help buffer
 
+:CCallHierarchy can also be used to view the callees for a function or
+method by invoking the command with a !:
+
+>
+
+   :CCallHierarchy!
+
+<
+
+
 
 Configuration
 -------------

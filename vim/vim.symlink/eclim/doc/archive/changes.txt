@@ -36,6 +36,9 @@ Php:
 
    - Support new php 5.3 version in pdt.
 
+Git Log (1.7.2)
+(https://github.com/ervandew/eclim/compare/1.7.1...1.7.2)
+
 *1.7.1*
 
 
@@ -51,6 +54,9 @@ Eclipse:
    - Enable vim embedding on Solaris, AIX, and HP-UX versions of
      eclipse.
 
+Git Log (1.7.1)
+(https://github.com/ervandew/eclim/compare/1.7.0...1.7.1)
+
 *1.7.0*
 
 
@@ -64,6 +70,9 @@ Bug Fixes:
 
 Eclipse:
    - Eclim now requires the latest version of eclipse (Indigo, 3.7).
+
+Git Log (1.7.0)
+(https://github.com/ervandew/eclim/compare/1.6.3...1.7.0)
 
 *1.6.3*
 
@@ -83,6 +92,9 @@ Installer:
 
 Java:
    - Added |:JavaClasspath| to echo the project's current classpath.
+
+Git Log (1.6.3)
+(https://github.com/ervandew/eclim/compare/1.6.2...1.6.3)
 
 *1.6.2*
 
@@ -150,6 +162,9 @@ Other:
      broken out from eclim to http://github.com/ervandew/lookup
      (http://github.com/ervandew/lookup).
 
+Git Log (1.6.2)
+(https://github.com/ervandew/eclim/compare/1.6.1...1.6.2)
+
 *1.6.1*
 
 
@@ -194,6 +209,9 @@ Python:
 Php:
    - Fixed validating php files in eclipse 3.6.1.
 
+Git Log (1.6.1)
+(https://github.com/ervandew/eclim/compare/1.6.0...1.6.1)
+
 *1.6.0*
 
 
@@ -211,6 +229,9 @@ Eclipse:
 Common:
    - |:ProjectTree| now supports eclipse resource links.
 
+Git Log (1.6.0)
+(https://github.com/ervandew/eclim/compare/1.5.8...1.6.0)
+
 *1.5.8*
 
 
@@ -224,6 +245,9 @@ Bug Fixes:
    - Fixed code completion and search for php as well as search for
      ruby, all of which were all affected by dltk module caching
      introduced in galileo SR2.
+
+Git Log (1.5.8)
+(https://github.com/ervandew/eclim/compare/1.5.7...1.5.8)
 
 *1.5.7*
 
@@ -239,6 +263,9 @@ Bug Fixes:
 Installer:
    - The installer has undergone some extensive changes to make it
      more reliable and to better support various environments.
+
+Git Log (1.5.7)
+(https://github.com/ervandew/eclim/compare/1.5.6...1.5.7)
 
 *1.5.6*
 
@@ -283,6 +310,9 @@ Eclim:
        location to the new location, but you may want to back those
        files up just in case.
 
+Git Log (1.5.6)
+(https://github.com/ervandew/eclim/compare/1.5.5...1.5.6)
+
 *1.5.5*
 
 
@@ -295,6 +325,9 @@ Bug Fixes:
 
 Install:
    - Fixed issue downloading content.jar from eclipse update site.
+
+Git Log (1.5.5)
+(https://github.com/ervandew/eclim/compare/1.5.4...1.5.5)
 
 *1.5.4*
 
@@ -313,6 +346,9 @@ Common:
 
    - Added new search scopes (buffers, quickfix, vcsmodified) to
      |:LocateFile|.
+
+Git Log (1.5.4)
+(https://github.com/ervandew/eclim/compare/1.5.3...1.5.4)
 
 *1.5.3*
 
@@ -360,6 +396,9 @@ Java:
    - Added |:JavaListInstalls| to list all the installed JDKs/JREs
      that eclipse is aware of.
 
+Git Log (1.5.3)
+(https://github.com/ervandew/eclim/compare/1.5.2...1.5.3)
+
 *1.5.2*
 
 
@@ -404,6 +443,9 @@ Java:
      (|vim-core-eclim#:EclimSettings|).
 
    - Added initial refactoring (|vim-java-refactor|) support.
+
+Git Log (1.5.2)
+(https://github.com/ervandew/eclim/compare/1.5.1...1.5.2)
 
 *1.5.1*
 
@@ -450,6 +492,9 @@ C/C++:
        After that you will need to re-configure any src or include
        folders you may have added.
 
+Git Log (1.5.1)
+(https://github.com/ervandew/eclim/compare/1.5.0...1.5.1)
+
 *1.5.0*
 
 
@@ -473,6 +518,9 @@ Java:
      :EclimSettings (|vim-core-eclim#:EclimSettings|) or per project
      using |:ProjectSettings|.
 
+Git Log (1.5.0)
+(https://github.com/ervandew/eclim/compare/1.4.9...1.5.0)
+
 *1.4.9*
 
 
@@ -490,6 +538,9 @@ Eclim:
 
    - Handle possible key binding conflicts when using embedded gvim
      for two common gvim bindings (ctrl-w, ctrl-u).
+
+Git Log (1.4.9)
+(https://github.com/ervandew/eclim/compare/1.4.8...1.4.9)
 
 *1.4.8*
 
@@ -515,6 +566,9 @@ Maven
 Python:
    - Added |:PythonSearchContext|.
 
+Git Log (1.4.8)
+(https://github.com/ervandew/eclim/compare/1.4.7...1.4.8)
+
 *1.4.7*
 
 
@@ -523,6 +577,9 @@ Python:
 
 Bug Fixes:
    - Fixed installation error on unix based operating systems.
+
+Git Log (1.4.7)
+(https://github.com/ervandew/eclim/compare/1.4.6...1.4.7)
 
 *1.4.6*
 
@@ -544,6 +601,9 @@ Java:
    - Added command to run javac.
 
    - Added command to run javadoc (|:Javadoc|).
+
+Git Log (1.4.6)
+(https://github.com/ervandew/eclim/compare/1.4.5...1.4.6)
 
 *1.4.5*
 
@@ -570,6 +630,9 @@ Java:
    - Added command to view type hierarchy (|:JavaHierarchy|).
 
    - Added command to import all undefined types.
+
+Git Log (1.4.5)
+(https://github.com/ervandew/eclim/compare/1.4.4...1.4.5)
 
 *1.4.4*
 
@@ -610,6 +673,9 @@ Vcs:
    - Added option to allow users to change the pattern used to match
      tracker ticket numbers in :VcsLog.
 
+Git Log (1.4.4)
+(https://github.com/ervandew/eclim/compare/1.4.3...1.4.4)
+
 *1.4.3*
 
 
@@ -635,6 +701,9 @@ Python:
 
    - Improved |:PyLint| support.
 
+Git Log (1.4.3)
+(https://github.com/ervandew/eclim/compare/1.4.2...1.4.3)
+
 *1.4.2*
 
 
@@ -651,6 +720,9 @@ Bug Fixes:
 
 Vcs:
    - Added support for git to :Vcs commands
+
+Git Log (1.4.2)
+(https://github.com/ervandew/eclim/compare/1.4.1...1.4.2)
 
 *1.4.1*
 
@@ -678,6 +750,9 @@ Java:
    - Added |:JavaFormat| command contributed by Anton Sharonov.
 
    - Added |:Checkstyle| support.
+
+Git Log (1.4.1)
+(https://github.com/ervandew/eclim/compare/1.4.0...1.4.1)
 
 *1.4.0*
 
@@ -740,6 +815,9 @@ Vim:
    - Added :OtherWorkingCopyDiff, :OtherWorkingCopyEdit,
      :OtherWorkingCopySplit, and :OtherWorkingCopyTabopen.
 
+Git Log (1.4.0)
+(https://github.com/ervandew/eclim/compare/1.3.5...1.4.0)
+
 *1.3.5*
 
 
@@ -768,6 +846,9 @@ Vcs:
 
 Trac:
    - Added :TracLog, :TracAnnotate, :TracChangeSet, and :TracDiff.
+
+Git Log (1.3.5)
+(https://github.com/ervandew/eclim/compare/1.3.4...1.3.5)
 
 *1.3.4*
 
@@ -798,6 +879,9 @@ Php:
      (|vim-php-validate|). Requires the eclipse pdt
      (http://eclipse.org/pdt/) plugin.
 
+Git Log (1.3.4)
+(https://github.com/ervandew/eclim/compare/1.3.3...1.3.4)
+
 *1.3.3*
 
 
@@ -806,6 +890,9 @@ Php:
 
 Bug Fixes:
    - Installer bug fixes.
+
+Git Log (1.3.3)
+(https://github.com/ervandew/eclim/compare/1.3.2...1.3.3)
 
 *1.3.2*
 
@@ -869,6 +956,9 @@ Vim:
    - Added :VimgrepRelative, :VimgrepAddRelative, :LvimgrepRelative,
      :LvimgrepAddRelative, :CdRelative, and :LcdRelative.
 
+Git Log (1.3.2)
+(https://github.com/ervandew/eclim/compare/1.3.1...1.3.2)
+
 *1.3.1*
 
 
@@ -883,6 +973,9 @@ Bug Fixes:
    - Fixed installer to not exclude html/util.vim when not installing
      wst integrations (fixes dependent code like java code
      completion).
+
+Git Log (1.3.1)
+(https://github.com/ervandew/eclim/compare/1.3.0...1.3.1)
 
 *1.3.0*
 
@@ -988,6 +1081,9 @@ Xml:
    - Added xml code completion (|vim-xml-index|).  Requires the
      eclipse wst (http://eclipse.org/webtools/main.php) plugin.
 
+Git Log (1.3.0)
+(https://github.com/ervandew/eclim/compare/1.2.3...1.3.0)
+
 *1.2.3*
 
 
@@ -1020,6 +1116,9 @@ Java:
 Xml:
    - Added command |:XmlFormat| to reformat a xml file.
 
+Git Log (1.2.3)
+(https://github.com/ervandew/eclim/compare/1.2.2...1.2.3)
+
 *1.2.2*
 
 
@@ -1036,6 +1135,9 @@ Bug Fixes:
 
    - Fixed all usages of the temp window to account properly for
      errors.
+
+Git Log (1.2.2)
+(https://github.com/ervandew/eclim/compare/1.2.1...1.2.2)
 
 *1.2.1*
 
@@ -1092,6 +1194,9 @@ Vim:
    - Added :Tabnew and :TabnewRelative.
 
    - :Split and :SplitRelative now support '*' and '**' wildcards.
+
+Git Log (1.2.1)
+(https://github.com/ervandew/eclim/compare/1.2.0...1.2.1)
 
 *1.2.0*
 
@@ -1185,6 +1290,9 @@ Vim:
    - Added :Split, :SplitRelative, :EditRelative, :LocateFileEdit,
      :LocateFileSplit, and :LocateFileTab.
 
+Git Log (1.2.0)
+(https://github.com/ervandew/eclim/compare/1.1.2...1.2.0)
+
 *1.1.2*
 
 
@@ -1275,6 +1383,9 @@ Vim:
 
 Xml:
    - Xml validation now caches remote entities (like dtds).
+
+Git Log (1.1.2)
+(https://github.com/ervandew/eclim/compare/1.1.1...1.1.2)
 
 *1.1.1*
 
@@ -1372,6 +1483,9 @@ Vim:
 
      Warning: - ftplugin/java/eclim_util.vim removed.
 
+Git Log (1.1.1)
+(https://github.com/ervandew/eclim/compare/1.1.0...1.1.1)
+
 *1.1.0*
 
 
@@ -1425,6 +1539,9 @@ Vim:
 Xml:
    - Xml validation (|xml-validation|).
 
+Git Log (1.1.0)
+(https://github.com/ervandew/eclim/compare/1.0.0...1.1.0)
+
 *1.0.0*
 
 
@@ -1433,5 +1550,7 @@ Xml:
 
 Eclim:
    - Initial release.
+
+Git Log (1.0.0) (https://github.com/ervandew/eclim/commits/1.0.0)
 
 vim:ft=eclimhelp
