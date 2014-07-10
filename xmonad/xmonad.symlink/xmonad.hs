@@ -101,14 +101,11 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
     , ((modMask,               xK_a     ), dirExecPromptNamed
             defaultXPConfig spawn "/home/peplin/.xmonad/actions" "Scripts: ")
 
-
     -- launch application launcher
-    , ((modMask,               xK_p     ), spawn "gmrun")
     , ((mod1Mask, xK_F2 ), spawn "gmrun")
 
     -- close focused window
     , ((modMask .|. shiftMask, xK_c     ), kill)
-
     -- preserve normal alt-f4 behavior to close focused window
     , ((mod1Mask, xK_F4     ), kill)
 
@@ -127,9 +124,6 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
 
     -- Move focus to the previous window
     , ((modMask,               xK_k     ), windows W.focusUp  )
-
-    -- Move focus to the master window
-    , ((modMask, xK_m     ), windows W.focusMaster  )
 
     -- Swap the focused window and the master window
     , ((modMask .|. shiftMask, xK_Return), windows W.swapMaster)
@@ -155,8 +149,9 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
     -- Deincrement the number of windows in the master area
     , ((modMask, xK_period), sendMessage (IncMasterN (-1)))
 
-    -- Quit xmonad
-    , ((modMask .|. shiftMask, xK_q     ), io (exitWith ExitSuccess))
+    -- Quit xmonad - don't use xK_k as it's too easy to trigger with a left hand
+    -- keyboard mash.
+    , ((modMask .|. shiftMask, xK_k     ), io (exitWith ExitSuccess))
 
     -- Restart xmonad
     , ((modMask, xK_q     ), restart "xmonad" True)
@@ -165,7 +160,7 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
     , ((modMask, xK_b), sendMessage ToggleStruts)
 
     -- lock the screen
-    , ((modMask, xK_z), spawn "xscreensaver-command --lock")
+    , ((modMask, xK_z), spawn "slock")
 
     -- window bringer
     , ((modMask .|. shiftMask, xK_g     ), gotoMenu)
@@ -184,7 +179,7 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
     , ((mod4Mask, xK_b), spawn "ncmpcpp next")
     , ((mod4Mask, xK_z), spawn "ncmpcpp prev")
 
-    -- audi
+    -- audio
     , ((modMask, xK_KP_Subtract), spawn "$HOME/.dotfiles/bin/updatevolume.sh -")
     , ((0, xF86XK_AudioLowerVolume), spawn "$HOME/.dotfiles/bin/updatevolume.sh -")
     , ((modMask, xK_KP_Add), spawn "$HOME/.dotfiles/bin/updatevolume.sh +")
@@ -194,10 +189,6 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
     -- lcd brightness
     , ((0, xF86XK_MonBrightnessUp), spawn "/usr/bin/xbacklight -inc 10")
     , ((0, xF86XK_MonBrightnessDown), spawn "/usr/bin/xbacklight -dec 10")
-
-    -- Search commands
-    , ((modMask, xK_s), promptSearch defaultXPConfig google)
-    , ((modMask .|. shiftMask, xK_s), selectSearch google)
 
     ]
     ++
@@ -294,9 +285,7 @@ myLayout = mkToggle(single REFLECTX) $
 -- 'className' and 'resource' are used below.
 --
 myManageHook = composeAll
-    [ className =? "MPlayer"        --> doFloat
-    , className =? "google-chrome"       --> doShift "web"
-    , className =? "Thunderbird"       --> doShift "email"
+    [ className =? "google-chrome"       --> doShift "web"
     , className =? "VirtualBox"     --> doShift "vm"
     , className =? "VMware Player"     --> doShift "vm"
     , className =? "Gimp"           --> doFloat
@@ -304,13 +293,11 @@ myManageHook = composeAll
     , className =? "Skype"           --> doFloat
     , className =? "emulator-arm"           --> doFloat
     , className =? "Xfce4-notifyd" --> doIgnore
-    , className =? "Eclipse" --> doShift "eclipse"
     , resource  =? "desktop_window" --> doIgnore ]
 
 -- Whether focus follows the mouse pointer.
 myFocusFollowsMouse :: Bool
 myFocusFollowsMouse = True
-
 
 ------------------------------------------------------------------------
 -- Status bars and logging
