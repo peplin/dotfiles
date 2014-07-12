@@ -17,35 +17,27 @@ URxvt*depth: 32
 URxvt*borderless: 1
 URxvt*scrollBar: false
 URxvt*loginShell: true
-Urxvt*secondaryScroll:  true    # Enable Shift-PageUp/Down in screen
 URxvt*saveLines: 5000
 URxvt*termName: xterm-256color
 
+URxvt*scrollTtyOutput: false
+URxvt*scrollWithBuffer: true
+URxvt*scrollTtyKeypress: true
+
 ! requires urxvt-perls from arch
-URxvt.perl-ext-common: default,url-select,keyboard-select,clipboard
-URxvt.keysym.M-u: perl:url-select:select_next
-URxvt.keysym.M-Escape: perl:keyboard-select:activate
-URxvt.keysym.M-s: perl:keyboard-select:search
-URxvt.keysym.M-c: perl:clipboard:copy
-URxvt.keysym.M-v: perl:clipboard:paste
-URxvt.keysym.M-C-v: perl:clipboard:paste_escaped
-URxvt.clipboard.autocopy: true
-URxvt.url-select.launcher: /usr/bin/google-chrome
+URxvt.perl-ext-common: default,matcher,vtwheel,font-size,selection-to-clipboard
+
+URxvt.url-launcher: /usr/bin/xdg-open
 URxvt.url-select.underline: true
-URxvt.urlLauncher: /usr/bin/google-chrome
 
-! xscreensaver ---------------------------------------------------------------
-
-!font settings
-xscreensaver.Dialog.headingFont: -*-dejavu sans mono-bold-r-*-*-12-*-*-*-*-*-*-*
-xscreensaver.Dialog.bodyFont:    -*-dejavu sans mono-medium-r-*-*-12-*-*-*-*-*-*-*
-xscreensaver.Dialog.labelFont:   -*-dejavu sans mono-medium-r-*-*-12-*-*-*-*-*-*-*
-xscreensaver.Dialog.unameFont:   -*-dejavu sans mono-medium-r-*-*-12-*-*-*-*-*-*-*
-xscreensaver.Dialog.buttonFont:  -*-dejavu sans mono-bold-r-*-*-12-*-*-*-*-*-*-*
-xscreensaver.Dialog.dateFont:    -*-dejavu sans mono-medium-r-*-*-11-*-*-*-*-*-*-*
-xscreensaver.passwd.passwdFont:  -*-dejavu sans mono-bold-r-*-*-12-*-*-*-*-*-*-*
-
-xscreensaver.dateFormat:    %I:%M%P %a %b %d, %Y
+! These bindings must be disabled for the font size bindings to work
+URxvt.iso14755: false
+URxvt.iso14755_52: false
+! Font size bindings
+URxvt.keysym.C-Up:     perl:font-size:increase
+URxvt.keysym.C-Down:   perl:font-size:decrease
+URxvt.keysym.C-S-Up:   perl:font-size:incglobal
+URxvt.keysym.C-S-Down: perl:font-size:decglobal
 
 ! Solarized color scheme for the X Window System
 !
