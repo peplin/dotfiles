@@ -36,6 +36,7 @@ autocmd!
         Plugin 'ervandew/supertab'
         Plugin 'Lokaltog/vim-easymotion'
         Plugin 'mileszs/ack.vim'
+        Plugin 'ConradIrwin/vim-bracketed-paste'
 
 
         Plugin 'kien/ctrlp.vim'
@@ -335,14 +336,6 @@ autocmd!
         " Keystrokes to toggle options are defined here.  They are all set to
         " normal mode keystrokes beginning \t but some function keys (which
         " won't work in all terminals) are also mapped.
-
-        " have \tp ("toggle paste") toggle paste on/off and report the change,
-        " and where possible also have <F4> do this both in normal and insert
-        " mode:
-        set pastetoggle=<F4>
-        nnoremap \tp :set invpaste paste?<CR>
-        nmap <F4> \tp
-        imap <F4> <C-O>\tp
 
         " Hit F5 to highlight lines longer than 80 characters
         map <F5> /\%>80v.\+<CR>
