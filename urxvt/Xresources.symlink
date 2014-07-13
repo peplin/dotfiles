@@ -28,7 +28,7 @@ URxvt*scrollTtyKeypress: true
 URxvt.perl-ext-common: default,matcher,vtwheel,font-size,selection-to-clipboard
 
 URxvt.url-launcher: /usr/bin/xdg-open
-URxvt.url-select.underline: true
+URxvt.url-select.underline: false
 
 ! These bindings must be disabled for the font size bindings to work
 URxvt.iso14755: false
