@@ -539,7 +539,11 @@ function! eclim#project#util#ProjectList(workspace) " {{{
 endfunction " }}}
 
 function! eclim#project#util#ProjectNatures(project) " {{{
-  " Prints nature info one or all projects.
+  " Prints nature info of one or all projects.
+
+  if !eclim#EclimAvailable()
+    return
+  endif
 
   let command = s:command_natures
   if a:project != ''
@@ -583,7 +587,30 @@ function! eclim#project#util#ProjectNatureModify(command, args) " {{{
   let args = eclim#util#ParseCmdLine(a:args)
 
   let project = args[0]
+  if eclim#project#util#GetProjectRoot(project) == ''
+    call eclim#util#EchoError('Project not found: ' . project)
+    return
+  endif
+
   let natures = args[1:]
+  if len(natures) == 0
+    call eclim#util#EchoError('Please supply at least one nature alias.')
+    return
+  else
+    let aliases = eclim#project#util#GetNatureAliasesDict()
+    let invalid = []
+    for nature in natures
+      if !has_key(aliases, nature)
+        call add(invalid, nature)
+      endif
+    endfor
+    if len(invalid) > 0
+      call eclim#util#EchoError(
+        \ 'One or more unrecognized nature aliases: ' . join(invalid, ','))
+      return
+    endif
+  endif
+
   let command = a:command == 'add' ? s:command_nature_add : s:command_nature_remove
   let command = substitute(command, '<project>', project, '')
   let command = substitute(command, '<natures>', join(natures, ','), '')
@@ -624,7 +651,7 @@ function! eclim#project#util#ProjectSettings(project) " {{{
     return
   endif
 
-  let content = ['# Settings for project: eclim', '']
+  let content = ['# Settings for project: ' . project, '']
   let path = ''
   for setting in settings
     if setting.path != path
@@ -746,7 +773,9 @@ function! eclim#project#util#ProjectTab(project) " {{{
     let is_project = 0
     let dir = expand(project, ':p')
     if !isdirectory(dir)
-      call eclim#util#EchoError("No project '" . project . "' found.")
+      if eclim#EclimAvailable(0)
+        call eclim#util#EchoError("No project '" . project . "' found.")
+      endif
       return
     endif
     let project = fnamemodify(substitute(dir, '/$', '', ''), ':t')
@@ -835,9 +864,11 @@ function! eclim#project#util#GetCurrentProjectName() " {{{
   return len(project) > 0 ? project.name : ''
 endfunction " }}}
 
-function! eclim#project#util#GetCurrentProjectRoot() " {{{
-  " Gets the project root dir for the project that the current file is in.
-  let project = eclim#project#util#GetProject(expand('%:p'))
+function! eclim#project#util#GetCurrentProjectRoot(...) " {{{
+  " Gets the project root dir for the project that the current or supplied
+  " file is in.
+  let path = len(a:000) > 0 ? a:000[0] : expand('%:p')
+  let project = eclim#project#util#GetProject(path)
   return len(project) > 0 ? project.path : ''
 endfunction " }}}
 
@@ -896,12 +927,7 @@ function! eclim#project#util#GetProjects() " {{{
   "   name: The name of the project.
   "   path: The root path of the project.
   "   links: List of linked paths.
-
   let instances = eclim#client#nailgun#GetEclimdInstances()
-  if type(instances) != g:DICT_TYPE
-    let s:workspace_projects = {}
-    return []
-  endif
 
   if keys(s:workspace_projects) != keys(instances)
     let s:workspace_projects = {}
@@ -912,15 +938,39 @@ function! eclim#project#util#GetProjects() " {{{
       if type(results) != g:LIST_TYPE
         continue
       endif
+
+      if has('win32unix')
+        " gather paths to translate
+        let winpaths = []
+        for project in results
+          call add(winpaths, project['path'])
+          if has_key(project, 'links')
+            for key in sort(keys(project['links']))
+              call add(winpaths, project['links'][key])
+            endfor
+          endif
+        endfor
+
+        let cygpaths = eclim#cygwin#CygwinPath(winpaths)
+
+        " update each project with the cygwin version of its paths
+        let index = 0
+        for project in results
+          let project['path'] = cygpaths[index]
+          let index += 1
+          if has_key(project, 'links')
+            for key in sort(keys(project['links']))
+              let project['links'][key] = cygpaths[index]
+              let index += 1
+            endfor
+          endif
+        endfor
+      endif
+
       for project in results
         let project['workspace'] = instance.workspace
-        if has('win32unix')
-          let project['path'] = eclim#cygwin#CygwinPath(project['path'])
-          if has_key(project, 'links')
-            call map(project['links'], 'eclim#cygwin#CygwinPath(v:val)')
-          endif
-        endif
       endfor
+
       let s:workspace_projects[instance.workspace] = results
       unlet results
     endfor
@@ -950,6 +1000,10 @@ function! eclim#project#util#GetProject(path) " {{{
 
   for project in projects
     if path =~ '^' . project.path . pattern
+      return project
+    endif
+
+    if has_key(project, 'link') && path =~ '^' . project.link . pattern
       return project
     endif
 
@@ -1105,8 +1159,18 @@ function! eclim#project#util#IsCurrentFileInProject(...) " {{{
   " Optional args:
   "   echo_error (default: 1): when non-0, echo an error to the user if project
   "                            could not be determined.
-  if eclim#project#util#GetCurrentProjectName() == ''
-    if (a:0 == 0 || a:1) && g:eclimd_running
+
+  let echo = a:0 ? a:1 : 1
+  if !echo
+    silent let project = eclim#project#util#GetCurrentProjectName()
+  else
+    let project = eclim#project#util#GetCurrentProjectName()
+  endif
+
+  if project == ''
+    " if eclimd isn't available, then that could be the reason the project
+    " couldn't be determined, so don't hide that message with this one.
+    if echo && eclim#EclimAvailable(0)
       call eclim#util#EchoError('Unable to determine the project. ' .
         \ 'Check that the current file is in a valid project.')
     endif
@@ -1120,10 +1184,13 @@ function! eclim#project#util#RefreshFileBootstrap() " {{{
   " refresh by the eclim project. The command should only be called as part of
   " the a BufWritePre autocmd.
   if eclim#project#util#GetCurrentProjectName() != '' && &modified
-    augroup eclim_refresh_files_bootstrap
-      autocmd!
-      autocmd BufWritePost <buffer> call eclim#project#util#RefreshFile()
-    augroup END
+    let refresh = !exists('b:EclimRefreshDisabled') || !b:EclimRefreshDisabled
+    if refresh
+      augroup eclim_refresh_files_bootstrap
+        autocmd!
+        autocmd BufWritePost <buffer> call eclim#project#util#RefreshFile()
+      augroup END
+    endif
   endif
 endfunction " }}}
 
@@ -1141,7 +1208,9 @@ function! eclim#project#util#RefreshFile() " {{{
 endfunction " }}}
 
 function! eclim#project#util#UnableToDetermineProject() " {{{
-  if g:eclimd_running
+  " if eclimd isn't available, then that could be the reason the project
+  " couldn't be determined, so don't hide that message with this one.
+  if eclim#EclimAvailable(0)
     call eclim#util#EchoError("Unable to determine the project. " .
       \ "Please specify a project name or " .
       \ "execute from a valid project directory.")
@@ -1299,6 +1368,33 @@ function! eclim#project#util#CommandCompleteProjectRelative(argLead, cmdLine, cu
   return eclim#util#ParseCommandCompletionResults(argLead, results)
 endfunction " }}}
 
+function! eclim#project#util#CommandCompleteProjectRelativeDir(argLead, cmdLine, cursorPos) " {{{
+  " Custom command completion for project relative files and directories.
+
+  let dir = eclim#project#util#GetCurrentProjectRoot()
+  if dir == '' && exists('b:project')
+    let dir = eclim#project#util#GetProjectRoot(b:project)
+  endif
+
+  if dir == ''
+    return []
+  endif
+
+  let cmdLine = strpart(a:cmdLine, 0, a:cursorPos)
+  let args = eclim#util#ParseCmdLine(cmdLine)
+  let argLead = cmdLine =~ '\s$' ? '' : (len(args) > 0 ? args[len(args) - 1] : '')
+
+  let results = split(eclim#util#Glob(dir . '/' . argLead . '*', 1), '\n')
+  call map(results, "substitute(v:val, '\\', '/', 'g')")
+  call filter(results, 'isdirectory(v:val)')
+  call map(results, 'v:val . "/"')
+  call map(results, 'substitute(v:val, dir, "", "")')
+  call map(results, 'substitute(v:val, "^\\(/\\|\\\\\\)", "", "g")')
+  call map(results, "substitute(v:val, ' ', '\\\\ ', 'g')")
+
+  return eclim#util#ParseCommandCompletionResults(argLead, results)
+endfunction " }}}
+
 function! eclim#project#util#CommandCompleteProjectOrDirectory(argLead, cmdLine, cursorPos) " {{{
   " Custom command completion for :ProjectTree/:ProjectTab to complete project names or
   " directories
@@ -1319,10 +1415,24 @@ function! eclim#project#util#CommandCompleteAbsoluteOrProjectRelative(argLead, c
   if len(args) > 0
     let argLead = cmdLine =~ '\s$' ? '' : args[len(args) - 1]
     if argLead =~ '^\(/\|[a-zA-Z]:\)'
-      return eclim#util#CommandCompleteDir(a:argLead, a:cmdLine, a:cursorPos)
+      return eclim#util#CommandCompleteFile(a:argLead, a:cmdLine, a:cursorPos)
     endif
   endif
   return eclim#project#util#CommandCompleteProjectRelative(
+    \ a:argLead, a:cmdLine, a:cursorPos)
+endfunction " }}}
+
+function! eclim#project#util#CommandCompleteAbsoluteOrProjectRelativeDir(argLead, cmdLine, cursorPos) " {{{
+  " Custom command completion for project relative files and directories.
+  let cmdLine = strpart(a:cmdLine, 0, a:cursorPos)
+  let args = eclim#util#ParseCmdLine(cmdLine)
+  if len(args) > 0
+    let argLead = cmdLine =~ '\s$' ? '' : args[len(args) - 1]
+    if argLead =~ '^\(/\|[a-zA-Z]:\)'
+      return eclim#util#CommandCompleteDir(a:argLead, a:cmdLine, a:cursorPos)
+    endif
+  endif
+  return eclim#project#util#CommandCompleteProjectRelativeDir(
     \ a:argLead, a:cmdLine, a:cursorPos)
 endfunction " }}}
 

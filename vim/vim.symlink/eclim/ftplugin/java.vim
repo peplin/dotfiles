@@ -5,7 +5,7 @@
 "
 " License:
 "
-" Copyright (C) 2005 - 2013  Eric Van Dewoestine
+" Copyright (C) 2005 - 2014  Eric Van Dewoestine
 "
 " This program is free software: you can redistribute it and/or modify
 " it under the terms of the GNU General Public License as published by
@@ -38,6 +38,10 @@ endif
 
 if !exists("g:EclimJavaSyntasticEnabled")
   let g:EclimJavaSyntasticEnabled = 0
+endif
+
+if !exists('g:EclimJavaCallHierarchyDefaultAction')
+  let g:EclimJavaCallHierarchyDefaultAction = g:EclimDefaultFileOpenAction
 endif
 
 " }}}
@@ -93,10 +97,7 @@ if g:EclimJavaCompilerAutoDetect
   endif
 endif
 
-" disable syntastic
-if exists('g:loaded_syntastic_plugin') && !g:EclimJavaSyntasticEnabled
-  let g:syntastic_java_checkers = []
-endif
+call eclim#lang#DisableSyntasticIfValidationIsEnabled('java')
 
 " }}}
 
@@ -201,6 +202,12 @@ if !exists(":JavaDocSearch")
   command -buffer -nargs=*
     \ -complete=customlist,eclim#java#search#CommandCompleteJavaSearch
     \ JavaDocSearch :call eclim#java#search#SearchAndDisplay('java_docsearch', '<args>')
+endif
+
+if !exists(":JavaCallHierarchy")
+  command -buffer -bang JavaCallHierarchy
+    \ :call eclim#lang#hierarchy#CallHierarchy(
+      \ 'java', g:EclimJavaCallHierarchyDefaultAction, '<bang>')
 endif
 
 if !exists(":JavaHierarchy")

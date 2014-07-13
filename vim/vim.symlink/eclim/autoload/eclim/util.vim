@@ -2,7 +2,7 @@
 "
 " License: {{{
 "
-" Copyright (C) 2005 - 2013  Eric Van Dewoestine
+" Copyright (C) 2005 - 2014  Eric Van Dewoestine
 "
 " This program is free software: you can redistribute it and/or modify
 " it under the terms of the GNU General Public License as published by
@@ -138,7 +138,9 @@ function! s:EchoLevel(message, level, highlight)
 
   exec "echohl " . a:highlight
   redraw
-  if mode() == 'n'
+  if mode() == 'n' || mode() == 'c'
+    " Note: in command mode, the message won't display, but the user can view
+    " it using :messages
     for line in messages
       echom line
     endfor
@@ -1042,6 +1044,44 @@ function! eclim#util#PromptConfirm(prompt, ...)
   return response =~ '\c\s*\(y\(es\)\?\)\s*'
 endfunction " }}}
 
+function! eclim#util#Complete(start, completions) " {{{
+  if !exists('##CompleteDone')
+    return complete(a:start, a:completions)
+  endif
+
+  let b:eclim_complete_temp_start = a:start
+  let b:eclim_complete_temp_completions = a:completions
+  let b:eclim_complete_temp_func = &completefunc
+  let b:eclim_complete_temp_opt = &completeopt
+  augroup eclim_complete_temp
+    autocmd!
+    autocmd CompleteDone <buffer> call eclim#util#CompleteTempReset()
+  augroup END
+  setlocal completefunc=eclim#util#CompleteTemp
+  setlocal completeopt=menuone,longest
+  call feedkeys("\<c-x>\<c-u>", "n")
+endfunction " }}}
+
+function! eclim#util#CompleteTemp(findstart, base) " {{{
+  if a:findstart
+    " complete() is 1 based, but omni completion functions are 0 based
+    return b:eclim_complete_temp_start - 1
+  endif
+  return b:eclim_complete_temp_completions
+endfunction " }}}
+
+function! eclim#util#CompleteTempReset() " {{{
+  silent! let &completefunc = b:eclim_complete_temp_func
+  silent! let &completeopt = b:eclim_complete_temp_opt
+  silent! unlet b:eclim_complete_temp_start
+  silent! unlet b:eclim_complete_temp_completions
+  silent! unlet b:eclim_complete_temp_func
+  silent! unlet b:eclim_complete_temp_opt
+  augroup eclim_complete_temp
+    autocmd!
+  augroup END
+endfunction " }}}
+
 function! eclim#util#Reload(options) " {{{
   " Reload the current file using ':edit' and perform other operations based on
   " the options supplied.
@@ -1086,9 +1126,10 @@ function! eclim#util#Reload(options) " {{{
   endif
 endfunction " }}}
 
-" SetLocationList(list, [action]) {{{
-" Sets the contents of the location list for the current window.
-function! eclim#util#SetLocationList(list, ...)
+function! eclim#util#SetLocationList(list, ...) " {{{
+  " Sets the contents of the location list for the current window.
+  " Optional args:
+  "   action: The action passed to the setloclist() function call.
   let loclist = a:list
 
   " filter the list if the current buffer defines a list of filters.
@@ -1117,16 +1158,25 @@ function! eclim#util#SetLocationList(list, ...)
     call setloclist(0, loclist, a:1)
   endif
 
-  let projectName = eclim#project#util#GetCurrentProjectName()
+  silent let projectName = eclim#project#util#GetCurrentProjectName()
   if projectName != ''
+    " setbufvar seems to have the side affect of changing to the buffer's dir
+    " when autochdir is set.
+    let save_autochdir = &autochdir
+    set noautochdir
+
     for item in getloclist(0)
       call setbufvar(item.bufnr, 'eclim_project', projectName)
     endfor
+
+    let &autochdir = save_autochdir
   endif
 
   if g:EclimShowCurrentError && len(loclist) > 0
     call eclim#util#DelayedCommand('call eclim#util#ShowCurrentError()')
   endif
+
+  let b:eclim_loclist = 1
   call eclim#display#signs#Update()
 endfunction " }}}
 
@@ -1159,6 +1209,7 @@ function! eclim#util#ClearLocationList(...)
     call setloclist(0, [], 'r')
   endif
   call eclim#display#signs#Update()
+  unlet! b:eclim_loclist
 endfunction " }}}
 
 " SetQuickfixList(list, [action]) {{{
@@ -1421,7 +1472,11 @@ function! eclim#util#TempWindow(name, lines, ...)
   setlocal noreadonly
   call append(1, a:lines)
   retab
+
+  let undolevels = &undolevels
+  set undolevels=-1
   silent 1,1delete _
+  let &undolevels = undolevels
 
   call cursor(line, col)
 
@@ -1429,6 +1484,7 @@ function! eclim#util#TempWindow(name, lines, ...)
     setlocal nomodified
     setlocal nomodifiable
     setlocal readonly
+    nmap <buffer> q :q<cr>
   endif
 
   silent doautocmd BufEnter

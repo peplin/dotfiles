@@ -6,7 +6,7 @@
 "
 " License:
 "
-" Copyright (C) 2005 - 2013  Eric Van Dewoestine
+" Copyright (C) 2005 - 2014  Eric Van Dewoestine
 "
 " This program is free software: you can redistribute it and/or modify
 " it under the terms of the GNU General Public License as published by
@@ -24,6 +24,10 @@
 " }}}
 
 " Global Varables {{{
+  if !exists('g:EclimTempFilesEnable')
+    let g:EclimTempFilesEnable = 1
+  endif
+
   if !exists('g:EclimFileTypeValidate')
     let g:EclimFileTypeValidate = 1
   endif
@@ -39,9 +43,16 @@
   let s:undoredo_command = '-command refactor_<operation>'
 " }}}
 
-" CodeComplete(command, findstart, base, [options]) {{{
-" Handles code completion.
-function! eclim#lang#CodeComplete(command, findstart, base, ...)
+function! eclim#lang#CodeComplete(command, findstart, base, ...) " {{{
+  " Optional args:
+  "   options: dict containing one or more of the following:
+  "     temp: 1 to use a temp file, 0 otherwise
+  "     regex: regular expression of characters to walk back over to find the
+  "            starting position of the completion.
+  "     layout: passed through to the eclimd completion for languages that
+  "             support this (typically decides how overloaded method names are
+  "             presented in the completion list).
+
   if !eclim#project#util#IsCurrentFileInProject(0)
     return a:findstart ? -1 : []
   endif
@@ -61,7 +72,8 @@ function! eclim#lang#CodeComplete(command, findstart, base, ...)
       let start -= 1
     endif
 
-    while start > 0 && line[start - 1] =~ '\w'
+    let pattern = get(options, 'regex', '\w')
+    while start > 0 && line[start - 1] =~ pattern
       let start -= 1
     endwhile
 
@@ -213,16 +225,46 @@ function! eclim#lang#Search(command, singleResultAction, argline)
 
 endfunction " }}}
 
+function! eclim#lang#IsFiletypeValidationEnabled(lang) " {{{
+  " global setting
+  if !g:EclimFileTypeValidate
+    return 0
+  endif
+  " per lang setting
+  exec 'let validate = g:Eclim' . toupper(a:lang[0]) . a:lang[1:] . 'Validate'
+  return validate
+endfunction " }}}
+
+function! eclim#lang#DisableSyntasticIfValidationIsEnabled(lang, ...) " {{{
+  "Optional arg:
+  "  syntastic lang: The syntastic lang string if it doesn't match eclim's lang.
+
+  if exists('g:loaded_syntastic_plugin') &&
+   \ eclim#lang#IsFiletypeValidationEnabled(a:lang)
+    let lang = a:0 ? a:1 : a:lang
+    exec 'let syntastic_enabled = ' .
+      \ 'g:Eclim' . toupper(lang[0]) . lang[1:] . 'SyntasticEnabled'
+
+    if !syntastic_enabled
+      if !exists('g:syntastic_mode_map')
+        let g:syntastic_mode_map = {'passive_filetypes': []}
+      elseif !has_key(g:syntastic_mode_map, 'passive_filetypes')
+        let g:syntastic_mode_map.passive_filetypes = []
+      endif
+      if index(g:syntastic_mode_map.passive_filetypes, lang) == -1
+        call add(g:syntastic_mode_map.passive_filetypes, lang)
+      endif
+    endif
+  endif
+endfunction " }}}
+
 function! eclim#lang#UpdateSrcFile(lang, ...) " {{{
   " Updates the src file on the server w/ the changes made to the current file.
   " Optional arg:
   "   validate: when 1 force the validation to execute, when 0 prevent it.
 
   if !a:0
-    " per lang setting
-    exec 'let validate = g:Eclim' . toupper(a:lang[0]) . a:lang[1:] . 'Validate'
-    " global setting
-    let validate = validate && g:EclimFileTypeValidate
+    let validate = eclim#lang#IsFiletypeValidationEnabled(a:lang)
   else
     " arg override
     let validate = a:1
@@ -290,17 +332,22 @@ function! eclim#lang#Validate(type, on_save, ...)
   endif
 endfunction " }}}
 
-" SilentUpdate([temp], [temp_write]) {{{
-" Silently updates the current source file w/out validation.
-function! eclim#lang#SilentUpdate(...)
+function! eclim#lang#SilentUpdate(...) " {{{
+  " Silently updates the current source file w/out validation.
+  " Optional args:
+  "   temp: construct a temp file path for the current file and return that path
+  "         (default is to not create a temp file)
+  "   temp_write: when constructing a temp file path, whether or not to write
+  "               the current file's contents to that path (default is to do so)
+
   " i couldn't reproduce the issue, but at least one person experienced the
   " cursor moving on update and breaking code completion:
   " http://sourceforge.net/tracker/index.php?func=detail&aid=1995319&group_id=145869&atid=763323
   let pos = getpos('.')
-  let file = eclim#project#util#GetProjectRelativeFilePath()
+  silent let file = eclim#project#util#GetProjectRelativeFilePath()
   if file != ''
     try
-      if a:0 && a:1
+      if a:0 && a:1 && g:EclimTempFilesEnable
         " don't create temp files if no server is available to clean them up.
         let project = eclim#project#util#GetCurrentProjectName()
         let workspace = eclim#project#util#GetProjectWorkspace(project)
@@ -311,7 +358,7 @@ function! eclim#lang#SilentUpdate(...)
           if a:0 < 2 || a:2
             let savepatchmode = &patchmode
             set patchmode=
-            exec 'silent noautocmd write! ' . escape(tempfile, ' ')
+            exec 'silent noautocmd keepalt write! ' . escape(tempfile, ' %')
             let &patchmode = savepatchmode
           endif
         endif
