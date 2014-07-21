@@ -1,6 +1,7 @@
 --ignore-file=match:map
 --ignore-file=match:sdb
 --ignore-file=match:lst
+--ignore-dir=env
 --ignore-dir=dependencies
 --ignore-dir=build
 --ignore-dir=objs
