@@ -285,13 +285,9 @@ myLayout = mkToggle(single REFLECTX) $
 -- 'className' and 'resource' are used below.
 --
 myManageHook = composeAll
-    [ className =? "google-chrome"       --> doShift "web"
-    , className =? "VirtualBox"     --> doShift "vm"
-    , className =? "VMware Player"     --> doShift "vm"
     , className =? "Gimp"           --> doFloat
     , className =? "gmrun"  --> doFloat
     , className =? "Skype"           --> doFloat
-    , className =? "emulator-arm"           --> doFloat
     , className =? "Xfce4-notifyd" --> doIgnore
     , resource  =? "desktop_window" --> doIgnore ]
 
