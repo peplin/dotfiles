@@ -160,7 +160,7 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
     , ((modMask, xK_b), sendMessage ToggleStruts)
 
     -- lock the screen
-    , ((modMask, xK_z), spawn "slock")
+    , ((modMask, xK_z), spawn "xautolock -locknow")
 
     -- window bringer
     , ((modMask .|. shiftMask, xK_g     ), gotoMenu)
