@@ -285,7 +285,7 @@ myLayout = mkToggle(single REFLECTX) $
 -- 'className' and 'resource' are used below.
 --
 myManageHook = composeAll
-    , className =? "Gimp"           --> doFloat
+    [ className =? "Gimp"           --> doFloat
     , className =? "gmrun"  --> doFloat
     , className =? "Skype"           --> doFloat
     , className =? "Xfce4-notifyd" --> doIgnore
