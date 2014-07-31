@@ -210,8 +210,6 @@ autocmd!
     " General {
         " don't make it look like there are line breaks where there aren't:
         set nowrap
-        " indent at the same level of the previous line
-        set autoindent
         " use indents of 4 spaces
         set shiftwidth=4
         " tabs are spaces, not spaces
