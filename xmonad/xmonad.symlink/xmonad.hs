@@ -18,6 +18,7 @@ import qualified Data.Map        as M
 import XMonad.Util.Run(spawnPipe)
 
 import XMonad.Hooks.DynamicLog
+import XMonad.Hooks.ManageHelpers
 import XMonad.Hooks.ManageDocks
 import XMonad.Hooks.EwmhDesktops
 import XMonad.Hooks.Place
@@ -149,9 +150,8 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
     -- Deincrement the number of windows in the master area
     , ((modMask, xK_period), sendMessage (IncMasterN (-1)))
 
-    -- Quit xmonad - don't use xK_k as it's too easy to trigger with a left hand
-    -- keyboard mash.
-    , ((modMask .|. shiftMask, xK_k     ), io (exitWith ExitSuccess))
+    -- Quit xmonad
+    , ((modMask .|. shiftMask, xK_q     ), io (exitWith ExitSuccess))
 
     -- Restart xmonad
     , ((modMask, xK_q     ), restart "xmonad" True)
@@ -289,7 +289,9 @@ myManageHook = composeAll
     , className =? "gmrun"  --> doFloat
     , className =? "Skype"           --> doFloat
     , className =? "Xfce4-notifyd" --> doIgnore
-    , resource  =? "desktop_window" --> doIgnore ]
+    , resource  =? "desktop_window" --> doIgnore
+    , isFullscreen --> doFullFloat
+    , isDialog --> doCenterFloat ]
 
 -- Whether focus follows the mouse pointer.
 myFocusFollowsMouse :: Bool
