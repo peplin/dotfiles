@@ -2,6 +2,9 @@
 --ignore-file=match:sdb
 --ignore-file=match:lst
 --ignore-file=match:funclist
+--ignore-file=match:sym
+--ignore-file=match:cmf
+--ignore-dir=EchoCard.X
 --ignore-dir=env
 --ignore-dir=dependencies
 --ignore-dir=build
