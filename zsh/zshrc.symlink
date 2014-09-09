@@ -35,3 +35,6 @@ do
 done
 
 unset config_files
+
+# added by travis gem
+[ -f /home/peplin/.travis/travis.sh ] && source /home/peplin/.travis/travis.sh
