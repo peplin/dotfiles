@@ -12,6 +12,7 @@ PACKAGES=(
     xclip
     pwgen
     ncmpcpp
+    mpc
     irsii
     ncdu
     iotop

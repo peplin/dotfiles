@@ -175,9 +175,9 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
     , ((modMask, xK_f), sendMessage $ Toggle REFLECTX)
 
     -- music
-    , ((mod4Mask, xK_c), spawn "ncmpcpp toggle")
-    , ((mod4Mask, xK_b), spawn "ncmpcpp next")
-    , ((mod4Mask, xK_z), spawn "ncmpcpp prev")
+    , ((mod4Mask, xK_c), spawn "mpc toggle")
+    , ((mod4Mask, xK_b), spawn "mpc next")
+    , ((mod4Mask, xK_z), spawn "mpc prev")
 
     -- audio
     , ((modMask, xK_KP_Subtract), spawn "$HOME/.dotfiles/bin/updatevolume.sh -")
