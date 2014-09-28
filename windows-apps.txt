@@ -1,0 +1,23 @@
+windows-apps
+
+Desura
+Vuescan
+M-audio driver
+Notepad++
+Network Printer
+7-zip
+Motherboard drivers
+Photoshop
+Bridge
+Lightroom
+Steam
+CHrome
+Dropbox
+Symlinks in games folder
+Reaper
+Nvidia drivers
+VLC
+Spyder3
+JoyToKey
+Lastpass
+Game Save Manager
