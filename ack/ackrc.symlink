@@ -1,4 +1,5 @@
 --ignore-file=match:sdb
+--ignore-file=match:coverage.xml
 --ignore-file=match:lst
 --ignore-file=match:funclist
 --ignore-file=match:sym
