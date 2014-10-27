@@ -13,7 +13,7 @@ autocmd!
 
         Plugin 'gmarik/Vundle.vim'
 
-        Plugin 'peplin/vim-markdown'
+        Plugin 'plasticboy/vim-markdown'
         Plugin 'tpope/vim-git'
         Plugin 'pangloss/vim-javascript'
         Plugin 'mattn/gist-vim'
@@ -436,6 +436,11 @@ autocmd!
 
     " Java syntax highlighting {
         let g:java_allow_cpp_keywords = 1
+    " }
+
+    " vim-markdown {
+        let g:vim_markdown_folding_disabled=1
+        let g:vim_markdown_frontmatter=1
     " }
 " }
 
