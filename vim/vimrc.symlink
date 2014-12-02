@@ -4,6 +4,7 @@ autocmd!
 " Environment {
     " Basics {
         set nocompatible
+        set ttyfast
     " }
 
     " Setup Vundle {
