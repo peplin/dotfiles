@@ -12,6 +12,7 @@
 --ignore-dir=_site
 --ignore-dir=build-cli
 --ignore-dir=coverage
+--ignore-dir=cover
 --ignore-dir=target
 --ignore-dir=gen
 --ignore-dir=bin
