@@ -20,9 +20,6 @@ function cdls() {
 
 alias grep='grep --color=auto'
 
-#Search aliases for something
-alias ag='alias | grep -i'
-
 # grep history
 alias gh='fc -l 0 | grep'
 

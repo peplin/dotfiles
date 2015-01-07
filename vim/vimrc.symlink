@@ -35,7 +35,7 @@ autocmd!
         Plugin 'scrooloose/syntastic'
         Plugin 'ervandew/supertab'
         Plugin 'Lokaltog/vim-easymotion'
-        Plugin 'mileszs/ack.vim'
+        Plugin 'rking/ag.vim'
         Plugin 'ConradIrwin/vim-bracketed-paste'
 
 
@@ -373,7 +373,7 @@ autocmd!
     " }
 
     " Ack {
-        map <leader>f :Ack<space>
+        map <leader>f :Ag<space>
     " }
 
     " NERDComment {

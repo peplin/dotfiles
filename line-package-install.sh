@@ -131,7 +131,7 @@ python2
 python2-pip
 ruby
 openjdk6
-ack
+the_silver_searcher
 ln -fs /usr/lib/jvm/java-6-openjdk /usr/lib/jvm/default-java
 htop
 dstat
