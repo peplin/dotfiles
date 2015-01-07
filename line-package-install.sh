@@ -222,3 +222,5 @@ vim
 
 # add startup service to run --auto-tune
 powertop
+
+wqy-zenhei
