@@ -19,9 +19,6 @@ autocmd!
         Plugin 'pangloss/vim-javascript'
         Plugin 'mattn/gist-vim'
         Plugin 'uarun/vim-protobuf'
-        "Plugin 'jnwhiteh/vim-golang'
-
-        "Plugin 'jmcantrell/vim-virtualenv'
 
         Plugin 'tpope/vim-fugitive'
         Plugin 'tpope/vim-surround'
@@ -38,7 +35,6 @@ autocmd!
         Plugin 'rking/ag.vim'
         Plugin 'ConradIrwin/vim-bracketed-paste'
 
-
         Plugin 'kien/ctrlp.vim'
         Plugin 'JazzCore/ctrlp-cmatcher'
 
@@ -46,8 +42,7 @@ autocmd!
         Plugin 'altercation/vim-colors-solarized'
         Plugin 'bling/vim-airline'
 
-        "Plugin 'nathanaelkane/vim-indent-guides'
-        "Plugin 'spolu/dwm.vim'
+        Plugin 'mxw/vim-jsx'
 
         call vundle#end()
     " }
@@ -374,6 +369,10 @@ autocmd!
 
     " Ack {
         map <leader>f :Ag<space>
+    " }
+    "
+    " vim-jsx {
+        let g:jsx_ext_required = 0
     " }
 
     " NERDComment {
