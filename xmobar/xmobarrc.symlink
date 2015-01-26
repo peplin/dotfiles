@@ -9,7 +9,7 @@ Config { font = "xft:Ubuntu Mono-11"
                 "--low","lightblue"] 36000
             , Run DynNetwork ["-L","10","-H","200","--normal","green",
                 "--high","red","--minwidth", "5","-t","<rx>KB | <tx>KB"] 20
-            , Run Wireless "enp0s20u3" ["-L","10","-H","200","--normal","green",
+            , Run Wireless "wlp3s0" ["-L","10","-H","200","--normal","green",
                 "--high","red","--minwidth", "5"] 20
             , Run Com "/home/peplin/.dotfiles/bin/volume.sh" [] "vol" 20
             , Run MultiCpu ["-t", "<autototal>","-L","30","-H","60","--normal",
@@ -21,5 +21,5 @@ Config { font = "xft:Ubuntu Mono-11"
        ]
        , sepChar = "%"
        , alignSep = "}{"
-       , template = "         %multicpu% %memory% | %enp0s20u3wi% %dynnetwork% %vol%}{%StdinReader% | %KARB% | <fc=#ee9a00>%date%</fc>"
+       , template = "         %multicpu% %memory% | %wlp3s0wi% %dynnetwork% %vol%}{%StdinReader% | %KARB% | <fc=#ee9a00>%date%</fc>"
        }
