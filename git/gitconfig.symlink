@@ -78,3 +78,5 @@
     recurseSubmodules = on-demand
 [credential]
 	helper = cache
+[rerere]
+	enabled = true
