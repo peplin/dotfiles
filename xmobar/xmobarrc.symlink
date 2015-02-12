@@ -7,6 +7,7 @@ Config { font = "xft:Ubuntu Mono-11"
             Run Weather "KARB" ["-t","<tempF>F","-L",
                 "20","-H","75","--normal","green","--high","red",
                 "--low","lightblue"] 36000
+            , Run Com "/home/peplin/.dotfiles/bin/batterycheck.sh" [] "batcheck" 60
             , Run DynNetwork ["-L","10","-H","200","--normal","green",
                 "--high","red","--minwidth", "5","-t","<rx>KB | <tx>KB"] 20
             , Run Wireless "wlp3s0" ["-L","10","-H","200","--normal","green",
