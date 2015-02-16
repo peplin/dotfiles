@@ -19,6 +19,7 @@ autocmd!
         Plugin 'pangloss/vim-javascript'
         Plugin 'mattn/gist-vim'
         Plugin 'uarun/vim-protobuf'
+        Plugin 'elzr/vim-json'
 
         Plugin 'tpope/vim-fugitive'
         Plugin 'tpope/vim-surround'
