@@ -21,7 +21,7 @@ cbatticon &
 fi
 
 pulseaudio &
-dropboxd &
+dropbox &
 
 xautolock -time 5 -locker slock &
 
