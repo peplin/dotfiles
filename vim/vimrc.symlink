@@ -36,8 +36,8 @@ autocmd!
         Plugin 'rking/ag.vim'
         Plugin 'ConradIrwin/vim-bracketed-paste'
 
-        Plugin 'kien/ctrlp.vim'
-        Plugin 'JazzCore/ctrlp-cmatcher'
+        Plugin 'ctrlpvim/ctrlp.vim'
+        "Plugin 'JazzCore/ctrlp-cmatcher'
 
         Plugin 'airblade/vim-gitgutter'
         Plugin 'altercation/vim-colors-solarized'
