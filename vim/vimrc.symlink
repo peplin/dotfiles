@@ -35,6 +35,7 @@ autocmd!
         Plugin 'Lokaltog/vim-easymotion'
         Plugin 'rking/ag.vim'
         Plugin 'ConradIrwin/vim-bracketed-paste'
+        Plugin 'hynek/vim-python-pep8-indent'
 
         Plugin 'ctrlpvim/ctrlp.vim'
         "Plugin 'JazzCore/ctrlp-cmatcher'
