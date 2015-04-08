@@ -23,3 +23,9 @@ configure asterisk
 
 * run lxappearance and select them for gtk apps
 configure xscreensaver
+
+## Pulse
+
+in /etc/pulse/default.pa
+
+load-module module-switch-on-connect
