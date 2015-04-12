@@ -179,7 +179,7 @@ autocmd!
     " names) first list the available options and complete the longest common
     " part, then have further <Tab>s cycle through the possibilities:
     set wildmode=list:longest
-    set wildignore+=*.o,*~,*.pyc,*.class,__pycache__,*/node_modules/*
+    set wildignore+=*.o,*~,*.pyc,*.class,__pycache__,*/node_modules/*,*/sent-mail/*
 
     " lines to scroll when cursor leaves screen
     set scrolljump=5
@@ -352,9 +352,6 @@ autocmd!
     "CtrlP {
         let g:ctrlp_map = '<leader>t'
         let g:ctrlp_cmd = 'CtrlP'
-        let g:ctrlp_custom_ignore = {
-            \ 'dir':  'node_modules',
-        \ }
     " }
 
     " Gist {
