@@ -101,6 +101,7 @@ autocmd!
     ca Wq wq
     ca W w
     ca Q q
+    ca Sp sp
 " }
 
 " Vim UI {
