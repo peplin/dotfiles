@@ -186,8 +186,8 @@ zlib
 mpd
 mpdscribble
 
-systemctl enable mpd
-systemctl enable mpdscribble
+systemctl --user enable mpd
+systemctl --user enable mpdscribble
 
 
 #nfs
@@ -223,4 +223,5 @@ vim
 # add startup service to run --auto-tune
 powertop
 
+# Mandarin font
 wqy-zenhei
