@@ -17,6 +17,6 @@ if filereadable(filename)
         let igstring .= "," . line
     endfor
     let igstring = substitute(igstring, "^,\/", '', "g")
-    let execstring = "set wildignore=".substitute(igstring, '^,', '', "g")
+    let execstring = "set wildignore+=".substitute(igstring, '^,', '', "g")
     execute execstring
 endif
