@@ -21,3 +21,4 @@
 gmon.out
 .gdb_history
 .ropeproject/
+.eggs/
