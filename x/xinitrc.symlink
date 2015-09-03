@@ -10,9 +10,9 @@ if [ "`hostname`" = "secant" ]; then
 $HOME/.screenlayout/workdual.sh
 fi
 
-#if [ "`hostname`" = "curve" ]; then
-#$HOME/.screenlayout/dual.sh
-#fi
+if [ "`hostname`" = "curve" ]; then
+$HOME/.screenlayout/dual.sh
+fi
 
 dbus-launch xmonad & wmpid=$!
 
