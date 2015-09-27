@@ -34,7 +34,7 @@ if [ -e "$BATTERY_PATH" ]; then
         if [ "$CAPACITY" -lt "$CRITICAL_BATTERY" ] && [ "$STATE" = "Discharging" ]; then
             DISPLAY=:0.0 notify-send -u critical -t 5000 -i "$ICON" "Battery critical, suspending now"
             sleep 5
-            sudo $($ACTION)
+            sudo $ACTION
         fi
     fi
 fi
