@@ -1,25 +1,17 @@
+
+gmail backup
+crashplan
+samba for tomato backups
 cnofigure mpd folders
 configure mpd to connect to pulseaudio via tcp
 configure ssh port, disallow root
-copy dbbackup to usr/local/bin, setup cron if necessary
-restore cron for getmail backup
 
-create user for me and katy, add to groups:
+create user for me, add to groups:
     admin audio lp optical storage video wheel games power scanner network uucp
          plugdev users vboxusers
-
-configure smtp to use a mandrill account
-configure rsync, check.sh
 configure sudoers
 configure wol service
 allow login when shutting down with pam
-
-configure nfs
-configure samba
-configure asterisk
-
-## Apperange
-
 
 * run lxappearance and select them for gtk apps
 configure xscreensaver
