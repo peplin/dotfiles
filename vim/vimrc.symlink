@@ -21,6 +21,8 @@ autocmd!
         Plugin 'uarun/vim-protobuf'
         Plugin 'elzr/vim-json'
 
+        Plugin 'rhysd/vim-clang-format'
+
         Plugin 'tpope/vim-fugitive'
         Plugin 'tpope/vim-surround'
         Plugin 'tpope/vim-ragtag'
@@ -444,6 +446,25 @@ autocmd!
     " vim-markdown {
         let g:vim_markdown_folding_disabled=1
         let g:vim_markdown_frontmatter=1
+    " }
+    " vim-clang-format {
+    let g:clang_format#auto_formatexpr=1
+    let g:clang_format#style_options = {
+                \ "BasedOnStyle" : "LLVM",
+                \ "UseTab" : "Never",
+                \ "IndentWidth" : 4,
+                \ "BreakBeforeBraces" : "Attach",
+                \ "AllowShortIfStatementsOnASingleLine" : "false",
+                \ "IndentCaseLabels" : "false",
+                \ "ColumnLimit" : 80,
+                \ "PointerAlignment" : "Left",
+                \ "AccessModifierOffset" : -4,
+                \ "AllowShortLoopsOnASingleLine" : "false",
+                \ "AllowShortFunctionsOnASingleLine" : "false",
+                \ "MaxEmptyLinesToKeep" : 2,
+                \ "Standard" : "Auto",
+                \ "BreakConstructorInitializersBeforeComma" : "true"
+                \}
     " }
 " }
 
