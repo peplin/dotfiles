@@ -13,16 +13,16 @@ patches: <patches|join( → )|pre_applied(%{$fg[yellow]%})|post_applied(%{$reset
 git="/usr/bin/git"
 
 git_branch() {
-  echo $(timeout 1 $git symbolic-ref HEAD 2>/dev/null | awk -F/ {'print $NF'})
+  echo $(timeout 0.2 $git symbolic-ref HEAD 2>/dev/null | awk -F/ {'print $NF'})
 }
 
 git_prompt_info() {
-  ref=$(timeout 1 $git symbolic-ref HEAD 2> /dev/null) || return
+  ref=$(timeout 0.2 $git symbolic-ref HEAD 2> /dev/null) || return
   echo "${ref#refs/heads/}"
 }
 
 git_dirty() {
-    st=$(timeout 1 $git status 2>/dev/null | tail -n 1)
+    st=$(timeout 0.2 $git status 2>/dev/null | tail -n 1)
     if [[ $st == "" ]]
     then
         echo ""
@@ -37,7 +37,7 @@ git_dirty() {
 }
 
 unpushed () {
-  timeout 1 $git cherry -v @{upstream} 2>/dev/null
+  timeout 0.2 $git cherry -v @{upstream} 2>/dev/null
 }
 
 project_name () {
