@@ -6,8 +6,8 @@ xsetroot -cursor_name left_ptr
 # Disable tap to click on touchpad
 synclient MaxTapTime=0
 
-if [ "`hostname`" = "secant" ]; then
-$HOME/.screenlayout/workdual.sh
+if [ "`hostname`" = "cpeplin-M4800" ]; then
+$HOME/.screenlayout/work.sh
 fi
 
 if [ "`hostname`" = "curve" ]; then
