@@ -370,6 +370,9 @@ autocmd!
         let g:syntastic_javascript_checkers=['jslint']
         let g:syntastic_python_checkers=['flake8']
         let g:syntastic_python_flake8_args = "--max-line-length=80"
+        let g:syntastic_cpp_compiler = 'clang++'
+        let g:syntastic_cpp_compiler_options = ' -std=c++11 -stdlib=libc++'
+
     " }
 
     " Ack {
@@ -448,7 +451,8 @@ autocmd!
         let g:vim_markdown_frontmatter=1
     " }
     " vim-clang-format {
-    let g:clang_format#auto_formatexpr=1
+    let g:clang_format#auto_formatexpr=0
+    let g:clang_format#detect_style_file=1
     let g:clang_format#style_options = {
                 \ "BasedOnStyle" : "LLVM",
                 \ "UseTab" : "Never",
