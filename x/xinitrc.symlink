@@ -21,7 +21,12 @@ cbatticon &
 fi
 
 pulseaudio &
+
+if [ "`hostname`" = "cpeplin-M4800" ]; then
+dropbox start
+else
 dropbox &
+fi
 
 xautolock -time 5 -locker slock &
 
