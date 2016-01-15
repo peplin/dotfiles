@@ -355,6 +355,7 @@ autocmd!
     "CtrlP {
         let g:ctrlp_map = '<leader>t'
         let g:ctrlp_cmd = 'CtrlP'
+        let g:ctrlp_clear_cache_on_exit = 0
     " }
 
     " Gist {
