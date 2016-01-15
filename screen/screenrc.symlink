@@ -26,6 +26,7 @@ autodetach on
 vbell on
 vbell_msg "   Wuff  ----  Wuff!!  "
 defscrollback 3000
+altscreen on
 
 # ------------------------------------------------------------------------------
 # SCREEN KEYBINDINGS
@@ -80,5 +81,7 @@ defnonblock 5
 
 setenv SSH_AUTH_SOCK "/tmp/ssh-agent-$USER-screen"
 
-term "screen-256color-bce"
+term "rxvt-unicode-256color"
 defbce "on"
+
+windowlist string "%4n %h%=%f"
