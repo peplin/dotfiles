@@ -1,6 +1,13 @@
 unbind C-b
-set -g prefix C-a
-bind C-a send-prefix
+set -g prefix C-q
+bind C-q send-prefix
+
+bind-key C-c new-window
+bind-key c new-window
+bind-key C-n next-window
+bind-key n next-window
+bind-key C-p previous-window
+bind-key p previous-window
 
 set -g default-terminal rxvt-unicode-256color
 # Don't use a login shell
