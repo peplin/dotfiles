@@ -1,2 +1,3 @@
 export IRBRC=$HOME/.irbrc
-export GEM_HOME="$(ruby -rubygems -e 'puts Gem.user_dir')"
+export RUBY_VERSION=2.3.0
+export GEM_HOME=$HOME/.gem/ruby/$RUBY_VERSION
