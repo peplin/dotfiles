@@ -22,7 +22,7 @@
 
 startup_message off
 deflogin on
-autodetach on 
+autodetach on
 vbell on
 vbell_msg "   Wuff  ----  Wuff!!  "
 defscrollback 3000
@@ -79,3 +79,6 @@ termcapinfo xterm|xterms|xs|rxvt ti@:te@
 defnonblock 5
 
 setenv SSH_AUTH_SOCK "/tmp/ssh-agent-$USER-screen"
+
+term "screen-256color-bce"
+defbce "on"
