@@ -457,8 +457,8 @@ autocmd!
         let g:vim_markdown_frontmatter=1
     " }
     " vim-clang-format {
-    let g:clang_format#auto_formatexpr=0
     let g:clang_format#detect_style_file=1
+    let g:clang_format#auto_formatexpr=1
     let g:clang_format#style_options = {
                 \ "BasedOnStyle" : "LLVM",
                 \ "UseTab" : "Never",
