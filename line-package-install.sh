@@ -204,11 +204,6 @@ systemctl enable nfs-server
 
 samba
 
-# asterisk
-
-asterisk
-systemctl enable asterisk
-
 cbatticon
 wpa_actiond
 thunar
@@ -225,3 +220,9 @@ powertop
 
 # Mandarin font
 wqy-zenhei
+
+nm-applet
+openvpn-update-resolv-conf
+systemctl enable NetworkManager
+
+
