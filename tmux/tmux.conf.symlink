@@ -1,7 +1,21 @@
+# Change escap key combo from C-b to C-q
 unbind C-b
-set -g prefix C-a
-bind C-a send-prefix
+set -g prefix C-q
+bind C-q send-prefix
 
+# Allow holding down control while doing key combos
+bind-key C-c new-window
+bind-key c new-window
+bind-key C-n next-window
+bind-key n next-window
+bind-key C-p previous-window
+bind-key p previous-window
+
+# Use 256 color
 set -g default-terminal rxvt-unicode-256color
+
 # Don't use a login shell
 set -g default-command "${SHELL}"
+
+# Make control-arrows work
+set-window-option -g xterm-keys on
