@@ -28,6 +28,8 @@ else
 dropbox &
 fi
 
+nm-applet &
+
 xautolock -time 5 -locker slock &
 
 wait $wmpid
