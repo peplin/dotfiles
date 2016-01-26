@@ -38,6 +38,7 @@ autocmd!
         " Primary feature plugins
         Plugin 'airblade/vim-gitgutter'
         Plugin 'tpope/vim-fugitive'
+        Plugin 'peplin/vim-phabrowse'
         Plugin 'tpope/vim-git'
         Plugin 'xolox/vim-notes'
         Plugin 'xolox/vim-misc'
@@ -463,6 +464,11 @@ autocmd!
         let g:vim_markdown_folding_disabled=1
         let g:vim_markdown_frontmatter=1
     " }
+
+    " vim-phabrowse {
+        let g:phabrowse_domains = ["https://code.int.uberatc.com"]
+    " }
+
     " vim-clang-format {
     let g:clang_format#detect_style_file=1
     let g:clang_format#auto_formatexpr=1
