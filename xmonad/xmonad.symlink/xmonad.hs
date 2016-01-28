@@ -180,11 +180,11 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
     , ((mod4Mask, xK_z), spawn "mpc prev")
 
     -- audio
-    , ((modMask, xK_KP_Subtract), spawn "$HOME/.dotfiles/bin/updatevolume.sh -")
-    , ((0, xF86XK_AudioLowerVolume), spawn "$HOME/.dotfiles/bin/updatevolume.sh -")
-    , ((modMask, xK_KP_Add), spawn "$HOME/.dotfiles/bin/updatevolume.sh +")
-    , ((0, xF86XK_AudioRaiseVolume), spawn "$HOME/.dotfiles/bin/updatevolume.sh +")
-    , ((0, xF86XK_AudioMute), spawn "$HOME/.dotfiles/bin/mute.sh")
+    , ((modMask, xK_KP_Subtract), spawn "updatevolume.sh -")
+    , ((0, xF86XK_AudioLowerVolume), spawn "updatevolume.sh -")
+    , ((modMask, xK_KP_Add), spawn "updatevolume.sh +")
+    , ((0, xF86XK_AudioRaiseVolume), spawn "updatevolume.sh +")
+    , ((0, xF86XK_AudioMute), spawn "mute.sh")
 
     -- lcd brightness
     , ((0, xF86XK_MonBrightnessUp), spawn "/usr/bin/xbacklight -inc 10")
