@@ -9,7 +9,6 @@ function install_packages(pkgs) {
 }
 
 PACKAGES=(
-    xclip
     pwgen
     ncmpcpp
     mpc
@@ -84,6 +83,9 @@ fontconfig-ubuntu
 ttf-ubuntu-font-family
 ttf-ubuntu-mono-powerline-git
 ttf-dejavu
+
+# Mandarin font
+wqy-zenhei
 
 # Xmonad
 
@@ -210,7 +212,6 @@ thunar
 gthumb
 google-talkplugin
 gdb
-valgrind
 picocom
 vlc
 vim
@@ -218,11 +219,6 @@ vim
 # add startup service to run --auto-tune
 powertop
 
-# Mandarin font
-wqy-zenhei
-
 nm-applet
 openvpn-update-resolv-conf
 systemctl enable NetworkManager
-
-
