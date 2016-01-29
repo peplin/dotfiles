@@ -39,7 +39,6 @@ autocmd!
         Plugin 'airblade/vim-gitgutter'
         Plugin 'tpope/vim-fugitive'
         Plugin 'peplin/vim-phabrowse'
-        Plugin 'tpope/vim-git'
         Plugin 'xolox/vim-notes'
         Plugin 'xolox/vim-misc'
 
@@ -49,6 +48,7 @@ autocmd!
 
         " File types
         Plugin 'elzr/vim-json'
+        Plugin 'tpope/vim-git'
         "Plugin 'plasticboy/vim-markdown'
         "Plugin 'pangloss/vim-javascript'
         "Plugin 'mxw/vim-jsx'
@@ -60,10 +60,6 @@ autocmd!
 
 
 " General {
-    if $COLORTERM == 'gnome-terminal' || $COLORTERM == 'Terminal'
-      set t_Co=256
-    endif
-
     syntax on
 
     " how many lines of history to store
@@ -113,6 +109,10 @@ autocmd!
 " }
 
 " Vim UI {
+    if $COLORTERM == 'gnome-terminal' || $COLORTERM == 'Terminal'
+      set t_Co=256
+    endif
+
     if &t_Co == 256
         set background=dark
         colors solarized
