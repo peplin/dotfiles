@@ -404,23 +404,6 @@ autocmd!
         let NERDSpaceDelims = 1
     " }
 
-    " OmniComplete {
-        set omnifunc=syntaxcomplete#Complete
-
-        " some convenient mappings
-        " TODO this doesn't work at the moment - prints out pumvisible...
-        "inoremap <expr> <Esc>      pumvisible() ? "\<C-e>" : "\<Esc>"
-        "inoremap <expr> <CR>=pumvisible() ? "\<C-y>" : "\<CR>"
-        "inoremap <expr> <Down>     pumvisible() ? "\<C-n>" : "\<Down>"
-        "inoremap <expr> <Up>       pumvisible() ? "\<C-p>" : "\<Up>"
-        "inoremap <expr> <C-d>        pumvisible() ? "\<PageDown>\<C-p>\<C-n>" : "\<C-d>"
-        "inoremap <expr> <C-u>      pumvisible() ? "\<PageUp>\<C-p>\<C-n>" : "\<C-u>"
-
-        " automatically open and close the popup menu / preview window
-        "au CursorMovedI,InsertLeave * if pumvisible() == 0|silent! pclose|endif
-        set completeopt=longest,menu,preview
-    " }
-
     " Notes {
         let g:notes_directories = ["~/Dropbox/notes"]
         let g:notes_smart_quotes = 0
@@ -442,13 +425,6 @@ autocmd!
     " airline (statusbar) {
       let g:airline#extensions#tabline#enabled = 1
       let g:airline_powerline_fonts = 1
-    " }
-
-    " Eclim {
-        let g:EclimXmlValidate = 0
-        let g:EclimHtmlValidate = 0
-        let g:EclimJavascriptValidate = 0
-        let g:eclim_javascript_jsl_warn = 1
     " }
 
     " Supertab {
@@ -523,5 +499,3 @@ function! RenameFile()
     endif
 endfunction
 map <leader>m :call RenameFile()<cr>
-
-map <Leader>r :w\|:!%:p<CR>
