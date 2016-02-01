@@ -29,7 +29,8 @@ autocmd!
 
         " Theme
         Plugin 'altercation/vim-colors-solarized'
-        Plugin 'bling/vim-airline'
+        Plugin 'vim-airline/vim-airline'
+        Plugin 'vim-airline/vim-airline-themes'
 
         " Formatters
         Plugin 'hynek/vim-python-pep8-indent'
