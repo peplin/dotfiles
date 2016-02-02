@@ -19,7 +19,6 @@ function cdls() {
 }
 
 alias grep='grep --color=auto'
-alias ack='ag'
 
 # grep history
 alias gh='fc -l 0 | grep'
