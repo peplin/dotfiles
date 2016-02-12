@@ -28,7 +28,7 @@ else
 dropbox &
 fi
 
-if [ "`hostname`" = "curve" ]; then
+if [ "`hostname`" != "secant" ]; then
 nm-applet &
 fi
 
