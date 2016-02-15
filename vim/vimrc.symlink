@@ -55,6 +55,9 @@ autocmd!
         "Plugin 'mxw/vim-jsx'
         "Plugin 'uarun/vim-protobuf'
 
+        Plugin 'ssh://code@code.int.uberatc.com/diffusion/VIMHIDL/vim-hidl-ftplugin.git'
+
+
         call vundle#end()
     " }
 " }

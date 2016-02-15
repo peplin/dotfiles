@@ -23,4 +23,3 @@ gmon.out
 .ropeproject/
 .eggs/
 .agignore
-*.orig

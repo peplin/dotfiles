@@ -12,17 +12,27 @@ set input-radix 0x10
 set height 0
 set width 0
 
-set $SHOW_CONTEXT = 1
-set $SHOW_NEST_INSN = 0
+#set $SHOW_CONTEXT = 1
+#set $SHOW_NEST_INSN = 0
 
-set $CONTEXTSIZE_STACK = 6
-set $CONTEXTSIZE_DATA  = 8
-set $CONTEXTSIZE_CODE  = 8
+#set $CONTEXTSIZE_STACK = 6
+#set $CONTEXTSIZE_DATA  = 8
+#set $CONTEXTSIZE_CODE  = 8
 
-set print array on
+#set print array on
 set print pretty on
-set auto-load safe-path /
+#set auto-load safe-path /
 
-if $COLOUREDPROMPT == 1
-	set prompt \033[31mgdb$ \033[0m
+#if $COLOUREDPROMPT == 1
+#	set prompt \033[31mgdb$ \033[0m
+#end
+
+set history save
+set history filename ~/.gdb_history
+
+python
+import sys
+sys.path.insert(0, '/home/cpeplin/dev//gdb_printers/python')
+from libstdcxx.v6.printers import register_libstdcxx_printers
+register_libstdcxx_printers (None)
 end
