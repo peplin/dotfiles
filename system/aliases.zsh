@@ -10,8 +10,8 @@ if [ "$TERM" != "dumb" ]; then
     alias ls='ls --group-directories-first --color=auto'
 fi
 
-alias ll='ls -lh'
-alias la='ls -lha'
+alias ll='ls -lNh'
+alias la='ls -lNha'
 
 alias ..='cd ..'
 function cdls() {
