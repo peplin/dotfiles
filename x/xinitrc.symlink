@@ -28,9 +28,7 @@ else
 dropbox &
 fi
 
-if [ "`hostname`" = "curve" ]; then
 nm-applet &
-fi
 
 xautolock -time 5 -locker slock &
 
