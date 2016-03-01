@@ -95,7 +95,7 @@ gmrun
 xmonad-contrib
 libnotify
 dunst
-dmenu-xft
+dmenu
 gnome-themes-standard
 xautolock
 slock

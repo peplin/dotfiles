@@ -1,5 +1,7 @@
-test $SSH_AUTH_SOCK && [[ $SSH_AUTH_SOCK != "/tmp/ssh-agent-$USER-screen" ]] && \
-    ln -sf "$SSH_AUTH_SOCK" "/tmp/ssh-agent-$USER-screen"
+if [[ -S "$SSH_AUTH_SOCK" && ! -h "$SSH_AUTH_SOCK" ]]; then
+        ln -sf "$SSH_AUTH_SOCK" ~/.ssh/ssh_auth_sock;
+fi
+export SSH_AUTH_SOCK=~/.ssh/ssh_auth_sock;
 
 if [ $SSH_TTY ] && [ ! $WINDOW ]; then
     if [[ -z "$TMUX" ]] ;then
