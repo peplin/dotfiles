@@ -65,4 +65,10 @@ zstyle ':completion:*:ssh:*' group-order \
 zstyle ':completion::complete:cd::' tag-order '! users' -
 zstyle '*' single-ignored show
 
+# Ignore compiled files on vi/vim completion
+zstyle ':completion:*:*:(v|vim):*:*files' ignored-patterns '*.(a|dylib|so|o|pyc)'
+
+# Ignore pyc files for python
+zstyle ':completion:*:*:(python*|pytest):*:*files' ignored-patterns '*.(pyc)'
+
 FIGNORE=".o"
