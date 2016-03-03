@@ -16,16 +16,17 @@ fi
 
 dbus-launch xmonad & wmpid=$!
 
-if [ -d /sys/class/power_supply/BAT0 ]; then
+if [ command -v cbatticon >/dev/null 2>&1 ]; then
 cbatticon &
 fi
 
 pulseaudio &
 
-if [ "`hostname`" = "cpeplin-M4800" ]; then
-dropbox start
-else
+HOSTNAME=`hostname`
+if [ command -v dropbox-cli >/dev/null 2>&1 ]; then
 dropbox &
+else
+dropbox start
 fi
 
 if [ "`hostname`" != "secant" ]; then
