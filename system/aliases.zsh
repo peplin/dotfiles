@@ -7,7 +7,7 @@ if [ "$TERM" != "dumb" ]; then
     if command -v dircolors >/dev/null 2>&1; then
         eval "`dircolors -b`"
     fi
-    alias ls='ls --group-directories-first --color=auto'
+    alias ls='ls -N --group-directories-first --color=auto'
 fi
 
 alias ll='ls -lNh'
