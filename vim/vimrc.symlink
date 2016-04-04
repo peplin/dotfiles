@@ -386,7 +386,7 @@ autocmd!
         let g:syntastic_python_checkers=['flake8']
         let g:syntastic_python_flake8_args = "--max-line-length=120"
         let g:syntastic_cpp_include_dirs = ['source', 'build/source', '/usr/include', '/home/peplin/downloads/flycapture2-2.6.3.4-i386/usr/include', '/home/peplin/downloads/flycapture2-2.6.3.4-i386/usr/include/flycapture']
-        let g:syntastic_cpp_compiler = 'clang++'
+        let g:syntastic_cpp_compiler = 'clang++-3.5'
         let g:syntastic_cpp_compiler_options = ' -std=c++11'
         let g:syntastic_always_populate_loc_list = 1
         let g:syntastic_auto_loc_list = 0
