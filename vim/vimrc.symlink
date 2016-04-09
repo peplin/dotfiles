@@ -50,6 +50,7 @@ autocmd!
         " File types
         Plugin 'elzr/vim-json'
         Plugin 'tpope/vim-git'
+        Plugin 'justinj/vim-pico8-syntax'
         "Plugin 'plasticboy/vim-markdown'
         "Plugin 'pangloss/vim-javascript'
         "Plugin 'mxw/vim-jsx'
