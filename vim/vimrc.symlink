@@ -51,10 +51,15 @@ autocmd!
         Plugin 'elzr/vim-json'
         Plugin 'tpope/vim-git'
         Plugin 'justinj/vim-pico8-syntax'
+        " Faster YAML parsing
+        Plugin 'stephpy/vim-yaml'
         "Plugin 'plasticboy/vim-markdown'
         "Plugin 'pangloss/vim-javascript'
         "Plugin 'mxw/vim-jsx'
         "Plugin 'uarun/vim-protobuf'
+
+        Plugin 'ssh://code@code.int.uberatc.com/diffusion/VIMHIDL/vim-hidl-ftplugin.git'
+
 
         call vundle#end()
     " }

@@ -95,7 +95,7 @@ gmrun
 xmonad-contrib
 libnotify
 dunst
-dmenu-xft
+dmenu
 gnome-themes-standard
 xautolock
 slock
@@ -222,3 +222,7 @@ powertop
 nm-applet
 openvpn-update-resolv-conf
 systemctl enable NetworkManager
+
+# May only be required on ubuntu, this makes select+paste from urxvt work like
+# you would expect, no middle mouse nonsense
+xsel
