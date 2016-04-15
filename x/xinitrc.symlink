@@ -29,9 +29,7 @@ else
 dropbox start
 fi
 
-if [ "`hostname`" != "secant" ]; then
 nm-applet &
-fi
 
 xautolock -time 5 -locker slock &
 
