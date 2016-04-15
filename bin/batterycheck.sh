@@ -15,15 +15,24 @@ ICON="/usr/share/icons/gnome/48x48/devices/battery.png"
 BATTERY_PATH="/sys/class/power_supply/$BAT"
 
 if [ -e "$BATTERY_PATH" ]; then
-    MAX_BATTERY=$(cat $BATTERY_PATH/energy_full)
-    LOW_BATTERY=$(($LOW_BATTERY * $MAX_BATTERY / 100))
+    if [ -e "$BATTERY_PATH/energy_full" ]; then
+        MAX_BATTERY=$(cat $BATTERY_PATH/energy_full)
+        LOW_BATTERY=$(($LOW_BATTERY * $MAX_BATTERY / 100))
+    else
+        MAX_BATTERY=$(cat $BATTERY_PATH/charge_full)
+        LOW_BATTERY=$(($LOW_BATTERY * $MAX_BATTERY / 100))
+    fi
     CRITICAL_BATTERY=$(($CRITICAL_BATTERY * $MAX_BATTERY/100))
 
     PRESENT=$(cat "$BATTERY_PATH/present")
     if [ "$PRESENT" = "1" ]; then
 
         STATE=$(cat "$BATTERY_PATH/status")
-        CAPACITY=$(cat "$BATTERY_PATH/energy_now")
+        if [ -e "$BATTERY_PATH/energy_now" ]; then
+            CAPACITY=$(cat "$BATTERY_PATH/energy_now")
+        else
+            CAPACITY=$(cat "$BATTERY_PATH/charge_now")
+        fi
         PERCENTAGE=$(cat "$BATTERY_PATH/capacity")
 
         echo "Percentage: $PERCENTAGE"
