@@ -50,6 +50,7 @@ autocmd!
         " File types
         Plugin 'elzr/vim-json'
         Plugin 'tpope/vim-git'
+        Plugin 'justinj/vim-pico8-syntax'
         " Faster YAML parsing
         Plugin 'stephpy/vim-yaml'
         "Plugin 'plasticboy/vim-markdown'
