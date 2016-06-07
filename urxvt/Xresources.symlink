@@ -25,7 +25,8 @@ URxvt*scrollWithBuffer: true
 URxvt*scrollTtyKeypress: true
 
 ! requires urxvt-perls from arch
-URxvt.perl-ext-common: default,matcher,vtwheel,font-size,selection-to-clipboard
+URxvt.perl-ext-common: default,matcher,vtwheel,font-size,selection-to-clipboard,clipboard
+URxvt.clipboard.autocopy: true
 
 URxvt.url-launcher: /usr/bin/xdg-open
 URxvt.url-select.underline: false
