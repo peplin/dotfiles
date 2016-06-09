@@ -4,7 +4,7 @@ Config { font = "xft:Ubuntu Mono-11"
        , position = Top
        , lowerOnStart = False
        , commands = [
-            Run Weather "KARB" ["-t","<tempF>F","-L",
+            Run Weather "KAGC" ["-t","<tempF>F","-L",
                 "20","-H","75","--normal","green","--high","red",
                 "--low","lightblue"] 36000
             , Run Com "/home/peplin/.dotfiles/bin/batterycheck.sh" [] "batcheck" 60
@@ -20,5 +20,5 @@ Config { font = "xft:Ubuntu Mono-11"
        ]
        , sepChar = "%"
        , alignSep = "}{"
-       , template = "         %multicpu% %memory% | %dynnetwork% %vol%}{%StdinReader% | %KARB% | <fc=#ee9a00>%date%</fc>"
+       , template = "         %multicpu% %memory% | %dynnetwork% %vol%}{%StdinReader% | %KAGC% | <fc=#ee9a00>%date%</fc>"
        }
