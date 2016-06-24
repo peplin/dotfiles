@@ -16,14 +16,14 @@ fi
 
 dbus-launch xmonad & wmpid=$!
 
-if [ command -v cbatticon >/dev/null 2>&1 ]; then
+if command -v cbatticon >/dev/null 2>&1; then
 cbatticon &
 fi
 
 pulseaudio &
 
 HOSTNAME=`hostname`
-if [ command -v dropbox-cli >/dev/null 2>&1 ]; then
+if command -v dropbox-cli >/dev/null 2>&1; then
 dropbox &
 else
 dropbox start
