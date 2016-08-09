@@ -7,7 +7,7 @@ set verbose off
 set breakpoint pending on
 
 set output-radix 0x10
-set input-radix 0x10
+set input-radix 0d10
 
 # These make gdb never pause in its output
 set height 0
