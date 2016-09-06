@@ -23,3 +23,6 @@ gmon.out
 .ropeproject/
 .eggs/
 .agignore
+xunit-test-results.xml
+build
+build/
