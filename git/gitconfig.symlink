@@ -48,6 +48,7 @@
     prr = "!f() { git fetch -fu $1 refs/pull/$2/head:pr/$2; } ; f"
     pru = "!f() { git fetch -fu upstream refs/pull/$1/head:pr/$1; } ; f"
     pr-clean = "!git for-each-ref refs/heads/pr/* --format='%(refname)' | while read ref ; do branch=${ref#refs/heads/} ; git branch -D $branch ; done"
+    addnw = !sh -c 'git diff -U0 -w --no-color "$@" | git apply --cached --ignore-whitespace --unidiff-zero -'
 
 [apply]
 	whitespace = nowarn
