@@ -24,3 +24,6 @@ gmon.out
 .eggs/
 .agignore
 env/
+xunit-test-results.xml
+build
+build/
