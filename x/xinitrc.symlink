@@ -3,6 +3,8 @@ xrdb -merge $HOME/.Xresources
 
 xsetroot -cursor_name left_ptr
 
+gnome-keyring-daemon --start --components=gpg,pkcs11,secrets,ssh
+
 # Disable tap to click on touchpad
 synclient MaxTapTime=0
 

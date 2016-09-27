@@ -1,4 +1,4 @@
-eval $(keychain --eval --agents ssh -Q --quiet id_rsa)
+#eval $(keychain --eval --agents ssh -Q --quiet id_rsa)
 type -p startx &> /dev/null
 if [[ $? == 0 ]] && [[ -z $DISPLAY ]] && ! [[ -e /tmp/.X11-unix/X0 ]] && (( EUID )); then
     exec startx
