@@ -1,4 +1,8 @@
 *vendor*
 *min.js
-packed*.*
 .git/
+build
+bin/
+lib/
+deps
+cmake
