@@ -206,11 +206,9 @@ systemctl enable nfs-server
 
 samba
 
-cbatticon
 wpa_actiond
 thunar
 gthumb
-google-talkplugin
 gdb
 picocom
 vlc

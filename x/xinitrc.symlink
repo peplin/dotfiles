@@ -16,10 +16,6 @@ fi
 
 dbus-launch xmonad & wmpid=$!
 
-if command -v cbatticon >/dev/null 2>&1; then
-cbatticon &
-fi
-
 pulseaudio &
 
 HOSTNAME=`hostname`
