@@ -3,7 +3,7 @@
 Xft.dpi: 96
 Xft.autohint: 0
 Xft.lcdfilter:  lcddefault
-Xft.hintstyle:  hintfull
+Xft.hintstyle:  hintslight
 Xft.hinting: true
 Xft.antialias: true
 ! this causes really wide character spacing in urxvt
