@@ -10,7 +10,7 @@ Xft.antialias: true
 ! Xft.rgba: rgb
 
 URxvt*buffered: true
-URxvt*cursorBlink: true
+URxvt*cursorBlink: false
 URxvt*underlineColor: yellow
 URxvt*font:  xft:Ubuntu Mono derivative Powerline:size=12:antialias=true
 URxvt*depth: 32
