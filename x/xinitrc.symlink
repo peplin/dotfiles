@@ -18,10 +18,6 @@ fi
 
 dbus-launch xmonad & wmpid=$!
 
-if command -v cbatticon >/dev/null 2>&1; then
-cbatticon &
-fi
-
 pulseaudio &
 
 HOSTNAME=`hostname`
@@ -33,6 +29,6 @@ fi
 
 nm-applet &
 
-xautolock -time 5 -locker slock &
+xautolock -time 5 -locker $HOME/.dotfiles/bin/lock-and-turn-off-display.sh &
 
 wait $wmpid

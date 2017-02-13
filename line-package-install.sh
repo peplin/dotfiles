@@ -77,9 +77,9 @@ systemctl enable avahi-daemon
 
 # fonts
 
-cairo-ubuntu
-freetype2-ubuntu
-fontconfig-ubuntu
+cairo
+freetype2
+fontconfig
 ttf-ubuntu-font-family
 ttf-ubuntu-mono-powerline-git
 ttf-dejavu
@@ -206,11 +206,9 @@ systemctl enable nfs-server
 
 samba
 
-cbatticon
 wpa_actiond
 thunar
 gthumb
-google-talkplugin
 gdb
 picocom
 vlc

@@ -3,14 +3,14 @@
 Xft.dpi: 96
 Xft.autohint: 0
 Xft.lcdfilter:  lcddefault
-Xft.hintstyle:  hintfull
+Xft.hintstyle:  hintslight
 Xft.hinting: true
 Xft.antialias: true
 ! this causes really wide character spacing in urxvt
 ! Xft.rgba: rgb
 
 URxvt*buffered: true
-URxvt*cursorBlink: true
+URxvt*cursorBlink: false
 URxvt*underlineColor: yellow
 URxvt*font:  xft:Ubuntu Mono derivative Powerline:size=12:antialias=true
 URxvt*depth: 32
