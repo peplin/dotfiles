@@ -23,7 +23,6 @@ PACKAGES=(
     preload
     trayer
     keychain
-    pm-utils
     acpi
     gnome-themes-standard
     lxappearance
