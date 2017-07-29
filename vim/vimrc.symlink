@@ -196,7 +196,7 @@ autocmd!
     " names) first list the available options and complete the longest common
     " part, then have further <Tab>s cycle through the possibilities:
     set wildmode=list:longest
-    set wildignore+=*.o,*~,*.pyc,*.class,__pycache__,*/node_modules/*,*/sent-mail/*,*/build/*
+    set wildignore+=*.o,*~,*.pyc,*.class,__pycache__,*/node_modules/*,*/sent-mail/*,build,*/build/*,*/purepy/*,*/experimental/*,*/embedded/common/hal/*,*/build-stripped/*
 
     " lines to scroll when cursor leaves screen
     set scrolljump=5

@@ -1,8 +1,10 @@
 *vendor*
 *min.js
 .git/
-build
+/build
 bin/
-lib/
 deps
 cmake
+atc-ui/
+node_modules/
+build-staged
