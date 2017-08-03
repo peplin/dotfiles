@@ -67,6 +67,7 @@ $INSTALL_CMD getmail
 libcups
 cups
 cups-filters
+gtk3-print-backends
 ghostscript
 gsfonts
 avahi
