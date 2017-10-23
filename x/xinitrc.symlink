@@ -8,7 +8,7 @@ gnome-keyring-daemon --start --components=gpg,pkcs11,secrets,ssh
 # Disable tap to click on touchpad
 synclient MaxTapTime=0
 
-if [ "`hostname`" = "cpeplin-M4800" ]; then
+if [ "`hostname`" = "cpeplin-7510" ]; then
 $HOME/.screenlayout/work.sh
 fi
 

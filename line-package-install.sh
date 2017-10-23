@@ -23,7 +23,6 @@ PACKAGES=(
     preload
     trayer
     keychain
-    pm-utils
     acpi
     gnome-themes-standard
     lxappearance
@@ -168,11 +167,8 @@ keychain
 
 # media
 
-gstreamer0.10-base-plugins
-gstreamer0.10-ffmpeg gstreamer0.10-good-plugins
-gstreamer0.10-ugly-plugins
 vlc
-morituri
+ripit
 alsa-utils
 
 libdvdcss

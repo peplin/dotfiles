@@ -25,5 +25,7 @@ gmon.out
 .agignore
 env/
 xunit-test-results.xml
-build
-build/
+/build
+/build/
+.agignore
+/build-staged/

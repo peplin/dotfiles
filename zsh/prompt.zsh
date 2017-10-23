@@ -2,27 +2,19 @@
 # http://github.com/ehrenmurdick/config/blob/master/zsh/prompt.zsh
 autoload colors && colors
 
-hg_prompt_info() {
-    hg prompt --angle-brackets "\
-<%{$fg[green]%}<branch>%{$reset_color%}>\
-<@%{$fg[yellow]%}<tags|%{$reset_color%}, %{$fg[yellow]%}>%{$reset_color%}>\
-%{$fg[green]%}<status|modified|unknown><update>%{$reset_color%}<
-patches: <patches|join( → )|pre_applied(%{$fg[yellow]%})|post_applied(%{$reset_color%})|pre_unapplied(%{$fg_bold[black]%})|post_unapplied(%{$reset_color%})>>" 2>/dev/null
-}
-
 git="/usr/bin/git"
 
 git_branch() {
-  echo $(timeout 0.2 $git symbolic-ref HEAD 2>/dev/null | awk -F/ {'print $NF'})
+  echo $(timeout 1.5 $git symbolic-ref HEAD 2>/dev/null | awk -F/ {'print $NF'})
 }
 
 git_prompt_info() {
-  ref=$(timeout 0.2 $git symbolic-ref HEAD 2> /dev/null) || return
+  ref=$(timeout 1.5 $git symbolic-ref HEAD 2> /dev/null) || return
   echo "${ref#refs/heads/}"
 }
 
 git_dirty() {
-    st=$(timeout 0.2 $git status 2>/dev/null | tail -n 1)
+    st=$(timeout 1.5 $git status 2>/dev/null | tail -n 1)
     if [[ $st == "" ]]
     then
         echo ""
@@ -37,7 +29,7 @@ git_dirty() {
 }
 
 unpushed () {
-  timeout 0.2 $git cherry -v @{upstream} 2>/dev/null
+  timeout 1.5 $git cherry -v @{upstream} 2>/dev/null
 }
 
 project_name () {
