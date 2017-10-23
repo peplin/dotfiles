@@ -15,6 +15,8 @@ import System.IO
 import qualified XMonad.StackSet as W
 import qualified Data.Map        as M
 
+import Data.Default(def)
+
 import XMonad.Util.Run(spawnPipe)
 
 import XMonad.Hooks.DynamicLog
@@ -100,7 +102,7 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
     , ((modMask,               xK_d     ), spawn "dmenu_run")
 
     , ((modMask,               xK_a     ), dirExecPromptNamed
-            def spawn "/home/peplin/.xmonad/actions" "Scripts: ")
+            spawn "/home/peplin/.xmonad/actions" "Scripts: ")
 
     -- launch application launcher
     , ((mod1Mask, xK_F2 ), spawn "gmrun")
@@ -166,7 +168,7 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
     , ((modMask .|. shiftMask, xK_g     ), gotoMenu)
     , ((modMask .|. shiftMask, xK_b     ), bringMenu)
 
-    , ((modMask, xK_x), goToSelected def)
+    , ((modMask, xK_x), goToSelected)
 
     -- temporarily maximize a window
     , ((modMask, xK_backslash), withFocused (sendMessage . maximizeRestore))
@@ -180,10 +182,11 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
     , ((mod4Mask, xK_z), spawn "mpc prev")
 
     -- audio
-    , ((modMask, xK_KP_Subtract), spawn "updatevolume.sh -")
+    , ((mod4Mask, xK_o), spawn "updatevolume.sh -")
     , ((0, xF86XK_AudioLowerVolume), spawn "updatevolume.sh -")
-    , ((modMask, xK_KP_Add), spawn "updatevolume.sh +")
+    , ((mod4Mask, xK_p), spawn "updatevolume.sh +")
     , ((0, xF86XK_AudioRaiseVolume), spawn "updatevolume.sh +")
+    , ((mod4Mask, xK_i), spawn "mute.sh")
     , ((0, xF86XK_AudioMute), spawn "mute.sh")
 
     -- lcd brightness
@@ -212,10 +215,10 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
     ++
 
     -- dynamic workspaces
-    [((modMask, xK_BackSpace), removeWorkspace)
-      , ((modMask, xK_v      ), selectWorkspace def)
-      , ((modMask, xK_m                    ), withWorkspace def (windows . W.shift))
-      , ((modMask, xK_n                    ), addWorkspacePrompt def)]
+    [-- ((modMask, xK_BackSpace), removeWorkspace)
+      ((modMask, xK_v      ), selectWorkspace )
+      , ((modMask, xK_m                    ), withWorkspace (windows . W.shift))
+      , ((modMask, xK_n                    ), addWorkspacePrompt )]
 
 ------------------------------------------------------------------------
 -- Mouse bindings: default actions bound to mouse events

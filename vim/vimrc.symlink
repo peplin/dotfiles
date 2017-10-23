@@ -162,6 +162,10 @@ autocmd!
 
     set confirm
 
+    " Disable F1 shortcut for help
+    nmap <F1> :echo<CR>
+    imap <F1> <C-o>:echo<CR>
+
     " Layout / Text formatting {{{
         " Conflict markers {{{
             " Highlight conflict markers
