@@ -100,7 +100,7 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
     , ((modMask,               xK_d     ), spawn "dmenu_run")
 
     , ((modMask,               xK_a     ), dirExecPromptNamed
-            defaultXPConfig spawn "/home/peplin/.xmonad/actions" "Scripts: ")
+            def spawn "/home/peplin/.xmonad/actions" "Scripts: ")
 
     -- launch application launcher
     , ((mod1Mask, xK_F2 ), spawn "gmrun")
@@ -166,7 +166,7 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
     , ((modMask .|. shiftMask, xK_g     ), gotoMenu)
     , ((modMask .|. shiftMask, xK_b     ), bringMenu)
 
-    , ((modMask, xK_x), goToSelected defaultGSConfig)
+    , ((modMask, xK_x), goToSelected def)
 
     -- temporarily maximize a window
     , ((modMask, xK_backslash), withFocused (sendMessage . maximizeRestore))
@@ -213,9 +213,9 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
 
     -- dynamic workspaces
     [((modMask, xK_BackSpace), removeWorkspace)
-      , ((modMask, xK_v      ), selectWorkspace defaultXPConfig)
-      , ((modMask, xK_m                    ), withWorkspace defaultXPConfig (windows . W.shift))
-      , ((modMask, xK_n                    ), addWorkspacePrompt defaultXPConfig)]
+      , ((modMask, xK_v      ), selectWorkspace def)
+      , ((modMask, xK_m                    ), withWorkspace def (windows . W.shift))
+      , ((modMask, xK_n                    ), addWorkspacePrompt def)]
 
 ------------------------------------------------------------------------
 -- Mouse bindings: default actions bound to mouse events
@@ -327,7 +327,7 @@ myStartupHook = return ()
 main = do
     xmobar <- spawnPipe "xmobar"
     trayproc <- spawnPipe "killall trayer; sleep 10; trayer --edge top --align left --SetDockType true --SetPartialStrut true --expand true --width 4 --alpha 0 --transparent true --height 18 --tint 000000"
-    xmonad $ ewmh defaultConfig {
+    xmonad $ docks def {
       -- simple stuff
         terminal           = myTerminal,
         focusFollowsMouse  = myFocusFollowsMouse,

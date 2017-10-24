@@ -416,6 +416,7 @@ autocmd!
         let g:notes_suffix = ".md"
         let g:notes_title_sync = 'no'
         let g:notes_list_bullets = ['*', '-', '+']
+        let g:notes_recentindex = '~/.vim/bundle/vim-notes/misc/notes/recent.txt'
         map <leader>n :Note<space>
     " }
 
