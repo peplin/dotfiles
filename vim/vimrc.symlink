@@ -30,8 +30,7 @@ autocmd!
 
         " Theme
         Plugin 'altercation/vim-colors-solarized'
-        Plugin 'vim-airline/vim-airline'
-        Plugin 'vim-airline/vim-airline-themes'
+        Plugin 'itchyny/lightline'
 
         " Formatters
         Plugin 'hynek/vim-python-pep8-indent'
@@ -427,11 +426,6 @@ autocmd!
 
     " gitgutter {
       let g:gitgutter_escape_grep = 1
-    " }
-
-    " airline (statusbar) {
-      let g:airline#extensions#tabline#enabled = 1
-      let g:airline_powerline_fonts = 1
     " }
 
     " Supertab {
