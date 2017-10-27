@@ -215,8 +215,9 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
     ++
 
     -- dynamic workspaces
-    [((modMask, xK_BackSpace), removeWorkspace)
-      , ((modMask, xK_v      ), selectWorkspace def)
+    [
+      -- ((modMask, xK_BackSpace), removeWorkspace)
+      ((modMask, xK_v      ), selectWorkspace def)
       , ((modMask, xK_m                    ), withWorkspace def (windows . W.shift))
       , ((modMask, xK_n                    ), addWorkspacePrompt def)]
 
