@@ -190,8 +190,8 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
     , ((0, xF86XK_AudioMute), spawn "mute.sh")
 
     -- lcd brightness
-    , ((0, xF86XK_MonBrightnessUp), spawn "/usr/bin/xbacklight -inc 10")
-    , ((0, xF86XK_MonBrightnessDown), spawn "/usr/bin/xbacklight -dec 10")
+    , ((0, xF86XK_MonBrightnessUp), spawn "sudo /home/cpeplin/bin/backlight.sh up")
+    , ((0, xF86XK_MonBrightnessDown), spawn "sudo /home/cpeplin/bin/backlight.sh down")
 
     ]
     ++
