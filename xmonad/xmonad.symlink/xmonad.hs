@@ -102,7 +102,7 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
     , ((modMask,               xK_d     ), spawn "dmenu_run")
 
     , ((modMask,               xK_a     ), dirExecPromptNamed
-            spawn "/home/peplin/.xmonad/actions" "Scripts: ")
+            def spawn "/home/peplin/.xmonad/actions" "Scripts: ")
 
     -- Screeenshot selected area
     , ((modMask, xK_s     ), spawn "xfce4-screenshooter -fc")
@@ -171,7 +171,7 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
     , ((modMask .|. shiftMask, xK_g     ), gotoMenu)
     , ((modMask .|. shiftMask, xK_b     ), bringMenu)
 
-    , ((modMask, xK_x), goToSelected)
+    , ((modMask, xK_x), goToSelected def)
 
     -- temporarily maximize a window
     , ((modMask, xK_backslash), withFocused (sendMessage . maximizeRestore))
