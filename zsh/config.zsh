@@ -27,7 +27,8 @@ if [ "$SHELL" = "/bin/zsh" ]; then
     setopt hist_no_store # don't save 'history' cmd in history
     setopt extended_history # add timestamps to history
     setopt hist_ignore_all_dups  # don't record dupes in history
-    setopt hist_reduce_blanks
+    # this may be causing the weird history corruption
+    #setopt hist_reduce_blanks
     setopt hist_verify # allow confirmation before running with history subst.
     setopt no_share_history
     setopt no_inc_append_history

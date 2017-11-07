@@ -102,6 +102,9 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
     , ((modMask,               xK_a     ), dirExecPromptNamed
             def spawn "/home/peplin/.xmonad/actions" "Scripts: ")
 
+    -- Screeenshot selected area
+    , ((modMask, xK_s     ), spawn "xfce4-screenshooter -rc")
+
     -- launch application launcher
     , ((mod1Mask, xK_F2 ), spawn "gmrun")
 
@@ -187,8 +190,8 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
     , ((0, xF86XK_AudioMute), spawn "mute.sh")
 
     -- lcd brightness
-    , ((0, xF86XK_MonBrightnessUp), spawn "/usr/bin/xbacklight -inc 10")
-    , ((0, xF86XK_MonBrightnessDown), spawn "/usr/bin/xbacklight -dec 10")
+    , ((0, xF86XK_MonBrightnessUp), spawn "sudo /home/cpeplin/bin/backlight.sh up")
+    , ((0, xF86XK_MonBrightnessDown), spawn "sudo /home/cpeplin/bin/backlight.sh down")
 
     ]
     ++
@@ -212,8 +215,9 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
     ++
 
     -- dynamic workspaces
-    [((modMask, xK_BackSpace), removeWorkspace)
-      , ((modMask, xK_v      ), selectWorkspace def)
+    [
+      -- ((modMask, xK_BackSpace), removeWorkspace)
+      ((modMask, xK_v      ), selectWorkspace def)
       , ((modMask, xK_m                    ), withWorkspace def (windows . W.shift))
       , ((modMask, xK_n                    ), addWorkspacePrompt def)]
 
@@ -326,7 +330,7 @@ myStartupHook = return ()
 --
 main = do
     xmobar <- spawnPipe "xmobar"
-    trayproc <- spawnPipe "killall trayer; sleep 10; trayer --edge top --align left --SetDockType true --SetPartialStrut true --expand true --width 4 --alpha 0 --transparent true --height 18 --tint 000000"
+    trayproc <- spawnPipe "killall trayer -q; sleep 10; trayer --edge top --align left --SetDockType true --SetPartialStrut true --expand true --width 4 --alpha 0 --transparent true --height 18 --tint 000000"
     xmonad $ docks def {
       -- simple stuff
         terminal           = myTerminal,
