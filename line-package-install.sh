@@ -223,3 +223,5 @@ systemctl enable NetworkManager
 xsel
 
 flake8
+
+arc-gtk
