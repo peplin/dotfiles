@@ -3,7 +3,7 @@ if [[ -S "$SSH_AUTH_SOCK" && ! -h "$SSH_AUTH_SOCK" ]]; then
 fi
 export SSH_AUTH_SOCK=~/.ssh/ssh_auth_sock;
 
-if [ $SSH_TTY ] && [ ! $WINDOW ]; then
+if [ $SSH_TTY ] && [ ! $WINDOW ] && [ ! $DISPLAY ]; then
     if [[ -z "$TMUX" ]] ;then
         if which tmux >/dev/null 2>&1; then
             ID="`tmux ls | grep -vm1 attached | cut -d: -f1`" # get the id of a deattached session

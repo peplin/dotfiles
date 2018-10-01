@@ -4,10 +4,7 @@ Config { font = "xft:Ubuntu Mono-11"
        , position = Top
        , lowerOnStart = False
        , commands = [
-            Run Weather "KAGC" ["-t","<tempF>F","-L",
-                "20","-H","75","--normal","green","--high","red",
-                "--low","lightblue"] 36000
-            , Run Com "/home/peplin/.dotfiles/bin/batterycheck.sh" [] "batcheck" 60
+            Run Com "/home/peplin/.dotfiles/bin/batterycheck.sh" [] "batcheck" 60
             , Run DynNetwork ["-L","10","-H","200","--normal","green",
                 "--high","red","--minwidth", "5","-t","<rx>KB | <tx>KB"] 20
             , Run Com "/home/peplin/.dotfiles/bin/volume.sh" [] "vol" 20
@@ -36,5 +33,5 @@ Config { font = "xft:Ubuntu Mono-11"
        ]
        , sepChar = "%"
        , alignSep = "}{"
-       , template = "            %battery% %multicpu% %memory% | %dynnetwork% %vol%}{%StdinReader% | %KAGC% | <fc=#ee9a00>%date%</fc>"
+       , template = "            %battery% %multicpu% %memory% | %dynnetwork% %vol%}{%StdinReader% | <fc=#ee9a00>%date%</fc>"
        }
