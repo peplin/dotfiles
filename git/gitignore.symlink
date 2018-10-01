@@ -29,3 +29,4 @@ xunit-test-results.xml
 /build/
 .agignore
 /build-staged/
+filters.json
