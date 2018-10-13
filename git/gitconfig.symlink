@@ -36,7 +36,7 @@
     head = !git l -1
     h = !git head
     s = !git l -20
-    l = "!. ~/.dotfiles/git/functions/glog && glog"
+    l = "!f() { git log --graph --format=fuller --pretty=\"tformat:%C(yellow)%h%Creset %Cgreen(%cr)%Creset %C(bold blue)%an%Creset %C(red)%d%Creset %s\" $*; } ; f"
     unmerged = branch -a --no-merged
     merged = branch -a --merged
 	last = log -1 HEAD

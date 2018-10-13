@@ -448,7 +448,7 @@ autocmd!
 
     " vim-clang-format {
     let g:clang_format#detect_style_file=1
-    let g:clang_format#auto_formatexpr=1
+    let g:clang_format#auto_formatexpr=0
     let g:clang_format#command="/opt/clang+llvm-3.8.0/bin/clang-format"
     let g:clang_format#style_options = {
                 \ "BasedOnStyle" : "LLVM",
