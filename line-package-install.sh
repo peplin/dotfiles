@@ -199,10 +199,6 @@ systemctl enable nfs-common
 systemctl enable portmap
 systemctl enable nfs-server
 
-# samba
-
-samba
-
 wpa_actiond
 thunar
 gthumb
