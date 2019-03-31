@@ -30,7 +30,7 @@ autocmd!
 
         " Theme
         Plugin 'altercation/vim-colors-solarized'
-        Plugin 'itchyny/lightline'
+        Plugin 'itchyny/lightline.vim'
 
         " Formatters
         Plugin 'hynek/vim-python-pep8-indent'
