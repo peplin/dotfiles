@@ -30,7 +30,7 @@ autocmd!
 
         " Theme
         Plugin 'altercation/vim-colors-solarized'
-        Plugin 'itchyny/lightline'
+        Plugin 'itchyny/lightline.vim'
 
         " Formatters
         Plugin 'hynek/vim-python-pep8-indent'
@@ -40,8 +40,7 @@ autocmd!
         Plugin 'airblade/vim-gitgutter'
         Plugin 'tpope/vim-fugitive'
         Plugin 'peplin/vim-phabrowse'
-        Plugin 'xolox/vim-notes'
-        Plugin 'xolox/vim-misc'
+        Plugin 'Alok/notational-fzf-vim'
 
         " Candidates for retirement
         "Plugin 'rking/ag.vim'
@@ -409,14 +408,12 @@ autocmd!
         let NERDSpaceDelims = 1
     " }
 
-    " Notes {
-        let g:notes_directories = ["~/Dropbox/notes"]
-        let g:notes_smart_quotes = 0
-        let g:notes_suffix = ".md"
-        let g:notes_title_sync = 'no'
-        let g:notes_list_bullets = ['*', '-', '+']
-        let g:notes_recentindex = '~/.vim/bundle/vim-notes/misc/notes/recent.txt'
-        map <leader>n :Note<space>
+    " notational-fzf {
+        let g:nv_search_paths = ['~/Dropbox/notes']
+        let g:nv_ignore_patterns = ['~/Dropbox/notes/archive/*']
+        let g:nv_use_short_pathnames = 1
+
+        map <leader>n :NV<CR>
     " }
 
     " EasyMotion {
