@@ -3,7 +3,7 @@ xrdb -merge $HOME/.Xresources
 
 xsetroot -cursor_name left_ptr
 
-gnome-keyring-daemon --start --components=gpg,pkcs11,secrets,ssh
+eval $(gnome-keyring-daemon --replace --components=gpg,pkcs11,secrets)
 
 # Disable tap to click on touchpad
 synclient MaxTapTime=0
@@ -13,12 +13,15 @@ synclient PalmMinWidth=100
 synclient PalmMinZ=200
 synclient ClickPad=1
 
+xinput -set-prop  'AlpsPS/2 ALPS DualPoint Stick' "Device Enabled" "0"
+xinput -set-prop  'AlpsPS/2 ALPS DualPoint TouchPad' "Device Enabled" "0"
+
 # The above settings are being reset by something when this laptop resumes from
 # suspend - resotring to this daemon to kill tap touch for now
 syndaemon -t -k -i 1.5 -d
 
 if [ "`hostname`" = "cpeplin-7510" ]; then
-$HOME/.screenlayout/work.sh
+xrandr --output DP-4 --off --output DP-3 --mode 2560x1600
 fi
 
 if [ "`hostname`" = "7520-cpeplin" ]; then
