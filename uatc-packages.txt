@@ -2,8 +2,10 @@ pwgen gnucash trayer keychain pm-utils acpi evince iftop iotop ncdu preload
 lxappearance openssl  libxml2 sqlite hunspell vim rxvt-unicode pavucontrol
 xmobar gmrun dunst suckless-tools xautolock  xclip openssh-server tmux
 dstat glances smartmontools lsof nmap thunar picocom vlc xsel zsh
-silversearcher-ag htop python-flake8 xfce4-screenshooter putty xbacklight
+silversearcher-ag htop flake8 xfce4-screenshooter putty xbacklight
 cabal-install xbacklight xfce4-clipmon
+
+libterm-readkey-perl
 
 cabal install xmonad
 cabal install xmonad-contrib
