@@ -199,10 +199,6 @@ systemctl enable nfs-common
 systemctl enable portmap
 systemctl enable nfs-server
 
-# samba
-
-samba
-
 wpa_actiond
 thunar
 gthumb
@@ -218,8 +214,12 @@ nm-applet
 openvpn-update-resolv-conf
 systemctl enable NetworkManager
 
+console-tdm
+
 # May only be required on ubuntu, this makes select+paste from urxvt work like
 # you would expect, no middle mouse nonsense
 xsel
 
 flake8
+
+arc-gtk

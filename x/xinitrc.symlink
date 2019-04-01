@@ -21,6 +21,10 @@ if [ "`hostname`" = "cpeplin-7510" ]; then
 $HOME/.screenlayout/work.sh
 fi
 
+if [ "`hostname`" = "7520-cpeplin" ]; then
+$HOME/.screenlayout/work.sh
+fi
+
 if [ "`hostname`" = "curve" ]; then
 $HOME/.screenlayout/dual.sh
 fi

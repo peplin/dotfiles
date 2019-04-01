@@ -179,13 +179,7 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
     -- toggle master pane on left/right
     , ((modMask, xK_f), sendMessage $ Toggle REFLECTX)
 
-    -- music
-    , ((mod4Mask, xK_c), spawn "mpc toggle")
-    , ((mod4Mask, xK_b), spawn "mpc next")
-    , ((mod4Mask, xK_z), spawn "mpc prev")
-
     -- audio
-    , ((mod4Mask, xK_o), spawn "updatevolume.sh -")
     , ((0, xF86XK_AudioLowerVolume), spawn "updatevolume.sh -")
     , ((mod4Mask, xK_p), spawn "updatevolume.sh +")
     , ((0, xF86XK_AudioRaiseVolume), spawn "updatevolume.sh +")
@@ -193,8 +187,8 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
     , ((0, xF86XK_AudioMute), spawn "mute.sh")
 
     -- lcd brightness
-    , ((0, xF86XK_MonBrightnessUp), spawn "sudo /home/cpeplin/bin/backlight.sh up")
-    , ((0, xF86XK_MonBrightnessDown), spawn "sudo /home/cpeplin/bin/backlight.sh down")
+    , ((0, xF86XK_MonBrightnessUp), spawn "xbacklight +10")
+    , ((0, xF86XK_MonBrightnessDown), spawn "xbacklight -10")
 
     ]
     ++
@@ -236,10 +230,10 @@ myMouseBindings (XConfig {XMonad.modMask = modMask}) = M.fromList $
     , ((mod1Mask, button1), (\w -> focus w >> mouseMoveWindow w))
 
     -- mod-button2, Raise the window to the top of the stack
-    , ((modMask, button2), (\w -> focus w >> windows W.swapMaster))
+    --, ((modMask, button2), (\w -> focus w >> windows W.swapMaster))
 
     -- mod-button3, Set the window to floating mode and resize by dragging
-    , ((modMask, button3), (\w -> focus w >> mouseResizeWindow w))
+    --, ((modMask, button3), (\w -> focus w >> mouseResizeWindow w))
 
     -- you may also bind events to the mouse scroll wheel (button4 and button5)
     ]
