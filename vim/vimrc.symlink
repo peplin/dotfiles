@@ -212,7 +212,7 @@ autocmd!
 " Folding {
     " auto fold code
     set foldenable
-    set foldlevelstart=0
+    set foldlevelstart=10
 
     " Space to toggle folds.
     nnoremap <Space> za
@@ -296,6 +296,9 @@ autocmd!
         " [<Ctrl>+N by default is like j, and <Ctrl>+P like k.]
         nnoremap <C-N> :next<CR>
         nnoremap <C-P> :prev<CR>
+
+        " Clear highlighted search
+        nnoremap <leader><space> :nohlsearch<CR>
 
         " Yank from the cursor to the end of the line, to be consistent with C
         " and D.
