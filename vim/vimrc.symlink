@@ -24,9 +24,12 @@ autocmd!
         Plugin 'tpope/vim-surround'
         Plugin 'tpope/vim-ragtag'
         Plugin 'tpope/vim-endwise'
+        Plugin 'tpope/vim-eunuch'
         Plugin 'tpope/vim-repeat'
         Plugin 'tpope/vim-unimpaired'
         Plugin 'simnalamburt/vim-mundo'
+        Plugin 'junegunn/vim-easy-align'
+        Plugin 'mileszs/ack.vim'
 
         " Theme
         Plugin 'altercation/vim-colors-solarized'
@@ -43,20 +46,9 @@ autocmd!
         Plugin 'Alok/notational-fzf-vim'
 
         " Candidates for retirement
-        "Plugin 'rking/ag.vim'
-        "Plugin 'mattn/gist-vim'
 
         " File types
-        Plugin 'elzr/vim-json'
-        Plugin 'tpope/vim-git'
-        Plugin 'justinj/vim-pico8-syntax'
-        " Faster YAML parsing
-        Plugin 'stephpy/vim-yaml'
-        "Plugin 'plasticboy/vim-markdown'
-        "Plugin 'pangloss/vim-javascript'
-        "Plugin 'mxw/vim-jsx'
-        "Plugin 'uarun/vim-protobuf'
-
+        Plugin 'sheerun/vim-polyglot'
         Plugin 'ssh://code@code.int.uberatc.com/diffusion/VIMHIDL/vim-hidl-ftplugin.git'
 
 
@@ -212,7 +204,7 @@ autocmd!
 " Folding {
     " auto fold code
     set foldenable
-    set foldlevelstart=0
+    set foldlevelstart=10
 
     " Space to toggle folds.
     nnoremap <Space> za
@@ -296,6 +288,9 @@ autocmd!
         " [<Ctrl>+N by default is like j, and <Ctrl>+P like k.]
         nnoremap <C-N> :next<CR>
         nnoremap <C-P> :prev<CR>
+
+        " Clear highlighted search
+        nnoremap <leader><space> :nohlsearch<CR>
 
         " Yank from the cursor to the end of the line, to be consistent with C
         " and D.
@@ -397,8 +392,17 @@ autocmd!
         map <leader>f :Ag<space>
     " }
     "
-    " vim-jsx {
-        let g:jsx_ext_required = 0
+
+    " lightline {
+        let g:lightline = {
+            \ 'colorscheme': 'solarized',
+        \ }
+    " }
+
+
+    " vim-ack {
+        let g:ackprg = 'rg --vimgrep'
+        nnoremap <Leader>a :Ack!<Space>
     " }
 
     " NERDComment {
@@ -442,6 +446,15 @@ autocmd!
 
     " vim-phabrowse {
         let g:phabrowse_domains = ["https://code.int.uberatc.com"]
+    " }
+
+    " vim-easy-align {
+        " Start interactive EasyAlign in visual mode (e.g. vipga)
+        " xmap ga <Plug>(EasyAlign)
+
+        " " Start interactive EasyAlign for a motion/text object (e.g. gaip)
+        " nmap ga <Plug>(EasyAlign)
+        au FileType markdown vmap <Leader><Bslash> :EasyAlign*<Bar><Enter>
     " }
 
     " vim-clang-format {
