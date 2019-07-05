@@ -36,7 +36,7 @@ xfce4-clipman &
 
 HOSTNAME=`hostname`
 if command -v dropbox-cli >/dev/null 2>&1; then
-dropbox &
+dropbox-cli start
 else
 dropbox start
 fi
