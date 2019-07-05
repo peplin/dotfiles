@@ -22,7 +22,7 @@ fi
 systemctl --user set-environment DISPLAY=:0
 
 rm ~/.xmonad/xmonad-x86_64-linux
-exec tdm --xstart
+dbus-launch xmonad & wmpid=$!
 
 if [ -d /etc/X11/xinit/xinitrc.d ] ; then
     for f in /etc/X11/xinit/xinitrc.d/?*.sh ; do
