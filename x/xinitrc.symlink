@@ -14,10 +14,6 @@ if [ "`hostname`" = "7520-cpeplin" ]; then
 $HOME/.screenlayout/work.sh
 fi
 
-if [ "`hostname`" = "curve" ]; then
-$HOME/.screenlayout/dual.sh
-fi
-
 # Set env for processes like dunst
 systemctl --user set-environment DISPLAY=:0
 
