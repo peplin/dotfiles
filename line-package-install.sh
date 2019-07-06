@@ -12,8 +12,12 @@ PACKAGES=(
     pwgen
     ncmpcpp
     mpd
+    mpc # for keyboard control
     mpdscribble
     ncdu
+    easytag
+    abcde
+    ntfs-3g # for NTFS write support
     iotop
     iftop
     gnucash
@@ -50,6 +54,7 @@ PACKAGES=(
 pulseaudio
 pavucontrol
 pulseaudio-alsa
+pulseaudio-zeroconf
 flac
 lame)
 
@@ -150,7 +155,6 @@ nmap
 # media
 
 vlc
-alsa-utils
 
 libdvdcss
 
@@ -172,8 +176,15 @@ gdb
 xsel
 
 flake8
-
 arc-gtk-theme
+
+
+cpupower
+sudo systemctl enable cpupower
+# set to performance on desktop
+
+thermald
+sudo systemctl enable thermald
 
 # Laptop only
 
