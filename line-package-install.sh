@@ -21,6 +21,7 @@ PACKAGES=(
     iotop
     iftop
     gnucash
+    libdbi-drivers # for gnucash sqlite backend
     gparted
     preload
     trayer
@@ -185,6 +186,10 @@ sudo systemctl enable cpupower
 
 thermald
 sudo systemctl enable thermald
+
+simple-scan
+iscan
+iscan-plugin-gt-x820
 
 # Laptop only
 
