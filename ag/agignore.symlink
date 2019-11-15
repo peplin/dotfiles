@@ -14,3 +14,4 @@ source/integration_tests/tests/integration_tests/ocs/suite_simulation_copilot_oc
 source/offboard/labeler/examples/perception_as_a_service.ipynb
 src/scripts/single_use/release_data.py
 source/third_party
+test_spectutil_data.py
