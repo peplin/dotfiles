@@ -208,7 +208,7 @@ autocmd!
 " Folding {
     " auto fold code
     set foldenable
-    set foldlevelstart=0
+    set foldlevelstart=10
 
     " Space to toggle folds.
     nnoremap <Space> za
@@ -292,6 +292,9 @@ autocmd!
         " [<Ctrl>+N by default is like j, and <Ctrl>+P like k.]
         nnoremap <C-N> :next<CR>
         nnoremap <C-P> :prev<CR>
+
+        " Clear highlighted search
+        nnoremap <leader><space> :nohlsearch<CR>
 
         " Yank from the cursor to the end of the line, to be consistent with C
         " and D.
@@ -402,7 +405,7 @@ autocmd!
 
 
     " vim-ack {
-        let g:ackprg = 'rg --vimgrep'
+        let g:ackprg = 'ack --vimgrep'
         nnoremap <Leader>a :Ack!<Space>
     " }
 
@@ -417,6 +420,7 @@ autocmd!
         let g:nv_search_paths = ['~/Dropbox/notes']
         let g:nv_ignore_patterns = ['~/Dropbox/notes/archive/*']
         let g:nv_use_short_pathnames = 1
+        let g:nv_show_preview = 0
 
         map <leader>n :NV<CR>
     " }
@@ -484,6 +488,9 @@ autocmd!
 
     " }
 " }
+
+highlight clear SpellBad
+highlight SpellBad ctermfg=009 ctermbg=011 guifg=#ff0000 guibg=#ffff00
 
 map <leader>q :call QFixToggle()<CR>
 function! QFixToggle()

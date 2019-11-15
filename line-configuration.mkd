@@ -1,23 +1,24 @@
 
-gmail backup
+fstab
 crashplan
-samba for tomato backups
-cnofigure mpd folders
+microcode in bootloader
+configure mpd folders
 configure mpd to connect to pulseaudio via tcp
-configure ssh port, disallow root
+configure ssh port, disallow root, disallow password
+locale-gen
+systemctl --user enable gmail-backup.timer
 
 create user for me, add to groups:
-    admin audio lp optical storage video wheel games power scanner network uucp
-         plugdev users vboxusers
+    audio lp optical storage video wheel games power scanner network uucp
+         plugdev users
 configure sudoers
 configure wol service
-allow login when shutting down with pam
 
-* run lxappearance and select them for gtk apps
+run lxappearance and select them for gtk apps
 configure xscreensaver
 
 ## Pulse
 
-in /etc/pulse/default.pa
+in .config/pulse/default.pa
 
 load-module module-switch-on-connect

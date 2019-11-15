@@ -1,4 +1,4 @@
-INSTALL_CMD="pacaur --noconfirm -S"
+INSTALL_CMD="yay -S"
 
 # Desktop
 
@@ -11,14 +11,17 @@ function install_packages(pkgs) {
 PACKAGES=(
     pwgen
     ncmpcpp
-    mpc
-    irsii
+    mpd
+    mpc # for keyboard control
+    mpdscribble
     ncdu
+    easytag
+    abcde
+    ntfs-3g # for NTFS write support
     iotop
     iftop
-    evince
-    vpnc
     gnucash
+    libdbi-drivers # for gnucash sqlite backend
     gparted
     preload
     trayer
@@ -33,12 +36,8 @@ PACKAGES=(
     libxslt
     libxml2
     sqlite
-    gnumeric
-    libreoffice
     hunspell
-    hunspell-en
     librsvg
-    android-udev
     vim
     dropbox
     dropbox-cli
@@ -52,9 +51,11 @@ install_packages($PACKAGES)
 
 # audio
 
-PACKAGES=(pulseaudio
+PACKAGES=(
+pulseaudio
 pavucontrol
 pulseaudio-alsa
+pulseaudio-zeroconf
 flac
 lame)
 
@@ -81,7 +82,7 @@ cairo
 freetype2
 fontconfig
 ttf-ubuntu-font-family
-ttf-ubuntu-mono-powerline-git
+powerline-fonts
 ttf-dejavu
 
 # Mandarin font
@@ -96,7 +97,6 @@ xmonad-contrib
 libnotify
 dunst
 dmenu
-gnome-themes-standard
 xautolock
 slock
 
@@ -104,8 +104,6 @@ slock
 
 xorg-server
 xorg-xinit
-xorg-utils
-xorg-server-utils
 xorg-xsetroot
 xorg-xmodmap
 mesa
@@ -117,95 +115,83 @@ xclip
 
 # Base
 
-grub
+grub / systemd-boot
 
 openssh
 systemctl enable sshd
+# disable password authentication
 
-sshguard
-systemctl enable sshbuard
-
-screen
+tmux
 zsh
 python
 python-pip
 python2
 python2-pip
 ruby
-openjdk6
+jre-openjdk-headless
 the_silver_searcher
-ln -fs /usr/lib/jvm/java-6-openjdk /usr/lib/jvm/default-java
+ripgrep
 htop
 dstat
 smartmontools
 ethtool
 unzip
-autoconf
-automake
 lsof
 wol
-screen-profiles
 glances
 
 git
 perl-term-readkey
 
-postfix
 rsync
 sudo
 
 ntp
-systemctl enable ntp
+systemctl enable ntpd
 
 # arch
 
-inetutils
-fakeroot
-dnsutils
-cdrkit
 nmap
-keychain
 
 # media
 
 vlc
-ripit
-alsa-utils
 
 libdvdcss
 
 google-chrome
 virtualbox
-firefox
-
-zlib
 
 # mpd
-
-mpd
-mpdscribble
 
 systemctl --user enable mpd
 systemctl --user enable mpdscribble
 
-
-#nfs
-
-# TODO only line
-#nfs-kernel-server
-nfs-utils
-rpcbind
-systemctl enable nfs-common
-systemctl enable portmap
-systemctl enable nfs-server
-
-wpa_actiond
 thunar
-gthumb
 gdb
-picocom
-vlc
-vim
+
+#console-tdm
+
+# May only be required on ubuntu, this makes select+paste from urxvt work like
+# you would expect, no middle mouse nonsense
+xsel
+
+flake8
+arc-gtk-theme
+
+
+cpupower
+sudo systemctl enable cpupower
+# set to performance on desktop
+
+thermald
+sudo systemctl enable thermald
+
+simple-scan
+iscan
+iscan-plugin-gt-x820
+
+# Laptop only
 
 # add startup service to run --auto-tune
 powertop
@@ -214,12 +200,5 @@ nm-applet
 openvpn-update-resolv-conf
 systemctl enable NetworkManager
 
-console-tdm
+openconnect
 
-# May only be required on ubuntu, this makes select+paste from urxvt work like
-# you would expect, no middle mouse nonsense
-xsel
-
-flake8
-
-arc-gtk
