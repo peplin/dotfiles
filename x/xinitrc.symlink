@@ -15,7 +15,7 @@ synclient ClickPad=1
 
 # The above settings are being reset by something when this laptop resumes from
 # suspend - resotring to this daemon to kill tap touch for now
-syndaemon -t -k -i 1.5 -d
+#syndaemon -t -k -i 1.5 -d
 
 if [ "`hostname`" = "cpeplin-7510" ]; then
 $HOME/.screenlayout/work.sh

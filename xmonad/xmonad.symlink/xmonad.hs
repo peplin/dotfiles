@@ -328,7 +328,7 @@ myStartupHook = return ()
 main = do
     xmobar <- spawnPipe "xmobar"
     trayproc <- spawnPipe "killall trayer -q; sleep 10; trayer --edge top --align left --SetDockType true --SetPartialStrut true --expand true --width 4 --alpha 0 --transparent true --height 18 --tint 000000"
-    xmonad $ docks def {
+    xmonad $ def {
       -- simple stuff
         terminal           = myTerminal,
         focusFollowsMouse  = myFocusFollowsMouse,
