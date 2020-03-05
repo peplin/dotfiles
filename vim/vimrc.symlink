@@ -42,15 +42,13 @@ autocmd!
         " Primary feature plugins
         Plugin 'airblade/vim-gitgutter'
         Plugin 'tpope/vim-fugitive'
-        Plugin 'peplin/vim-phabrowse'
+        Plugin 'tpope/vim-rhubarb'
         Plugin 'Alok/notational-fzf-vim'
 
         " Candidates for retirement
 
         " File types
         Plugin 'sheerun/vim-polyglot'
-        Plugin 'ssh://code@code.int.uberatc.com/diffusion/VIMHIDL/vim-hidl-ftplugin.git'
-
 
         call vundle#end()
     " }
@@ -446,10 +444,6 @@ autocmd!
     " vim-markdown {
         let g:vim_markdown_folding_disabled=1
         let g:vim_markdown_frontmatter=1
-    " }
-
-    " vim-phabrowse {
-        let g:phabrowse_domains = ["https://code.int.uberatc.com"]
     " }
 
     " vim-easy-align {
