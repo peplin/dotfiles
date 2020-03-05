@@ -1,3 +1,3 @@
-map <F7> Ofrom nose.tools import set_trace; set_trace(); # TODO<esc>
+map <F7> Oimport pdb; pdb.set_trace(); # TODO<esc>
 
 map <Leader>r :w\|:!python %:p<CR>
