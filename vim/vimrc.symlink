@@ -42,7 +42,7 @@ autocmd!
         " Primary feature plugins
         Plugin 'airblade/vim-gitgutter'
         Plugin 'tpope/vim-fugitive'
-        Plugin 'peplin/vim-phabrowse'
+        Plugin 'tpope/vim-rhubarb'
         Plugin 'Alok/notational-fzf-vim'
 
         " Candidates for retirement
@@ -440,10 +440,6 @@ autocmd!
     " vim-markdown {
         let g:vim_markdown_folding_disabled=1
         let g:vim_markdown_frontmatter=1
-    " }
-
-    " vim-phabrowse {
-        let g:phabrowse_domains = ["https://code.int.uberatc.com"]
     " }
 
     " vim-easy-align {
