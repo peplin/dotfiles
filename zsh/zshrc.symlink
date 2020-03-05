@@ -51,3 +51,5 @@ export SSH_AUTH_SOCK=/home/cpeplin/.ssh/ssh-agent.sock
 autoload bashcompinit
 bashcompinit
 . /etc/bash_completion.d/bops
+
+eval "$(direnv hook zsh)"

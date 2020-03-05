@@ -42,3 +42,4 @@ source/offboard/labeler/examples/perception_as_a_service.ipynb
 src/scripts/single_use/release_data.py
 source/third_party
 *.json
+*.tmp
