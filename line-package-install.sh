@@ -108,6 +108,7 @@ xorg-server
 xorg-xinit
 xorg-xsetroot
 xorg-xmodmap
+xorg-fonts-misc
 mesa
 xf86-input-keyboard
 xf86-input-mouse
