@@ -18,6 +18,7 @@ import qualified Data.Map        as M
 import Data.Default(def)
 
 import XMonad.Util.Run(spawnPipe)
+import XMonad.Util.EZConfig
 
 import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.ManageHelpers
