@@ -5,29 +5,6 @@ xsetroot -cursor_name left_ptr
 
 eval $(gnome-keyring-daemon --replace --components=gpg,pkcs11,secrets)
 
-# Disable tap to click on touchpad
-synclient MaxTapTime=0
-synclient MaxTapMove=0
-synclient PalmDetect=1
-synclient PalmMinWidth=100
-synclient PalmMinZ=200
-synclient ClickPad=1
-
-xinput -set-prop  'AlpsPS/2 ALPS DualPoint Stick' "Device Enabled" "0"
-xinput -set-prop  'AlpsPS/2 ALPS DualPoint TouchPad' "Device Enabled" "0"
-
-# The above settings are being reset by something when this laptop resumes from
-# suspend - resotring to this daemon to kill tap touch for now
-syndaemon -t -k -i 1.5 -d
-
-if [ "`hostname`" = "cpeplin-7510" ]; then
-xrandr --output DP-4 --off --output DP-3 --mode 2560x1600
-fi
-
-if [ "`hostname`" = "7520-cpeplin" ]; then
-$HOME/.screenlayout/work.sh
-fi
-
 # Set env for processes like dunst
 /* systemctl --user set-environment DISPLAY=:0 */
 
@@ -44,7 +21,6 @@ fi
 pulseaudio &
 xfce4-clipman &
 
-HOSTNAME=`hostname`
 if command -v dropbox-cli >/dev/null 2>&1; then
 dropbox-cli start
 else
@@ -55,6 +31,6 @@ nm-applet &
 
 gnome-keyring-daemon
 
-xautolock -time 5 -locker $HOME/.dotfiles/bin/lock-and-turn-off-display.sh &
+xautolock -time 5 -corners "00--" -secure -locker $HOME/.dotfiles/bin/lock-and-turn-off-display.sh &
 
 wait $wmpid

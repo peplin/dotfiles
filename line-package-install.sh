@@ -18,6 +18,7 @@ PACKAGES=(
     easytag
     abcde
     ntfs-3g # for NTFS write support
+    ntfs-3g-system-compression
     iotop
     iftop
     gnucash
@@ -45,6 +46,7 @@ PACKAGES=(
     urxvt-perls
     urxvt-vtwheel
     urxvt-font-size-git
+    udisks2
 )
 
 install_packages($PACKAGES)
@@ -106,6 +108,7 @@ xorg-server
 xorg-xinit
 xorg-xsetroot
 xorg-xmodmap
+xorg-fonts-misc
 mesa
 xf86-input-keyboard
 xf86-input-mouse
@@ -190,6 +193,8 @@ sudo systemctl enable thermald
 simple-scan
 iscan
 iscan-plugin-gt-x820
+
+xfce4-screenshooter
 
 # Laptop only
 
