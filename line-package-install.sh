@@ -24,7 +24,6 @@ PACKAGES=(
     gnucash
     libdbi-drivers # for gnucash sqlite backend
     gparted
-    preload
     trayer
     keychain
     acpi
