@@ -29,6 +29,7 @@ import XMonad.Layout.Reflect
 import XMonad.Layout.MultiToggle
 import XMonad.Layout.AutoMaster
 import XMonad.Layout.Renamed
+import XMonad.Layout.Grid
 
 import XMonad.Prompt
 import XMonad.Prompt.DirExec
@@ -250,7 +251,7 @@ myMouseBindings (XConfig {XMonad.modMask = modMask}) = M.fromList $
 -- which denotes layout choice.
 --
 myLayout = mkToggle(single REFLECTX) $
-        tiled ||| mirrored ||| fullscreen
+        tiled ||| mirrored ||| fullscreen ||| grid
   where
      -- default tiling algorithm partitions the screen into two panes
      tiled = renamed [Replace "Tiled"] $ maximize(reflectHoriz $ Tall nmaster delta ratio)
@@ -259,6 +260,8 @@ myLayout = mkToggle(single REFLECTX) $
      mirrored = Mirror tiled
 
      fullscreen = Full
+
+     grid = Grid
 
      -- The default number of windows in the master pane
      nmaster = 1
