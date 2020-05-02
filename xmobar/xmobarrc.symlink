@@ -4,10 +4,9 @@ Config { font = "xft:Ubuntu Mono-11"
        , position = Top
        , lowerOnStart = False
        , commands = [
-            Run Com "/home/peplin/.dotfiles/bin/batterycheck.sh" [] "batcheck" 60
+            Run Com "/home/peplin/.dotfiles/bin/batterycheck.sh" [] "batcheck" 600
             , Run DynNetwork ["-L","10","-H","200","--normal","green",
                 "--high","red","--minwidth", "5","-t","<rx>KB | <tx>KB"] 20
-            , Run Com "/home/peplin/.dotfiles/bin/volume.sh" [] "vol" 20
         -- battery monitor
         , Run Battery        [ "--template" , "Batt: <acstatus>"
                              , "--Low"      , "15"        -- units: %
@@ -23,15 +22,15 @@ Config { font = "xft:Ubuntu Mono-11"
                                        , "-O"	, "<fc=#dAA520>Charging</fc> <left>%"
                                        -- charged status
                                        , "-i"	, "<fc=#006000>Charged</fc>"
-                             ] 50
+                             ] 600
             , Run MultiCpu ["-t", "<autototal>","-L","30","-H","60","--normal",
                 "green","--high","red","-p","3","--suffix","True"] 20
             , Run Memory ["-t","<usedratio>%","-H","20078","-L","4096",
-                "--normal","green","--high","red"] 20
-            , Run Date "%a %b %_d %Y %H:%M:%S" "date" 20
+                "--normal","green","--high","red"] 50
+            , Run Date "%a %b %_d %Y %H:%M" "date" 600
             , Run StdinReader
        ]
        , sepChar = "%"
        , alignSep = "}{"
-       , template = "            %battery% %multicpu% %memory% | %dynnetwork% %vol%}{%StdinReader% | <fc=#ee9a00>%date%</fc>"
+       , template = "            %battery% %multicpu% %memory% | %dynnetwork%}{%StdinReader% | <fc=#ee9a00>%date%</fc>"
        }
