@@ -166,10 +166,6 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
     -- lock the screen
     , ((modMask, xK_z), spawn "lock-and-turn-off-display.sh")
 
-    -- window bringer
-    , ((modMask .|. shiftMask, xK_g     ), gotoMenu)
-    , ((modMask .|. shiftMask, xK_b     ), bringMenu)
-
     , ((modMask, xK_x), goToSelected def)
 
     -- temporarily maximize a window
