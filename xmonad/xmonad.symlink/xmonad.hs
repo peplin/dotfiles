@@ -183,6 +183,12 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
     , ((0, xF86XK_AudioRaiseVolume), spawn "updatevolume.sh +")
     , ((mod4Mask, xK_i), spawn "mute.sh")
     , ((0, xF86XK_AudioMute), spawn "mute.sh")
+    , ((0, xF86XK_AudioPlay), spawn "/usr/bin/mpc toggle")
+    , ((0, xK_F9), spawn "/usr/bin/mpc toggle")
+    , ((0, xF86XK_AudioNext), spawn "/usr/bin/mpc next")
+    , ((0, xK_F11), spawn "/usr/bin/mpc next")
+    , ((0, xF86XK_AudioPrev), spawn "/usr/bin/mpc prev")
+    , ((0, xK_F10), spawn "/usr/bin/mpc prev")
 
     -- lcd brightness
     , ((0, xF86XK_MonBrightnessUp), spawn "/home/cpeplin/bin/backlight.sh up")
