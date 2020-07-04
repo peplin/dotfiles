@@ -17,6 +17,8 @@ PACKAGES=(
     ncdu
     easytag
     abcde
+    perl-webservice-musicbrainz
+    perl-musicbrainz-discid
     ntfs-3g # for NTFS write support
     ntfs-3g-system-compression
     iotop
