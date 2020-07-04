@@ -197,6 +197,8 @@ iscan
 iscan-plugin-gt-x820
 
 xfce4-screenshooter
+peek
+gifski
 
 # Laptop only
 

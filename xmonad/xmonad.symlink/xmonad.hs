@@ -295,6 +295,7 @@ myManageHook = composeAll
     [ className =? "Gimp"           --> doFloat
     , className =? "gmrun"  --> doFloat
     , className =? "Skype"           --> doFloat
+    , className =? "Peek"           --> doFloat
     , className =? "Xfce4-notifyd" --> doIgnore
     , resource  =? "desktop_window" --> doIgnore
     , isFullscreen --> doFullFloat
