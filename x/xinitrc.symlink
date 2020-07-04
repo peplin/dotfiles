@@ -25,8 +25,8 @@ fi
 
 nm-applet &
 
-gnome-keyring-daemon
+xautolock -time 14 -corners "----" -secure -locker $HOME/.dotfiles/bin/lock-and-turn-off-display.sh &
 
-xautolock -time 5 -corners "----" -secure -locker $HOME/.dotfiles/bin/lock-and-turn-off-display.sh &
+gnome-keyring-daemon
 
 wait $wmpid
