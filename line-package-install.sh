@@ -87,6 +87,7 @@ fontconfig
 ttf-ubuntu-font-family
 powerline-fonts
 ttf-dejavu
+noto-fonts-emoji
 
 # Mandarin font
 wqy-zenhei
