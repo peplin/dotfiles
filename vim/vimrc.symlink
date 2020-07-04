@@ -150,10 +150,6 @@ autocmd!
 
     set confirm
 
-    " Disable F1 shortcut for help
-    nmap <F1> :echo<CR>
-    imap <F1> <C-o>:echo<CR>
-
     " Layout / Text formatting {{{
         " Conflict markers {{{
             " Highlight conflict markers
@@ -188,7 +184,7 @@ autocmd!
     " names) first list the available options and complete the longest common
     " part, then have further <Tab>s cycle through the possibilities:
     set wildmode=list:longest
-    set wildignore+=*.o,*~,*.pyc,*.class,__pycache__,*/node_modules/*,*/sent-mail/*,build,*/build/*,*/purepy/*,*/embedded/common/hal/*,*/build-stripped/*
+    set wildignore+=*.o,*~,*.pyc,*.class,__pycache__,*/node_modules/*,*/sent-mail/*,*/build/*
 
     " lines to scroll when cursor leaves screen
     set scrolljump=5

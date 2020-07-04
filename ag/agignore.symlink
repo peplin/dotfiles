@@ -5,15 +5,6 @@
 bin/
 deps
 cmake
-atc-ui/
 node_modules/
-source/offboard/labeler/tools/test_spectutil_data.py
 build-staged
-source/offboard/labeler/pipeline/test/resources/simple_spectacle/filters.json
-source/integration_tests/tests/integration_tests/ocs/suite_simulation_copilot_ocs/shared/verificationPoints/VP_screenshot_dialog
-source/offboard/labeler/examples/perception_as_a_service.ipynb
-src/scripts/single_use/release_data.py
-source/third_party
-test_spectutil_data.py
 *.ipynb
-platform/calibration
