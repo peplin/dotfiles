@@ -46,7 +46,6 @@ PACKAGES=(
     rxvt-unicode
     urxvt-perls
     urxvt-vtwheel
-    urxvt-font-size-git
     udisks2
 )
 
