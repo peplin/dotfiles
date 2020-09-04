@@ -1,14 +1,13 @@
-! urxvt
-
-Xft.dpi: 96
+Xft.dpi: 120
 Xft.autohint: 0
 Xft.lcdfilter:  lcddefault
-Xft.hintstyle:  hintslight
+Xft.hintstyle:  hintfull
 Xft.hinting: true
 Xft.antialias: true
-! this causes really wide character spacing in urxvt
+! This causes too wide character spacing in urxvt
 ! Xft.rgba: rgb
 
+! urxvt
 URxvt*buffered: true
 URxvt*cursorBlink: false
 URxvt*underlineColor: yellow
