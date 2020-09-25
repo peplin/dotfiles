@@ -28,7 +28,6 @@ autocmd!
         Plugin 'tpope/vim-repeat'
         Plugin 'tpope/vim-unimpaired'
         Plugin 'simnalamburt/vim-mundo'
-        Plugin 'junegunn/vim-easy-align'
         Plugin 'mileszs/ack.vim'
 
         " Theme
@@ -43,7 +42,6 @@ autocmd!
         " Primary feature plugins
         Plugin 'airblade/vim-gitgutter'
         Plugin 'tpope/vim-fugitive'
-        Plugin 'tpope/vim-rhubarb'
         Plugin 'Alok/notational-fzf-vim'
 
         " vim-polyglot {
@@ -264,10 +262,6 @@ autocmd!
         " human-language text [this clobbers the `help' filetype, but that
         " doesn't seem to prevent help from working properly]:
         au BufNewFile,BufRead *.txt set filetype=human
-
-        au BufNewFile,BufRead *.aidl set filetype=java
-
-        au BufNewFile,BufRead *.ino set filetype=c
     " }
 " }
 
@@ -296,9 +290,9 @@ autocmd!
         " Clear highlighted search
         nnoremap <leader><space> :nohlsearch<CR>
 
-        " Yank from the cursor to the end of the line, to be consistent with C
-        " and D.
-        nnoremap Y y$
+        " Have Y behave analogously to D and C rather than to dd and cc (which
+        " is already done by yy):
+        noremap Y y$
 
         map <leader>v :vsp<CR>
         map <leader>s :sp<CR>
@@ -308,9 +302,6 @@ autocmd!
         map <C-K> <C-W>k<C-W>_
         map <C-L> <C-W>l<C-W>_
         map <C-H> <C-W>h<C-W>_
-
-        nnoremap <C-t> :tabnew<CR>
-        nnoremap <C-q> :tabclose<CR>
 
         " Shortcuts
         " Change Working Directory to that of the current file
@@ -332,10 +323,6 @@ autocmd!
         nnoremap Q gqap
         vnoremap Q gq
 
-        " have Y behave analogously to D and C rather than to dd and cc (which
-        " is already done by yy):
-        noremap Y y$
-
         " remove trailing whitespace and blank line whitespace on write
         autocmd BufWritePre * :%s/\s\+$//e
 
@@ -345,16 +332,14 @@ autocmd!
         " Keystrokes to toggle options are defined here.  They are all set to
         " normal mode keystrokes beginning \t but some function keys (which
         " won't work in all terminals) are also mapped.
-
-        " Hit F5 to highlight lines longer than 80 characters
-        map <F5> /\%>80v.\+<CR>
     " }
+
+    " Don't require shift to get colon
     nnoremap ; :
 " }
 
 " Highlighting {
     " Highlight whitespace errors
-    " TODO enable this only for source code filetypes
     highlight rightMargin ctermbg=red
     highlight tabError ctermbg=red
     highlight trailingSpace ctermbg=red
@@ -363,12 +348,9 @@ autocmd!
 " }
 
 " Plugins {
+    " fuzzyfinder
     " {
         map <leader>t :FZF<CR>
-    " }
-
-    " Gist {
-        let g:gist_detect_filetype = 1
     " }
 
     " Syntastic {
@@ -390,21 +372,15 @@ autocmd!
 
     " }
 
-    " Ack {
-        map <leader>f :Ag<space>
-    " }
-    "
-
     " lightline {
         let g:lightline = {
             \ 'colorscheme': 'solarized',
         \ }
     " }
 
-
     " vim-ack {
-        let g:ackprg = 'ack --vimgrep'
-        nnoremap <Leader>a :Ack!<Space>
+        let g:ackprg = 'ag --vimgrep --smart-case'
+        map <leader>f :Ack<space>
     " }
 
     " NERDComment {
@@ -429,7 +405,7 @@ autocmd!
     " }
 
     " gitgutter {
-      let g:gitgutter_escape_grep = 1
+         let g:gitgutter_escape_grep = 1
     " }
 
     " Supertab {
@@ -437,22 +413,9 @@ autocmd!
         let g:SuperTabLongestHighlight = 1
     " }
 
-    " Java syntax highlighting {
-        let g:java_allow_cpp_keywords = 1
-    " }
-
     " vim-markdown {
         let g:vim_markdown_folding_disabled=1
         let g:vim_markdown_frontmatter=1
-    " }
-
-    " vim-easy-align {
-        " Start interactive EasyAlign in visual mode (e.g. vipga)
-        " xmap ga <Plug>(EasyAlign)
-
-        " " Start interactive EasyAlign for a motion/text object (e.g. gaip)
-        " nmap ga <Plug>(EasyAlign)
-        au FileType markdown vmap <Leader><Bslash> :EasyAlign*<Bar><Enter>
     " }
 
     " vim-codefmt {
@@ -476,8 +439,8 @@ autocmd!
     " }
 
     " vim-mundo {
-    nnoremap <F6> :MundoToggle<CR>
-
+        let g:mundo_auto_preview_delay=0
+        nnoremap <F6> :MundoToggle<CR>
     " }
 " }
 
