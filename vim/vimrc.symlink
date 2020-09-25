@@ -36,8 +36,9 @@ autocmd!
         Plugin 'itchyny/lightline.vim'
 
         " Formatters
-        Plugin 'hynek/vim-python-pep8-indent'
-        Plugin 'rhysd/vim-clang-format'
+        Plugin 'google/vim-maktaba'
+        Plugin 'google/vim-codefmt'
+        Plugin 'google/vim-glaive'
 
         " Primary feature plugins
         Plugin 'airblade/vim-gitgutter'
@@ -51,6 +52,8 @@ autocmd!
         Plugin 'sheerun/vim-polyglot'
 
         call vundle#end()
+
+        call glaive#Install()
     " }
 " }
 
@@ -451,26 +454,24 @@ autocmd!
         au FileType markdown vmap <Leader><Bslash> :EasyAlign*<Bar><Enter>
     " }
 
-    " vim-clang-format {
-    let g:clang_format#detect_style_file=1
-    let g:clang_format#auto_formatexpr=0
-    let g:clang_format#command="/opt/clang+llvm-3.8.0/bin/clang-format"
-    let g:clang_format#style_options = {
-                \ "BasedOnStyle" : "LLVM",
-                \ "UseTab" : "Never",
-                \ "IndentWidth" : 4,
-                \ "BreakBeforeBraces" : "Attach",
-                \ "AllowShortIfStatementsOnASingleLine" : "false",
-                \ "IndentCaseLabels" : "false",
-                \ "ColumnLimit" : 80,
-                \ "PointerAlignment" : "Left",
-                \ "AccessModifierOffset" : -4,
-                \ "AllowShortLoopsOnASingleLine" : "false",
-                \ "AllowShortFunctionsOnASingleLine" : "false",
-                \ "MaxEmptyLinesToKeep" : 2,
-                \ "Standard" : "Auto",
-                \ "BreakConstructorInitializersBeforeComma" : "true"
-                \}
+    " vim-codefmt {
+        " <Leader>b formats the buffer, <Leader>= formats the current line
+        Glaive codefmt plugin[mappings]
+        Glaive codefmt google_java_executable="java -jar /path/to/google-java-format-VERSION-all-deps.jar"
+
+		augroup autoformat_settings
+		  autocmd FileType bzl AutoFormatBuffer buildifier
+		  autocmd FileType c,cpp,proto,javascript,arduino AutoFormatBuffer clang-format
+		  autocmd FileType dart AutoFormatBuffer dartfmt
+		  autocmd FileType go AutoFormatBuffer gofmt
+		  autocmd FileType gn AutoFormatBuffer gn
+		  autocmd FileType html,css,sass,scss,less,json AutoFormatBuffer js-beautify
+		  autocmd FileType java AutoFormatBuffer google-java-format
+		  autocmd FileType python AutoFormatBuffer yapf
+		  " Alternative: autocmd FileType python AutoFormatBuffer autopep8
+		  autocmd FileType rust AutoFormatBuffer rustfmt
+		  autocmd FileType vue AutoFormatBuffer prettier
+		augroup END
     " }
 
     " vim-mundo {
