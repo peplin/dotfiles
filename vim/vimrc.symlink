@@ -388,21 +388,15 @@ autocmd!
 
     " }
 
-    " Ack {
-        map <leader>f :Ag<space>
-    " }
-    "
-
     " lightline {
         let g:lightline = {
             \ 'colorscheme': 'solarized',
         \ }
     " }
 
-
     " vim-ack {
-        let g:ackprg = 'ack --vimgrep'
-        nnoremap <Leader>a :Ack!<Space>
+        let g:ackprg = 'ag --vimgrep --smart-case'
+        map <leader>f :Ack<space>
     " }
 
     " NERDComment {
