@@ -8,3 +8,4 @@ deps
 cmake
 *.ipynb
 yarn.lock
+.coverage
