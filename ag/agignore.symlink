@@ -6,3 +6,5 @@ bin/
 lib/
 deps
 cmake
+*.ipynb
+yarn.lock
