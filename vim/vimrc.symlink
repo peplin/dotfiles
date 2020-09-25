@@ -339,8 +339,6 @@ autocmd!
         " remove trailing whitespace and blank line whitespace on write
         autocmd BufWritePre * :%s/\s\+$//e
 
-        autocmd Filetype c,cpp set comments^=:///
-
     " }
 
     " Toggles {
