@@ -46,10 +46,13 @@ autocmd!
         Plugin 'tpope/vim-rhubarb'
         Plugin 'Alok/notational-fzf-vim'
 
-        " Candidates for retirement
+        " vim-polyglot {
+            " Must be defined before loading vim-polyglot
+            let g:polyglot_disabled = ['protobuf']
+            Plugin 'sheerun/vim-polyglot'
+        " }
 
         " File types
-        Plugin 'sheerun/vim-polyglot'
 
         call vundle#end()
 
