@@ -262,10 +262,6 @@ autocmd!
         " human-language text [this clobbers the `help' filetype, but that
         " doesn't seem to prevent help from working properly]:
         au BufNewFile,BufRead *.txt set filetype=human
-
-        au BufNewFile,BufRead *.aidl set filetype=java
-
-        au BufNewFile,BufRead *.ino set filetype=c
     " }
 " }
 
@@ -294,9 +290,9 @@ autocmd!
         " Clear highlighted search
         nnoremap <leader><space> :nohlsearch<CR>
 
-        " Yank from the cursor to the end of the line, to be consistent with C
-        " and D.
-        nnoremap Y y$
+        " Have Y behave analogously to D and C rather than to dd and cc (which
+        " is already done by yy):
+        noremap Y y$
 
         map <leader>v :vsp<CR>
         map <leader>s :sp<CR>
@@ -306,9 +302,6 @@ autocmd!
         map <C-K> <C-W>k<C-W>_
         map <C-L> <C-W>l<C-W>_
         map <C-H> <C-W>h<C-W>_
-
-        nnoremap <C-t> :tabnew<CR>
-        nnoremap <C-q> :tabclose<CR>
 
         " Shortcuts
         " Change Working Directory to that of the current file
@@ -330,10 +323,6 @@ autocmd!
         nnoremap Q gqap
         vnoremap Q gq
 
-        " have Y behave analogously to D and C rather than to dd and cc (which
-        " is already done by yy):
-        noremap Y y$
-
         " remove trailing whitespace and blank line whitespace on write
         autocmd BufWritePre * :%s/\s\+$//e
 
@@ -343,16 +332,14 @@ autocmd!
         " Keystrokes to toggle options are defined here.  They are all set to
         " normal mode keystrokes beginning \t but some function keys (which
         " won't work in all terminals) are also mapped.
-
-        " Hit F5 to highlight lines longer than 80 characters
-        map <F5> /\%>80v.\+<CR>
     " }
+
+    " Don't require shift to get colon
     nnoremap ; :
 " }
 
 " Highlighting {
     " Highlight whitespace errors
-    " TODO enable this only for source code filetypes
     highlight rightMargin ctermbg=red
     highlight tabError ctermbg=red
     highlight trailingSpace ctermbg=red
@@ -361,12 +348,9 @@ autocmd!
 " }
 
 " Plugins {
+    " fuzzyfinder
     " {
         map <leader>t :FZF<CR>
-    " }
-
-    " Gist {
-        let g:gist_detect_filetype = 1
     " }
 
     " Syntastic {
@@ -421,16 +405,12 @@ autocmd!
     " }
 
     " gitgutter {
-      let g:gitgutter_escape_grep = 1
+         let g:gitgutter_escape_grep = 1
     " }
 
     " Supertab {
         let g:SuperTabDefaultCompletionType = "<c-n>"
         let g:SuperTabLongestHighlight = 1
-    " }
-
-    " Java syntax highlighting {
-        let g:java_allow_cpp_keywords = 1
     " }
 
     " vim-markdown {
@@ -461,7 +441,6 @@ autocmd!
     " vim-mundo {
         let g:mundo_auto_preview_delay=0
         nnoremap <F6> :MundoToggle<CR>
-
     " }
 " }
 
