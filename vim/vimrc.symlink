@@ -466,7 +466,8 @@ autocmd!
     " }
 
     " vim-mundo {
-    nnoremap <F6> :MundoToggle<CR>
+        let g:mundo_auto_preview_delay=0
+        nnoremap <F6> :MundoToggle<CR>
 
     " }
 " }
