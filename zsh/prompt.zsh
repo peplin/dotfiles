@@ -33,13 +33,7 @@ unpushed () {
 }
 
 project_name () {
-  in_ford=$(pwd | grep 'ford')
-  if [[ $in_ford == "" ]]
-  then
-    name=$(pwd | awk -F'dev/' '{print $2}' | awk -F/ '{print $1}')
-  else
-    name=$(pwd | awk -F'dev/ford/' '{print $2}' | awk -F/ '{print $1}')
-  fi
+  name=$(pwd | awk -F'dev/' '{print $2}' | awk -F/ '{print $1}')
   echo $name
 }
 
