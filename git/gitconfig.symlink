@@ -50,10 +50,17 @@
     pr-clean = "!git for-each-ref refs/heads/pr/* --format='%(refname)' | while read ref ; do branch=${ref#refs/heads/} ; git branch -D $branch ; done"
     addnw = !sh -c 'git diff -U0 -w --no-color "$@" | git apply --cached --ignore-whitespace --unidiff-zero -'
 
+    land = !~/dev/av/tools/git/safe_land
+    flow = !~/dev/av/tools/git/flow
+    move-branch = !~/dev/av/tools/git/move_branch
+    br = !~/dev/av/tools/git/branch_tree  --sort_by_author_date
+    squash = !~/dev/av/tools/git/squash_branch
+    bd = diff @{upstream}...
+
 [apply]
 	whitespace = nowarn
 [branch]
-	autosetupmerge = true
+	autosetupmerge = always
 	autosetuprebase = always
 [github]
 	user = peplin
