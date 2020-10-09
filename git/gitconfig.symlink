@@ -81,7 +81,7 @@
 [init]
 	templatedir = ~/.git_template
 [mergetool "fugitive"]
-	cmd = vim -f -c \"Gvdiff\" \"$MERGED\"
+	cmd = vim -f -c \"Gvdiffsplit!\" \"$MERGED\"
 [fetch]
     recurseSubmodules = on-demand
 [credential]

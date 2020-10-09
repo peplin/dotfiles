@@ -12,7 +12,6 @@ create user for me, add to groups:
     audio lp optical storage video wheel games power scanner network uucp
          plugdev users
 configure sudoers
-configure wol service
 
 run lxappearance and select them for gtk apps
 configure xscreensaver

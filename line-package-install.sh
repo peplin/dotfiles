@@ -47,6 +47,7 @@ PACKAGES=(
     urxvt-perls
     urxvt-vtwheel
     udisks2
+    fzf
 )
 
 install_packages($PACKAGES)
