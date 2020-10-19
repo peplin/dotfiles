@@ -8,7 +8,13 @@ golint
 ripgrep (manual)
 dropbox (manual)
 fzf (manual)
+vundle (manual)
 
 .localrc:
 
 . /etc/profile
+
+
+clone dotfiles, install
+chsh
+clone work repos
