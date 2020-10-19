@@ -224,8 +224,6 @@ autocmd!
         " an indentation every four columns
         set tabstop=4
 
-        imap <S-Tab> <C-o><<
-
         " have % bounce between angled brackets, as well as t'other kinds:
         set matchpairs+=<:>
 
