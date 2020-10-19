@@ -5,11 +5,11 @@ autoload colors && colors
 git="/usr/bin/git"
 
 git_branch() {
-  echo $(timeout 0.2 $git symbolic-ref HEAD 2>/dev/null | awk -F/ {'print $NF'})
+  echo $(timeout 0.1 $git symbolic-ref HEAD 2>/dev/null | awk -F/ {'print $NF'})
 }
 
 git_prompt_info() {
-  ref=$(timeout 0.2 $git symbolic-ref HEAD 2> /dev/null) || return
+  ref=$(timeout 0.1 $git symbolic-ref HEAD 2> /dev/null) || return
   echo "${ref#refs/heads/}"
 }
 
@@ -21,15 +21,15 @@ git_dirty() {
     else
         if [[ "$st" =~ clean ]]
         then
-            echo "%{$fg[green]%}$(git_prompt_info)%{$reset_color%}"
+            echo "%{$fg[green]%}$(git_branch)%{$reset_color%}"
         else
-            echo "%{$fg_bold[red]%}$(git_prompt_info)%{$reset_color%}"
+            echo "%{$fg_bold[red]%}$(git_branch)%{$reset_color%}"
         fi
     fi
 }
 
 unpushed () {
-  timeout 0.2 $git cherry -v @{upstream} 2>/dev/null
+  timeout 0.1 $git cherry -v @{upstream} 2>/dev/null
 }
 
 project_name () {
