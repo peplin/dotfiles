@@ -53,9 +53,10 @@
     land = !~/dev/av/tools/git/safe_land
     flow = !~/dev/av/tools/git/flow
     move-branch = !~/dev/av/tools/git/move_branch
-    br = !~/dev/av/tools/git/branch_tree  --sort_by_author_date
+    br = !~/dev/av/tools/git/branch_tree  --sort_by_author_date -d
     squash = !~/dev/av/tools/git/squash_branch
     bd = diff @{upstream}...
+    remaster = !git rebase --onto master HEAD~1
 
 [apply]
 	whitespace = nowarn
