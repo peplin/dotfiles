@@ -10,3 +10,5 @@ cmake
 yarn.lock
 .coverage
 .cache/
+experimental/
+node_modules/
