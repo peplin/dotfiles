@@ -1,6 +1,6 @@
 fpath=($ZSH/functions $fpath)
 
-if [ "$SHELL" = "/bin/zsh" ]; then
+if [[ "$SHELL" = "/bin/zsh" || "$SHELL" = "/usr/bin/zsh" ]]; then
     autoload -U $ZSH/functions/*(:t)
 
     # Autoload zsh modules when they are referenced
@@ -20,7 +20,7 @@ HISTFILE=~/.zsh_history
 HISTSIZE=1000
 SAVEHIST=1000
 
-if [ "$SHELL" = "/bin/zsh" ]; then
+if [[ "$SHELL" = "/bin/zsh" || "$SHELL" = "/usr/bin/zsh" ]]; then
     # Set/unset shell options (case and underscore insensitive)
     setopt append_history
     setopt hist_ignore_dups
