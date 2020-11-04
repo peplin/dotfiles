@@ -200,6 +200,8 @@ xfce4-screenshooter
 peek
 gifski
 
+telegraf
+
 # Laptop only
 
 # add startup service to run --auto-tune

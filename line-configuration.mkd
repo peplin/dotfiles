@@ -21,3 +21,8 @@ configure xscreensaver
 in .config/pulse/default.pa
 
 load-module module-switch-on-connect
+
+
+## metrics
+
+configure telegraf
