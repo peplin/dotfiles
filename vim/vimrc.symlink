@@ -423,7 +423,7 @@ autocmd!
 
         augroup autoformat_settings
           autocmd FileType bzl AutoFormatBuffer buildifier
-          autocmd FileType c,cpp,proto,javascript,arduino AutoFormatBuffer clang-format
+          autocmd FileType c,cpp,proto,arduino AutoFormatBuffer clang-format
           autocmd FileType dart AutoFormatBuffer dartfmt
           autocmd FileType go AutoFormatBuffer gofmt
           autocmd FileType gn AutoFormatBuffer gn
@@ -441,6 +441,8 @@ autocmd!
         nnoremap <F6> :MundoToggle<CR>
     " }
 " }
+
+map <F3> :sp %:h/BUILD<CR>
 
 highlight clear SpellBad
 highlight SpellBad ctermfg=009 ctermbg=011 guifg=#ff0000 guibg=#ffff00
