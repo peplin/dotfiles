@@ -29,21 +29,6 @@ zstyle ':completion:*' group-name ''
 # offer indexes before parameters in subscripts
 zstyle ':completion:*:*:-subscript-:*' tag-order indexes parameters
 
-# command for process lists, the local web server details and host completion
-# on processes completion complete all user processes
-# zstyle ':completion:*:processes' command 'ps -au$USER'
-
-## add colors to processes for kill completion
-zstyle ':completion:*:*:kill:*:processes' list-colors '=(#b) #([0-9]#)*=0=01;31'
-
-#zstyle ':completion:*:processes' command 'ps ax -o pid,s,nice,stime,args | sed "/ps/d"'
-zstyle ':completion:*:*:kill:*:processes' command 'ps --forest -A -o pid,user,cmd'
-zstyle ':completion:*:processes-names' command 'ps axho command'
-
-# Use caching so that commands like apt and dpkg complete are useable
-zstyle ':completion::complete:*' use-cache 1
-zstyle ':completion::complete:*' cache-path ~/.oh-my-zsh/cache/
-
 # ignore completion functions (until the _ignored completer)
 zstyle ':completion:*:functions' ignored-patterns '_*'
 zstyle ':completion:*:*:*:users' ignored-patterns \
