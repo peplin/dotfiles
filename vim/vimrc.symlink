@@ -435,6 +435,7 @@ autocmd!
     " }
 " }
 
+" Jump to Bazel BUILD file in same directory as this file
 map <F3> :sp %:h/BUILD<CR>
 
 " highlight clear SpellBad
