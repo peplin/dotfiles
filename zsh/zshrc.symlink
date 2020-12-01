@@ -39,6 +39,8 @@ unset config_files
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
+source <(kubectl completion zsh)
+
 # Setting ag as the default source for fzf
 export FZF_DEFAULT_COMMAND='ag -g ""'
 #
