@@ -1,7 +1,6 @@
 *vendor*
 *min.js
 .git/
-build
 bin/
 lib/
 deps

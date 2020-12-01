@@ -20,14 +20,13 @@ autocmd!
         Plugin 'ConradIrwin/vim-bracketed-paste'
         Plugin 'scrooloose/nerdcommenter'
         Plugin 'scrooloose/syntastic'
-        Plugin 'ervandew/supertab'
+        Plugin 'ajh17/VimCompletesMe'
         Plugin 'tpope/vim-surround'
         Plugin 'tpope/vim-ragtag'
         Plugin 'tpope/vim-endwise'
         Plugin 'tpope/vim-eunuch'
         Plugin 'tpope/vim-repeat'
         Plugin 'tpope/vim-unimpaired'
-        Plugin 'simnalamburt/vim-mundo'
         Plugin 'mileszs/ack.vim'
 
         " Theme
@@ -187,8 +186,13 @@ autocmd!
     " have command-line completion <Tab> (for filenames, help topics, option
     " names) first list the available options and complete the longest common
     " part, then have further <Tab>s cycle through the possibilities:
-    set wildmode=list:longest
+    set wildmode=longest:list
     set wildignore+=*.o,*~,*.pyc,*.class,__pycache__,*/node_modules/*,*/sent-mail/*,*/build/*
+
+    " don't search includes, takes too long to scan
+    set complete-=i
+    " complete from spellcheck dictionary
+    set spell
 
     " lines to scroll when cursor leaves screen
     set scrolljump=5
@@ -346,7 +350,7 @@ autocmd!
 " }
 
 " Plugins {
-    " fuzzyfinder
+    " fuzzyfinder / fzf
     " {
         map <leader>t :FZF<CR>
     " }
@@ -406,14 +410,8 @@ autocmd!
          let g:gitgutter_escape_grep = 1
     " }
 
-    " Supertab {
-        let g:SuperTabDefaultCompletionType = "<c-n>"
-        let g:SuperTabLongestHighlight = 1
-    " }
-
-    " vim-markdown {
-        let g:vim_markdown_folding_disabled=1
-        let g:vim_markdown_frontmatter=1
+    " VimCompletesMe {
+         let g:vcm_omni_pattern = -1
     " }
 
     " vim-codefmt {
@@ -435,17 +433,17 @@ autocmd!
           autocmd FileType vue AutoFormatBuffer prettier
         augroup END
     " }
-
-    " vim-mundo {
-        let g:mundo_auto_preview_delay=0
-        nnoremap <F6> :MundoToggle<CR>
-    " }
 " }
 
+" Jump to Bazel BUILD file in same directory as this file
 map <F3> :sp %:h/BUILD<CR>
 
-highlight clear SpellBad
-highlight SpellBad ctermfg=009 ctermbg=011 guifg=#ff0000 guibg=#ffff00
+" highlight clear SpellBad
+" highlight SpellBad ctermfg=009 ctermbg=011 guifg=#ff0000 guibg=#ffff00
+" Workaround for vim bug to fix spell highlighting
+" https://github.com/vim/vim/issues/2424
+set t_Cs=
+hi SpellBad cterm=undercurl ctermbg=NONE
 
 map <leader>q :call QFixToggle()<CR>
 function! QFixToggle()
@@ -468,14 +466,3 @@ function! MyLastWindow()
     endif
   endif
 endfunction
-
-function! RenameFile()
-    let old_name = expand('%')
-    let new_name = input('New file name: ', expand('%'))
-    if new_name != '' && new_name != old_name
-        exec ':saveas ' . new_name
-        exec ':silent !rm ' . old_name
-        redraw!
-    endif
-endfunction
-map <leader>m :call RenameFile()<cr>
