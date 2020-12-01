@@ -437,8 +437,12 @@ autocmd!
 
 map <F3> :sp %:h/BUILD<CR>
 
-highlight clear SpellBad
-highlight SpellBad ctermfg=009 ctermbg=011 guifg=#ff0000 guibg=#ffff00
+" highlight clear SpellBad
+" highlight SpellBad ctermfg=009 ctermbg=011 guifg=#ff0000 guibg=#ffff00
+" Workaround for vim bug to fix spell highlighting
+" https://github.com/vim/vim/issues/2424
+set t_Cs=
+hi SpellBad cterm=undercurl ctermbg=NONE
 
 map <leader>q :call QFixToggle()<CR>
 function! QFixToggle()
