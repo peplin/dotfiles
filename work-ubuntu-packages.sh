@@ -10,6 +10,8 @@ dropbox (manual)
 fzf (manual)
 vundle (manual)
 
+pip: flake8 pycodestyle
+
 .localrc:
 
 . /etc/profile
