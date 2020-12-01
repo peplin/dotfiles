@@ -27,7 +27,6 @@ autocmd!
         Plugin 'tpope/vim-eunuch'
         Plugin 'tpope/vim-repeat'
         Plugin 'tpope/vim-unimpaired'
-        Plugin 'simnalamburt/vim-mundo'
         Plugin 'mileszs/ack.vim'
 
         " Theme
@@ -439,11 +438,6 @@ autocmd!
           autocmd FileType rust AutoFormatBuffer rustfmt
           autocmd FileType vue AutoFormatBuffer prettier
         augroup END
-    " }
-
-    " vim-mundo {
-        let g:mundo_auto_preview_delay=0
-        nnoremap <F6> :MundoToggle<CR>
     " }
 " }
 
