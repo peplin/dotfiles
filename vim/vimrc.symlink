@@ -20,7 +20,7 @@ autocmd!
         Plugin 'ConradIrwin/vim-bracketed-paste'
         Plugin 'scrooloose/nerdcommenter'
         Plugin 'scrooloose/syntastic'
-        Plugin 'ervandew/supertab'
+        Plugin 'ajh17/VimCompletesMe'
         Plugin 'tpope/vim-surround'
         Plugin 'tpope/vim-ragtag'
         Plugin 'tpope/vim-endwise'
@@ -350,7 +350,7 @@ autocmd!
 " }
 
 " Plugins {
-    " fuzzyfinder
+    " fuzzyfinder / fzf
     " {
         map <leader>t :FZF<CR>
     " }
@@ -410,14 +410,8 @@ autocmd!
          let g:gitgutter_escape_grep = 1
     " }
 
-    " Supertab {
-        let g:SuperTabDefaultCompletionType = "<c-n>"
-        let g:SuperTabLongestHighlight = 1
-    " }
-
-    " vim-markdown {
-        let g:vim_markdown_folding_disabled=1
-        let g:vim_markdown_frontmatter=1
+    " VimCompletesMe {
+         let g:vcm_omni_pattern = -1
     " }
 
     " vim-codefmt {
