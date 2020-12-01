@@ -190,6 +190,11 @@ autocmd!
     set wildmode=list:longest
     set wildignore+=*.o,*~,*.pyc,*.class,__pycache__,*/node_modules/*,*/sent-mail/*,*/build/*
 
+    " don't search includes, takes too long to scan
+    set complete-=i
+    " complete from spellcheck dictionary
+    set spell
+
     " lines to scroll when cursor leaves screen
     set scrolljump=5
     " minimum lines to keep above and below cursor
