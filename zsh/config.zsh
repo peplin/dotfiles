@@ -17,8 +17,8 @@ fi
 
 DIRSTACKSIZE=15
 HISTFILE=~/.zsh_history
-HISTSIZE=1000
-SAVEHIST=1000
+HISTSIZE=10000
+SAVEHIST=10000
 
 if [[ "$SHELL" = "/bin/zsh" || "$SHELL" = "/usr/bin/zsh" ]]; then
     # Set/unset shell options (case and underscore insensitive)
