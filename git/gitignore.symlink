@@ -23,7 +23,5 @@ gmon.out
 .ropeproject/
 .eggs/
 .agignore
-env/
 xunit-test-results.xml
-build
-build/
+tags
