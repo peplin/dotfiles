@@ -41,6 +41,10 @@ unset config_files
 
 source <(kubectl completion zsh)
 
+# Tweak Bazel completion
+zstyle ':completion:*' use-cache on
+zstyle ':completion:*' cache-path ~/cache/zsh
+
 # Setting ag as the default source for fzf
 export FZF_DEFAULT_COMMAND='ag -g ""'
 #
