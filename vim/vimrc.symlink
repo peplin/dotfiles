@@ -45,7 +45,10 @@ autocmd!
 
         " vim-polyglot {
             " Must be defined before loading vim-polyglot
-            let g:polyglot_disabled = ['protobuf']
+            let g:polyglot_disabled = [ 'protobuf' ]
+            " A long list of shStatement/zshStatement highlights
+            " significantly slows down editing these files
+            let g:polyglot_disabled += [ 'sh', 'zsh' ]
             Plugin 'sheerun/vim-polyglot'
         " }
 
