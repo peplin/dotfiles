@@ -65,7 +65,7 @@ autocmd!
     syntax on
 
     " how many lines of history to store
-    set history=500
+    set history=10000
 
     " remember all of these between sessions, but only 50 search terms; also
     " remember info for 50 files, but never any on removable disks, don't
@@ -267,6 +267,7 @@ autocmd!
         " human-language text [this clobbers the `help' filetype, but that
         " doesn't seem to prevent help from working properly]:
         au BufNewFile,BufRead *.txt set filetype=human
+        au BufNewFile,BufRead *.jsx set filetype=javascript
     " }
 " }
 
