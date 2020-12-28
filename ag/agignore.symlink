@@ -11,3 +11,6 @@ yarn.lock
 .cache/
 experimental/
 node_modules/
+*.map
+monitoring/fleetmon/fleetmon-frontend/build/static/
+monitoring/fleetmon/fleetmon-frontend/static
