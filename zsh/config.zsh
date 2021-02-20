@@ -12,6 +12,7 @@ if [[ "$SHELL" = "/bin/zsh" || "$SHELL" = "/usr/bin/zsh" ]]; then
     autoload colors
     autoload zsh/terminfo
     autoload -U url-quote-magic
+    autoload -Uz zcalc
     zle -N self-insert url-quote-magic
 fi
 
