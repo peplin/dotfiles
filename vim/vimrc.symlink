@@ -27,7 +27,6 @@ autocmd!
         Plugin 'tpope/vim-eunuch'
         Plugin 'tpope/vim-repeat'
         Plugin 'tpope/vim-unimpaired'
-        Plugin 'mileszs/ack.vim'
 
         " Theme
         Plugin 'altercation/vim-colors-solarized'
@@ -358,6 +357,9 @@ autocmd!
     " fuzzyfinder / fzf
     " {
         map <leader>t :Files<CR>
+        map <leader>b :Buffers<CR>
+        map <leader>l :Lines<CR>
+        map <leader>f :Rg<CR>
         let g:fzf_layout = {'down': '40%'}
     " }
 
@@ -384,11 +386,6 @@ autocmd!
         let g:lightline = {
             \ 'colorscheme': 'solarized',
         \ }
-    " }
-
-    " vim-ack {
-        let g:ackprg = 'ag --vimgrep --smart-case'
-        map <leader>f :Ack<space>
     " }
 
     " NERDComment {

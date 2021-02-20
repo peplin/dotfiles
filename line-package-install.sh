@@ -41,6 +41,7 @@ PACKAGES=(
     hunspell
     librsvg
     vim
+    bat
     dropbox
     dropbox-cli
     rxvt-unicode
