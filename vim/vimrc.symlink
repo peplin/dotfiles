@@ -42,6 +42,7 @@ autocmd!
         Plugin 'airblade/vim-gitgutter'
         Plugin 'tpope/vim-fugitive'
         Plugin 'Alok/notational-fzf-vim'
+        Plugin 'junegunn/fzf.vim'
 
         " vim-polyglot {
             " Must be defined before loading vim-polyglot
@@ -356,7 +357,8 @@ autocmd!
 " Plugins {
     " fuzzyfinder / fzf
     " {
-        map <leader>t :FZF<CR>
+        map <leader>t :Files<CR>
+        let g:fzf_layout = {'down': '40%'}
     " }
 
     " Syntastic {
