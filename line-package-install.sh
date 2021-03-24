@@ -65,7 +65,7 @@ lame)
 
 # backup
 
-$INSTALL_CMD getmail
+getmail6
 
 # printing
 
