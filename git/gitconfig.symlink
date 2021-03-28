@@ -33,6 +33,7 @@
     unmerged = branch -a --no-merged
     merged = branch -a --merged
     pr = "!f() { git fetch -fu origin refs/pull/$1/head:pr/$1; } ; f"
+    br = !~/bin/branch_tree  --sort_by_author_date -d
 
 [apply]
 	whitespace = nowarn
