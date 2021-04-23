@@ -5,3 +5,5 @@ export PATH="$PATH:$HOME/.cabal/bin"
 for DIR in `find ~/bin/ -maxdepth 1 -type d`; do
     export PATH=$PATH:$DIR
 done
+
+eval "$(direnv hook zsh)"
