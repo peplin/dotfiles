@@ -19,12 +19,6 @@ fi
 pulseaudio &
 xfce4-clipman &
 
-if command -v dropbox-cli >/dev/null 2>&1; then
-dropbox-cli start
-else
-dropbox start
-fi
-
 picom &
 nm-applet &
 

@@ -396,8 +396,8 @@ autocmd!
     " }
 
     " notational-fzf {
-        let g:nv_search_paths = ['~/Dropbox/notes']
-        let g:nv_ignore_patterns = ['~/Dropbox/notes/archive/*']
+        let g:nv_search_paths = ['~/notes']
+        let g:nv_ignore_patterns = ['~/notes/archive/*']
         let g:nv_use_short_pathnames = 1
         let g:nv_show_preview = 0
 

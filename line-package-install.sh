@@ -42,8 +42,7 @@ PACKAGES=(
     librsvg
     vim
     bat
-    dropbox
-    dropbox-cli
+    syncthing
     rxvt-unicode
     urxvt-perls
     urxvt-vtwheel
