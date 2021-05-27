@@ -103,8 +103,8 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
     , ((modMask,               xK_a     ), dirExecPromptNamed
             def spawn "/home/peplin/.xmonad/actions" "Scripts: ")
 
-    -- Screeenshot selected area
-    , ((modMask, xK_s     ), spawn "xfce4-screenshooter -rc")
+    -- Screeenshot selected area and save to /tmp
+    , ((modMask, xK_s     ), spawn "maim -s | xclip -selection clipboard -t image/png && xclip -selection clipboard -o > /tmp/Screenshot-$(date +%Y-%m-%d-%T).png")
 
     -- launch application launcher
     , ((mod1Mask, xK_F2 ), spawn "gmrun")

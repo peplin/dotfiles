@@ -196,7 +196,7 @@ simple-scan
 iscan
 iscan-plugin-gt-x820
 
-xfce4-screenshooter
+maim # screenshots
 peek
 gifski
 
