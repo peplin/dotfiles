@@ -38,7 +38,7 @@
 [apply]
 	whitespace = nowarn
 [branch]
-	autosetupmerge = true
+	autosetupmerge = always
 	autosetuprebase = always
 [github]
 	user = peplin
