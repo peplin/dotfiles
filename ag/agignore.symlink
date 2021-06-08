@@ -11,3 +11,4 @@ yarn.lock
 .cache/
 experimental/
 node_modules/
+.stversions/
