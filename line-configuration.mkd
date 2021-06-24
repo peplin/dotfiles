@@ -3,25 +3,27 @@ fstab
 crashplan
 microcode in bootloader
 configure mpd folders
-configure mpd to connect to pulseaudio via tcp
 configure ssh port, disallow root, disallow password
 locale-gen
-systemctl --user enable gmail-backup.timer
 
 create user for me, add to groups:
-    audio lp optical storage video wheel games power scanner network uucp
-         plugdev users
+    audio lp optical storage video wheel games power scanner network uucp plugdev users
 configure sudoers
 
 run lxappearance and select them for gtk apps
 configure xscreensaver
+
+avahi, /etc/nsswitch for mDNS
+systemd-resolved should do this...maybe need to set that up instead
+
+add  ~/.config/system to dotfiles?
+systemctl --user enable gmail-backup.timer
 
 ## Pulse
 
 in .config/pulse/default.pa
 
 load-module module-switch-on-connect
-
 
 ## metrics
 

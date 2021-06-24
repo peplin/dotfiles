@@ -3,7 +3,7 @@ INSTALL_CMD="yay -S"
 # Desktop
 
 function install_packages(pkgs) {
-    for $PKG in $pkgs; do
+    for PKG in $pkgs; do
         $INSTALL_CMD $PKG
     done
 }
@@ -59,12 +59,14 @@ pulseaudio
 pavucontrol
 pulseaudio-alsa
 pulseaudio-zeroconf
+pasystray
 flac
 lame)
 
 # backup
 
 getmail6
+msmtp
 
 # printing
 
@@ -130,9 +132,6 @@ tmux
 zsh
 python
 python-pip
-python2
-python2-pip
-ruby
 jre-openjdk-headless
 the_silver_searcher
 ripgrep
@@ -173,6 +172,7 @@ systemctl --user enable mpd
 systemctl --user enable mpdscribble
 
 thunar
+tumbler # for thumbnails
 gdb
 
 #console-tdm
@@ -184,19 +184,12 @@ xsel
 flake8
 arc-gtk-theme
 
-
-cpupower
-sudo systemctl enable cpupower
-# set to performance on desktop
-
-thermald
-sudo systemctl enable thermald
-
 simple-scan
 iscan
 iscan-plugin-gt-x820
 
-maim # screenshots
+# screenshots, screen recordings
+maim
 peek
 gifski
 
@@ -208,8 +201,8 @@ telegraf
 powertop
 
 nm-applet
-openvpn-update-resolv-conf
 systemctl enable NetworkManager
 
-openconnect
+jack2 pulseaudio-jack cadence alsa-tools alsa-utils reaper-bin realtime
 
+nss-mdns
