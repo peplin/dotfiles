@@ -190,7 +190,7 @@ autocmd!
     " names) first list the available options and complete the longest common
     " part, then have further <Tab>s cycle through the possibilities:
     set wildmode=longest:list
-    set wildignore+=*.o,*~,*.pyc,*.class,__pycache__,*/node_modules/*,*/sent-mail/*,*/build/*
+    set wildignore+=*.o,*~,*.pyc,*.class,__pycache__,*/node_modules/*,*/sent-mail/*,*/build/*,*webp,*jpg
 
     " don't search includes, takes too long to scan
     set complete-=i
