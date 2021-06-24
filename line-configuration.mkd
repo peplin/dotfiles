@@ -1,5 +1,4 @@
-
-fstab
+fstab - make sure password for smb matches tangent
 crashplan
 microcode in bootloader
 configure mpd folders
@@ -16,8 +15,13 @@ configure xscreensaver
 avahi, /etc/nsswitch for mDNS
 systemd-resolved should do this...maybe need to set that up instead
 
-add  ~/.config/system to dotfiles?
+make sure ~/.config/systemd is restored, has user services/timers
 systemctl --user enable gmail-backup.timer
+systemctl --user enable backup-to-nas.timer
+
+systemd conf set  SystemMaxUse to limit journal size
+systemd-networkd
+    requires config in /etc/systemd/network
 
 ## Pulse
 
@@ -28,3 +32,16 @@ load-module module-switch-on-connect
 ## metrics
 
 configure telegraf
+
+## tangent
+
+add panic=15 to /etc/default/grub 's default params (GRUB_CMDLINE_LINUX_DEFAULT)
+to make it auto restart 15 sceonds after a kernel panic
+
+install samba
+set up /etc/samba/smb.conf
+smbpasswd - add users for writing
+set up fstab mounts for external / fstab mounts on curve for cifs
+
+plex
+minidlna - has remote search
