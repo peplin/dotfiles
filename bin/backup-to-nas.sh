@@ -41,10 +41,15 @@ HOME_DIRS=(
 )
 
 HOME_EXCLUDES="""
+- .config/Slack
 - .config/google-chrome
 - .config/Signal
 - .config/aacs
 - .config/syncthing
+- .config/ghb/EncodeLogs
+- .keychain
+- .getmail
+- .ssh/ssh_auth_sock
 - .local
 - .cache
 - .cargo
@@ -64,6 +69,7 @@ HOME_EXCLUDES="""
 - .vimundo
 - .thunderbird
 - .terraform
+- .zsh_history
 """
 
 AUDIO_PRODUCTION_ACTIVE=(
