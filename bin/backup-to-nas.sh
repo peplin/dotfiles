@@ -2,8 +2,11 @@
 
 set -ex
 
-# Assume user has already unlocked the keys with keychain, load into environment for systemd --user
-eval $(keychain --eval --agents ssh -Q --quiet id_rsa)
+
+# Wait for me to log in and unlock my keychain
+for i in 1 2 3 4 5; do
+eval $(keychain --eval --agents ssh -Q --quiet id_rsa) && break || sleep 30
+done
 
 TARGET_HOSTNAME=192.168.1.105
 
