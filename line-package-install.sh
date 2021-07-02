@@ -16,6 +16,7 @@ BASE_PACKAGES=(
 base-devel
 wget
 grub
+inetutils
 go
 ncdu
 tmux
