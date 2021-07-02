@@ -36,6 +36,7 @@ autocmd!
         Plugin 'google/vim-maktaba'
         Plugin 'google/vim-codefmt'
         Plugin 'google/vim-glaive'
+        Plugin 'hashivim/vim-terraform'
 
         " Primary feature plugins
         Plugin 'airblade/vim-gitgutter'
@@ -435,6 +436,10 @@ autocmd!
           autocmd FileType rust AutoFormatBuffer rustfmt
           autocmd FileType vue AutoFormatBuffer prettier
         augroup END
+    " }
+
+    " vim-terraform {
+        let g:terraform_fmt_on_save=1
     " }
 " }
 
