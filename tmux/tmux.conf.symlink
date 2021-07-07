@@ -21,7 +21,7 @@ set -g default-command "${SHELL}"
 set-window-option -g xterm-keys on
 
 set -g update-environment -r
-setenv -g SSH_AUTH_SOCK $HOME/.ssh/ssh_auth_sock
+setenv -g SSH_AUTH_SOCK /tmp/$USER-ssh_auth_sock
 
 # Increase scrollback buffer size
 set-option -g history-limit 3000
