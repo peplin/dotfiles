@@ -34,7 +34,9 @@
     unmerged = branch -a --no-merged
     merged = branch -a --merged
     pr = "!f() { git fetch -fu origin refs/pull/$1/head:pr/$1; } ; f"
-    br = !~/bin/branch_tree  --sort_by_author_date -d
+
+    # Aurora helpers
+    br = !bonsai branch
 
     # Aurora helpers
     land = !~/dev/av/tools/git/safe_land
