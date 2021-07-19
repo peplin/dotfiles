@@ -1,38 +1,40 @@
 [user]
-	name = Christopher Peplin
-	email = cpeplin@aurora.tech
-	signingkey = "D963BFAF"
+    name = Christopher Peplin
+    email = cpeplin@aurora.tech
+    signingkey = "D963BFAF"
 [color]
-	diff = auto
-	status = auto
-	ui = auto
+    diff = auto
+    status = auto
+    ui = auto
     branch = auto
 [color "branch"]
-	current = yellow reverse
-	local = yellow
-	remote = green
+    current = yellow reverse
+    local = yellow
+    remote = green
 [color "status"]
-	added = yellow
-	changed = green
-	untracked = cyan
+    added = yellow
+    changed = green
+    untracked = cyan
 [core]
-	whitespace=fix,-indent-with-non-tab,trailing-space,-cr-at-eol
-	excludesfile = ~/.gitignore
-	editor = vim
-	autocrlf = input
+    whitespace=fix,-indent-with-non-tab,trailing-space,-cr-at-eol
+    excludesfile = ~/.gitignore
+    editor = vim
+    autocrlf = input
 [alias]
     aa = !git add --all && git add . && git status
-	st = status -sb
-	ci = commit -v
+    st = status -sb
+    ci = commit -v
     c = commit -m
     ca = commit --amend -C HEAD
-	co = checkout
-	lg = log -p
+    co = checkout
+    lg = log -p
     cp = cherry-pick -x
+    diffup = diff @{upstream}
     l = "!f() { git log --graph --format=fuller --pretty=\"tformat:%C(yellow)%h%Creset %Cgreen(%cr)%Creset %C(bold blue)%an%Creset %C(red)%d%Creset %s\" $*; } ; f"
     unmerged = branch -a --no-merged
     merged = branch -a --merged
     pr = "!f() { git fetch -fu origin refs/pull/$1/head:pr/$1; } ; f"
+    br = !~/bin/branch_tree  --sort_by_author_date -d
 
     # Aurora helpers
     land = !~/dev/av/tools/git/safe_land
@@ -42,37 +44,37 @@
     squash = !~/dev/av/tools/git/squash_branch
 
 [apply]
-	whitespace = nowarn
+    whitespace = nowarn
 [branch]
-	autosetupmerge = always
-	autosetuprebase = always
+    autosetupmerge = always
+    autosetuprebase = always
 [github]
-	user = peplin
+    user = peplin
 [push]
-	default = current
+    default = current
 [help]
-	autocorrect = 1
+    autocorrect = 1
 [merge]
-	tool = fugitive
+    tool = fugitive
     keepBackup = false
     keepTemporaries = false
     prompt = false
 [interactive]
-	singlekey = true
+    singlekey = true
 [init]
-	templatedir = ~/.git_template
+    templatedir = ~/.git_template
 [mergetool "fugitive"]
-	cmd = vim -f -c \"Gvdiffsplit!\" \"$MERGED\"
+    cmd = vim -f -c \"Gvdiffsplit!\" \"$MERGED\"
 [fetch]
     recurseSubmodules = on-demand
 [credential]
-	helper = cache
+    helper = cache
 [rerere]
-	enabled = true
+    enabled = true
 [filter "lfs"]
-	required = true
-	clean = git-lfs clean -- %f
-	smudge = git-lfs smudge -- %f
-	process = git-lfs filter-process
+    required = true
+    clean = git-lfs clean -- %f
+    smudge = git-lfs smudge -- %f
+    process = git-lfs filter-process
 [mergetool]
-	keepBackup = false
+    keepBackup = false

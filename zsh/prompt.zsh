@@ -55,7 +55,7 @@ directory_name(){
   echo "%{$fg[green]%}${PWD/#$HOME/~}%{$reset_color%}"
 }
 
-export PROMPT=$'$(directory_name) $(project_name_color)$(git_dirty)$(need_push)\n> '
+export PROMPT=$'$(directory_name) $(project_name_color)$(git_dirty)$(need_push)\n$ '
 
 local return_code="%(?..%{$fg[red]%}%?%{$reset_color%})"
 export RPS1="${return_code}"

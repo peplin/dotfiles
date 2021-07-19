@@ -1,6 +1,6 @@
 export EDITOR='vim'
 export BROWSER=google-chrome-stable
-export PAGER="less"
+export PAGER="less -F"
 export LESS="-R"
 
 export LSCOLORS="exfxcxdxbxegedabagacad"

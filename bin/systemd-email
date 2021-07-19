@@ -1,0 +1,11 @@
+#!/bin/sh
+
+/usr/bin/msmtp -tv <<ERRMAIL
+To: $1
+From: systemd on $HOSTNAME <$HOSTNAME@rhubarbtech.com>
+Subject: $2 failed
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=UTF-8
+
+$(systemctl --user status --no-pager --full "$2")
+ERRMAIL

@@ -25,3 +25,4 @@ gmon.out
 .agignore
 xunit-test-results.xml
 tags
+.terraform*

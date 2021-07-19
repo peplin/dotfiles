@@ -1,6 +1,5 @@
 alias dotcd='cd $ZSH'
 alias reload='. ~/.zshrc'
 alias xclip='xclip -sel clip'
+alias mmv='noglob zmv -W'
 alias less='less -n'
-
-calc() { awk "BEGIN{ print $* }" ;}

@@ -27,7 +27,6 @@ autocmd!
         Plugin 'tpope/vim-eunuch'
         Plugin 'tpope/vim-repeat'
         Plugin 'tpope/vim-unimpaired'
-        Plugin 'mileszs/ack.vim'
 
         " Theme
         Plugin 'altercation/vim-colors-solarized'
@@ -37,11 +36,13 @@ autocmd!
         Plugin 'google/vim-maktaba'
         Plugin 'google/vim-codefmt'
         Plugin 'google/vim-glaive'
+        Plugin 'hashivim/vim-terraform'
 
         " Primary feature plugins
         Plugin 'airblade/vim-gitgutter'
         Plugin 'tpope/vim-fugitive'
         Plugin 'Alok/notational-fzf-vim'
+        Plugin 'junegunn/fzf.vim'
 
         " vim-polyglot {
             " Must be defined before loading vim-polyglot
@@ -64,7 +65,6 @@ autocmd!
 
 
 " General {
-    syntax on
 
     " how many lines of history to store
     set history=10000
@@ -192,7 +192,7 @@ autocmd!
     " names) first list the available options and complete the longest common
     " part, then have further <Tab>s cycle through the possibilities:
     set wildmode=longest:list
-    set wildignore+=*.o,*~,*.pyc,*.class,__pycache__,*/node_modules/*,*/sent-mail/*,*/build/*
+    set wildignore+=*.o,*~,*.pyc,*.class,__pycache__,*/node_modules/*,*/sent-mail/*,*/build/*,*webp,*jpg
 
     " don't search includes, takes too long to scan
     set complete-=i
@@ -264,6 +264,8 @@ autocmd!
         filetype plugin on
         filetype indent on
         filetype plugin indent on
+
+        syntax on
 
         " recognize anything at all with a .txt extension as being
         " human-language text [this clobbers the `help' filetype, but that
@@ -358,7 +360,11 @@ autocmd!
 " Plugins {
     " fuzzyfinder / fzf
     " {
-        map <leader>t :FZF<CR>
+        map <leader>t :Files<CR>
+        map <leader>b :Buffers<CR>
+        map <leader>l :Lines<CR>
+        map <leader>f :Rg<CR>
+        let g:fzf_layout = {'down': '40%'}
     " }
 
     " Syntastic {
@@ -386,11 +392,6 @@ autocmd!
         \ }
     " }
 
-    " vim-ack {
-        let g:ackprg = 'ag --vimgrep --smart-case'
-        map <leader>f :Ack<space>
-    " }
-
     " NERDComment {
         "comment out line(s) in visual mode
         vmap  o  :call NERDComment(1, 'toggle')<CR>
@@ -399,8 +400,8 @@ autocmd!
     " }
 
     " notational-fzf {
-        let g:nv_search_paths = ['~/Dropbox/notes']
-        let g:nv_ignore_patterns = ['~/Dropbox/notes/archive/*']
+        let g:nv_search_paths = ['~/notes']
+        let g:nv_ignore_patterns = ['~/notes/archive/*']
         let g:nv_use_short_pathnames = 1
         let g:nv_show_preview = 0
 
@@ -429,16 +430,15 @@ autocmd!
         augroup autoformat_settings
           autocmd FileType bzl AutoFormatBuffer buildifier
           autocmd FileType c,cpp,proto,arduino AutoFormatBuffer clang-format
-          autocmd FileType dart AutoFormatBuffer dartfmt
           autocmd FileType go AutoFormatBuffer gofmt
-          autocmd FileType gn AutoFormatBuffer gn
           autocmd FileType html,css,sass,scss,less,json AutoFormatBuffer js-beautify
           autocmd FileType java AutoFormatBuffer google-java-format
-          autocmd FileType python AutoFormatBuffer yapf
-          " Alternative: autocmd FileType python AutoFormatBuffer autopep8
-          autocmd FileType rust AutoFormatBuffer rustfmt
-          autocmd FileType vue AutoFormatBuffer prettier
+          autocmd FileType python AutoFormatBuffer black
         augroup END
+    " }
+
+    " vim-terraform {
+        let g:terraform_fmt_on_save=1
     " }
 " }
 

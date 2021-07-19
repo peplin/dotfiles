@@ -13,3 +13,4 @@ experimental/
 node_modules/
 *.map
 houdini/
+.stversions/

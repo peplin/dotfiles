@@ -54,5 +54,4 @@ export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 # Stop Control-S from freezing the terminal
 stty -ixon
 
-autoload -U url-quote-magic
-zle -N self-insert url-quote-magic
+command -v keychain >/dev/null && eval $(keychain --eval --agents ssh -Q --quiet id_rsa)
