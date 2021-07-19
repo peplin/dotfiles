@@ -33,7 +33,11 @@ set history filename ~/.gdb_history
 
 python
 import sys
-sys.path.insert(0, '/home/cpeplin/dev/gdb_printers/python')
-from libstdcxx.v6.printers import register_libstdcxx_printers
-register_libstdcxx_printers (None)
+sys.path.insert(0, '/usr/share/gcc-8/python')
+try:
+    from libstdcxx.v6.printers import register_libstdcxx_printers
+    register_libstdcxx_printers (None)
+except:
+    print("Failed to load libstdcxx pretty printer")
+    pass
 end
