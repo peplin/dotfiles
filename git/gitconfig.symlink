@@ -38,13 +38,6 @@
     # Aurora helpers
     br = !bonsai branch
 
-    # Aurora helpers
-    land = !~/dev/av/tools/git/safe_land
-    flow = !~/dev/av/tools/git/flow
-    move-branch = !~/dev/av/tools/git/move_branch
-    br = !~/dev/av/tools/git/branch_tree  --sort_by_author_date -d
-    squash = !~/dev/av/tools/git/squash_branch
-
 [apply]
     whitespace = nowarn
 [branch]
