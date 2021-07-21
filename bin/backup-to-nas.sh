@@ -11,7 +11,7 @@ done
 TARGET_HOSTNAME=192.168.1.105
 
 SYSTEM_DIRS=(
-    "/etc"
+    "/etc/"
 )
 
 SYSTEM_EXCLUDES="""
@@ -92,19 +92,19 @@ PHOTOS_EXCLUDES="""
 echo "Backing up home..."
 echo "$HOME_EXCLUDES" | rsync -av --delete --delete-excluded --exclude-from=- --chmod=ugo=rwX \
     "${HOME_DIRS[@]}" \
-    $TARGET_HOSTNAME:/volume1/system-backup/curve/home/
+    $TARGET_HOSTNAME:/volume2/system-backup/curve/home/
 
 echo "Backing up system config..."
 echo "$SYSTEM_EXCLUDES" | rsync -av --delete --delete-excluded --exclude-from=- --chmod=ugo=rwX \
     "${SYSTEM_DIRS[@]}" \
-    $TARGET_HOSTNAME:/volume1/system-backup/curve/etc/
+    $TARGET_HOSTNAME:/volume2/system-backup/curve/etc/
 
 echo "Backing up active audio production..."
 rsync -av --delete --delete-excluded --chmod=ugo=rwX \
     "${AUDIO_PRODUCTION_ACTIVE[@]}" \
-    $TARGET_HOSTNAME:/volume1/audio-production-active-backup/
+    $TARGET_HOSTNAME:/volume2/audio-production-active-backup/
 
 echo "Backing up active photos..."
 echo "$PHOTOS_EXCLUDES" | rsync -av --delete --delete-excluded --exclude-from=- --chmod=ugo=rwX \
     "${PHOTOS_ACTIVE[@]}"  \
-    $TARGET_HOSTNAME:/volume1/photos-active-backup/
+    $TARGET_HOSTNAME:/volume2/photos-active-backup/
