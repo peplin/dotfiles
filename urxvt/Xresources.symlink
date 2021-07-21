@@ -84,7 +84,7 @@ URxvt.url-select.underline: false
 *pointerColorBackground:  S_base01
 *pointerColorForeground:  S_base1
 
-*color0:                  S_base02
+*color0:                  S_base2
 *color1:                  S_red
 *color2:                  S_green
 *color3:                  S_yellow
@@ -92,7 +92,7 @@ URxvt.url-select.underline: false
 *color5:                  S_magenta
 *color6:                  S_cyan
 *color7:                  S_base2
-*color8:                  S_base03
+*color8:                  S_base3
 *color9:                  S_orange
 *color10:                 S_base01
 *color11:                 S_base00
