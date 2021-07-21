@@ -20,3 +20,6 @@ pip: flake8 pycodestyle
 clone dotfiles, install
 chsh
 clone work repos
+
+sudo add-apt-repository ppa:ubuntu-toolchain-r/test
+to get non ancient gdb

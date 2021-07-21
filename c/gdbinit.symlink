@@ -28,12 +28,14 @@ set print pretty on
 #	set prompt \033[31mgdb$ \033[0m
 #end
 
+directory /home/cpeplin/dev/av
+
 set history save
 set history filename ~/.gdb_history
 
 python
 import sys
-sys.path.insert(0, '/usr/share/gcc-8/python')
+sys.path.insert(0, '/usr/share/gcc/python')
 try:
     from libstdcxx.v6.printers import register_libstdcxx_printers
     register_libstdcxx_printers (None)
