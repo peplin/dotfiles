@@ -38,6 +38,7 @@
 
     # Aurora helpers
     br = !bonsai branch
+    flow = !~/dev/av/tools/git/flow
 
 [apply]
     whitespace = nowarn
