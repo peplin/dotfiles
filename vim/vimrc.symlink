@@ -29,7 +29,6 @@ autocmd!
         Plugin 'tpope/vim-unimpaired'
 
         " Theme
-        Plugin 'altercation/vim-colors-solarized'
         Plugin 'itchyny/lightline.vim'
         Plugin 'romainl/apprentice'
 
@@ -386,7 +385,7 @@ autocmd!
 
     " lightline {
         let g:lightline = {
-            \ 'colorscheme': 'solarized',
+            \ 'colorscheme': 'apprentice',
         \ }
     " }
 
