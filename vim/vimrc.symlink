@@ -31,6 +31,7 @@ autocmd!
         " Theme
         Plugin 'altercation/vim-colors-solarized'
         Plugin 'itchyny/lightline.vim'
+        Plugin 'romainl/apprentice'
 
         " Formatters
         Plugin 'google/vim-maktaba'
@@ -118,12 +119,9 @@ autocmd!
     endif
 
     if &t_Co == 256
-        set background=dark
-        colors solarized
-        highlight SignColumn ctermbg=0
-        call togglebg#map("<F4>")
+        colorscheme apprentice
     else
-        colors wombat
+        colorscheme wombat
     end
 
     " display the current mode and partially-typed commands in the status line:
