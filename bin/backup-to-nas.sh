@@ -49,6 +49,8 @@ HOME_EXCLUDES="""
 - .config/ghb/EncodeLogs
 - .keychain
 - .getmail
+- .dotfiles/vim/vim.symlink/bundle
+- .mpd
 - .ssh/ssh_auth_sock
 - .local
 - .cache
