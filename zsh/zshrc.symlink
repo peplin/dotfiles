@@ -45,6 +45,10 @@ source <(kubectl completion zsh)
 zstyle ':completion:*' use-cache on
 zstyle ':completion:*' cache-path ~/cache/zsh
 
+# Enable zsh-history-substring-search
+bindkey '^[[A' history-substring-search-up
+bindkey '^[[B' history-substring-search-down
+
 # Setting ag as the default source for fzf
 export FZF_DEFAULT_COMMAND='ag -g ""'
 #
