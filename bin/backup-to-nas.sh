@@ -69,6 +69,8 @@ HOME_EXCLUDES="""
 - .aqbanking
 - .vimswap
 - .vimundo
+- .viminfo
+- .zcalc_history
 - .thunderbird
 - .terraform
 - .zsh_history
