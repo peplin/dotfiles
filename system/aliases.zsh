@@ -20,9 +20,6 @@ function cdls() {
 
 alias grep='grep --color=auto'
 
-# grep history
-alias gh='fc -l 0 | grep'
-
 alias dh='dirs -v'  # directory history
 
 # Find a file with a pattern in name:
