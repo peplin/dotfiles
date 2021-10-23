@@ -177,14 +177,7 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
     -- audio
     , ((0, xF86XK_AudioLowerVolume), spawn "updatevolume.sh -")
     , ((0, xF86XK_AudioRaiseVolume), spawn "updatevolume.sh +")
-    -- , ((0, xF86XK_AudioMute), spawn "mute.sh")
-    , ((0, xF86XK_AudioMute), spawn "mpc toggle")
-    , ((0, xF86XK_AudioPlay), spawn "/usr/bin/mpc toggle")
-    , ((0, xK_F9), spawn "/usr/bin/mpc toggle")
-    , ((0, xF86XK_AudioNext), spawn "/usr/bin/mpc next")
-    , ((0, xK_F11), spawn "/usr/bin/mpc next")
-    , ((0, xF86XK_AudioPrev), spawn "/usr/bin/mpc prev")
-    , ((0, xK_F10), spawn "/usr/bin/mpc prev")
+    , ((0, xF86XK_AudioMute), spawn "mute.sh")
 
     -- lcd brightness
     , ((0, xF86XK_MonBrightnessUp), spawn "xbacklight +10")
