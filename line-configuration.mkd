@@ -23,8 +23,7 @@ copy SSH pubkey
 copy dotfiles, install packages
 
 boot into graphical
-run lxappearance and select them for gtk apps
-configure xscreensaver?
+run lxappearance and select them for gtk apps. select ubuntu as default font
 
 systemd conf set SystemMaxUse to limit journal size
 
@@ -47,9 +46,13 @@ load-module module-switch-on-connect
 
 configure telegraf
 
-## old tangent (old thinkpad laptop)
+## servers
 
 add panic=15 to /etc/default/grub 's default params (GRUB_CMDLINE_LINUX_DEFAULT)
 to make it auto restart 15 sceonds after a kernel panic
 
 ## new tangent
+
+add udev rule for brightness control
+add libinput rule to enable touchpad tapping
+add libinput-gestures config for 3-finger back/forward
