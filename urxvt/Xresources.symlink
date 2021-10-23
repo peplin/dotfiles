@@ -19,6 +19,9 @@ URxvt*loginShell: true
 URxvt*saveLines: 5000
 URxvt*termName: xterm-256color
 
+URxvt.iso14755: false
+URxvt.iso14755_52: false
+
 XTerm*charClass: 2500:1
 
 URxvt*scrollTtyOutput: false
