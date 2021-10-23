@@ -14,6 +14,7 @@ function install_packages {
 
 BASE_PACKAGES=(
 base-devel
+tailscale
 wget
 grub
 inetutils
@@ -28,6 +29,7 @@ zsh
 ripgrep
 git
 htop
+btop
 dstat
 smartmontools
 unzip
@@ -40,8 +42,6 @@ readline
 fzf
 iotop
 iftop
-ntfs-3g # for NTFS write support
-ntfs-3g-system-compression
 openssl
 hunspell
 keychain
@@ -71,7 +71,12 @@ getmail6
 msmtp
 )
 
-BASE_GUI_DESKTOP_PACKAGES=(
+WINDOWS_DUAL_BOOT_PACKAGES=(
+ntfs-3g # for NTFS write support
+ntfs-3g-system-compression
+)
+
+BASE_GUI_PACKAGES=(
 # screenshots
 maim
 
@@ -127,7 +132,7 @@ pwgen
 gparted
 )
 
-FULL_DESKTOP_GUI_PACKAGES=(
+FULL_GUI_PACKAGES=(
 #compositing and screen recordings
 peek
 gifski
@@ -135,45 +140,51 @@ picom
 arc-gtk-theme
 
 vlc
-libdvdcss
-
-ncmpcpp
-mpd
-mpc # for keyboard control
-mpdscribble
-easytag
-abcde
 
 gnucash
 libdbi-drivers # for gnucash sqlite backend
+)
 
+
+LAPTOP_PACKAGES=(
+light
+)
+
+DESKTOP_PACKAGES=(
 # scanner
 simple-scan
 iscan
 iscan-plugin-gt-x820
+
+libdvdcss
+
+easytag
+abcde
 )
 
-#install_packages "${BASE_PACKAGES[@]}"
+install_packages "${BASE_PACKAGES[@]}"
 if [[ $HOSTNAME == "tangent" ]]; then
-    #install_packages "${AUDIO_PACKAGES[@]}"
-    install_packages "${BASE_GUI_DESKTOP_PACKAGES[@]}"
+    install_packages "${AUDIO_PACKAGES[@]}"
+    install_packages "${BASE_GUI_PACKAGES[@]}"
+    install_packages "${WINDOWS_DUAL_BOOT_PACKAGES[@]}"
+    install_packages "${DEVELOPMENT_MACHINE[@]}"
+    install_packages "${FULL_GUI_PACKAGES[@]}"
 elif [[ $HOSTNAME == "curve" ]]; then
     install_packages "${AUDIO_PACKAGES[@]}"
-    install_packages "${BASE_GUI_DESKTOP_PACKAGES[@]}"
+    install_packages "${BASE_GUI_PACKAGES[@]}"
     install_packages "${DEVELOPMENT_MACHINE[@]}"
     install_packages "${BACKUP_PACKAGES[@]}"
-    install_packages "${FULL_DESKTOP_GUI_PACKAGES[@]}"
+    install_packages "${WINDOWS_DUAL_BOOT_PACKAGES[@]}"
+    install_packages "${FULL_GUI_PACKAGES[@]}"
+    install_packages "${DESKTOP_PACKAGES[@]}"
 fi
 
 # Reminders of system services to enable
-#systemctl enable NetworkManager
-#systemctl enable systemd-networkd
+#systemctl enable NetworkManager (tangent only)
+#systemctl enable systemd-networkd (curve only)
 #systemctl enable systemd-resolved
 #systemctl enable systemd-timesyncd
 #systemctl enable cupsd
 #
 ## disable password authentication
 #systemctl enable sshd
-#
-#systemctl --user enable mpd
-#systemctl --user enable mpdscribble

@@ -1,25 +1,39 @@
-fstab - make sure password for smb matches tangent
-crashplan
-microcode in bootloader
-configure mpd folders
-configure ssh port, disallow root, disallow password
+## from installer
+
+fstab should mount /, /home, and EFI partition to /boot
+    write kernels to /boot, don't expect to have very many
+
+microcode in bootloader (follow systemd-boot setup instructions, which include this in the example)
 locale-gen
+
+openssh
+sudo
+vim
+systemd-resolved
 
 create user for me, add to groups:
     audio lp optical storage video wheel games power scanner network uucp plugdev users
 configure sudoers
 
-run lxappearance and select them for gtk apps
-configure xscreensaver
+install SSH so the rest of this can be done remotely
 
-avahi, /etc/nsswitch for mDNS
-systemd-resolved should do this...maybe need to set that up instead
+## after first boot
+
+copy SSH pubkey
+copy dotfiles, install packages
+
+boot into graphical
+run lxappearance and select them for gtk apps
+configure xscreensaver?
+
+systemd conf set SystemMaxUse to limit journal size
+
+## curve only
 
 make sure ~/.config/systemd is restored, has user services/timers
 systemctl --user enable gmail-backup.timer
 systemctl --user enable backup-to-nas.timer
 
-systemd conf set  SystemMaxUse to limit journal size
 systemd-networkd
     requires config in /etc/systemd/network
 
@@ -33,15 +47,9 @@ load-module module-switch-on-connect
 
 configure telegraf
 
-## tangent
+## old tangent (old thinkpad laptop)
 
 add panic=15 to /etc/default/grub 's default params (GRUB_CMDLINE_LINUX_DEFAULT)
 to make it auto restart 15 sceonds after a kernel panic
 
-install samba
-set up /etc/samba/smb.conf
-smbpasswd - add users for writing
-set up fstab mounts for external / fstab mounts on curve for cifs
-
-plex
-minidlna - has remote search
+## new tangent
