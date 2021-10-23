@@ -21,6 +21,6 @@ cadence --minimized &
 picom &
 nm-applet &
 
-xautolock -time 14 -corners "----" -secure -locker $HOME/.dotfiles/bin/lock-and-turn-off-display.sh &
+xss-lock $HOME/.dotfiles/bin/lock-and-turn-off-display.sh &
 
 wait $wmpid

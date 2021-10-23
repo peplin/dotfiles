@@ -112,7 +112,7 @@ xmonad-contrib
 libnotify
 dunst
 dmenu
-xautolock
+xss-lock
 slock
 trayer
 lxappearance

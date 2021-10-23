@@ -164,7 +164,7 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
     , ((modMask, xK_b), sendMessage ToggleStruts)
 
     -- lock the screen
-    , ((modMask, xK_z), spawn "lock-and-turn-off-display.sh")
+    , ((modMask, xK_z), spawn "loginctl lock-session")
 
     , ((modMask, xK_x), goToSelected def)
 
