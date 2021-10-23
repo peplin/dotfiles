@@ -10,7 +10,7 @@ Config { font = "xft:Ubuntu Mono-11"
         -- battery monitor
         , Run Battery        [ "--template" , "Batt: <acstatus>"
                              , "--Low"      , "15"        -- units: %
-                             , "--High"     , "80"        -- units: %
+                             , "--High"     , "65"        -- units: %
                              , "--low"      , "darkred"
                              , "--normal"   , "darkorange"
                              , "--high"     , "darkgreen"
