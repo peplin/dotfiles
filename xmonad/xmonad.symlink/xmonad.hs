@@ -180,8 +180,8 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
     , ((0, xF86XK_AudioMute), spawn "mute.sh")
 
     -- lcd brightness
-    , ((0, xF86XK_MonBrightnessUp), spawn "xbacklight +10")
-    , ((0, xF86XK_MonBrightnessDown), spawn "xbacklight -10")
+    , ((0, xF86XK_MonBrightnessUp), spawn "light -A 5")
+    , ((0, xF86XK_MonBrightnessDown), spawn "light -U 5")
 
     ]
     ++
