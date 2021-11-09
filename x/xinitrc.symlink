@@ -23,4 +23,8 @@ nm-applet &
 
 xss-lock $HOME/.dotfiles/bin/lock-and-turn-off-display.sh &
 
+if [[ $HOSTNAME == "tangent" ]]; then
+    libinput-gestures-setup start
+fi
+
 wait $wmpid
