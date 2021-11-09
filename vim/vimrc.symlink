@@ -37,6 +37,7 @@ autocmd!
         Plugin 'google/vim-codefmt'
         Plugin 'google/vim-glaive'
         Plugin 'hashivim/vim-terraform'
+        Plugin 'dense-analysis/ale'
 
         " Primary feature plugins
         Plugin 'airblade/vim-gitgutter'
@@ -429,6 +430,16 @@ autocmd!
           autocmd FileType java AutoFormatBuffer google-java-format
           autocmd FileType python AutoFormatBuffer black
         augroup END
+    " }
+
+    " vim-ale {
+        let g:ale_linters = {'ruby': ['standardrb']}
+        let g:ale_fixers = {'ruby': ['standardrb']}
+        let g:ale_fix_on_save = 1
+    " }
+
+    " vim-ruby (from vim-polyglot) {
+        let g:ruby_indent_assignment_style = 'variable'
     " }
 
     " vim-terraform {
