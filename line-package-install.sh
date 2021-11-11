@@ -188,3 +188,4 @@ fi
 #
 ## disable password authentication
 #systemctl enable sshd
+# /etc/modprobe.d/nobeep.conf -> blacklist pcspkr
