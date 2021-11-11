@@ -127,6 +127,7 @@ tumbler # for thumbnails
 google-chrome
 urxvt-perls
 urxvt-vtwheel
+urxvt-font-size-git
 syncthing
 pwgen
 gparted

@@ -19,9 +19,6 @@ URxvt*loginShell: true
 URxvt*saveLines: 5000
 URxvt*termName: xterm-256color
 
-URxvt.iso14755: false
-URxvt.iso14755_52: false
-
 XTerm*charClass: 2500:1
 
 URxvt*scrollTtyOutput: false
@@ -29,7 +26,7 @@ URxvt*scrollWithBuffer: true
 URxvt*scrollTtyKeypress: true
 
 ! requires urxvt-perls from arch
-URxvt.perl-ext-common: default,matcher,vtwheel,selection-to-clipboard,clipboard
+URxvt.perl-ext-common: default,matcher,vtwheel,font-size,selection-to-clipboard,clipboard
 URxvt.clipboard.autocopy: true
 
 URxvt.url-launcher: /usr/bin/xdg-open
@@ -74,3 +71,13 @@ URxvt.url-select.underline: false
 ! white
 *.color7:       #6c6c6c
 *.color15:      #ffffff
+
+! These bindings must be disabled for the font size bindings to work
+URxvt.iso14755: false
+URxvt.iso14755_52: false
+
+! Font size bindings
+URxvt.keysym.C-Up:     perl:font-size:increase
+URxvt.keysym.C-Down:   perl:font-size:decrease
+URxvt.keysym.C-S-Up:   perl:font-size:incglobal
+URxvt.keysym.C-S-Down: perl:font-size:decglobal
