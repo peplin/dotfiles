@@ -64,6 +64,7 @@ HOME_EXCLUDES="""
 - .mpd
 - .npm
 - .nv
+- .pulse
 - .__pycache__
 - .ssh/ssh_auth_sock
 - .steam
