@@ -41,38 +41,40 @@ HOME_DIRS=(
 )
 
 HOME_EXCLUDES="""
-- .config/Slack
-- .config/google-chrome
-- .config/Signal
-- .config/aacs
-- .config/syncthing
-- .config/ghb/EncodeLogs
-- .keychain
-- .getmail
-- .dotfiles/vim/vim.symlink/bundle
-- .mpd
-- .ssh/ssh_auth_sock
-- .local
+- .aqbanking
+- .bundle
 - .cache
 - .cargo
-- .dvdcss
-- .npm
-- .gem
-- .bundle
-- .java
-- .nv
-- go
-- downloads
-- .tox
-- .__pycache__
 - .cddb
-- .aqbanking
+- .config/aacs
+- .config/ghb/EncodeLogs
+- .config/google-chrome
+- .config/Signal
+- .config/Slack
+- .config/syncthing
+- .dotfiles/vim/vim.symlink/bundle
+- downloads
+- .dvdcss
+- .gem
+- .getmail
+- go
+- .java
+- .keychain
+- .local
+- .mpd
+- .npm
+- .nv
+- .__pycache__
+- .ssh/ssh_auth_sock
+- .steam
+- .terraform
+- .thunderbird
+- .tox
+- .viminfo
 - .vimswap
 - .vimundo
-- .viminfo
 - .zcalc_history
-- .thunderbird
-- .terraform
+- .zoom
 - .zsh_history
 """
 
