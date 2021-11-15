@@ -42,6 +42,7 @@ autocmd!
         " Primary feature plugins
         Plugin 'airblade/vim-gitgutter'
         Plugin 'tpope/vim-fugitive'
+        Plugin 'tpope/vim-rhubarb'
         Plugin 'Alok/notational-fzf-vim'
         Plugin 'junegunn/fzf.vim'
 
