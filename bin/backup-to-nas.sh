@@ -70,6 +70,7 @@ HOME_EXCLUDES="""
 - .steam
 - .terraform
 - .thunderbird
+- *tmp/*
 - .tox
 - .viminfo
 - .vimswap
