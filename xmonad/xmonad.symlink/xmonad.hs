@@ -302,7 +302,7 @@ myStartupHook = return ()
 main = do
     xmobar <- spawnPipe "xmobar"
     trayproc <- spawnPipe "killall trayer -q; sleep 10; trayer --edge top --align left --SetDockType true --SetPartialStrut true --expand true --width 4 --alpha 0 --transparent true --height 18 --tint 000000"
-    xmonad $ docks def {
+    xmonad $ docks $ ewmh def {
       -- simple stuff
         terminal           = myTerminal,
         focusFollowsMouse  = myFocusFollowsMouse,
@@ -320,5 +320,6 @@ main = do
         layoutHook         = smartBorders $ avoidStruts $ myLayout,
         manageHook         = placeHook simpleSmart <+> manageDocks <+> myManageHook,
         logHook            =  (dynamicLogWithPP xmobarPP {ppOutput = hPutStrLn xmobar}),
-        startupHook        = myStartupHook
+        startupHook        = myStartupHook,
+        handleEventHook    = handleEventHook def <+> fullscreenEventHook
     }
