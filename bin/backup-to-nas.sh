@@ -52,6 +52,7 @@ HOME_EXCLUDES="""
 - .config/Signal
 - .config/Slack
 - .config/syncthing
+- dev/atob
 - .dotfiles/vim/vim.symlink/bundle
 - downloads
 - .dvdcss
