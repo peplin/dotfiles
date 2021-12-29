@@ -47,6 +47,7 @@ HOME_EXCLUDES="""
 - .cargo
 - .cddb
 - .config/aacs
+- .config/Cadence
 - .config/ghb/EncodeLogs
 - .config/google-chrome
 - .config/Signal
@@ -54,6 +55,10 @@ HOME_EXCLUDES="""
 - .config/syncthing
 - dev/atob
 - .dotfiles/vim/vim.symlink/bundle
+- .dotfiles/xmonad/xmonad.symlink/prompt-history
+- .dotfiles/xmonad/xmonad.symlink/xmonad-x86_64-linux
+- .dotfiles/xmonad/xmonad.symlink/*.errors
+- .dotfiles/xmonad/xmonad.symlink/*.o
 - downloads
 - .dvdcss
 - .gem
@@ -62,7 +67,9 @@ HOME_EXCLUDES="""
 - .java
 - .keychain
 - .local
+- .log
 - .mpd
+- .nodenv
 - .npm
 - .nv
 - .pulse
