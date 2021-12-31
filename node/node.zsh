@@ -1,1 +1,1 @@
-export PATH=$PATH:~/.nodenv/bin
+export PATH=$PATH:~/.nodenv/shims
