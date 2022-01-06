@@ -41,6 +41,9 @@
     # Fetch origin, then flow down all changes to child branches from main/master
     refresh = !git fetch origin && ~/.dotfiles/git/flow.sh all
     move = !~/.dotfiles/git/move.sh
+    tidy = !~/.dotfiles/git/tidy.sh
+    fpa = push --all --force origin
+    fp = push --force origin
 
 [apply]
     whitespace = nowarn
