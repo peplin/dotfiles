@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-set -ex
+set -e
 
 # Change the parent of a child branch and rebase it.
 # Example:
