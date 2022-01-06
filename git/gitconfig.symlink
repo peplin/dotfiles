@@ -39,7 +39,7 @@
     # Flow down changes from base branches to child branches by rebasing
     flow = !~/.dotfiles/git/flow.sh
     # Fetch origin, then flow down all changes to child branches from main/master
-    refresh = !git fetch origin && ~/.dotfiles/git/flow.sh all
+    refresh = !git fetch origin && ~/.dotfiles/git/flow.sh all && git tidy
     move = !~/.dotfiles/git/move.sh
     tidy = !~/.dotfiles/git/tidy.sh
     fpa = push --all --force origin
