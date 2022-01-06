@@ -29,7 +29,7 @@ tidy() {
 
 }
 
-find_starting_branch
+find_starting_branch "all"
 build_branch_tree $branch_parents
 
 tidy $starting_branch 0
