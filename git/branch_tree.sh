@@ -83,7 +83,11 @@ print_branch_tree() {
 
     pr_info+="$pr_number$NO_COLOR"
 
-    outputs+=("$prefix$branch	$commits_output	$pr_info	$commit_message")
+    branch_output="$branch$NO_COLOR"
+    if [ "$branch" = "$current_branch" ]; then
+        branch_output="$GREEN$branch_output"
+    fi
+    outputs+=("$prefix$branch_output	$commits_output	$pr_info	$commit_message")
 
     for child_branch in $child_branches; do
         print_branch_tree $child_branch $depth+1
