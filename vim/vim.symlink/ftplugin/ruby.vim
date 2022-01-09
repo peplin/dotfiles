@@ -1,1 +1,1 @@
-map <F7> Obinding.pry # TODO<esc>
+map <F7> Odebugger # TODO<esc>
