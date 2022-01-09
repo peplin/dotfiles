@@ -40,15 +40,21 @@ print_branch_tree() {
     commits_behind=$((commits_diff[0]))
     local commits_output="("
 
-    if (( commits_ahead > 0 && commits_behind == 0)); then
+    if (( commits_ahead > 0 )); then
         commits_output+="\033[0;32m+$commits_ahead\033[0m"
-    elif (( commits_ahead > 0 && commits_behind > 0)); then
-        commits_output+="\033[0;32m+$commits_ahead\033[0m, \033[0;31m-$commits_behind\033[0m"
-    elif (( commits_ahead == 0 && commits_behind > 0)); then
-        commits_output+="\033[0;31m+$commits_behind\033[0m"
-    else
+    fi
+
+    if (( commits_behind > 0 )); then
+        if ((commits_ahead > 0)); then
+            commits_output+=", "
+        fi
+        commits_output+="\033[0;31m-$commits_behind\033[0m"
+    fi
+
+    if (( commits_ahead == 0 && commits_behind == 0)); then
         commits_output+="0"
     fi
+
     commits_output+=")"
 
     local commit_message=$(git show -q --format=%s $branch)
