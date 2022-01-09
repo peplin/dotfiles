@@ -6,11 +6,13 @@ source $SCRIPT_DIRECTORY/util.sh
 set -e
 
 declare -A branch_parents
+outputs=()
 
 print_branch_tree() {
     local branch=$1
     local depth=($2)
     local upstream=$(git rev-parse --abbrev-ref --symbolic-full-name $branch@{upstream})
+    calculate_commits_ahead_of_upstream $branch $upstream
     local child_branches=("${branch_parents[$branch]}")
     local siblings=(${branch_parents[$upstream]})
 

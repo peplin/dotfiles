@@ -50,3 +50,9 @@ find_starting_branch() {
 find_current_branch() {
     current_branch=$(git rev-parse --abbrev-ref --symbolic-full-name HEAD)
 }
+
+calculate_commits_ahead_of_upstream() {
+    local branch=$1
+    local upstream=$2
+    commits_ahead_of_upstream=$(($(git rev-list --right-only --count $upstream...$branch)))
+}

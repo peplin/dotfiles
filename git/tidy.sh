@@ -11,7 +11,7 @@ tidy() {
     local branch=$1
     local depth=$(($2))
     local upstream=$(git rev-parse --abbrev-ref --symbolic-full-name $branch@{upstream})
-    local commits_ahead_of_upstream=$(($(git rev-list --right-only --count $upstream...$branch)))
+    calculate_commits_ahead_of_upstream $branch $upstream
     local child_branches=("${branch_parents[$branch]}")
 
     if [ $depth != 0 ] && [ $commits_ahead_of_upstream = 0 ]; then
