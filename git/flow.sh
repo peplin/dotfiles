@@ -27,7 +27,7 @@ flowdown() {
     done
 }
 
-current_branch=$(git rev-parse --abbrev-ref --symbolic-full-name HEAD)
+find_current_branch
 find_starting_branch $1
 build_branch_tree $branch_parents
 flowdown $starting_branch 0

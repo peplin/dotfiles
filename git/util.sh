@@ -46,3 +46,7 @@ find_starting_branch() {
         starting_branch=$(git rev-parse --abbrev-ref --symbolic-full-name HEAD)
     fi
 }
+
+find_current_branch() {
+    current_branch=$(git rev-parse --abbrev-ref --symbolic-full-name HEAD)
+}
