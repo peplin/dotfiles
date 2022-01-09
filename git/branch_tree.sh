@@ -58,7 +58,19 @@ print_branch_tree() {
     commits_output+=")"
 
     local commit_message=$(git show -q --format=%s $branch)
-    outputs+=("$prefix$branch	$commits_output	$commit_message")
+
+    if (( depth > 0 )); then
+        set +e
+        TMPFILE=$(mktemp)
+        local pr_info_output=$(gh pr view $branch --json number,state 2> $TMPFILE)
+        if (( $? == 0 )); then
+            local pr_number=$(echo $pr_info_output | jq .number)
+            local pr_state=$(echo $pr_info_output | jq .state)
+        fi
+        set -e
+    fi
+
+    outputs+=("$prefix$branch	$commits_output	$pr_number	$commit_message")
 
     for child_branch in $child_branches; do
         print_branch_tree $child_branch $depth+1
@@ -72,5 +84,5 @@ print_branch_tree $starting_branch 0
 
 for info in "${outputs[@]}"; do
     echo -e "$info"
-done | column -t -s "	" -T 3
+done | column -t -s "	" -T 4
 
