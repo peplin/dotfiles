@@ -60,7 +60,7 @@ print_branch_tree() {
 
     local commit_message=$(git show -q --format=%s $branch)
 
-    if (( depth > 0 )); then
+    if (( depth > 0 )) && (( no_external_calls == 0 )); then
         set +e
         TMPFILE=$(mktemp)
         local pr_info_output=$(gh pr view $branch --json number,state,isDraft 2> $TMPFILE)
@@ -90,6 +90,12 @@ print_branch_tree() {
     done
 }
 
+# Pass --fast to the script to disable calls to GitHub and print only local information
+no_external_calls=0
+if [[ "$1" == "--fast" ]]; then
+    no_external_calls=1
+fi
+
 find_current_branch
 find_starting_branch all
 build_branch_tree $branch_parents
@@ -98,4 +104,3 @@ print_branch_tree $starting_branch 0
 for info in "${outputs[@]}"; do
     echo -e "$info"
 done | column -t -s "	" -T 4
-
