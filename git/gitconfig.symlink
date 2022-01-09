@@ -33,8 +33,7 @@
     l = "!f() { git log --graph --format=fuller --pretty=\"tformat:%C(yellow)%h%Creset %Cgreen(%cr)%Creset %C(bold blue)%an%Creset %C(red)%d%Creset %s\" $*; } ; f"
     unmerged = branch -a --no-merged
     merged = branch -a --merged
-    br = !~/bin/branch_tree  --sort_by_author_date -d
-    newbr = !~/.dotfiles/git/branch_tree.sh
+    br = !~/.dotfiles/git/branch_tree.sh
     # Squash all commits since the fork point in the current branch into 1 commit
     squash = !~/.dotfiles/git/squashall.sh
     # Flow down changes from base branches to child branches by rebasing
