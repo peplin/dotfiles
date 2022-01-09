@@ -1,15 +1,9 @@
 #!/usr/bin/env bash
 
-# Return true if they a key exists in an associative array
-# Call it like "exists foo bar".
-exists() {
-  eval '[ ${'$2'[$1]}+nothing ]'
-}
-
 # Build an associative array mapping parent branches to a space-separated list
 # of their child branches.
 build_branch_tree() {
-    branch_parents=$1
+    local -n branches=$1
 
     # Collect all local branches and their upstreams
     branches_and_upstreams=$(git for-each-ref --format='%(refname:short) %(upstream:short)' refs/heads)
@@ -19,10 +13,10 @@ build_branch_tree() {
         branch="${branch_info[0]}"
         upstream="${branch_info[1]}"
 
-        if ! exists upstream branch_parents; then
-            branch_parents[$upstream]="$branch"
+        if [ ${branches[$upstream]+nothing} ]; then
+            branches[$upstream]+=" $branch"
         elif [ ! -z "$upstream" ]; then
-            branch_parents[$upstream]+=" $branch"
+            branches[$upstream]="$branch"
         fi
     done <<< "$branches_and_upstreams"
 }

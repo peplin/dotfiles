@@ -6,6 +6,7 @@ source $SCRIPT_DIRECTORY/util.sh
 set -e
 
 declare -A branch_parents
+declare -A visited_branches
 outputs=()
 
 LIGHT_BLUE="\033[0;34m"
@@ -13,7 +14,7 @@ GREEN="\033[0;32m"
 RED="\033[0;31m"
 NO_COLOR="\033[0m"
 
-print_branch_tree() {
+render_branch_tree() {
     local branch=$1
     local depth=($2)
     depth=$((depth))
@@ -89,8 +90,9 @@ print_branch_tree() {
     fi
     outputs+=("$prefix$branch_output	$commits_output	$pr_info	$commit_message")
 
+    visited_branches[$branch]="foo"
     for child_branch in $child_branches; do
-        print_branch_tree $child_branch $depth+1
+        render_branch_tree $child_branch $depth+1
     done
 }
 
@@ -100,10 +102,20 @@ if [[ "$1" == "--fast" ]]; then
     no_external_calls=1
 fi
 
+
 find_current_branch
 find_starting_branch all
-build_branch_tree $branch_parents
-print_branch_tree $starting_branch 0
+build_branch_tree branch_parents
+
+render_branch_tree $starting_branch 0
+
+# Render any branches not inheriting from the starting branch
+all_heads=$(git for-each-ref --format='%(refname:short)' refs/heads)
+while IFS= read -r branch; do
+    if [ ! ${visited_branches[$branch]+nothing} ]; then
+        render_branch_tree $branch 0
+    fi
+done <<< "$all_heads"
 
 for info in "${outputs[@]}"; do
     echo -e "$info"
