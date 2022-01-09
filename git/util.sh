@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 
 # Return true if they a key exists in an associative array
-# Call it like "exists foo in bar".
+# Call it like "exists foo bar".
 exists() {
-  eval '[ ${'$3'[$1]}+nothing ]'
+  eval '[ ${'$2'[$1]}+nothing ]'
 }
 
 # Build an associative array mapping parent branches to a space-separated list
@@ -19,7 +19,7 @@ build_branch_tree() {
         branch="${branch_info[0]}"
         upstream="${branch_info[1]}"
 
-        if ! exists upstream in branch_parents; then
+        if ! exists upstream branch_parents; then
             branch_parents[$upstream]="$branch"
         else
             branch_parents[$upstream]+=" $branch"
