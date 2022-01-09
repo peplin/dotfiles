@@ -51,7 +51,8 @@ print_branch_tree() {
     fi
     commits_output+=")"
 
-    outputs+=("$prefix$branch|$commits_output")
+    local commit_message=$(git show -q --format=%s $branch)
+    outputs+=("$prefix$branch	$commits_output	$commit_message")
 
     for child_branch in $child_branches; do
         print_branch_tree $child_branch $depth+1
@@ -65,5 +66,5 @@ print_branch_tree $starting_branch 0
 
 for info in "${outputs[@]}"; do
     echo -e "$info"
-done | column -t -s "|"
+done | column -t -s "	" -T 3
 
