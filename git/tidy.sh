@@ -16,8 +16,15 @@ tidy() {
 
     if [ $depth != 0 ] && [ $commits_ahead_of_upstream = 0 ]; then
         for child_branch in $child_branches; do
-            git branch -u "$upstream" "$child_branch"
+            REPARENT_OUTPUT=$(git branch -u "$upstream" "$child_branch")
+            echo "Reparented $child_branch"
         done
+
+        # If we're on a branch about to be deleted, switch to the parent
+        current_branch=$(git rev-parse --abbrev-ref --symbolic-full-name HEAD)
+        if [ "$current_branch" = "$branch" ]; then
+            CHECKOUT_OUTPUT=$(git checkout $upstream)
+        fi
 
         DELETE_OUTPUT=$(git branch -d "$branch")
         echo "Removed empty branch $branch and reparented children"
