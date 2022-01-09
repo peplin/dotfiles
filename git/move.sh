@@ -10,13 +10,13 @@ set -e
 reparent_branch() {
     new_parent_branch=$1
     child_branch=$2
-    current_branch=$(git rev-parse --abbrev-ref --symbolic-full-name HEAD)
     child_branch=${child_branch:=$current_branch}
 
-    first_commit=$(git log @{upstream}..$child_branch --pretty=format:"%h" | tail -1)
+    first_commit=$(git log @{upstream}~1..$child_branch --pretty=format:"%h" | tail -1)
     git switch $child_branch
     git branch -u $new_parent_branch
     git rebase --onto $new_parent_branch $first_commit
 }
 
+find_current_branch
 reparent_branch $1 $2
