@@ -1,0 +1,135 @@
+## Git Tools for Stacked Branches
+
+This is a set of bash tools for a git workflow that makes heavy use of stacked
+branches (and pull requests) with single commits, rebasing and force pushing.
+These are some sharp knives but can be very powerful. If anything gets messed
+up, `git reflog` is your friend.
+
+If you use more than 1 commit per branch, YMMV.
+
+**Prerequisites**
+
+Set up your git config to always rebase branches:
+
+`git config --global branch.autosetuprebase always`
+
+### `branch_tree.sh`
+
+This tool visualizes all of your local branches as a tree. The prerequisites:
+
+* All branches have upstream set (`git branch -u UPSTREAM_BRANCH`)
+* All branches are rooted in 'main' or 'master' (it's auto-detected).
+
+Add this to your git config:
+
+```
+[alias]
+   br = !~/.dotfiles/git/branch_tree.sh --fast
+```
+
+To view a graph
+
+```
+$ git br
+main                                 (0)     Initial commit
+├─ bugfix-1                          (+1)    Fix a bug
+   ├─ another-feature                (+1)    Another independent feature that depends on the bugfix
+   └─ new-feature                    (+1)    Add feature that depends on bugfix
+├─ feature-incremental-step-1        (+1)    Incremental refactoring towards a new feature
+   └─ bugfix-2                       (+1)    Bugfix required for new feature, could be lifted out to main
+      └─ feature-incremental-step-2  (+1)    Another incremental step towards the new feature that can be landed
+         └─ add-feature-flag         (+1)    Add a feature flag to control the new feature, off by default
+            └─ finish-new-feature    (+1)    Implement new feature, behind the previously added feature flag
+└─ remove-use-of-deprecated-column   (+1)    Remove all use in code of a column we want to remove from the DB
+   └─ remove-column                  (+1)    Remove column with a database migration
+```
+
+You can also enrich this output with pull request information by dropping the
+`--fast` option. It will print the pull request number, if any, and change the
+color based on if the PR is open, closed or a draft. This is currently pretty
+slow and needs to be optimized to make a single call to the GitHub API instead
+of one for each branch.
+
+### `flow.sh`
+
+Flow down changes from base branches to child branches by rebasing.
+
+For example, in the working copy visualized above, say you made an update in the
+`bugfix-1` branch. The child branches are now out of sync:
+
+```
+$ git br
+main                                 (0)         Initial commit
+├─ bugfix-1                          (+1)        Fix a bug differently
+   ├─ another-feature                (+2, -1)    Another independent feature that depends on the bugfix
+   └─ new-feature                    (+2, -1)    Add feature that depends on bugfix
+```
+
+They still have the old copy of `bugfix-1`. To fix this, run `flow.sh` (aliased
+to `git flow`):
+
+```
+$ git flow
+Rebasing bugfix-1...done
+  Rebasing another-feature...done
+  Rebasing new-feature...done
+Switched to branch 'bugfix-1'
+Your branch is ahead of 'main' by 1 commit.
+  (use "git push" to publish your local commits)
+```
+
+and now check the tree:
+
+```
+$ git br
+main                                 (0)     Initial commit
+├─ bugfix-1                          (+1)    Fix a bug differently
+   ├─ another-feature                (+1)    Another independent feature that depends on the bugfix
+   └─ new-feature                    (+1)    Add feature that depends on bugfix
+
+```
+
+The 2 child branches were rebased against `bugfix-1` and are now up to date.
+
+Note, if you've rebased a branch, you typically need to use `git push origin
+--force` to push the changes to a remote. This is a destructive operation, so
+use it with care. If you made any changes to a pull request in the GitHub web UI
+it may be overwritten by this operation. When using this workflow, I recommend
+considering your working copy the source of truth - the PR in GitHub is just a
+proposal for something to be merged and could be overwritten at any time.
+
+### `move.sh`
+
+In the above example, `bugfix-2` is a bug we encountered along the way of
+developing a new feature, and it might be beneficial to be able to land that fix
+onto the main branch even if the new feature isn't ready.
+
+You could create a new branch off of `main`, and cherry pick `bugfix-2`.
+Alternatively, and this can sometimes come in handy for bigger branch changes,
+use the `move.sh` script.
+
+This changes the upstream of a branch and rebases it against the new parent:
+
+
+```
+move.sh <new parent> [<target branch to move>]
+```
+
+If we're on `bugfix-2`, we can run this to move this branch to `main`:
+
+```
+move.sh main
+```
+
+Note, the child branches of `bugfix-2` along for the ride.
+
+### Aliases
+
+The `refresh` alias is a handy way to pull the latest changes from the remote
+and update all of your local branches. This will also remove and tidy up any
+branches that have been merged.
+
+```
+[alias]
+   refresh = !git fetch origin && ~/.dotfiles/git/flow.sh all && git tidy && git br
+```
