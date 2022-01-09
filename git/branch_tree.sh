@@ -8,6 +8,7 @@ set -e
 declare -A branch_parents
 outputs=()
 
+LIGHT_BLUE="\033[0;34m"
 GREEN="\033[0;32m"
 RED="\033[0;31m"
 NO_COLOR="\033[0m"
@@ -41,14 +42,14 @@ print_branch_tree() {
     local commits_output="("
 
     if (( commits_ahead > 0 )); then
-        commits_output+="\033[0;32m+$commits_ahead\033[0m"
+        commits_output+="$GREEN+$commits_ahead$NO_COLOR"
     fi
 
     if (( commits_behind > 0 )); then
         if ((commits_ahead > 0)); then
             commits_output+=", "
         fi
-        commits_output+="\033[0;31m-$commits_behind\033[0m"
+        commits_output+="$RED-$commits_behind$NO_COLOR"
     fi
 
     if (( commits_ahead == 0 && commits_behind == 0)); then
@@ -62,15 +63,27 @@ print_branch_tree() {
     if (( depth > 0 )); then
         set +e
         TMPFILE=$(mktemp)
-        local pr_info_output=$(gh pr view $branch --json number,state 2> $TMPFILE)
+        local pr_info_output=$(gh pr view $branch --json number,state,isDraft 2> $TMPFILE)
         if (( $? == 0 )); then
             local pr_number=$(echo $pr_info_output | jq .number)
             local pr_state=$(echo $pr_info_output | jq .state)
+            local pr_draft=$(echo $pr_info_output | jq .isDraft)
         fi
         set -e
     fi
 
-    outputs+=("$prefix$branch	$commits_output	$pr_number	$commit_message")
+    pr_info=""
+    if [ "$pr_draft" = "true" ]; then
+        pr_info+="$LIGHT_BLUE"
+    elif [ "$pr_state" = "\"OPEN\"" ]; then
+        pr_info+="$GREEN"
+    else
+        pr_info+="$RED"
+    fi
+
+    pr_info+="$pr_number$NO_COLOR"
+
+    outputs+=("$prefix$branch	$commits_output	$pr_info	$commit_message")
 
     for child_branch in $child_branches; do
         print_branch_tree $child_branch $depth+1
