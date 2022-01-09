@@ -21,7 +21,7 @@ build_branch_tree() {
 
         if ! exists upstream branch_parents; then
             branch_parents[$upstream]="$branch"
-        else
+        elif [ ! -z "$upstream" ]; then
             branch_parents[$upstream]+=" $branch"
         fi
     done <<< "$branches_and_upstreams"
