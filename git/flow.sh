@@ -29,6 +29,6 @@ flowdown() {
 
 find_current_branch
 find_starting_branch $1
-build_branch_tree $branch_parents
+build_branch_tree branch_parents
 flowdown $starting_branch 0
 git checkout $current_branch
