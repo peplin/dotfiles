@@ -5,13 +5,29 @@ branches (and pull requests) with single commits, rebasing and force pushing.
 These are some sharp knives but can be very powerful. If anything gets messed
 up, `git reflog` is your friend.
 
-If you use more than 1 commit per branch, YMMV.
+Why? Check out [this
+article](https://jg.gg/2018/09/29/stacked-diffs-versus-pull-requests/)
+on the power of "stacked diffs". Many former Phabricator users that have seen
+the light are now trying to recreating a similar workflow in GitHub. This is my
+attempt, being as lightweight as possible. These tools require only git and a
+modern version of `bash`. Besides the convention of using 1 commit per branch,
+there is no other magic or metadata stored in your repository.
 
 **Prerequisites**
 
-Set up your git config to always rebase branches:
+* Set up your git config to always rebase branches: `git config --global branch.autosetuprebase always`
+* Limit each branch to 1 commit. If you need to change anything,
+  use `git commit --amend` instead of adding a new commit.
 
-`git config --global branch.autosetuprebase always`
+### GitHub Notes
+
+A few things I've noticed when using this workflow with GitHub and the `gh` CLI:
+
+* If you create a pull request from a branch with `gh pr create`, it changes the
+    upstream of your local branch to `origin/branch-name`. This breaks the local
+    hierarchy, defeating the purpose of these tools.  I recommend fixing the
+    upstream after creating the branch (`git branch -u <LOCAL UPSTREAM>`), or
+    creating PRs in the web interface.
 
 ### `branch_tree.sh`
 
