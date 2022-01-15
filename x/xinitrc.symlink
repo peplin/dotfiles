@@ -1,5 +1,9 @@
 xmodmap $HOME/.dotfiles/x/modcapslock
-xrdb -merge $HOME/.Xresources
+
+xrdb -merge $HOME/.dotfiles/x/Xresources.base
+if [[ $HOSTNAME == "tangent" ]]; then
+    xrdb -merge $HOME/.dotfiles/x/Xresources.laptop
+fi
 
 xsetroot -cursor_name left_ptr
 
@@ -16,7 +20,8 @@ if [ -d /etc/X11/xinit/xinitrc.d ] ; then
     unset f
 fi
 
-cadence --minimized &
+#cadence --minimized &
+pulseaudio &
 
 picom &
 nm-applet &
