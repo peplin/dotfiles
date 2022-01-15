@@ -123,6 +123,8 @@ xsel
 
 # apps
 thunar
+thunar-volman
+gvfs
 tumbler # for thumbnails
 google-chrome
 urxvt-perls
