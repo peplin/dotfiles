@@ -101,7 +101,7 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
     , ((modMask,               xK_d     ), spawn "dmenu_run")
 
     , ((modMask,               xK_a     ), dirExecPromptNamed
-            def spawn "/home/peplin/.xmonad/actions" "Scripts: ")
+            def{ font = "xft:Ubuntu Mono:size=10:antialias=true" } spawn "/home/peplin/.xmonad/actions" "Scripts: ")
 
     -- Screeenshot selected area and save to /tmp
     , ((modMask, xK_s     ), spawn "maim -s | xclip -selection clipboard -t image/png && xclip -selection clipboard -o > /tmp/Screenshot-$(date +%Y-%m-%d-%T).png")
