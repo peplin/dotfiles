@@ -61,6 +61,7 @@ pulseaudio
 pavucontrol
 pulseaudio-alsa
 pulseaudio-zeroconf
+playerctl
 pasystray
 flac
 jack2 pulseaudio-jack cadence alsa-tools alsa-utils reaper-bin realtime

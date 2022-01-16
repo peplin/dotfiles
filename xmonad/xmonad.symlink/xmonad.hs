@@ -175,9 +175,10 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
     , ((modMask, xK_f), sendMessage $ Toggle REFLECTX)
 
     -- audio
-    , ((0, xF86XK_AudioLowerVolume), spawn "updatevolume.sh -")
-    , ((0, xF86XK_AudioRaiseVolume), spawn "updatevolume.sh +")
-    , ((0, xF86XK_AudioMute), spawn "mute.sh")
+    , ((0, xK_F9), spawn "playerctl previous")
+    , ((0, xK_F10), spawn "playerctl next")
+    , ((0, xK_F11), spawn "playerctl play-pause")
+    , ((0, xK_F12), spawn "xdotool key XF86AudioMute")
 
     -- lcd brightness
     , ((0, xF86XK_MonBrightnessUp), spawn "light -A 5")
