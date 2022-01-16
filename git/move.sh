@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
 
+SCRIPT_DIRECTORY="$(dirname "$0")"
+source $SCRIPT_DIRECTORY/util.sh
+
 set -e
 
 # Change the parent of a child branch and rebase it.
