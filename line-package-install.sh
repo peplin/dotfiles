@@ -125,6 +125,8 @@ xsel
 # apps
 thunar
 thunar-volman
+thunar-archive-plugin
+xarchiver
 gvfs
 tumbler # for thumbnails
 google-chrome
