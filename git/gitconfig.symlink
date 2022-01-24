@@ -81,3 +81,5 @@
     process = git-lfs filter-process
 [mergetool]
     keepBackup = false
+[advice]
+	skippedCherryPicks = false
