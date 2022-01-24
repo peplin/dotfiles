@@ -1,1 +1,1 @@
-map <F7> Odebugger # TODO<esc>
+map <F7> Obyebug # TODO<esc>
