@@ -11,3 +11,4 @@ yarn.lock
 experimental/
 node_modules/
 .stversions/
+*cassettes*
