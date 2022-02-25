@@ -133,11 +133,11 @@ autocmd!
     set ruler
     set rulerformat=%30(%=\:b%n%y%m%r%w\ %l,%c%V\ %P%) " a ruler on steroids
 
-    " Vertical line at 80 characters
+    " Vertical line at 88 characters
     if exists('+colorcolumn')
         set colorcolumn=+1
     else
-        au BufWinEnter * let w:m2=matchadd('ErrorMsg', '\%>81v.\+', -1)
+        au BufWinEnter * let w:m2=matchadd('ErrorMsg', '\%>89v.\+', -1)
     endif
 
     " show partial commands in status line and selected characters/lines in
@@ -372,8 +372,8 @@ autocmd!
         let g:syntastic_ansible_checkers=[]
         let g:syntastic_html_checkers=['tidy']
         let g:syntastic_javascript_checkers=['jslint']
-        let g:syntastic_python_checkers=['flake8']
-        let g:syntastic_python_flake8_args = "--max-line-length=120"
+        let g:syntastic_python_checkers=['']
+        " let g:syntastic_python_flake8_args = "--max-line-length=120"
         let g:syntastic_cpp_include_dirs = ['source', 'build/source', '/usr/include', '/home/peplin/downloads/flycapture2-2.6.3.4-i386/usr/include', '/home/peplin/downloads/flycapture2-2.6.3.4-i386/usr/include/flycapture']
         let g:syntastic_cpp_compiler = 'clang++-3.5'
         let g:syntastic_cpp_compiler_options = ' -std=c++11'
@@ -435,9 +435,11 @@ autocmd!
     " }
 
     " vim-ale {
-        let g:ale_linters = {'ruby': ['rubocop']}
-        let g:ale_fixers = {'ruby': ['rubocop']}
+        let g:ale_linters = {'ruby': ['rubocop'], 'python': ['flake8']}
+        let g:ale_fixers = {'ruby': ['rubocop'], 'python': ['black']}
         let g:ale_fix_on_save = 1
+
+        let g:ale_python_flake8_options = '--max-line-length=88'
     " }
 
     " vim-ruby (from vim-polyglot) {
