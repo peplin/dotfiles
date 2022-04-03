@@ -26,3 +26,4 @@ gmon.out
 xunit-test-results.xml
 tags
 .terraform*
+.cache
