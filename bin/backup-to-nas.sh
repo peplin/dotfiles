@@ -70,6 +70,7 @@ HOME_EXCLUDES="""
 - .log
 - .mpd
 - .nodenv
+- .nvm
 - .npm
 - .nv
 - .pulse
