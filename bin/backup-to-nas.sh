@@ -73,6 +73,7 @@ HOME_EXCLUDES="""
 - .nvm
 - .npm
 - .nv
+- .pnpm-store
 - .pulse
 - .__pycache__
 - .ssh/ssh_auth_sock
