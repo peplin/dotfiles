@@ -29,6 +29,7 @@
     co = checkout
     lg = log -p
     cp = cherry-pick -x
+    git = status
     diffup = diff @{upstream}
     l = "!f() { git log --graph --format=fuller --pretty=\"tformat:%C(yellow)%h%Creset %Cgreen(%cr)%Creset %C(bold blue)%an%Creset %C(red)%d%Creset %s\" $*; } ; f"
     unmerged = branch -a --no-merged
