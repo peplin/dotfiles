@@ -57,14 +57,13 @@ python-pip
 )
 
 AUDIO_PACKAGES=(
-pulseaudio
 pavucontrol
-pulseaudio-alsa
-pulseaudio-zeroconf
+pipewire-pulse
+wireplumber
 playerctl
 pasystray
 flac
-jack2 pulseaudio-jack cadence alsa-tools alsa-utils reaper-bin realtime
+alsa-tools alsa-utils reaper-bin realtime
 )
 
 BACKUP_PACKAGES=(
@@ -191,6 +190,7 @@ fi
 #systemctl enable systemd-resolved
 #systemctl enable systemd-timesyncd
 #systemctl enable cupsd
+#systemctl enable pipewire
 #
 ## disable password authentication
 #systemctl enable sshd
