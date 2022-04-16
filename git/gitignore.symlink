@@ -27,3 +27,5 @@ xunit-test-results.xml
 tags
 .terraform*
 .cache
+.bash_history
+.guard_history
