@@ -67,6 +67,7 @@
     singlekey = true
 [init]
     templatedir = ~/.git_template
+    defaultBranch = main
 [mergetool "fugitive"]
     cmd = vim -f -c \"Gvdiffsplit!\" \"$MERGED\"
 [fetch]
@@ -83,4 +84,4 @@
 [mergetool]
     keepBackup = false
 [advice]
-	skippedCherryPicks = false
+    skippedCherryPicks = false
