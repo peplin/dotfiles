@@ -46,7 +46,6 @@ iotop
 iftop
 openssl
 hunspell
-keychain
 )
 
 DEVELOPMENT_MACHINE=(
@@ -112,6 +111,7 @@ xmobar
 gmrun
 xmonad-contrib
 libnotify
+lxsession
 dunst
 dmenu
 xss-lock

@@ -48,6 +48,4 @@ export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 # Stop Control-S from freezing the terminal
 stty -ixon
 
-command -v keychain >/dev/null && eval $(keychain --eval --agents ssh -Q --quiet id_rsa)
-
 eval "$(direnv hook zsh)"
