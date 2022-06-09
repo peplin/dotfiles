@@ -46,6 +46,7 @@ HOME_EXCLUDES="""
 - .cache
 - .cargo
 - .cddb
+- .config/1Password
 - .config/aacs
 - .config/Cadence
 - .config/ghb/EncodeLogs
@@ -76,6 +77,8 @@ HOME_EXCLUDES="""
 - .pnpm-store
 - .pulse
 - .__pycache__
+- .pyenv
+- .rbenv
 - .ssh/ssh_auth_sock
 - .steam
 - .terraform
