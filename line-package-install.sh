@@ -19,6 +19,8 @@ wget
 grub
 inetutils
 go
+rbenv
+ruby-build
 ncdu
 tmux
 vim
