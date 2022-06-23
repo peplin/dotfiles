@@ -1,1 +1,3 @@
-export SSH_AUTH_SOCK=~/.1password/agent.sock
+if [[ ! -S "$SSH_AUTH_SOCK" ]]; then
+    ln -sf ~/.1password/agent.sock /tmp/$USER-ssh_auth_sock;
+fi
