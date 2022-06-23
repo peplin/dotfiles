@@ -23,6 +23,8 @@ fi
 lxsession &
 picom &
 nm-applet &
+1password --silent &
+urxvt &
 
 xss-lock $HOME/.dotfiles/bin/lock-and-turn-off-display.sh &
 
