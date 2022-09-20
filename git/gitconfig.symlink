@@ -85,3 +85,15 @@
     keepBackup = false
 [advice]
     skippedCherryPicks = false
+
+[user]
+  signingkey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJvhUMoc+h4MV9PMa3O8NM5WszAsk5glaJ4Ef/e96cux
+
+[gpg]
+  format = ssh
+
+[gpg "ssh"]
+  program = "/opt/1Password/op-ssh-sign"
+
+[commit]
+  gpgsign = true
