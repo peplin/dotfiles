@@ -1,7 +1,7 @@
 [user]
     name = Christopher Peplin
     email = chris.peplin@rhubarbtech.com
-    signingkey = "D963BFAF"
+    signingkey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJvhUMoc+h4MV9PMa3O8NM5WszAsk5glaJ4Ef/e96cux
 [color]
     diff = auto
     status = auto
@@ -86,9 +86,6 @@
 [advice]
     skippedCherryPicks = false
 
-[user]
-  signingkey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJvhUMoc+h4MV9PMa3O8NM5WszAsk5glaJ4Ef/e96cux
-
 [gpg]
   format = ssh
 
@@ -96,4 +93,4 @@
   program = "/opt/1Password/op-ssh-sign"
 
 [commit]
-  gpgsign = true
+  gpgsign = false
