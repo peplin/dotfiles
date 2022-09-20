@@ -32,6 +32,8 @@ find_starting_branch() {
             starting_branch="master"
         elif git show-ref --verify --quiet refs/heads/main; then
             starting_branch="main"
+        elif git show-ref --verify --quiet refs/heads/develop; then
+            starting_branch="develop"
         else
             echo "Unable to determine default base branch"
             exit 1
