@@ -36,12 +36,6 @@ systemctl --user enable backup-to-nas.timer
 systemd-networkd
     requires config in /etc/systemd/network
 
-## Pulse
-
-in .config/pulse/default.pa
-
-load-module module-switch-on-connect
-
 ## metrics
 
 configure telegraf
