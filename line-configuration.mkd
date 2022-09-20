@@ -54,3 +54,7 @@ add libinput-gestures config for 3-finger back/forward
 ## work
 
 sudo systemctl set-default multi-user.target
+
+install libinput-gestures
+add libinput rule to enable touchpad tapping
+add libinput-gestures config for 3-finger back/forward
