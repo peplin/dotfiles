@@ -3,4 +3,4 @@
 " insert the comment leader characters:
 set formatoptions+=ro
 
-map <F2> :e %:p:s,.hh$,.X123X,:s,.cc$,.hh,:s,.X123X$,.cc,<CR>
+map <F2> :e %:p:s,.h$,.X123X,:s,.c$,.h,:s,.X123X$,.c,<CR>
