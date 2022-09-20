@@ -27,6 +27,7 @@ autocmd!
         Plugin 'tpope/vim-eunuch'
         Plugin 'tpope/vim-repeat'
         Plugin 'tpope/vim-unimpaired'
+        Plugin 'vim-scripts/a.vim'
 
         " Theme
         Plugin 'itchyny/lightline.vim'
@@ -446,7 +447,9 @@ autocmd!
 " }
 
 " Jump to Bazel BUILD file in same directory as this file
-map <F3> :sp %:h/BUILD<CR>
+" map <F3> :sp %:h/BUILD<CR>
+
+map <F2> :A<CR>
 
 " highlight clear SpellBad
 " highlight SpellBad ctermfg=009 ctermbg=011 guifg=#ff0000 guibg=#ffff00
