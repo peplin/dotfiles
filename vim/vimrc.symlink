@@ -43,7 +43,6 @@ autocmd!
         Plugin 'airblade/vim-gitgutter'
         Plugin 'tpope/vim-fugitive'
         Plugin 'tpope/vim-rhubarb'
-        Plugin 'Alok/notational-fzf-vim'
         Plugin 'junegunn/fzf.vim'
 
         " vim-polyglot {
@@ -398,12 +397,7 @@ autocmd!
     " }
 
     " notational-fzf {
-        let g:nv_search_paths = ['~/notes']
-        let g:nv_ignore_patterns = ['~/notes/archive/*']
-        let g:nv_use_short_pathnames = 1
-        let g:nv_show_preview = 0
-
-        map <leader>n :NV<CR>
+        nmap <leader>n :Files ~/notes<CR>
     " }
 
     " EasyMotion {
