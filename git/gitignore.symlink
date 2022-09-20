@@ -29,3 +29,4 @@ tags
 .cache
 .bash_history
 .guard_history
+.envrc
