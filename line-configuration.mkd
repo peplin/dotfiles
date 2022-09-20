@@ -50,3 +50,7 @@ to make it auto restart 15 sceonds after a kernel panic
 add udev rule for brightness control
 add libinput rule to enable touchpad tapping
 add libinput-gestures config for 3-finger back/forward
+
+## work
+
+sudo systemctl set-default multi-user.target

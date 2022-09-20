@@ -1,7 +1,5 @@
 #!/usr/bin/env bash
-
 set -ex
-
 # install yay manually from Arch AUR
 INSTALL_CMD="yay --noconfirm -S"
 
@@ -28,7 +26,6 @@ rxvt-unicode
 ripgrep
 the_silver_searcher
 zsh
-ripgrep
 git
 htop
 btop
@@ -131,6 +128,7 @@ xarchiver
 gvfs
 tumbler # for thumbnails
 google-chrome
+rxvt-unicode-256color
 urxvt-perls
 urxvt-vtwheel
 urxvt-font-size-git
@@ -147,6 +145,7 @@ picom
 arc-gtk-theme
 
 vlc
+playerctl
 
 gnucash
 libdbi-drivers # for gnucash sqlite backend
@@ -193,7 +192,14 @@ fi
 #systemctl enable systemd-timesyncd
 #systemctl enable cupsd
 #systemctl enable pipewire
+#systemctl enable --user dunst
 #
 ## disable password authentication
 #systemctl enable sshd
 # /etc/modprobe.d/nobeep.conf -> blacklist pcspkr
+
+# Ubuntu specific packages
+#
+# libdbd-sqlite3 # for sqlite3 on ubuntu
+# libterm-readkey-perl
+# rxvt-unicode-256color
