@@ -1,14 +1,15 @@
-#!/bin/sh
+#!/bin/bash
+
 if [[ $HOSTNAME == "curve" ]]; then
-sudo systemctl stop mnt-pentagon-scratch.automount
-sudo systemctl stop mnt-pentagon-archive.automount
-sudo systemctl stop mnt-pentagon-audio-production-active-backup.automount
-sudo systemctl stop mnt-pentagon-audio-production-archive.automount
-sudo systemctl stop mnt-pentagon-music.automount
-sudo systemctl stop mnt-pentagon-photos-active-backup.automount
-sudo systemctl stop mnt-pentagon-photos-archive.automount
-sudo systemctl stop mnt-pentagon-system-backup.automount
-sudo systemctl stop mnt-pentagon-video.automount
-sudo systemctl stop mnt-pentagon-video-production-archive.automount
+    sudo systemctl stop mnt-pentagon-scratch.automount
+    sudo systemctl stop mnt-pentagon-archive.automount
+    sudo systemctl stop mnt-pentagon-audio-production-active-backup.automount
+    sudo systemctl stop mnt-pentagon-audio-production-archive.automount
+    sudo systemctl stop mnt-pentagon-music.automount
+    sudo systemctl stop mnt-pentagon-photos-active-backup.automount
+    sudo systemctl stop mnt-pentagon-photos-archive.automount
+    sudo systemctl stop mnt-pentagon-system-backup.automount
+    sudo systemctl stop mnt-pentagon-video.automount
+    sudo systemctl stop mnt-pentagon-video-production-archive.automount
 fi
 sudo poweroff
