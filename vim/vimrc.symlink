@@ -195,6 +195,7 @@ autocmd!
     set complete-=i
     " complete from spellcheck dictionary
     set spell
+    set spellcapcheck=
 
     " lines to scroll when cursor leaves screen
     set scrolljump=5
