@@ -203,3 +203,7 @@ fi
 # libdbd-sqlite3 # for sqlite3 on ubuntu
 # libterm-readkey-perl
 # rxvt-unicode-256color
+# isort
+# black
+# mypy
+# pip install autoflake ipython
