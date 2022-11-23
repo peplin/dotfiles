@@ -1,12 +1,15 @@
+#!/usr/bin/env bash
+
 xmodmap $HOME/.dotfiles/x/modcapslock
 #xmodmap /home/chris.peplin/.dotfiles/x/modcapslock
 
 xrdb -merge $HOME/.dotfiles/x/Xresources.base
 
-#autorandr --change
-if [[ $HOSTNAME == "P15S-PF3DP8BS" ]]; then
+HOSTNAME=$(hostname)
+
+if [ $HOSTNAME == "P15S-PF3DP8BS" ]; then
     autorandr | grep current | grep mobile && xrdb -merge $HOME/.dotfiles/x/Xresources.work
-elif [[ $HOSTNAME == "tanget" ]]; then
+elif [ $HOSTNAME -eq "tangent" ]; then
     xrdb -merge $HOME/.dotfiles/x/Xresources.laptop
 fi
 
@@ -35,11 +38,11 @@ urxvt &
 
 xss-lock $HOME/.dotfiles/bin/lock-and-turn-off-display.sh &
 
-if [[ $HOSTNAME == "P15S-PF3DP8BS" ]]; then
+if [ $HOSTNAME == "P15S-PF3DP8BS" ]; then
     xinput set-prop 13 "libinput Accel Speed" .75
     xinput set-prop 13 "libinput Tapping Enabled" 1
     libinput-gestures-setup start
-elif [[ $HOSTNAME == "tangent" ]]; then
+elif [ $HOSTNAME -eq "tangent" ]; then
     libinput-gestures-setup start
 fi
 
