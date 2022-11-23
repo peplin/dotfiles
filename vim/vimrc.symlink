@@ -455,7 +455,15 @@ autocmd!
         let g:ale_fixers = {'ruby': ['rubocop'], 'python': ['black', 'autoflake', 'isort']}
         let g:ale_fix_on_save = 1
 
-        let g:ale_python_flake8_options = '--max-line-length=88'
+        let g:ale_python_flake8_options = '--max-line-length=99'
+        let g:ale_python_black_options = '--line-length=99'
+
+        let g:ale_c_clang_options="-I/home/chris.peplin/dev/zipline/FlightSystems/build/host_linux"
+        let g:ale_cpp_clang_options="-I/home/chris.peplin/dev/zipline/FlightSystems/build/host_linux"
+        let g:ale_cpp_clangd_options = "-stdlib=libc++ -std=c++17"
+        let g:ale_cpp_cc_options = "-std=c++17"
+
+        let g:ale_rust_cargo_use_clippy = 1
     " }
 
     " vim-ruby (from vim-polyglot) {

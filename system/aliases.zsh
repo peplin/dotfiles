@@ -1,4 +1,5 @@
 
+export PATH=$PATH:$HOME/bin
 if command -v brew >/dev/null 2>&1; then
 PATH="$(brew --prefix coreutils)/libexec/gnubin:$PATH"
 fi
