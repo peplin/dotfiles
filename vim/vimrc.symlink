@@ -426,13 +426,19 @@ autocmd!
           autocmd FileType go AutoFormatBuffer gofmt
           autocmd FileType html,css,sass,scss,less,json AutoFormatBuffer js-beautify
           autocmd FileType java AutoFormatBuffer google-java-format
-          autocmd FileType python AutoFormatBuffer black
+          autocmd FileType rust AutoFormatBuffer rustfmt
         augroup END
     " }
 
     " vim-ale {
-        let g:ale_linters = {'ruby': ['rubocop'], 'python': ['flake8']}
-        let g:ale_fixers = {'ruby': ['rubocop'], 'python': ['black']}
+        let g:ale_linters = {
+                    \ 'ruby': ['rubocop'],
+            \ 'python': ['flake8', 'mypy'],
+            \ 'c': ['clang'],
+            \ 'cpp': ['clang', 'g++'],
+            \ 'rust': ['cargo', 'analyzer']
+        \ }
+        let g:ale_fixers = {'ruby': ['rubocop'], 'python': ['black', 'autoflake', 'isort']}
         let g:ale_fix_on_save = 1
 
         let g:ale_python_flake8_options = '--max-line-length=88'
