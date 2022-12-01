@@ -44,6 +44,7 @@ autocmd!
         Plugin 'airblade/vim-gitgutter'
         Plugin 'tpope/vim-fugitive'
         Plugin 'tpope/vim-rhubarb'
+        Plugin 'junegunn/fzf'
         Plugin 'junegunn/fzf.vim'
 
         " vim-polyglot {
