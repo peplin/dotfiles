@@ -24,6 +24,7 @@ tmux
 vim
 rxvt-unicode
 ripgrep
+fd-find
 the_silver_searcher
 zsh
 git
