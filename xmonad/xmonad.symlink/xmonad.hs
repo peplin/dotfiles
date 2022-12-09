@@ -179,6 +179,10 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
     , ((0, xK_F10), spawn "playerctl next")
     , ((0, xK_F11), spawn "playerctl play-pause")
     , ((0, xK_F12), spawn "xdotool key XF86AudioMute")
+    , ((0, xF86XK_AudioLowerVolume), spawn "/home/peplin/.dotfiles/bin/updatevolume.sh -")
+    , ((0, xF86XK_AudioRaiseVolume), spawn "/home/peplin/.dotfiles/bin/updatevolume.sh +")
+    , ((0, xF86XK_AudioMute), spawn "/home/peplin/.dotfiles/bin/mute.sh")
+
 
     -- lcd brightness
     , ((0, xF86XK_MonBrightnessUp), spawn "light -A 5")
