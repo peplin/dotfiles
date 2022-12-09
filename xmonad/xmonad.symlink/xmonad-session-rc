@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+
+xrdb -merge $HOME/.dotfiles/x/Xresources.base
+if [ $HOSTNAME == "X1C-PF3VJF1V" ]; then
+    # autorandr | grep current | grep mobile && xrdb -merge $HOME/.dotfiles/x/Xresources.work
+    xrdb -merge $HOME/.dotfiles/x/Xresources.laptop
+elif [ $HOSTNAME -eq "tangent" ]; then
+    xrdb -merge $HOME/.dotfiles/x/Xresources.laptop
+fi
+
+xsetroot -cursor_name left_ptr
+
+lxpolkit &
+picom &
+nm-applet &
+
+1password --silent &
+urxvt &
+
+xss-lock $HOME/.dotfiles/bin/lock-and-turn-off-display.sh &
+
+sleep 1 && xmodmap $HOME/.dotfiles/x/modcapslock
