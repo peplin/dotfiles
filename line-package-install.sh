@@ -12,6 +12,7 @@ function install_packages {
 
 BASE_PACKAGES=(
 base-devel
+shellcheck
 tailscale
 wget
 grub
