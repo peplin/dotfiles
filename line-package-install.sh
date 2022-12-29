@@ -147,7 +147,6 @@ picom
 arc-gtk-theme
 
 vlc
-playerctl
 
 gnucash
 libdbi-drivers # for gnucash sqlite backend
