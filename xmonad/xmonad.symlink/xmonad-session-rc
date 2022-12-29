@@ -1,12 +1,7 @@
 #!/usr/bin/env bash
 
-xrdb -merge $HOME/.dotfiles/x/Xresources.base
-if [ $HOSTNAME == "X1C-PF3VJF1V" ]; then
-    # autorandr | grep current | grep mobile && xrdb -merge $HOME/.dotfiles/x/Xresources.work
-    xrdb -merge $HOME/.dotfiles/x/Xresources.laptop
-elif [ $HOSTNAME -eq "tangent" ]; then
-    xrdb -merge $HOME/.dotfiles/x/Xresources.laptop
-fi
+$HOME/bin/refresh_display.sh
+$HOME/bin/srandrd $HOME/bin/refresh_display.sh
 
 xsetroot -cursor_name left_ptr
 
@@ -18,5 +13,8 @@ nm-applet &
 urxvt &
 
 xss-lock $HOME/.dotfiles/bin/lock-and-turn-off-display.sh &
+
+xinput set-prop "ELAN0672:00 04F3:3187 Touchpad" "libinput Tapping Enabled" 1
+libinput-gestures-setup start
 
 sleep 1 && xmodmap $HOME/.dotfiles/x/modcapslock

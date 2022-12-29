@@ -29,11 +29,7 @@ lxappearance &
 
 xss-lock $HOME/.dotfiles/bin/lock-and-turn-off-display.sh &
 
-if [ $HOSTNAME == "P15S-PF3DP8BS" ]; then
-    xinput set-prop "SynPS/2 Synaptics TouchPad" "libinput Accel Speed" .75
-    xinput set-prop "SynPS/2 Synaptics TouchPad" "libinput Tapping Enabled" 1
-    libinput-gestures-setup start
-elif [ $HOSTNAME -eq "tangent" ]; then
+if [ $HOSTNAME -eq "tangent" ]; then
     libinput-gestures-setup start
 fi
 
