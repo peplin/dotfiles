@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
-$HOME/bin/refresh_display.sh
-$HOME/bin/srandrd $HOME/bin/refresh_display.sh
+/home/chris.peplin/.dotfiles/bin/refresh_display.sh
+$HOME/bin/srandrd /home/chris.peplin/.dotfiles/bin/refresh_display.sh
 
 xsetroot -cursor_name left_ptr
 
