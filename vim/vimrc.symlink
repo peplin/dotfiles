@@ -32,6 +32,7 @@ autocmd!
         " Theme
         Plugin 'itchyny/lightline.vim'
         Plugin 'romainl/apprentice'
+        Plugin 'gruvbox-community/gruvbox'
 
         " Formatters
         Plugin 'google/vim-maktaba'
@@ -119,10 +120,22 @@ autocmd!
     endif
 
     if &t_Co == 256
-        colorscheme apprentice
+        " colorscheme apprentice
+        colorscheme gruvbox
+        set background=dark
+
+        nnoremap <silent> [oh :call gruvbox#hls_show()<CR>
+        nnoremap <silent> ]oh :call gruvbox#hls_hide()<CR>
+        nnoremap <silent> coh :call gruvbox#hls_toggle()<CR>
+
+        nnoremap * :let @/ = ""<CR>:call gruvbox#hls_show()<CR>*
+        nnoremap / :let @/ = ""<CR>:call gruvbox#hls_show()<CR>/
+        nnoremap ? :let @/ = ""<CR>:call gruvbox#hls_show()<CR>?
     else
         colorscheme wombat
     end
+
+    set termguicolors
 
     " display the current mode and partially-typed commands in the status line:
     set showmode
