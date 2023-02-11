@@ -167,6 +167,7 @@ libdvdcss
 
 easytag
 abcde
+whipper
 )
 
 install_packages "${BASE_PACKAGES[@]}"
