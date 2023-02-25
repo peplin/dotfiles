@@ -9,25 +9,26 @@ SYSTEM_DIRS=(
 )
 
 SYSTEM_EXCLUDES="""
-- ssl
-- ca-certificates
-- ssh/ssh_host*
-- vpnc
-- wireguard
-- libvirt
-- *shadow*
-- sudoers*
-- samba
-- cni
 - audit
+- ca-certificates
+- cni
+- credstore*
+- crypttab
+- docker
+- libaudit.conf
+- libvirt
+- *.lock
+- named.conf
 - pacman.d/gnupg
 - polkit-1
-- docker
-- named.conf
-- crypttab
+- samba
+- *shadow*
+- ssh/ssh_host*
+- ssl
+- sudoers*
 - useradd
-- libaudit.conf
-- *.lock
+- vpnc
+- wireguard
 """
 
 HOME_DIRS=(
