@@ -14,6 +14,7 @@ SYSTEM_EXCLUDES="""
 - cni
 - credstore*
 - crypttab
+- cups
 - docker
 - libaudit.conf
 - libvirt
