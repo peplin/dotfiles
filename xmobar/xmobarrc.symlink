@@ -27,7 +27,7 @@ Config { font = "Ubuntu Mono 16"
                 "green","--high","red","-p","3","--suffix","True"] 20
             , Run Memory ["-t","<usedratio>%","-H","20078","-L","4096",
                 "--normal","green","--high","red"] 50
-            , Run Date "%Y-%m-%_d %H:%M" "date" 600
+            , Run Date "%Y-%m-%d %H:%M" "date" 600
             , Run StdinReader
        ]
        , sepChar = "%"
