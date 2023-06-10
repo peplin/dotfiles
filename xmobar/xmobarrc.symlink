@@ -1,4 +1,4 @@
-Config { font = "Ubuntu Mono 16"
+Config { font = "Ubuntu Mono 14"
        , bgColor = "black"
        , fgColor = "grey"
        , position = Top
