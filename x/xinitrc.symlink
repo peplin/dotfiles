@@ -24,6 +24,7 @@ nm-applet &
 
 1password --silent &
 urxvt &
+lxappearance &
 
 xss-lock $HOME/.dotfiles/bin/lock-and-turn-off-display.sh &
 
