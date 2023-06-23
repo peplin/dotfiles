@@ -30,3 +30,4 @@ tags
 .bash_history
 .guard_history
 .envrc
+.mypy_cache
