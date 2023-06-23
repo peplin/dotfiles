@@ -388,7 +388,6 @@ autocmd!
         let g:syntastic_html_checkers=['tidy']
         let g:syntastic_javascript_checkers=['jslint']
         let g:syntastic_python_checkers=['']
-        " let g:syntastic_python_flake8_args = "--max-line-length=120"
         let g:syntastic_cpp_include_dirs = ['source', 'build/source', '/usr/include', '/home/peplin/downloads/flycapture2-2.6.3.4-i386/usr/include', '/home/peplin/downloads/flycapture2-2.6.3.4-i386/usr/include/flycapture']
         let g:syntastic_cpp_compiler = 'clang++-3.5'
         let g:syntastic_cpp_compiler_options = ' -std=c++11'
@@ -438,7 +437,7 @@ autocmd!
           autocmd FileType bzl AutoFormatBuffer buildifier
           autocmd FileType c,cpp,proto,arduino AutoFormatBuffer clang-format
           autocmd FileType go AutoFormatBuffer gofmt
-          autocmd FileType html,css,sass,scss,less,json AutoFormatBuffer js-beautify
+          "autocmd FileType html,css,sass,scss,less,json AutoFormatBuffer js-beautify
           autocmd FileType java AutoFormatBuffer google-java-format
           autocmd FileType rust AutoFormatBuffer rustfmt
         augroup END
@@ -452,11 +451,15 @@ autocmd!
             \ 'cpp': ['clang', 'g++'],
             \ 'rust': ['cargo', 'analyzer']
         \ }
-        let g:ale_fixers = {'ruby': ['rubocop'], 'python': ['black', 'autoflake', 'isort']}
+        let g:ale_fixers = {'ruby': ['rubocop'], 'python': ['black', 'isort']}
         let g:ale_fix_on_save = 1
 
-        let g:ale_python_flake8_options = '--max-line-length=99'
-        let g:ale_python_black_options = '--line-length=99'
+        " enforce line length only with black
+        let g:ale_python_flake8_options = '--ignore=E501'
+
+        " override for some stupid projects
+        "let g:ale_python_flake8_options = '--max-line-length=99'
+        "let g:ale_python_black_options = '--line-length=99'
 
         let g:ale_c_clang_options="-I/home/chris.peplin/dev/zipline/FlightSystems/build/host_linux"
         let g:ale_cpp_clang_options="-I/home/chris.peplin/dev/zipline/FlightSystems/build/host_linux"
