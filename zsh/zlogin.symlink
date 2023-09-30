@@ -1,4 +1,5 @@
 type -p startx &> /dev/null
 if [[ $? == 0 ]] && [[ -z $DISPLAY ]] && [[ -z $SSH_CLIENT ]] && ! [[ -e /tmp/.X11-unix/X0 ]] && (( EUID )); then
-    exec startx
+    #exec startx
+    dbus-run-session Hyprland
 fi
