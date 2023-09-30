@@ -1,7 +1,8 @@
+#!/usr/bin/env python3
+
 # MIT licensed source: https://github.com/Alexays/Waybar/blob/master/resources/custom_modules/mediaplayer.py
 # Copied here so I can use this repo independently
 
-#!/usr/bin/env python3
 import gi
 
 gi.require_version("Playerctl", "2.0")
