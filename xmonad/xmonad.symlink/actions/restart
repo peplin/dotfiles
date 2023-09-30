@@ -11,4 +11,4 @@ if [[ $HOSTNAME == "curve" ]]; then
     sudo systemctl stop mnt-pentagon-video.automount
     sudo systemctl stop mnt-pentagon-video-production-archive.automount
 fi
-sudo shutdown -r now
+sudo /usr/bin/shutdown -r now
