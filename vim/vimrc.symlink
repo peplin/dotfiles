@@ -20,7 +20,7 @@ autocmd!
         Plugin 'ConradIrwin/vim-bracketed-paste'
         Plugin 'scrooloose/nerdcommenter'
         Plugin 'scrooloose/syntastic'
-        Plugin 'ajh17/VimCompletesMe'
+        Plugin 'https://git.sr.ht/~ackyshake/VimCompletesMe.vim'
         Plugin 'tpope/vim-surround'
         Plugin 'tpope/vim-ragtag'
         Plugin 'tpope/vim-endwise'
