@@ -3,6 +3,7 @@
   "files.autoSave": "afterDelay",
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "terminal.integrated.defaultProfile.osx": "zsh",
+  "terminal.integrated.defaultProfile.linux": "zsh",
   "editor.formatOnSave": true,
   "files.watcherExclude": {
     "**/.git/objects/**": true,
