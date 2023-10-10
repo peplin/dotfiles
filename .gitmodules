@@ -1,4 +1,0 @@
-[submodule "python/startup"]
-	path = python/startup
-	url = git@github.com:peplin/python-startup.git
-    ignore = untracked
