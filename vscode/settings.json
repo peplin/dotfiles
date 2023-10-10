@@ -1,0 +1,56 @@
+{
+  "editor.fontFamily": "Hack, Menlo, Monaco, 'Courier New', monospace",
+  "files.autoSave": "afterDelay",
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "terminal.integrated.defaultProfile.osx": "zsh",
+  "editor.formatOnSave": true,
+  "files.watcherExclude": {
+    "**/.git/objects/**": true,
+    "**/.git/subtree-cache/**": true,
+    "**/build/**": true,
+    "**/node_modules/*/**": true
+  },
+  "terminal.external.osxExec": "iTerm.app",
+  "terminal.integrated.allowMnemonics": true,
+  "redhat.telemetry.enabled": false,
+  "editor.minimap.enabled": false,
+  "vim.leader": ",",
+  "workbench.colorTheme": "Gruvbox Dark Hard",
+  "vim.hlsearch": true,
+  "vim.useSystemClipboard": true,
+  "vim.vimrc.enable": true,
+  "vim.easymotion": true,
+  "vim.statusBarColors.commandlineinprogress": "",
+  "vim.normalModeKeyBindings": [
+    {
+      "before": ["<leader>", "t"],
+      "after": [],
+      "commands": [
+        {
+          "command": "workbench.action.quickOpen",
+          "args": []
+        }
+      ]
+    },
+    {
+      "before": ["<leader>", "<space"],
+      "after": [],
+      "commands": [":nohlsearch"]
+    },
+    {
+      "before": ["<leader>", "v"],
+      "after": [],
+      "commands": [":vsp"]
+    },
+    {
+      "before": ["<leader>", "s"],
+      "after": [],
+      "commands": [":sp"]
+    },
+    {
+      "before": ["leader", "w"],
+      "after": [],
+      "commands": ["workbench.action.files.save"]
+    }
+  ]
+}
