@@ -401,7 +401,7 @@ autocmd!
 
     " lightline {
         let g:lightline = {
-            \ 'colorscheme': 'apprentice',
+            \ 'colorscheme': 'gruvbox',
         \ }
     " }
 
