@@ -4,12 +4,14 @@ skip_global_compinit=1
 if [ $USER = "vscode" ]; then
   export ZSH=/workspaces/.codespaces/.persistedshare/dotfiles/
   [[ ! -L ~/.dotfiles ]] && ln -s $ZSH ~/.dotfiles
+
+  export PROJECTS=/workspaces
 else
   export ZSH=$HOME/.dotfiles
-fi
 
-# your project folder that we can `c [tab]` to
-export PROJECTS=~/dev
+  # your project folder that we can `c [tab]` to
+  export PROJECTS=~/dev
+fi
 
 # use .localrc for SUPER SECRET CRAP that you don't
 # want in your public, versioned repo.
