@@ -55,6 +55,7 @@ directory_name(){
   echo "%{$fg[green]%}${PWD/#$HOME/~}%{$reset_color%}"
 }
 
+setopt PROMPT_SUBST
 export PROMPT=$'$(directory_name) $(project_name_color)$(git_dirty)$(need_push)\n$ '
 
 local return_code="%(?..%{$fg[red]%}%?%{$reset_color%})"
