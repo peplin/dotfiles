@@ -4,7 +4,9 @@ else
     export EDITOR='vim'
 fi
 
-export BROWSER=google-chrome-stable
+if command -v google-chrome-stable >/dev/null 2>&1; then
+    export BROWSER=google-chrome-stable
+fi
 export PAGER="less -FXR"
 export LESS="-R"
 
