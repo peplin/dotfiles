@@ -1,7 +1,12 @@
 skip_global_compinit=1
 
 # shortcut to this dotfiles path is $ZSH
-export ZSH=$HOME/.dotfiles
+if [ $USER = "vscode" ]; then
+  export ZSH=/workspaces/.codespaces/.persistedshare/dotfiles/
+  [[ ! -L ~/.dotfiles ]] && ln -s $ZSH ~/.dotfiles
+else
+  export ZSH=$HOME/.dotfiles
+fi
 
 # your project folder that we can `c [tab]` to
 export PROJECTS=~/dev
