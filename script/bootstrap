@@ -38,6 +38,9 @@ install_dotfiles () {
   backup_all=false
   skip_all=false
 
+  # Make this script non-interactive at the risk of erasing files
+  overwrite_all=true
+
   for source in `find $DOTFILES_ROOT -maxdepth 2 -name \*.symlink`
   do
     dest="$HOME/.`basename \"${source%.*}\"`"
