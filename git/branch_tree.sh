@@ -119,4 +119,4 @@ done <<< "$all_heads"
 
 for info in "${outputs[@]}"; do
     echo -e "$info"
-done | column -t -s "	" -T 4
+done | column -t -s "	"
