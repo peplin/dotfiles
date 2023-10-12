@@ -38,8 +38,10 @@ install_dotfiles () {
   backup_all=false
   skip_all=false
 
-  # Make this script non-interactive at the risk of erasing files
-  overwrite_all=true
+  if [ ! -z "$CODESPACES" ]; then
+    # Make this script non-interactive at the risk of erasing files
+    overwrite_all=true
+  fi
 
   for source in `find $DOTFILES_ROOT -maxdepth 2 -name \*.symlink`
   do
@@ -101,19 +103,24 @@ install_dotfiles () {
   done
 }
 
+install_dependencies () {
+  info 'installing dependencies'
+
+  if [ ! -z "$CODESPACES" ]; then
+    if [ ! -d ~/.fzf ]; then
+      git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
+      ~/.fzf/install --all
+    fi
+
+    if [ ! -d ~/.vim/bundle/Vundle.vim ]; then
+      git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+    fi
+  fi
+}
+
 install_dotfiles
 
-# If we are on a mac, lets install and setup homebrew
-if [ "$(uname -s)" == "Darwin" ]
-then
-  info "installing dependencies"
-  if . bin/dot > /tmp/dotfiles-dot 2>&1
-  then
-    success "dependencies installed"
-  else
-    fail "error installing dependencies"
-  fi
-fi
+install_dependencies
 
 echo ''
 echo '  All installed!'
