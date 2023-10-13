@@ -279,6 +279,10 @@ autocmd!
 
         syntax on
 
+        " use new regex engine to fix very slow TypeScript syntax highlight
+        " (may only apply to Mac?)
+        set re=0
+
         " recognize anything at all with a .txt extension as being
         " human-language text [this clobbers the `help' filetype, but that
         " doesn't seem to prevent help from working properly]:
