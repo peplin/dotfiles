@@ -63,6 +63,7 @@ HOME_EXCLUDES="""
 - .config/vivaldi-snapshot
 - .config/xfce4
 - .config/xfce4
+- dev/*/env
 - .dotfiles/vim/vim.symlink/bundle
 - .dotfiles/xmonad/xmonad.symlink/*.errors
 - .dotfiles/xmonad/xmonad.symlink/*.o
