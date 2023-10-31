@@ -15,6 +15,8 @@
         caps-d
     Screenshot:
         caps-s
+* Disable Mission Control's Control-Arrow shortcuts (use Super-num with Amethyst
+    instead) - this restores Control-Arrow for jumping between words
 
 
 
