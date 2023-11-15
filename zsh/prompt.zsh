@@ -55,8 +55,14 @@ directory_name(){
   echo "%{$fg[green]%}${PWD/#$HOME/~}%{$reset_color%}"
 }
 
+aws_vault_profile () {
+  if [[ -n ${AWS_VAULT} ]]; then
+    echo "[AWS: ${AWS_VAULT}] "
+  fi
+}
+
 setopt PROMPT_SUBST
-export PROMPT=$'$(directory_name) $(project_name_color)$(git_dirty)$(need_push)\n$ '
+export PROMPT=$'$(aws_vault_profile)$(directory_name) $(project_name_color)$(git_dirty)$(need_push)\n$ '
 
 local return_code="%(?..%{$fg[red]%}%?%{$reset_color%})"
 export RPS1="${return_code}"
