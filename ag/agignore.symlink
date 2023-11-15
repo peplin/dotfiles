@@ -1,7 +1,6 @@
-*vendor*
+*vendor/
 *min.js
 .git/
-bin/
 deps
 cmake
 *.ipynb
@@ -16,3 +15,8 @@ node_modules/
 sorbet/
 poetry.lock
 build
+*.map
+dist/*
+*.svg
+*.tsbuildinfo
+.eslintcache
