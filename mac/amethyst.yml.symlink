@@ -16,7 +16,7 @@
 # layouts - Ordered list of layouts to use by layout key (default tall, wide, fullscreen, and column).
 layouts:
   - tall-right
-  - tall
+  #- tall
   - fullscreen
   # - wide
   # - two-pane
@@ -73,8 +73,8 @@ cycle-layout:
 
 # Move to the previous layout in the list.
 cycle-layout-backward:
-  mod: mod2
-  key: space
+  mod: mod1
+  key: '\'
 
 # Shrink the main pane by a percentage of the screen dimension as defined by window-resize-step. Note that not all layouts respond to this command.
 shrink-main:
