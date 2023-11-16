@@ -46,6 +46,8 @@
     tidy = !~/.dotfiles/git/tidy.sh
     fpa = push --all --force origin
     fp = push --force origin
+    discard = !git reset HEAD -- && git co -- .
+    rc = "-c core.editor=true rebase --continue"
 
 [apply]
     whitespace = nowarn
