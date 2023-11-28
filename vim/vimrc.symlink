@@ -441,6 +441,7 @@ autocmd!
         let g:ale_fixers = {
             \ 'ruby': ['rubocop'],
             \ 'python': ['black', 'autoflake', 'isort'],
+            \ 'json': ['prettier'],
             \ 'yaml': ['prettier'],
             \ 'javascript': ['prettier'],
             \ 'typescript': ['prettier']
