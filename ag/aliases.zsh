@@ -1,1 +1,1 @@
-alias ack='ag --smart-case --hidden'
+alias ack='rg'
