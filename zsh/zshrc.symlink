@@ -47,12 +47,12 @@ unset config_files
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 # Setting ag as the default source for fzf
-export FZF_DEFAULT_COMMAND='ag --hidden -g ""'
+export FZF_DEFAULT_COMMAND='fdfind --hidden .'
 #
 # # To apply the command to CTRL-T as well
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 
-export FZF_ALT_C_COMMAND="fdfind -t d ."
+export FZF_ALT_C_COMMAND="fdfind --hidden -t d ."
 
 # Stop Control-S from freezing the terminal
 stty -ixon
