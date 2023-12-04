@@ -87,7 +87,7 @@ syn keyword processingFunction	contained year keyPressed mousePressed
 syn keyword processingFunction	contained frameRate
 
 " highlight funtcion names only when they are followed by "("
-" need to terminate match using \ze before ( to allow for 
+" need to terminate match using \ze before ( to allow for
 " unmatched bracket higlighting
 syn match   processingFunRegion	"\K\k*\s*\ze(" contains=processingFunction
 
@@ -103,7 +103,7 @@ syn keyword processingType	int long short void
 syn keyword processingBoolean	false true
 syn keyword processingConstant	null
 
-syn keyword processingStorageClass	final static synchronized transient volatile 
+syn keyword processingStorageClass	final static synchronized transient volatile
 syn keyword processingConditional	if else switch
 syn keyword processingControlFlow	break continue return
 syn keyword processingRepeat		while for do

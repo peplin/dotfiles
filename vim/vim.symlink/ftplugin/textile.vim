@@ -48,4 +48,3 @@ function! TextileRenderBufferToTab()
   call append("^", split(html, "\n"))
   set syntax=html
 endfunction
-

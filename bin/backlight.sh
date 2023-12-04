@@ -60,5 +60,3 @@ case "$1" in
   *)
     usage "invalid argument"
 esac
-
-

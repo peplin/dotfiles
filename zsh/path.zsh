@@ -9,4 +9,3 @@ fi
 export PATH="/usr/local/bin:/usr/local/sbin:$ZSH/bin:$PATH"
 export PATH="$PATH:$HOME/.cabal/bin"
 export PATH="$PATH:$HOME/.npm/bin"
-

@@ -26,7 +26,7 @@ highlight link rdocSpeckyHeader Question
 
 " Secondary header lines
 "
-syntax match rdocSpeckyHeaderLine /^-\+$/ contained 
+syntax match rdocSpeckyHeaderLine /^-\+$/ contained
 highlight link rdocSpeckyHeaderLine NonText
 
 " Remove the formatting characters from the display
@@ -49,4 +49,3 @@ syntax region rdocSpeckyType matchgroup=rdocSpeckySpecials start=" +" end="+"
 highlight link rdocSpeckyType Identifier
 
 let b:current_syntax = "rdoc"
-

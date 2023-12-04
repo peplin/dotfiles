@@ -45,18 +45,18 @@ syn keyword ngxDirective autoindex_exact_size
 syn keyword ngxDirective autoindex_localtime
 
 " DAV
-syn keyword ngxDirective dav_access dav_methods create_full_put_path 
+syn keyword ngxDirective dav_access dav_methods create_full_put_path
 
-" FastCGI 
+" FastCGI
 syn keyword ngxDirective fastcgi_index fastcgi_hide_header fastcgi_intercept_errors fastcgi_param fastcgi_pass_header fastcgi_redirect_errors
 syn keyword ngxDirectiveImportant fastcgi_pass
 
 " gzip
-syn keyword ngxDirective gzip gzip_buffers gzip_comp_level gzip_min_length gzip_http_version gzip_proxied gzip_types 
+syn keyword ngxDirective gzip gzip_buffers gzip_comp_level gzip_min_length gzip_http_version gzip_proxied gzip_types
 
 " header
-syn keyword ngxDirective add_header 
-syn keyword ngxDirective expires 
+syn keyword ngxDirective add_header
+syn keyword ngxDirective expires
 
 " auto-index
 syn keyword ngxDirective index
@@ -64,7 +64,7 @@ syn keyword ngxDirective index
 " log
 syn keyword ngxDirective access_log log_format
 
-" proxy 
+" proxy
 syn keyword ngxDirective proxy_buffer_size proxy_buffering proxy_buffers proxy_connect_timeout proxy_hide_header proxy_intercept_errors proxy_method proxy_next_upstream proxy_pass_header proxy_read_timeout proxy_redirect_errors proxy_send_timeout proxy_set_header proxy_temp_path proxy_temp_file_write_size proxy_busy_buffers_size proxy_send_lowat
 syn keyword ngxDirectiveImportant proxy_pass proxy_redirect
 
@@ -73,7 +73,7 @@ syn keyword ngxDirectiveControl break return set uninitialized_variable_warn rew
 syn keyword ngxDirective uninitialized_variable_warn
 syn keyword ngxBlockDirective if contained
 
-" SSL 
+" SSL
 syn keyword ngxDirective ssl ssl_certificate ssl_certificate_key ssl_client_certificate ssl_ciphers ssl_prefer_server_ciphers ssl_protocols ssl_verify_client ssl_verify_depth ssl_session_cache ssl_session_timeout
 
 " Upstream
@@ -118,7 +118,7 @@ syn keyword ngxDirective perl_modules perl_require perl_set
 syn keyword ngxDirective limit_zone limit_conn
 
 " memcache
-syn keyword ngxDirective memcached_connect_timeout memcached_send_timeout memcached_read_timeout memcached_buffer_size memcached_next_upstream 
+syn keyword ngxDirective memcached_connect_timeout memcached_send_timeout memcached_read_timeout memcached_buffer_size memcached_next_upstream
 syn keyword ngxDirectiveImportant memcached_pass
 
 " stub
@@ -127,7 +127,7 @@ syn keyword ngxDirective stub_status
 " flv
 syn keyword ngxDirective flv
 
-" browser 
+" browser
 syn keyword ngxDirective ancient_browser ancient_browser_value modern_browser modern_browser_value
 
 syn region ngxStartBlock start=+^+ end=+{+ contains=ngxBlockDirective,ngxContextVariable oneline

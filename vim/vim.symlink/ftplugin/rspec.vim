@@ -4,4 +4,3 @@ endif
 
 " Behave just like Ruby
 runtime! ftplugin/ruby.vim
-

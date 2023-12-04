@@ -169,7 +169,7 @@ class Completer(object):
         if type(func_obj) == types.ClassType: func_obj = _ctor(func_obj)
         elif type(func_obj) == types.MethodType: func_obj = func_obj.im_func
         else: arg_offset = 0
-        
+
         arg_text=''
         if type(func_obj) in [types.FunctionType, types.LambdaType]:
             try:
@@ -461,7 +461,7 @@ class PyParser:
     def _parseassignment(self):
         assign=''
         tokentype, token, indent = self.next()
-        if tokentype == tokenize.STRING or token == 'str':  
+        if tokentype == tokenize.STRING or token == 'str':
             return '""'
         elif token == '(' or token == 'tuple':
             return '()'
@@ -569,7 +569,7 @@ class PyParser:
                     freshscope = True
                     dbg("new scope: class")
                     self.scope = self.scope.add(cls)
-                    
+
                 elif token == 'import':
                     imports = self._parseimportlist()
                     for mod, alias in imports:
@@ -591,7 +591,7 @@ class PyParser:
                 elif tokentype == STRING:
                     if freshscope: self.scope.doc(token)
                 elif tokentype == NAME:
-                    name,token = self._parsedotname(token) 
+                    name,token = self._parsedotname(token)
                     if token == '=':
                         stmt = self._parseassignment()
                         dbg("parseassignment: %s = %s" % (name, stmt))
