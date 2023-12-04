@@ -1127,6 +1127,8 @@
 			</dict>
 			<key>Mouse Reporting</key>
 			<true/>
+			<key>Movement Keys Scroll Outside Interactive Apps</key>
+			<false/>
 			<key>Name</key>
 			<string>Default</string>
 			<key>Non Ascii Font</key>
