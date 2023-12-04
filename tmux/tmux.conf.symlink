@@ -11,6 +11,10 @@ bind-key n next-window
 bind-key C-p previous-window
 bind-key p previous-window
 
+# Fix Home/End on iTerm2
+bind-key -n Home send Escape "[H"
+bind-key -n End send Escape "[F"
+
 # Use 256 color
 set -g default-terminal rxvt-unicode-256color
 
