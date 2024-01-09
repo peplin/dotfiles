@@ -59,8 +59,6 @@ render_branch_tree() {
 
     commits_output+=")"
 
-    local commit_message=$(git show -q --format=%s $branch)
-
     if (( depth > 0 )) && (( no_external_calls == 0 )); then
         set +e
         TMPFILE=$(mktemp)
@@ -87,6 +85,12 @@ render_branch_tree() {
     branch_output="$branch$NO_COLOR"
     if [ "$branch" = "$current_branch" ]; then
         branch_output="$GREEN$branch_output"
+    fi
+
+    local max_cols=$(tput cols)
+    local commit_message="	$(git show -q --format=%s $branch)"
+    if [ $max_cols -lt 165 ]; then
+        commit_message=""
     fi
     outputs+=("$prefix$branch_output	$commits_output	$pr_info	$commit_message")
 
