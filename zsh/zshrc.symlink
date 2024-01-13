@@ -57,6 +57,10 @@ export FZF_ALT_C_COMMAND="fdfind --hidden -t d ."
 # Stop Control-S from freezing the terminal
 stty -ixon
 
+if [[ $HOSTNAME = 'penguin' ]]; then
+  command -v keychain >/dev/null && eval $(keychain --eval --agents ssh -Q --quiet id_rsa)
+fi
+
 if command -v direnv >/dev/null 2>&1; then
   eval "$(direnv hook zsh)"
 fi
