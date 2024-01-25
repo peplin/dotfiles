@@ -17,7 +17,7 @@ flowdown() {
         indentation+="  "
     done
 
-    echo -n "${indentation}Rebasing $branch..."
+    echo -n "${indentation}Rebasing $branch ..."
     REBASE_OUTPUT=$(git rebase --quiet --fork-point $upstream $branch)
     echo "done"
 

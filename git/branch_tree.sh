@@ -91,6 +91,9 @@ render_branch_tree() {
     local commit_message="	$(git show -q --format=%s $branch)"
     if [ $max_cols -lt 165 ]; then
         commit_message=""
+    elif [ $max_cols -lt 180 ]; then
+        # TODO be smarter, truncate the line to max
+        commit_message=${commit_message:0:30}
     fi
     outputs+=("$prefix$branch_output	$commits_output	$pr_info	$commit_message")
 
