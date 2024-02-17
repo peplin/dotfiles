@@ -5,6 +5,7 @@ deps
 cmake
 *.ipynb
 yarn.lock
+.yarn
 .coverage
 .cache/
 experimental/
