@@ -116,6 +116,8 @@ install_dependencies () {
       git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
     fi
 
+    vim +PluginInstall +qall
+
     sudo chsh "$(id -un)" --shell "/usr/bin/zsh"
 
     cd /workspaces/obsidian
