@@ -85,3 +85,5 @@
     keepBackup = false
 [advice]
     skippedCherryPicks = false
+[includeIf "hasconfig:remote.*.url:git@github.com:VantaInc/**"]
+    path = gitconfig-vanta
