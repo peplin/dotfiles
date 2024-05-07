@@ -437,15 +437,18 @@ autocmd!
             \ 'cpp': ['clang', 'g++'],
             \ 'rust': ['cargo', 'analyzer'],
             \ 'javascript': ['eslint'],
-            \ 'typescript': ['eslint']
+            \ 'typescript': ['eslint'],
+            \ 'typescriptreact': ['eslint']
         \ }
         let g:ale_fixers = {
             \ 'ruby': ['rubocop'],
             \ 'python': ['black', 'autoflake', 'isort'],
             \ 'json': ['prettier'],
+            \ 'jsonc': ['prettier'],
             \ 'yaml': ['prettier'],
             \ 'javascript': ['prettier'],
-            \ 'typescript': ['prettier']
+            \ 'typescript': ['prettier'],
+            \ 'typescriptreact': ['prettier']
         \ }
         let g:ale_fix_on_save = 1
 
