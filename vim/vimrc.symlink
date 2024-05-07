@@ -28,6 +28,7 @@ autocmd!
         Plugin 'tpope/vim-repeat'
         Plugin 'tpope/vim-unimpaired'
         Plugin 'vim-scripts/a.vim'
+        Plugin 'wsdjeg/vim-fetch'
 
         " Theme
         Plugin 'itchyny/lightline.vim'
