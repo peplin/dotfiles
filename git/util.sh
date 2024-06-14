@@ -13,10 +13,12 @@ build_branch_tree() {
         branch="${branch_info[0]}"
         upstream="${branch_info[1]}"
 
-        if [ ${branches[$upstream]+nothing} ]; then
-            branches[$upstream]+=" $branch"
-        elif [ ! -z "$upstream" ]; then
-            branches[$upstream]="$branch"
+        if [ ! -z "$upstream" ]; then
+            if [ ${branches[$upstream]+nothing} ]; then
+                branches[$upstream]+=" $branch"
+            else
+                branches[$upstream]="$branch"
+            fi
         fi
     done <<< "$branches_and_upstreams"
 }
