@@ -21,10 +21,12 @@ render_branch_tree() {
 
     local upstream=$(git rev-parse --abbrev-ref --symbolic-full-name $branch@{upstream})
     if [ -z "$upstream" ]; then
-       return
+        local child_branches=""
+        local silbings=""
+    else
+        local siblings=(${branch_parents[$upstream]})
+        local child_branches=("${branch_parents[$branch]}")
     fi
-    local siblings=(${branch_parents[$upstream]})
-    local child_branches=("${branch_parents[$branch]}")
 
     local prefix=""
 
