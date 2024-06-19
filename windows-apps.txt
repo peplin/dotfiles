@@ -1,27 +1,11 @@
 windows-apps
 
-M-audio driver
-Notepad++
-7-zip
 Motherboard drivers
-Adobe CC - Lightroom, bridge
-Lastpass
-Game Save Manager
+Adobe CC - Lightroom
 VLC
 Nvidia drivers
-Dropbox
-Bridge
 Steam
 Chrome
-
-## Optional
-
-Origin
-Desura
 Vuescan
-Network Printer
-Symlinks in games folder
-Reaper
-Spyder3
-JoyToKey
-Photoshop CS4
+Wiztree
+Razer synapse
