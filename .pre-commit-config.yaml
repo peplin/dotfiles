@@ -1,15 +1,15 @@
 repos:
 -   repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: c4a0b883114b00d8d76b479c820ce7950211c99b  # frozen: v4.5.0
+    rev: 2c9f875913ee60ca25ce70243dc24d5b6415598c  # frozen: v4.6.0
     hooks:
     -   id: check-yaml
     -   id: end-of-file-fixer
     -   id: trailing-whitespace
 -   repo: https://github.com/psf/black
-    rev: 2a1c67e0b2f81df602ec1f6e7aeb030b9709dc7c  # frozen: 23.11.0
+    rev: 3702ba224ecffbcec30af640c149f231d90aebdb  # frozen: 24.4.2
     hooks:
     -   id: black
 -   repo: https://github.com/trufflesecurity/trufflehog
-    rev: d69de658b262d67abe200d6eff9100934bc8f7a4  # frozen: v3.63.1
+    rev: 433a57adaf8fedce312630ef593f5142227c5855  # frozen: v3.78.1
     hooks:
     -   id: trufflehog
