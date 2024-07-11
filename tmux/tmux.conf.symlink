@@ -28,4 +28,4 @@ set -g update-environment -r
 setenv -g SSH_AUTH_SOCK /tmp/$USER-ssh_auth_sock
 
 # Increase scrollback buffer size
-set-option -g history-limit 3000
+set-option -g history-limit 100000
