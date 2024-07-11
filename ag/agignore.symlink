@@ -14,9 +14,10 @@ node_modules/
 .next/
 sorbet/
 poetry.lock
-build
+**/build/*
 *.map
 dist/*
 *.svg
 *.tsbuildinfo
 .eslintcache
+3rd-party-packages/*
