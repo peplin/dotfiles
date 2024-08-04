@@ -112,6 +112,7 @@ HOME_EXCLUDES="""
 - .viminfo
 - .vimswap
 - .vimundo
+- .yay-cache/
 - .zcalc_history
 - .zoom
 - .zsh_history
