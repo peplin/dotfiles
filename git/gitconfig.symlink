@@ -44,7 +44,7 @@
     offline-refresh = !~/.dotfiles/git/flow.sh -b all && git tidy && git br
     move = !~/.dotfiles/git/move.sh
     tidy = !~/.dotfiles/git/tidy.sh
-    fp = "!f() { [[ ! $(git rev-parse --abbrev-ref HEAD) =~ ^ma(in|ster)$ ]] && git push --force origin || echo \"Not force pushing main branch\"; } ; f"
+    fp = "!bash -c 'f() { [[ ! $(git rev-parse --abbrev-ref HEAD) =~ ^ma(in|ster)$ ]] && git push --force origin || echo \"Not force pushing main branch\"; } ; f'"
     discard = !git reset HEAD -- && git co -- .
     rc = "-c core.editor=true rebase --continue"
 
