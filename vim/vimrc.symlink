@@ -377,6 +377,7 @@ autocmd!
         map <leader>l :Lines<CR>
         map <leader>f :Rg<CR>
         let g:fzf_layout = {'down': '40%'}
+        let g:fzf_preview_window = []
     " }
 
     " Syntastic {
