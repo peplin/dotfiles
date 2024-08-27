@@ -18,7 +18,7 @@ SYSTEM_EXCLUDES="""
 - os-release
 - resolv.conf
 - cifs-utils/
-- crypttab
+- crypt*
 - cups
 - docker
 - fonts
