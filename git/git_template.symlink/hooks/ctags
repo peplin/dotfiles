@@ -1,4 +1,7 @@
 #!/bin/sh
+#
+#
+# FOooo
 set -e
 PATH="/usr/local/bin:$PATH"
 trap 'rm -f "$$.tags"' EXIT

@@ -53,6 +53,8 @@
 [branch]
     autosetupmerge = always
     autosetuprebase = always
+[rebase]
+    updateRefs = true
 [github]
     user = peplin
 [push]

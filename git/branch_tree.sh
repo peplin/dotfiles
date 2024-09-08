@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# sdasdflkj
 
 SCRIPT_DIRECTORY="$(dirname "$0")"
 source $SCRIPT_DIRECTORY/util.sh

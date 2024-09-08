@@ -1,4 +1,6 @@
 #!/usr/bin/env bash
+#
+# amend
 
 SCRIPT_DIRECTORY="$(dirname "$0")"
 source $SCRIPT_DIRECTORY/util.sh
@@ -6,6 +8,7 @@ source $SCRIPT_DIRECTORY/util.sh
 set -e
 
 declare -A branch_parents
+declare -A visited_branches
 
 PUSH=""
 BRANCH=""
@@ -24,22 +27,16 @@ flowdown() {
     local upstream=$(git rev-parse --abbrev-ref --symbolic-full-name $branch@{upstream})
     local depth=$(($2))
     local push=$3
-    local indentation=""
-    for i in $(seq 1 $depth); do
-        indentation+="  "
-    done
 
-    echo -n "${indentation}Rebasing $branch ..."
-    REBASE_OUTPUT=$(git rebase --quiet --fork-point $upstream $branch)
-    echo "done"
+    visited_branches+=" $branch"
 
-    if [[ ${push} == "true" ]]; then
-        echo -n "${indentation}Pushing $branch ..."
-        PUSH_OUTPUT=$(git push origin --force-with-lease)
+    local child_branches=("${branch_parents[$branch]}")
+    if [ -z "$child_branches" ] || [ ${#child_branches[@]} -eq 0 ]; then
+        echo -n "Rebasing $branch and updating all parent refs..."
+        REBASE_OUTPUT=$(git rebase --update-refs $starting_branch $branch)
         echo "done"
     fi
 
-    local child_branches=("${branch_parents[$branch]}")
     for child_branch in $child_branches; do
         flowdown $child_branch $depth+1 $push
     done
@@ -48,5 +45,12 @@ flowdown() {
 find_current_branch
 find_starting_branch $BRANCH
 build_branch_tree branch_parents
-flowdown $starting_branch 0 $PUSH
+flowdown $starting_branch 0
+
+if [[ ${PUSH} == "true" ]]; then
+    echo -n "Pushing rebased branches..."
+    PUSH_OUTPUT=$(git push origin --force-with-lease $branches)
+    echo "done"
+fi
+
 git checkout $current_branch
