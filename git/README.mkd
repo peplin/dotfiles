@@ -107,12 +107,13 @@ main                                 (0)     Initial commit
 
 The 2 child branches were rebased against `bugfix-1` and are now up to date.
 
-Note, if you've rebased a branch, you typically need to use `git push origin
---force` to push the changes to a remote. This is a destructive operation, so
-use it with care. If you made any changes to a pull request in the GitHub web UI
-it may be overwritten by this operation. When using this workflow, I recommend
-considering your working copy the source of truth - the PR in GitHub is just a
-proposal for something to be merged and could be overwritten at any time.
+Note, if you've rebased a branch, you need to use `git push origin --force` or
+`--force-with-lease` (a newer, safer option) to push the changes to a remote.
+This is a destructive operation, so use it with care. If you made any changes to
+a pull request in the GitHub web UI it may be overwritten by this operation.
+When using this workflow, I recommend considering your working copy the source
+of truth - the PR in GitHub is just a proposal for something to be merged and
+could be overwritten at any time.
 
 ### `move.sh`
 

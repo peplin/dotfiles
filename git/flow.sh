@@ -35,7 +35,7 @@ flowdown() {
 
     if [[ ${push} == "true" ]]; then
         echo -n "${indentation}Pushing $branch ..."
-        PUSH_OUTPUT=$(git push origin --force)
+        PUSH_OUTPUT=$(git push origin --force-with-lease)
         echo "done"
     fi
 
