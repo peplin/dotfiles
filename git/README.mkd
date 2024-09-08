@@ -1,5 +1,7 @@
 ## Git Tools for Stacked Branches
 
+foo
+
 This is a set of bash tools for a git workflow that makes heavy use of stacked
 branches (and pull requests) with single commits, rebasing and force pushing.
 These are some sharp knives but can be very powerful. If anything gets messed
