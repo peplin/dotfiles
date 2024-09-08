@@ -24,7 +24,6 @@
     st = status -sb
     ci = commit -v
     c = commit -m
-    ca = commit --amend -C HEAD
     co = checkout
     lg = log -p --date=local
     cp = cherry-pick -x
@@ -53,6 +52,8 @@
 [branch]
     autosetupmerge = always
     autosetuprebase = always
+[rebase]
+    updateRefs = true
 [github]
     user = peplin
 [push]
