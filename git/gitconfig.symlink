@@ -24,6 +24,8 @@
     st = status -sb
     ci = commit -v
     c = commit -m
+    ca = commit --amend -C HEAD
+    fixup = "!git log -n 50 --pretty=format:'%h %s' --no-merges | fzf | cut -c -7 | xargs -o git commit --fixup"
     co = checkout
     lg = log -p --date=local
     cp = cherry-pick -x
@@ -53,6 +55,7 @@
     autosetupmerge = always
     autosetuprebase = always
 [rebase]
+    autosquash = true
     updateRefs = true
 [github]
     user = peplin
