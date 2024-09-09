@@ -48,7 +48,8 @@ build_branch_tree branch_parents
 flowdown $starting_branch 0
 
 if [[ ${PUSH} == "true" ]]; then
-    echo -n "Pushing rebased branches..."
+    echo "Pushing rebased branches..."
+    echo $branches
     PUSH_OUTPUT=$(git push origin --force-with-lease $branches)
     echo "done"
 fi
