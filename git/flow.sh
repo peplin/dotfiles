@@ -49,8 +49,7 @@ flowdown $starting_branch 0
 
 if [[ ${PUSH} == "true" ]]; then
     echo "Pushing rebased branches..."
-    echo $branches
-    PUSH_OUTPUT=$(git push origin --force-with-lease $branches)
+    PUSH_OUTPUT=$(git push origin --force-with-lease $visited_branches)
     echo "done"
 fi
 
