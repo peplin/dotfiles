@@ -36,7 +36,7 @@ flowdown() {
 
     # Use old school method when --update-refs fails due to a parent branch
     # having an amended commit.
-    if [[ ${FORCE} == "true" ]]; then
+    if [[ $depth == 0 ]] || [[ ${FORCE} == "true" ]]; then
         echo -n "${indentation}Rebasing $branch ..."
         REBASE_OUTPUT=$(git rebase --quiet --fork-point $upstream $branch)
         echo "done"
