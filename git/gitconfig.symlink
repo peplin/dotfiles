@@ -28,6 +28,7 @@
     fixup = "!git log -n 50 --pretty=format:'%h %s' --no-merges | fzf | cut -c -7 | xargs -o git commit --fixup"
     co = checkout
     lg = log -p --date=local
+    lgf = log --follow -p --date=local
     cp = cherry-pick -x
     git = status
     diffup = diff @{upstream}
