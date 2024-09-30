@@ -118,28 +118,6 @@ slock
 trayer
 lxappearance
 
-# wayland / hyprland
-
-wayland
-linux-headers
-# See hyprland wiki for guide to enabling required kernel options
-nvidia-dkms
-hyprland-nvidia
-foot
-rofi
-swaylock
-swayidle
-waybar
-otf-font-awesome
-ttf-font-awesome
-xdg-desktop-portal-hyprland
-xdg-desktop-portal-gtk
-pyton-gobject # for mediaplayer.py
-cliphist
-wl-clip-persist
-grim
-slurp
-
 # May only be required on ubuntu, this makes select+paste from urxvt work like
 # you would expect, no middle mouse nonsense
 xsel

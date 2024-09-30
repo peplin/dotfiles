@@ -67,7 +67,7 @@ add libinput-gestures config for 3-finger back/forward
 don't disable gdm, use an xmonad session
 
 
-# Wayland / hyprland
+# Wayland
 
 sudo systemctl enable nvidia-suspend.service nvidia-hibernate.service nvidia-resume.service
 systemctl --user enable foot-server.service
