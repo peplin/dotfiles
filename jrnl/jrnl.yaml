@@ -14,7 +14,7 @@ journals:
     journal: /home/peplin/notes/journal.txt
   work:
     journal: /home/peplin/notes/work-journal.txt
-linewrap: 79
+linewrap: false
 tagsymbols: '#@'
 template: false
 timeformat: '%F %r'
