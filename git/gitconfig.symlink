@@ -93,3 +93,5 @@
     path = .gitconfig-vanta
 [includeIf "hasconfig:remote.*.url:https://github.com/VantaInc/**"]
     path = .gitconfig-vanta
+[diff]
+    noprefix = true
