@@ -21,6 +21,9 @@ while getopts 'pfb:' flag; do
     esac
 done
 
+# Switch to old school method since update-refs isn't handling rebases as cleanly
+FORCE="true"
+
 # Recursively rebase this and all child branches against their upstream branch.
 flowdown() {
     local branch=$1
