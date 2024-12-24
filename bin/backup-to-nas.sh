@@ -78,6 +78,7 @@ HOME_EXCLUDES="""
 - .dotfiles/xmonad/xmonad.symlink/*.o
 - .dotfiles/xmonad/xmonad.symlink/prompt-history
 - .dotfiles/xmonad/xmonad.symlink/xmonad-x86_64-linux
+- .dotfiles/xmonad/xmonad.symlink/build-x86_64-linux
 - downloads
 - .dvdcss
 - .fzf
@@ -89,6 +90,7 @@ HOME_EXCLUDES="""
 - .java
 - .keychain
 - .local
+- .lesshst
 - .log
 - .MakeMKV
 - .mozilla
