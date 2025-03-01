@@ -46,6 +46,9 @@ autocmd!
         Plugin 'junegunn/fzf'
         Plugin 'junegunn/fzf.vim'
 
+        " Experimental
+        Plugin 'https://github.com/github/copilot.vim'
+
         " vim-polyglot {
             " Must be defined before loading vim-polyglot
             let g:polyglot_disabled = [ 'protobuf' ]
