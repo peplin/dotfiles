@@ -63,7 +63,7 @@
 [push]
     default = current
 [help]
-    autocorrect = 1
+    autocorrect = immediate
 [merge]
     tool = fugitive
     keepBackup = false
