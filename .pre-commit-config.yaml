@@ -13,4 +13,4 @@ repos:
     rev: 433a57adaf8fedce312630ef593f5142227c5855  # frozen: v3.78.1
     hooks:
     -   id: trufflehog
-        stages: [pre-push, manual]
+        stages: [push, manual]
