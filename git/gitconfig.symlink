@@ -55,13 +55,17 @@
 [branch]
     autosetupmerge = always
     autosetuprebase = always
+    sort = -committerdate
 [rebase]
     autosquash = true
+    autostash = true
     updateRefs = false
 [github]
     user = peplin
 [push]
-    default = current
+    default = simple
+    autoSetupRemote = true
+    followTags = true
 [help]
     autocorrect = immediate
 [merge]
@@ -78,8 +82,12 @@
     cmd = vim -f -c \"Gvdiffsplit!\" \"$MERGED\"
 [fetch]
     recurseSubmodules = on-demand
+    prune = true
+    pruneTags = true
+    all = true
 [rerere]
     enabled = true
+    autoupdate = true
 [filter "lfs"]
     required = true
     clean = git-lfs clean -- %f
@@ -95,3 +103,15 @@
     path = .gitconfig-vanta
 [diff]
     noprefix = true
+    algorithm = histogram
+    colorMoved = plain
+    mnemonicPrefix = true
+    renames = true
+[commit]
+    verbose = true
+[pull]
+    rebase = true
+[column]
+    ui = auto
+[tag]
+    sort = version:refname

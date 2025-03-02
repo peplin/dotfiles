@@ -1,2 +1,5 @@
 [user]
     email = chris.peplin@vanta.com
+[core]
+    fsmonitor = true
+    untrackedCache = true
