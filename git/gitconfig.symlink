@@ -6,6 +6,8 @@
     status = auto
     ui = auto
     branch = auto
+[color "diff"]
+    whitespace = red reverse
 [color "branch"]
     current = yellow reverse
     local = yellow
@@ -49,9 +51,8 @@
     fp = "!bash -c 'f() { [[ ! $(git rev-parse --abbrev-ref HEAD) =~ ^ma(in|ster)$ ]] && git push --force-with-lease origin || echo \"Not force pushing main branch\"; } ; f'"
     discard = !git reset HEAD -- && git co -- .
     rc = "-c core.editor=true rebase --continue"
-
 [apply]
-    whitespace = nowarn
+    whitespace = fix
 [branch]
     autosetupmerge = always
     autosetuprebase = always
@@ -107,6 +108,7 @@
     colorMoved = plain
     mnemonicPrefix = true
     renames = true
+    colorMovedWS = allow-indentation-change
 [commit]
     verbose = true
 [pull]
@@ -115,3 +117,7 @@
     ui = auto
 [tag]
     sort = version:refname
+[format]
+    pretty=fuller
+[log]
+    date = iso
