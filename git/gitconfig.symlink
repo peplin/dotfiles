@@ -115,7 +115,5 @@
     ui = auto
 [tag]
     sort = version:refname
-[format]
-    pretty=fuller
 [log]
     date = iso
