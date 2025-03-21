@@ -26,10 +26,8 @@ gmon.out
 .eggs/
 .agignore
 xunit-test-results.xml
-tags
 .terraform*
 .cache
 .bash_history
 .guard_history
-.envrc
 .mypy_cache
