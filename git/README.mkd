@@ -115,6 +115,13 @@ When using this workflow, I recommend considering your working copy the source
 of truth - the PR in GitHub is just a proposal for something to be merged and
 could be overwritten at any time.
 
+To run `git flow`, add this to your `.gitconfig`.
+
+```
+[alias]
+    flow = !~/.dotfiles/git/flow.sh
+```
+
 ### `move.sh`
 
 In the above example, `bugfix-2` is a bug we encountered along the way of
@@ -146,7 +153,10 @@ The `refresh` alias is a handy way to pull the latest changes from the remote
 and update all of your local branches. This will also remove and tidy up any
 branches that have been merged.
 
+`offline-refresh` does the same but skips the remote fetch.
+
 ```
 [alias]
-   refresh = !git fetch origin && ~/.dotfiles/git/flow.sh all && git tidy && git br
+   refresh = !git fetch --no-tags origin && ~/.dotfiles/git/flow.sh -b all && git tidy && git br
+   offline-refresh = !~/.dotfiles/git/flow.sh -b all && git tidy && git br
 ```
