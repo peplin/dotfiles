@@ -23,6 +23,8 @@ SYSTEM_EXCLUDES="""
 - docker
 - fonts
 - systemd
+- xdg
+- sane.d
 - iptables
 - alsa
 - libaudit.conf
