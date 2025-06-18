@@ -116,15 +116,9 @@ install_dependencies () {
       git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
     fi
 
-    cd /workspaces/obsidian
-    git worktree add ../2obsidian
-    cd ../2obsidian
-    git branch -u origin/main
-    git branch -m 2main
-
     sudo chsh "$(id -un)" --shell "/usr/bin/zsh"
 
-    # vim +PluginInstall +qall || true
+    vim +PluginInstall +qall || true
   fi
 }
 
