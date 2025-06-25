@@ -451,21 +451,11 @@ autocmd!
             \ 'typescript': ['eslint'],
             \ 'typescriptreact': ['eslint']
         \ }
-        let g:ale_fixers = {
-            \ 'ruby': ['rubocop'],
-            \ 'python': ['black', 'autoflake', 'isort'],
-            \ 'json': ['prettier'],
-            \ 'jsonc': ['prettier'],
-            \ 'yaml': ['prettier'],
-            \ 'javascript': ['prettier'],
-            \ 'typescript': ['prettier'],
-            \ 'typescriptreact': ['prettier']
-        \ }
         let g:ale_fix_on_save = 1
+        let g:ale_fixers = ['prettier', 'remove_trailing_lines']
 
         let g:ale_python_flake8_options = '--max-line-length=88'
-        let g:ale_typescript_eslint_options = '--cache --cache-strategy content'
-        let g:ale_javascript_eslint_options = '--cache --cache-strategy content'
+        let g:ale_javascript_eslint_options = '--no-warn-ignored'
     " }
 
     " vim-ruby (from vim-polyglot) {
