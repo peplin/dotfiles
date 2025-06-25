@@ -33,7 +33,7 @@ autocmd!
         " Theme
         Plugin 'itchyny/lightline.vim'
         Plugin 'romainl/apprentice'
-        Plugin 'gruvbox-community/gruvbox'
+        Plugin 'sainnhe/gruvbox-material'
 
         " Formatters
         Plugin 'hashivim/vim-terraform'
@@ -119,17 +119,11 @@ autocmd!
     endif
 
     if &t_Co == 256
-        " colorscheme apprentice
-        colorscheme gruvbox
+        " Must be set before invoking colorscheme
+        let g:gruvbox_material_background = "dark"
         set background=dark
 
-        nnoremap <silent> [oh :call gruvbox#hls_show()<CR>
-        nnoremap <silent> ]oh :call gruvbox#hls_hide()<CR>
-        nnoremap <silent> coh :call gruvbox#hls_toggle()<CR>
-
-        nnoremap * :let @/ = ""<CR>:call gruvbox#hls_show()<CR>*
-        nnoremap / :let @/ = ""<CR>:call gruvbox#hls_show()<CR>/
-        nnoremap ? :let @/ = ""<CR>:call gruvbox#hls_show()<CR>?
+        colorscheme gruvbox-material
     else
         colorscheme wombat
     end
@@ -405,7 +399,7 @@ autocmd!
 
     " lightline {
         let g:lightline = {
-            \ 'colorscheme': 'gruvbox',
+            \ 'colorscheme': 'gruvbox_material',
         \ }
     " }
 
