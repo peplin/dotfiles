@@ -19,5 +19,4 @@ dist/*
 *.svg
 *.tsbuildinfo
 .eslintcache
-3rd-party-packages/*
 .external_modules/
