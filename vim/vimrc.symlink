@@ -397,6 +397,19 @@ autocmd!
 
     " }
 
+    " copilot.vim{
+        let g:copilot_filetypes = {
+                    \ '*': v:false ,
+                    \ 'python' : v:true,
+                    \ 'javascript' : v:true,
+                    \ 'typescript' : v:true,
+                    \ 'typescriptreact' : v:true,
+                    \ 'yaml' : v:true,
+                    \ 'json' : v:true,
+                    \ 'jsonc' : v:true
+                    \ }
+    " }
+
     " lightline {
         let g:lightline = {
             \ 'colorscheme': 'gruvbox_material',
