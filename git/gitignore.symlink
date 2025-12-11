@@ -26,8 +26,9 @@ gmon.out
 .eggs/
 .agignore
 xunit-test-results.xml
-.terraform*
+.terraform/
 .cache
 .bash_history
 .guard_history
 .mypy_cache
+**/.claude/settings.local.json

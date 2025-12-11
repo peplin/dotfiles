@@ -42,7 +42,7 @@ flowdown() {
     # having an amended commit.
     if [[ $depth == 0 ]] || [[ ${FORCE} == "true" ]]; then
         echo -n "${indentation}Rebasing $branch ..."
-        _=$(git rebase --quiet --fork-point $upstream $branch)
+        _=$(git rebase --quiet --fork-point "$upstream" "$branch")
         echo "done"
     fi
 
@@ -64,7 +64,6 @@ build_branch_tree branch_parents
 flowdown "$starting_branch" 0
 
 if [[ ${PUSH} == "true" ]]; then
-    echo "Pushing rebased branches..."
     _=$(git push origin --force-with-lease $visited_branches)
     echo "done"
 fi

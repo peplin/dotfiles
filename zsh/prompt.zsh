@@ -14,7 +14,7 @@ git_prompt_info() {
 }
 
 git_dirty() {
-    st=$(timeout 0.2 $git status 2>/dev/null | tail -n 1)
+    st=$(timeout 0.2 $git --no-optional-locks status 2>/dev/null | tail -n 1)
     if [[ $st == "" ]]
     then
         echo ""

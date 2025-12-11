@@ -20,3 +20,6 @@ dist/*
 *.tsbuildinfo
 .eslintcache
 .external_modules/
+moved.tf
+*.regression*
+*nock.regression.testutil.ts

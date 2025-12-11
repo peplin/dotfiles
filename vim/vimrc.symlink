@@ -46,9 +46,6 @@ autocmd!
         Plugin 'junegunn/fzf'
         Plugin 'junegunn/fzf.vim'
 
-        " Experimental
-        Plugin 'https://github.com/github/copilot.vim'
-
         " vim-polyglot {
             " Must be defined before loading vim-polyglot
             let g:polyglot_disabled = [ 'protobuf' ]
@@ -85,6 +82,8 @@ autocmd!
 
     " save files when switching buffers or various other things
     set autowrite
+
+    set iskeyword+=-
 
     " reload files edited outside of vim automatically
     set autoread
@@ -449,7 +448,8 @@ autocmd!
             \ 'rust': ['cargo', 'analyzer'],
             \ 'javascript': ['eslint'],
             \ 'typescript': ['eslint'],
-            \ 'typescriptreact': ['eslint']
+            \ 'typescriptreact': ['eslint'],
+            \ 'terraform': ['tflint']
         \ }
         let g:ale_fix_on_save = 1
         let g:ale_fixers = ['prettier', 'remove_trailing_lines']

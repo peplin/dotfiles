@@ -44,7 +44,7 @@
     # Flow down changes from base branches to child branches by rebasing
     flow = !~/.dotfiles/git/flow.sh
     # Fetch origin, then flow down all changes to child branches from main/master
-    refresh = !git fetch --no-tags origin && ~/.dotfiles/git/flow.sh -b all && git tidy && git br
+    refresh = !git fetch --no-tags origin main && ~/.dotfiles/git/flow.sh -b all && git tidy && git br
     offline-refresh = !~/.dotfiles/git/flow.sh -b all && git tidy && git br
     move = !~/.dotfiles/git/move.sh
     tidy = !~/.dotfiles/git/tidy.sh
@@ -66,18 +66,17 @@
 [push]
     default = simple
     autoSetupRemote = true
-    followTags = true
 [help]
     autocorrect = immediate
 [merge]
-    tool = fugitive
+    tool = vimdiff
     keepBackup = false
     keepTemporaries = false
     prompt = false
+    conflictstyle = diff3
 [interactive]
     singlekey = true
 [init]
-    templatedir = ~/.git_template
     defaultBranch = main
 [mergetool "fugitive"]
     cmd = vim -f -c \"Gvdiffsplit!\" \"$MERGED\"
@@ -96,6 +95,7 @@
     keepBackup = false
 [advice]
     skippedCherryPicks = false
+    mergeConflict = false
 [includeIf "hasconfig:remote.*.url:git@github.com:VantaInc/**"]
     path = .gitconfig-vanta
 [includeIf "hasconfig:remote.*.url:https://github.com/VantaInc/**"]
