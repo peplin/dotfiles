@@ -19,7 +19,7 @@ fi
 
 lxsession &
 lxpolkit &
-picom &
+#picom &
 nm-applet &
 
 1password --silent &
