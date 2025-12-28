@@ -143,7 +143,7 @@ FULL_GUI_PACKAGES=(
 #compositing and screen recordings
 peek
 gifski
-picom
+fastcompmgr
 arc-gtk-theme
 
 vlc
