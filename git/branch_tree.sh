@@ -19,13 +19,13 @@ render_branch_tree() {
     local depth=($2)
     depth=$((depth))
 
-    local upstream=$(git rev-parse --abbrev-ref --symbolic-full-name $branch@{upstream})
+    local upstream=$(git rev-parse --abbrev-ref --symbolic-full-name "$branch@{upstream}" 2>/dev/null)
     if [ -z "$upstream" ]; then
         local child_branches=""
         local silbings=""
     else
         local siblings=(${branch_parents[$upstream]})
-        local child_branches=("${branch_parents[$branch]}")
+        local child_branches=(${branch_parents[$branch]})
     fi
 
     local prefix=""
@@ -63,6 +63,12 @@ render_branch_tree() {
     fi
 
     commits_output+=")"
+    # Pad to fixed width, accounting for invisible ANSI codes
+    local visible_commits=$(echo -e "$commits_output" | sed 's/\x1b\[[0-9;]*m//g')
+    local commits_padding=$((10 - ${#visible_commits}))
+    if (( commits_padding > 0 )); then
+        commits_output+=$(printf "%${commits_padding}s" "")
+    fi
 
     if (( depth > 0 )) && (( no_external_calls == 0 )); then
         set +e
@@ -86,24 +92,45 @@ render_branch_tree() {
     fi
 
     pr_info+="$pr_number$NO_COLOR"
+    # Pad PR info to fixed width
+    local visible_pr=$(echo -e "$pr_info" | sed 's/\x1b\[[0-9;]*m//g')
+    local pr_padding=$((8 - ${#visible_pr}))
+    if (( pr_padding > 0 )); then
+        pr_info+=$(printf "%${pr_padding}s" "")
+    fi
 
-    branch_output="$branch$NO_COLOR"
+    # Calculate prefix display width (each depth level = 3 chars)
+    local prefix_width=0
+    if (( depth > 0 )); then
+        prefix_width=$((depth * 3))
+    fi
+
+    # Pad branch so prefix + branch = 50 chars total
+    local target_width=50
+    local branch_padding=$((target_width - prefix_width - ${#branch}))
+    if (( branch_padding > 0 )); then
+        local padded_branch="$branch$(printf "%${branch_padding}s" "")"
+    else
+        local padded_branch="$branch"
+    fi
+
     if [ "$branch" = "$current_branch" ]; then
-        branch_output="$GREEN$branch_output"
+        branch_output="$GREEN$padded_branch$NO_COLOR"
+    else
+        branch_output="$padded_branch"
     fi
 
     local max_cols=$(tput cols)
-    local commit_message="	$(git show -q --format=%s $branch)"
+    local commit_message="$(git show -q --format=%s $branch)"
     if [ $max_cols -lt 165 ]; then
         commit_message=""
     elif [ $max_cols -lt 180 ]; then
-        # TODO be smarter, truncate the line to max
         commit_message=${commit_message:0:30}
     fi
-    outputs+=("$prefix$branch_output	$commits_output	$pr_info	$commit_message")
+    outputs+=("$prefix$branch_output  $commits_output  $pr_info  $commit_message")
 
     visited_branches[$branch]="foo"
-    for child_branch in $child_branches; do
+    for child_branch in "${child_branches[@]}"; do
         render_branch_tree $child_branch $depth+1
     done
 }
@@ -131,4 +158,4 @@ done <<< "$all_heads"
 
 for info in "${outputs[@]}"; do
     echo -e "$info"
-done | column -t -s "	"
+done

@@ -46,14 +46,9 @@ flowdown() {
         echo "done"
     fi
 
-    local child_branches=("${branch_parents[$branch]}")
-    if [ -z "$child_branches" ] || [ ${#child_branches[@]} -eq 0 ]; then
-        echo -n "Rebasing $branch and updating all parent refs..."
-        _=$(git rebase --update-refs "$starting_branch" "$branch")
-        echo "done"
-    fi
+    local child_branches=(${branch_parents[$branch]})
 
-    for child_branch in $child_branches; do
+    for child_branch in "${child_branches[@]}"; do
         flowdown "$child_branch" "$depth+1" "$push"
     done
 }
