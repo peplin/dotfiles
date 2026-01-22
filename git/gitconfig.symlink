@@ -21,6 +21,7 @@
     excludesfile = ~/.gitignore
     editor = vim
     autocrlf = input
+    fsmonitor = false
 [alias]
     aa = !git add --all && git add . && git status
     st = status -sb
