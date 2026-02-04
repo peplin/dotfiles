@@ -57,3 +57,7 @@ zstyle ':completion:*:*:(v|vim):*:*files' ignored-patterns '*.(a|dylib|so|o|pyc)
 zstyle ':completion:*:*:(python*|pytest):*:*files' ignored-patterns '*.(pyc)'
 
 FIGNORE=".o"
+
+if command -v prek >/dev/null 2>&1; then
+    eval "$(COMPLETE=zsh prek)"
+fi
