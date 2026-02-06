@@ -1,0 +1,8 @@
+{
+  "enableAllProjectMcpServers": false,
+  "enabledMcpjsonServers": [],
+  "fileSuggestion": {
+    "type": "command",
+    "command": "~/.claude/file-suggestion.sh"
+  }
+}
