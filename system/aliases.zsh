@@ -3,20 +3,22 @@ if command -v brew >/dev/null 2>&1; then
 PATH="$(brew --prefix coreutils)/libexec/gnubin:$PATH"
 fi
 
+LS_SUFFIX=""
+if ls --version >/dev/null 2>&1; then
+    # GNU ls
+    LS_SUFFIX="-N --group-directories-first --color=auto"
+elif ls -G >/dev/null 2>&1; then
+    # BSD ls
+fi
+
 if [ "$TERM" != "dumb" ]; then
     if command -v dircolors >/dev/null 2>&1; then
         eval $(dircolors -b ~/.dircolors)
     fi
-    alias ls='ls -N --group-directories-first --color=auto'
 fi
 
-alias ll='ls -lNh'
-alias la='ls -lNha'
-
-alias ..='cd ..'
-function cdls() {
-    cd $1 && ls
-}
+alias ll='ls -lh'
+alias la='ls -lha'
 
 alias grep='grep --color=auto'
 

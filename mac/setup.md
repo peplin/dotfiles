@@ -2,19 +2,17 @@
 * Install Hack font
 * Install gruvbox theme in Terminal.app
     https://github.com/sidnvy/gruvbox-terminal
-* Configure iterm2 profile
+* Configure iterm2 profile to use gruvbox colors and Hack font
 * Configure caps lock to be option key
 * Configure Keyboard shortcuts for:
-    Chrome:
-        control-t
-        control-w
-        control-k
-        control-l
-        shift versions
     Spotlight:
         caps-d
+    1password:
+        caps-shift-d
     Screenshot:
-        caps-s
+        caps-s to clipboard
+        caps-shift-s to file
+    Mission control
 * Disable Mission Control's Control-Arrow shortcuts (use Super-num with Amethyst
     instead) - this restores Control-Arrow for jumping between words
 
@@ -44,7 +42,5 @@ defaults write com.apple.Finder AppleShowAllFiles true
 defaults write com.googlecode.iterm2.plist PrefsCustomFolder -string "~/.dotfiles/mac"
 # Tell iTerm2 to use the custom preferences in the directory
 defaults write com.googlecode.iterm2.plist LoadPrefsFromCustomFolder -bool true
-
-
 
 Q: is it possible to make caps-enter a global shortcut to open a new terminal?
