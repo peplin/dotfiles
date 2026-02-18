@@ -35,6 +35,9 @@ brew install --cask \
     visual-studio-code \
     amethyst \
 
+Enable tmux integration in iTerm2. Make sure tmux is invoked with "tmux -CC" on
+the other end.
+
 
 defaults write com.apple.Finder AppleShowAllFiles true
 

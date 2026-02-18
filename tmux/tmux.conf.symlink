@@ -16,10 +16,11 @@ bind-key p previous-window
 #bind-key -n End send Escape "[F"
 
 # Use 256 color
-# set -g default-terminal rxvt-unicode-256color
+set -g default-terminal xterm-256color
 
 # Don't use a login shell
-set -g default-command "${SHELL}"
+#set -g default-command "${SHELL}"
+set-option -g default-shell /bin/zsh
 
 # Make control-arrows work
 set-window-option -g xterm-keys on
@@ -29,3 +30,4 @@ setenv -g SSH_AUTH_SOCK /tmp/$USER-ssh_auth_sock
 
 # Increase scrollback buffer size
 set-option -g history-limit 100000
+
