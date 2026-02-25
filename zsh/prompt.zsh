@@ -15,8 +15,8 @@ _async_git_info() {
     branch=$(git symbolic-ref --short HEAD 2>/dev/null) || branch=$(git rev-parse --short HEAD 2>/dev/null) || return
 
     local dirty=""
-    if ! git diff --quiet --ignore-submodules HEAD 2>/dev/null || \
-       [[ -n $(git status --porcelain 2>/dev/null | head -1) ]]; then
+    if ! git --no-optional-locks diff --quiet --ignore-submodules HEAD 2>/dev/null || \
+       [[ -n $(git --no-optional-locks status --porcelain 2>/dev/null | head -1) ]]; then
         dirty="1"
     fi
 
