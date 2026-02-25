@@ -26,7 +26,6 @@ set-option -g default-shell /bin/zsh
 set-window-option -g xterm-keys on
 
 set -g update-environment -r
-setenv -g SSH_AUTH_SOCK /tmp/$USER-ssh_auth_sock
 
 # Increase scrollback buffer size
 set-option -g history-limit 100000
