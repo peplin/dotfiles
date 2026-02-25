@@ -354,6 +354,9 @@ autocmd!
 
     " Don't require shift to get colon
     nnoremap ; :
+
+    " I literally *never* want to record a macro
+    nnoremap q <Nop>
 " }
 
 " Highlighting {
@@ -371,7 +374,6 @@ autocmd!
         map <leader>t :Files<CR>
         map <leader>b :Buffers<CR>
         map <leader>l :Lines<CR>
-        map <leader>f :Rg<CR>
         let g:fzf_layout = {'down': '40%'}
         let g:fzf_preview_window = []
     " }
@@ -386,27 +388,11 @@ autocmd!
         " let g:syntastic_javascript_checkers=['jslint']
         let g:syntastic_python_checkers=['']
         " let g:syntastic_python_flake8_args = "--max-line-length=120"
-        let g:syntastic_cpp_include_dirs = ['source', 'build/source', '/usr/include', '/home/peplin/downloads/flycapture2-2.6.3.4-i386/usr/include', '/home/peplin/downloads/flycapture2-2.6.3.4-i386/usr/include/flycapture']
-        let g:syntastic_cpp_compiler = 'clang++-3.5'
-        let g:syntastic_cpp_compiler_options = ' -std=c++11'
         let g:syntastic_always_populate_loc_list = 1
         let g:syntastic_auto_loc_list = 0
         let g:syntastic_check_on_open = 1
         let g:syntastic_check_on_wq = 0
 
-    " }
-
-    " copilot.vim{
-        let g:copilot_filetypes = {
-                    \ '*': v:false ,
-                    \ 'python' : v:true,
-                    \ 'javascript' : v:true,
-                    \ 'typescript' : v:true,
-                    \ 'typescriptreact' : v:true,
-                    \ 'yaml' : v:true,
-                    \ 'json' : v:true,
-                    \ 'jsonc' : v:true
-                    \ }
     " }
 
     " lightline {
@@ -433,6 +419,13 @@ autocmd!
 
     " gitgutter {
          let g:gitgutter_escape_grep = 1
+    " }
+
+    " grep {
+        set grepprg=rg\ --vimgrep
+        set grepformat^=%f:%l:%c:%m
+
+        nmap <leader>g :silent grep<Space>
     " }
 
     " VimCompletesMe {
