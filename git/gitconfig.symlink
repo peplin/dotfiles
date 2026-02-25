@@ -97,10 +97,8 @@
 [advice]
     skippedCherryPicks = false
     mergeConflict = false
-[includeIf "hasconfig:remote.*.url:vgithub**"]
-    path = .gitconfig-githubv
-[includeIf "hasconfig:remote.*.url:vgithub**"]
-    path = .gitconfig-githubv
+[includeIf "hasconfig:remote.*.url:git@vgithub*/**"]
+    path = .gitconfig-work
 [diff]
     noprefix = true
     algorithm = histogram
