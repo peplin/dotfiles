@@ -1,24 +1,17 @@
 if [[ -S "$SSH_AUTH_SOCK" && ! -h "$SSH_AUTH_SOCK" ]]; then
-    ln -sf "$SSH_AUTH_SOCK" /tmp/$USER-ssh_auth_sock;
+    ln -sf "$SSH_AUTH_SOCK" $HOME/.ssh/ssh_auth_sock.$HOSTNAME
 fi
-export SSH_AUTH_SOCK=/tmp/$USER-ssh_auth_sock;
+export SSH_AUTH_SOCK=$HOME/.ssh/ssh_auth_sock.$HOSTNAME
+
 
 if [ $SSH_TTY ] && [ ! $WINDOW ] && [ ! $DISPLAY ]; then
     if [[ -z "$TMUX" ]] ;then
         if which tmux >/dev/null 2>&1; then
-            ID="`tmux ls | grep -vm1 attached | cut -d: -f1`" # get the id of a deattached session
-            if [[ -z "$ID" ]] ;then # if not available create a new one
-                if [ ! -z "$CODESPACES" ]; then
-                    tmux -CC
-                else
-                    tmux new-session
-                fi
+            session=mysession
+            if tmux has-session -t "$session" 2>/dev/null; then
+                tmux -CC attach-session -t "$session"
             else
-                if [ ! -z "$CODESPACES" ]; then
-                    tmux -CC attach
-                else
-                    tmux attach-session -t "$ID" # if available attach to it
-                fi
+                tmux -CC new-session -s "$session"
             fi
         fi
     fi
