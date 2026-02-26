@@ -28,6 +28,10 @@
 	<false/>
 	<key>AutoHideTmuxClientSession</key>
 	<true/>
+	<key>ClosingTmuxWindowKillsTmuxWindows</key>
+	<true/>
+	<key>ClosingTmuxWindowKillsTmuxWindows_selection</key>
+	<integer>1</integer>
 	<key>Custom Color Presets</key>
 	<dict>
 		<key>gruvbox-dark</key>
