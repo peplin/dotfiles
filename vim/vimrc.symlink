@@ -469,7 +469,10 @@ map <F2> :A<CR>
 map <S-k> <Nop>
 
 " Load work config, if present
-source ~/.vimrc-work
+"
+if filereadable($HOME . "/.vimrc-work")"
+    source ~/.vimrc-work
+endif
 
 " highlight clear SpellBad
 " highlight SpellBad ctermfg=009 ctermbg=011 guifg=#ff0000 guibg=#ffff00
