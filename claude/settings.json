@@ -1,8 +1,22 @@
 {
-  "enableAllProjectMcpServers": false,
-  "enabledMcpjsonServers": [],
+  "alwaysThinkingEnabled": false,
+  "model": "opus",
+  "sandbox": {
+    "enabled": true,
+    "autoAllowBashIfSandboxed": true
+  },
+  "permissions": {
+    "additionalDirectories": [
+      "/home/cpeplin/dev"
+    ]
+  },
   "fileSuggestion": {
     "type": "command",
     "command": "~/.claude/file-suggestion.sh"
+  },
+  "statusLine": {
+    "type": "command",
+    "command": "~/.claude/statusline.sh",
+    "padding": 0
   }
 }
