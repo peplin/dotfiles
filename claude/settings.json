@@ -12,11 +12,11 @@
   },
   "fileSuggestion": {
     "type": "command",
-    "command": "~/.claude/file-suggestion.sh"
+    "command": "~/.dotfiles/claude/file-suggestion.sh"
   },
   "statusLine": {
     "type": "command",
-    "command": "~/.claude/statusline.sh",
+    "command": "~/.dotfiles/claude/statusline.sh",
     "padding": 0
   }
 }
