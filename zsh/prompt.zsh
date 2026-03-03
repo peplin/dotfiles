@@ -85,7 +85,7 @@ project_name_color() {
 }
 
 directory_name() {
-    echo "%{$fg[yellow]%}${HOST%%.*}%{$reset_color%}%{$fg[green]%}@${PWD/#$HOME/~}%{$reset_color%}"
+    echo "%{$fg[yellow]%}${HOST%%.*}%{$reset_color%}%{$fg[green]%}:${PWD/#$HOME/~}%{$reset_color%}"
 }
 
 aws_vault_profile() {
