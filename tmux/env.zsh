@@ -1,4 +1,5 @@
 if [[ -S "$SSH_AUTH_SOCK" && ! -h "$SSH_AUTH_SOCK" ]]; then
+    mkdir -p $HOME/.ssh
     ln -sf "$SSH_AUTH_SOCK" $HOME/.ssh/ssh_auth_sock.$HOSTNAME
 fi
 export SSH_AUTH_SOCK=$HOME/.ssh/ssh_auth_sock.$HOSTNAME
