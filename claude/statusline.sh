@@ -13,11 +13,11 @@ DIR=$(echo "$input" | jq -r '.workspace.current_dir // "."')
 TRANSCRIPT=$(echo "$input" | jq -r '.transcript_path // ""')
 
 # Get git branch and check for uncommitted changes
-BRANCH=$(git -C "$DIR" branch --show-current 2>/dev/null || echo "no-git")
+BRANCH=$(git --no-optional-locks -C "$DIR" branch --show-current 2>/dev/null || echo "no-git")
 DIRTY=""
 if [ "$BRANCH" != "no-git" ]; then
     # Check if there are any uncommitted changes (staged or unstaged)
-    if [ -n "$(git -C "$DIR" status --porcelain 2>/dev/null)" ]; then
+    if [ -n "$(git --no-optional-locks -C "$DIR" status --porcelain 2>/dev/null)" ]; then
         DIRTY="*"
     fi
 fi
