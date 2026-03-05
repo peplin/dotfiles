@@ -73,15 +73,21 @@ _get_git_info() {
 }
 
 project_name() {
-    local name
-    name=$(pwd | awk -F'dev/' '{print $2}' | awk -F/ '{print $1}')
-    echo $name
+    local toplevel
+    toplevel=$(git rev-parse --show-toplevel 2>/dev/null) || return
+    # Resolve symlinks in HOME so paths match git's resolved output
+    local real_dev="${HOME:A}/dev/"
+    local rel="${toplevel#$real_dev}"
+    [[ "$rel" == "$toplevel" ]] && return
+    # Strip org prefix
+    echo "${rel##*/}"
 }
 
 project_name_color() {
     local name
     name=$(project_name)
-    echo "%{\e[0;35m%}${name}%{\e[0m%}"
+    [[ -z "$name" ]] && return
+    echo "%{\e[0;35m%}${name}%{\e[0m%}%{$fg[yellow]%}|%{$reset_color%}"
 }
 
 directory_name() {
@@ -95,7 +101,7 @@ aws_vault_profile() {
 }
 
 setopt PROMPT_SUBST
-export PROMPT=$'$(aws_vault_profile)$(directory_name) $(project_name_color)|$(_get_git_info)\n$ '
+export PROMPT=$'$(aws_vault_profile)$(directory_name) $(project_name_color)$(_get_git_info)\n$ '
 
 local return_code="%(?..%{$fg[red]%}%?%{$reset_color%})"
 export RPS1="${return_code}"
