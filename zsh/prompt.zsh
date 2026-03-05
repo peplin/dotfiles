@@ -44,10 +44,11 @@ _handle_async_git() {
 
     [[ "$dir" != "$PWD" ]] && return
 
+    local sep="%{$fg[yellow]%}|%{$reset_color%}"
     if [[ "$color" == "red" ]]; then
-        _git_info="%{$fg_bold[red]%}${branch}%{$reset_color%}"
+        _git_info="${sep}%{$fg_bold[red]%}${branch}%{$reset_color%}"
     else
-        _git_info="%{$fg[green]%}${branch}%{$reset_color%}"
+        _git_info="${sep}%{$fg[green]%}${branch}%{$reset_color%}"
     fi
     _git_info_pwd="$PWD"
 
@@ -87,7 +88,7 @@ project_name_color() {
     local name
     name=$(project_name)
     [[ -z "$name" ]] && return
-    echo "%{\e[0;35m%}${name}%{\e[0m%}%{$fg[yellow]%}|%{$reset_color%}"
+    echo "%{\e[0;35m%}${name}%{\e[0m%}"
 }
 
 directory_name() {
