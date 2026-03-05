@@ -95,7 +95,7 @@ aws_vault_profile() {
 }
 
 setopt PROMPT_SUBST
-export PROMPT=$'$(aws_vault_profile)$(directory_name) $(project_name_color)$(_get_git_info)\n$ '
+export PROMPT=$'$(aws_vault_profile)$(directory_name) $(project_name_color)|$(_get_git_info)\n$ '
 
 local return_code="%(?..%{$fg[red]%}%?%{$reset_color%})"
 export RPS1="${return_code}"
