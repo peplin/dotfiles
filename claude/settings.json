@@ -1,22 +1,32 @@
 {
-  "alwaysThinkingEnabled": false,
-  "model": "opus",
-  "sandbox": {
-    "enabled": true,
-    "autoAllowBashIfSandboxed": true
-  },
-  "permissions": {
-    "additionalDirectories": [
-      "/home/cpeplin/dev"
-    ]
-  },
   "fileSuggestion": {
     "type": "command",
     "command": "~/.dotfiles/claude/file-suggestion.sh"
   },
+  "permissions": {
+    "allow": [
+      "Bash(chmod:*)"
+    ],
+    "additionalDirectories": [
+      "~/dev",
+      "~/.dotfiles"
+    ]
+  },
+  "model": "opus",
   "statusLine": {
     "type": "command",
     "command": "~/.dotfiles/claude/statusline.sh",
     "padding": 0
-  }
+  },
+  "sandbox": {
+    "enabled": true,
+    "autoAllowBashIfSandboxed": true,
+    "writePaths": [
+      "/home/cpeplin/.cache/bazel",
+      "/data/home/cpeplin/.cache/bazel",
+      "/tmp"
+    ]
+  },
+  "alwaysThinkingEnabled": false,
+  "autoUpdatesChannel": "latest"
 }

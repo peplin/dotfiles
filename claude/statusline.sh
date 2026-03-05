@@ -3,14 +3,15 @@
 # Read JSON input from stdin
 input=$(cat)
 
-# Debug: Save the JSON to a file (uncomment to inspect)
-echo "$input" | jq '.' > /tmp/claude-statusline-input.json
-
 # Extract basic info
 MODEL=$(echo "$input" | jq -r '.model.display_name // "Unknown"')
 MODEL_ID=$(echo "$input" | jq -r '.model.id // ""')
 DIR=$(echo "$input" | jq -r '.workspace.current_dir // "."')
 TRANSCRIPT=$(echo "$input" | jq -r '.transcript_path // ""')
+
+# Extract cost info
+COST_USD=$(echo "$input" | jq -r '.cost.total_cost_usd // 0')
+COST_FMT=$(printf '$%.2f' "$COST_USD")
 
 # Get git branch and check for uncommitted changes
 BRANCH=$(git --no-optional-locks -C "$DIR" branch --show-current 2>/dev/null || echo "no-git")
@@ -63,5 +64,5 @@ if [ -n "$TRANSCRIPT" ] && [ -f "$TRANSCRIPT" ]; then
 fi
 
 # Format output with colors (using ANSI codes)
-# \033[36m = cyan, \033[33m = yellow, \033[32m = green, \033[31m = red, \033[0m = reset
-echo -e "\033[36m[$MODEL]\033[0m \033[33m$BRANCH\033[0m\033[31m$DIRTY\033[0m ${CONTEXT_INFO}"
+# \033[36m = cyan, \033[33m = yellow, \033[32m = green, \033[31m = red, \033[35m = magenta, \033[0m = reset
+echo -e "\033[36m[$MODEL]\033[0m \033[35m${COST_FMT}\033[0m \033[33m$BRANCH\033[0m\033[31m$DIRTY\033[0m ${CONTEXT_INFO}"
