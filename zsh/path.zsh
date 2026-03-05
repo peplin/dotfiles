@@ -6,6 +6,6 @@ if [[ -d $HOME/bin ]]; then
     done
 fi
 
-export PATH="/usr/local/bin:/usr/local/sbin:$ZSH/bin:$PATH:$HOME/.local/bin"
-export PATH="$PATH:$HOME/.cabal/bin"
-export PATH="$PATH:$HOME/.npm/bin"
+export PATH="$HOME/.local/bin:$ZSH/bin:/usr/local/bin:/usr/local/sbin:$PATH"
+export PATH="$HOME/.cabal/bin:$PATH"
+export PATH="$HOME/.npm/bin:$PATH"
