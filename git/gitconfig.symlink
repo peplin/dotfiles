@@ -30,6 +30,7 @@
     ca = commit --amend -C HEAD
     fixup = "!git log -n 50 --pretty=format:'%h %s' --no-merges | fzf | cut -c -7 | xargs -o git commit --fixup"
     co = checkout
+    d = checkout --detach
     lg = log -p --date=local
     lgf = log --follow -p --date=local
     cp = cherry-pick -x
@@ -49,6 +50,7 @@
     offline-refresh = !~/.dotfiles/git/flow.sh -b all && git tidy && git br
     move = !~/.dotfiles/git/move.sh
     tidy = !~/.dotfiles/git/tidy.sh
+    subup = !~/.dotfiles/git/subup.sh
     fp = "!bash -c 'f() { if [[ $(git rev-parse --abbrev-ref HEAD) =~ ^ma(in|ster)$ ]]; then echo \"Not force pushing main branch\"; else git push --force-with-lease origin; fi  } ; f'"
     discard = !git reset HEAD -- && git co -- .
     rc = "-c core.editor=true rebase --continue"

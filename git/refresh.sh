@@ -8,5 +8,5 @@ find_starting_branch "all"
 git fetch --no-tags origin "$starting_branch" && \
     "$SCRIPT_DIRECTORY/flow.sh" -b all && \
     git tidy && \
-    git submodule update && \
+    "$SCRIPT_DIRECTORY/subup.sh" && \
     git br

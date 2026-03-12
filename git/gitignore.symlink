@@ -32,3 +32,4 @@ xunit-test-results.xml
 .guard_history
 .mypy_cache
 **/.claude/settings.local.json
+**/.claude/worktrees
