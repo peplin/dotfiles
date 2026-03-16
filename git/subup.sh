@@ -14,5 +14,5 @@ fi
 
 echo "$initialized" | while read -r sm_path; do
     echo "Updating $sm_path..."
-    git submodule update "$sm_path"
+    git submodule update --init "$sm_path"
 done
