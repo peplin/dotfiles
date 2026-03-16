@@ -6,7 +6,7 @@
   "permissions": {
     "defaultMode": "acceptEdits",
     "allow": [
-      "Bash(chmod *)"
+      "Bash(chmod *)",
       "Bash(find *)"
     ],
     "additionalDirectories": [
