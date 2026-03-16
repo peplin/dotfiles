@@ -1,6 +1,7 @@
 autoload colors && colors
 
 typeset -g _git_info=""
+typeset -g _project_name=""
 typeset -g _git_info_pwd=""
 typeset -g _async_git_pid=0
 
@@ -20,11 +21,17 @@ _async_git_info() {
         dirty="1"
     fi
 
-    if [[ -n "$dirty" ]]; then
-        printf '\x1f%s\x1fred\x1f%s' "$branch" "$dir"
-    else
-        printf '\x1f%s\x1fgreen\x1f%s' "$branch" "$dir"
+    local toplevel project=""
+    toplevel=$(git rev-parse --show-toplevel 2>/dev/null)
+    if [[ -n "$toplevel" ]]; then
+        local real_dev="${HOME:A}/dev/"
+        local rel="${toplevel#$real_dev}"
+        [[ "$rel" != "$toplevel" ]] && project="${rel##*/}"
     fi
+
+    local color="green"
+    [[ -n "$dirty" ]] && color="red"
+    printf '\x1f%s\x1f%s\x1f%s\x1f%s' "$branch" "$color" "$project" "$dir"
 }
 
 _handle_async_git() {
@@ -39,8 +46,8 @@ _handle_async_git() {
 
     [[ -z "$output" ]] && return
 
-    local branch color dir
-    IFS=$'\x1f' read -r _ branch color dir <<< "$output"
+    local branch color project dir
+    IFS=$'\x1f' read -r _ branch color project dir <<< "$output"
 
     [[ "$dir" != "$PWD" ]] && return
 
@@ -49,6 +56,11 @@ _handle_async_git() {
         _git_info="${sep}%{$fg_bold[red]%}${branch}%{$reset_color%}"
     else
         _git_info="${sep}%{$fg[green]%}${branch}%{$reset_color%}"
+    fi
+    if [[ -n "$project" ]]; then
+        _project_name="%{\e[0;35m%}${project}%{\e[0m%}"
+    else
+        _project_name=""
     fi
     _git_info_pwd="$PWD"
 
@@ -73,22 +85,10 @@ _get_git_info() {
     fi
 }
 
-project_name() {
-    local toplevel
-    toplevel=$(git rev-parse --show-toplevel 2>/dev/null) || return
-    # Resolve symlinks in HOME so paths match git's resolved output
-    local real_dev="${HOME:A}/dev/"
-    local rel="${toplevel#$real_dev}"
-    [[ "$rel" == "$toplevel" ]] && return
-    # Strip org prefix
-    echo "${rel##*/}"
-}
-
-project_name_color() {
-    local name
-    name=$(project_name)
-    [[ -z "$name" ]] && return
-    echo "%{\e[0;35m%}${name}%{\e[0m%}"
+_get_project_name() {
+    if [[ "$_git_info_pwd" == "$PWD" ]]; then
+        echo "$_project_name"
+    fi
 }
 
 directory_name() {
@@ -102,7 +102,7 @@ aws_vault_profile() {
 }
 
 setopt PROMPT_SUBST
-export PROMPT=$'$(aws_vault_profile)$(directory_name) $(project_name_color)$(_get_git_info)\n$ '
+export PROMPT=$'$(aws_vault_profile)$(directory_name) $(_get_project_name)$(_get_git_info)\n$ '
 
 local return_code="%(?..%{$fg[red]%}%?%{$reset_color%})"
 export RPS1="${return_code}"
@@ -112,6 +112,7 @@ precmd() {
 
     if [[ "$_git_info_pwd" != "$PWD" ]]; then
         _git_info=""
+        _project_name=""
     fi
 
     _start_async_git
