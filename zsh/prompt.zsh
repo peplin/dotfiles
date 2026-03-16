@@ -44,7 +44,7 @@ _handle_async_git() {
 
     [[ "$dir" != "$PWD" ]] && return
 
-    local sep="%{$fg[yellow]%}|%{$reset_color%}"
+    local sep="%{$fg[yellow]%} %{$reset_color%}"
     if [[ "$color" == "red" ]]; then
         _git_info="${sep}%{$fg_bold[red]%}${branch}%{$reset_color%}"
     else
