@@ -4,17 +4,17 @@
     "command": "~/.dotfiles/claude/file-suggestion.sh"
   },
   "permissions": {
-    "defaultMode": "acceptEdits",
     "allow": [
       "Bash(chmod *)",
       "Bash(find *)"
     ],
+    "defaultMode": "acceptEdits",
     "additionalDirectories": [
       "~/dev",
       "~/.dotfiles"
     ]
   },
-  "model": "opus",
+  "model": "opus[1m]",
   "statusLine": {
     "type": "command",
     "command": "~/.dotfiles/claude/statusline.sh",
