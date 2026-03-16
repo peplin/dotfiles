@@ -12,7 +12,6 @@ zstyle ':completion:*:expand:*' tag-order all-expansions
 
 # formatting and messages
 zstyle ':completion:*' verbose yes
-zstyle ':completion:*:descriptions' format "- %d -"
 zstyle ':completion:*:default' list-prompt '%S%M matches%s'
 zstyle ':completion:*:manuals' separate-sections true
 zstyle ':completion:*' menu select
