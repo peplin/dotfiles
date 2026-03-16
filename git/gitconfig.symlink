@@ -52,7 +52,7 @@
     tidy = !~/.dotfiles/git/tidy.sh
     subup = !~/.dotfiles/git/subup.sh
     fp = "!bash -c 'f() { if [[ $(git rev-parse --abbrev-ref HEAD) =~ ^ma(in|ster)$ ]]; then echo \"Not force pushing main branch\"; else git push --force-with-lease origin; fi  } ; f'"
-    discard = !git reset HEAD -- && git co -- .
+    discard = !git reset HEAD && git co -- .
     rc = "-c core.editor=true rebase --continue"
 [apply]
     whitespace = fix
