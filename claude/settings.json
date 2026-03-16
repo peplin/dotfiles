@@ -4,8 +4,10 @@
     "command": "~/.dotfiles/claude/file-suggestion.sh"
   },
   "permissions": {
+    "defaultMode": "acceptEdits",
     "allow": [
-      "Bash(chmod:*)"
+      "Bash(chmod *)"
+      "Bash(find *)"
     ],
     "additionalDirectories": [
       "~/dev",
@@ -19,7 +21,7 @@
     "padding": 0
   },
   "sandbox": {
-    "enabled": true,
+    "enabled": false,
     "autoAllowBashIfSandboxed": true,
     "writePaths": [
       "/home/cpeplin/.cache/bazel",
