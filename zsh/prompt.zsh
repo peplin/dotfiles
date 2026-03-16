@@ -36,9 +36,10 @@ _async_git_info() {
 
 _handle_async_git() {
     local output
-    read -r -u $1 output
-    zle -F $1
-    exec {1}<&-
+    local fd=$1
+    read -r -u $fd output
+    zle -F $fd
+    exec {fd}<&-
 
     if [[ $_async_git_pid -ne 0 ]]; then
         _async_git_pid=0

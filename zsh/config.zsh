@@ -68,10 +68,10 @@ unsetopt beep
 unsetopt list_beep
 
 bindkey -e
-bindkey ';5A' vi-beginning-of-line
-bindkey ';5B' vi-end-of-line
-bindkey ';5C' emacs-forward-word
-bindkey ';5D' emacs-backward-word
+#bindkey ';5A' vi-beginning-of-line
+#bindkey ';5B' vi-end-of-line
+#bindkey ';5C' emacs-forward-word
+#bindkey ';5D' emacs-backward-word
 bindkey '^[Od' backward-word
 bindkey '^[Oc' forward-word
 bindkey '^[[7~' beginning-of-line

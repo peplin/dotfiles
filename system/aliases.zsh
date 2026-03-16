@@ -6,7 +6,7 @@ fi
 LS_SUFFIX=""
 if ls --version >/dev/null 2>&1; then
     # GNU ls
-    LS_SUFFIX="-N --group-directories-first --color=auto"
+    LS_SUFFIX=" -N --group-directories-first --color=auto"
 elif ls -G >/dev/null 2>&1; then
     # BSD ls
 fi
@@ -17,8 +17,9 @@ if [ "$TERM" != "dumb" ]; then
     fi
 fi
 
-alias ll='ls -lh'
-alias la='ls -lha'
+alias ls="ls -N$LS_SUFFIX"
+alias ll="ls -lh$LS_SUFFIX"
+alias la="ls -lha$LS_SUFFIX"
 
 alias grep='grep --color=auto'
 

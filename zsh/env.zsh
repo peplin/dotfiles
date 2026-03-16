@@ -17,4 +17,4 @@ export DEBFULLNAME="Christopher Peplin"
 export DEBEMAIL="chris.peplin@rhubarbtech.com"
 export GPGKEY=D963BFAF
 
-export HOSTNAME="`hostname`"
+export HOSTNAME="${HOSTNAME:-$(hostname)}"

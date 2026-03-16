@@ -1,8 +1,7 @@
 if [[ -d $HOME/bin ]]; then
     export PATH="$HOME/bin:$PATH"
-    # add all first level subdirectories in ~/bin to PATH
-    for DIR in `find ~/bin/ -maxdepth 1 -type d`; do
-        export PATH=$PATH:$DIR
+    for DIR in ~/bin/*/; do
+        [[ -d "$DIR" ]] && export PATH="$PATH:$DIR"
     done
 fi
 

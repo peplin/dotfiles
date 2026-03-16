@@ -9,8 +9,8 @@ squash_all() {
     message=$1
     first_commit=$(git log @{upstream}..HEAD --pretty=format:"%h" | tail -1)
     git reset --soft $first_commit
-    if [ ! -z $message ]; then
-      git commit --amend -m $message
+    if [ ! -z "$message" ]; then
+      git commit --amend -m "$message"
     else
       git commit --amend --no-edit
     fi
