@@ -35,6 +35,8 @@ autocmd!
         Plug 'itchyny/lightline.vim'
         Plug 'romainl/apprentice'
         Plug 'sainnhe/gruvbox-material'
+        Plug 'rose-pine/vim'
+        Plug 'phanviet/vim-monokai-pro'
 
         " Formatters & Linters
         Plug 'dense-analysis/ale'
@@ -122,7 +124,14 @@ autocmd!
         let g:gruvbox_material_background = "dark"
         set background=dark
 
-        colorscheme gruvbox-material
+        "colorscheme gruvbox-material
+        " let g:lightline = { 'colorscheme': 'gruvbox_material' }
+        "
+        "colorscheme rosepine_moon
+        "let g:lightline = { 'colorscheme': 'rosepine_moon' }
+
+        colorscheme monokai_pro
+        let g:lightline = { 'colorscheme': 'monokai_pro' }
     else
         colorscheme wombat
     end
@@ -373,9 +382,6 @@ autocmd!
     " }
 
     " lightline {
-        let g:lightline = {
-            \ 'colorscheme': 'gruvbox_material',
-        \ }
     " }
 
     " NERDComment {
