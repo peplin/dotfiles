@@ -68,10 +68,10 @@ unsetopt beep
 unsetopt list_beep
 
 bindkey -e
-#bindkey ';5A' vi-beginning-of-line
-#bindkey ';5B' vi-end-of-line
-#bindkey ';5C' emacs-forward-word
-#bindkey ';5D' emacs-backward-word
+bindkey ';5A' vi-beginning-of-line
+bindkey ';5B' vi-end-of-line
+bindkey ';5C' emacs-forward-word
+bindkey ';5D' emacs-backward-word
 bindkey '^[Od' backward-word
 bindkey '^[Oc' forward-word
 bindkey '^[[7~' beginning-of-line
@@ -83,6 +83,11 @@ bindkey '\e[F'    end-of-line
 
 bindkey '^N' forward-word
 bindkey '^B' backward-word
+
+# PageUp/Down without shift searches through history. Don't really use this,
+# just tired it it spamming my terminal with ~
+bindkey '^[[5~' history-beginning-search-backward
+bindkey '^[[6~' history-beginning-search-forward
 
 if [ -e /etc/zsh_command_not_found ]; then
     source /etc/zsh_command_not_found

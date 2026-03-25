@@ -30,3 +30,10 @@ quit-after-last-window-closed = true
 
 # theme = dark:Rose Pine Moon,light:Rose Pine Dawn
 theme = dark:Monokai Pro,light:Monokai Pro Light
+
+keybind = shift+page_up=scroll_page_up
+keybind = shift+page_down=scroll_page_down
+
+# please why can't i just linux and xmonad
+keybind = alt+\=toggle_fullscreen
+keybind = alt+enter=new_window
