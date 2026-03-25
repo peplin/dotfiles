@@ -3,8 +3,6 @@
 SCRIPT_DIRECTORY="$(dirname "$0")"
 source "$SCRIPT_DIRECTORY/util.sh"
 
-set -e
-
 declare -A branch_parents
 declare visited_branches
 
@@ -35,14 +33,22 @@ flowdown() {
         indentation+="  "
     done
 
-    upstream=$(git rev-parse --abbrev-ref --symbolic-full-name "$branch@{upstream}")
+    if ! upstream=$(git rev-parse --abbrev-ref --symbolic-full-name "$branch@{upstream}" 2>/dev/null); then
+        echo "${indentation}SKIPPED ($branch): no upstream set"
+        return
+    fi
     visited_branches+=" $branch"
 
     # Use old school method when --update-refs fails due to a parent branch
     # having an amended commit.
     if [[ $depth == 0 ]] || [[ ${FORCE} == "true" ]]; then
         echo -n "${indentation}Rebasing $branch ..."
-        _=$(git rebase --quiet --fork-point "$upstream" "$branch")
+        if ! rebase_output=$(git rebase --quiet --fork-point "$upstream" "$branch" 2>&1); then
+            # If rebase started but hit conflicts, abort it
+            git rebase --abort 2>/dev/null
+            echo "SKIPPED ($branch): $rebase_output"
+            return
+        fi
         echo "done"
     fi
 
