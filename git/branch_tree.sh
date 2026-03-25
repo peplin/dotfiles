@@ -12,7 +12,35 @@ outputs=()
 LIGHT_BLUE="\033[0;34m"
 GREEN="\033[0;32m"
 RED="\033[0;31m"
+PURPLE="\033[0;35m"
 NO_COLOR="\033[0m"
+
+declare -A pr_numbers
+declare -A pr_states
+declare -A pr_drafts
+
+# Fetch PR info for all branches in a single gh call
+fetch_all_pr_info() {
+    local branches=("$@")
+    if (( ${#branches[@]} == 0 )); then
+        return
+    fi
+
+    local pr_json
+    pr_json=$(gh pr list --author @me --state all --limit 200 \
+        --json number,state,isDraft,headRefName 2>/dev/null) || return
+
+    for branch in "${branches[@]}"; do
+        local match
+        match=$(echo "$pr_json" | jq -r --arg b "$branch" \
+            '[.[] | select(.headRefName == $b)] | sort_by(.number) | last // empty')
+        if [ -n "$match" ]; then
+            pr_numbers[$branch]=$(echo "$match" | jq -r '.number')
+            pr_states[$branch]=$(echo "$match" | jq -r '.state')
+            pr_drafts[$branch]=$(echo "$match" | jq -r '.isDraft')
+        fi
+    done
+}
 
 render_branch_tree() {
     local branch=$1
@@ -20,12 +48,11 @@ render_branch_tree() {
     depth=$((depth))
 
     local upstream=$(git rev-parse --abbrev-ref --symbolic-full-name "$branch@{upstream}" 2>/dev/null)
-    if [ -z "$upstream" ]; then
-        local child_branches=""
-        local silbings=""
-    else
+    local child_branches=(${branch_parents[$branch]})
+    if [ -n "$upstream" ]; then
         local siblings=(${branch_parents[$upstream]})
-        local child_branches=(${branch_parents[$branch]})
+    else
+        local siblings=""
     fi
 
     local prefix=""
@@ -42,9 +69,14 @@ render_branch_tree() {
         fi
     fi
 
-    commits_diff=($(git rev-list --left-right --count $upstream...$branch))
-    commits_ahead=$((commits_diff[1]))
-    commits_behind=$((commits_diff[0]))
+    if [ -n "$upstream" ]; then
+        commits_diff=($(git rev-list --left-right --count $upstream...$branch))
+        commits_ahead=$((commits_diff[1]))
+        commits_behind=$((commits_diff[0]))
+    else
+        commits_ahead=0
+        commits_behind=0
+    fi
     local commits_output="("
 
     if (( commits_ahead > 0 )); then
@@ -70,28 +102,23 @@ render_branch_tree() {
         commits_output+=$(printf "%${commits_padding}s" "")
     fi
 
-    if (( depth > 0 )) && (( no_external_calls == 0 )); then
-        set +e
-        TMPFILE=$(mktemp)
-        local pr_info_output=$(gh pr view $branch --json number,state,isDraft 2> $TMPFILE)
-        if (( $? == 0 )); then
-            local pr_number=$(echo $pr_info_output | jq .number)
-            local pr_state=$(echo $pr_info_output | jq .state)
-            local pr_draft=$(echo $pr_info_output | jq .isDraft)
-        fi
-        set -e
-    fi
+    local pr_number="${pr_numbers[$branch]}"
+    local pr_state="${pr_states[$branch]}"
+    local pr_draft="${pr_drafts[$branch]}"
 
     pr_info=""
-    if [ "$pr_draft" = "true" ]; then
-        pr_info+="$LIGHT_BLUE"
-    elif [ "$pr_state" = "\"OPEN\"" ]; then
-        pr_info+="$GREEN"
-    else
-        pr_info+="$RED"
+    if [ -n "$pr_number" ]; then
+        if [ "$pr_state" = "MERGED" ]; then
+            pr_info+="$PURPLE"
+        elif [ "$pr_state" = "CLOSED" ]; then
+            pr_info+="$RED"
+        elif [ "$pr_draft" = "true" ]; then
+            pr_info+="$LIGHT_BLUE"
+        else
+            pr_info+="$GREEN"
+        fi
+        pr_info+="$pr_number$NO_COLOR"
     fi
-
-    pr_info+="$pr_number$NO_COLOR"
     # Pad PR info to fixed width
     local visible_pr=$(echo -e "$pr_info" | sed 's/\x1b\[[0-9;]*m//g')
     local pr_padding=$((8 - ${#visible_pr}))
@@ -145,6 +172,17 @@ fi
 find_current_branch
 find_starting_branch all
 build_branch_tree branch_parents
+
+# Batch-fetch PR info for all non-root branches
+if (( no_external_calls == 0 )); then
+    all_branch_names=()
+    while IFS= read -r branch; do
+        if [ "$branch" != "$starting_branch" ]; then
+            all_branch_names+=("$branch")
+        fi
+    done <<< "$(git for-each-ref --format='%(refname:short)' refs/heads)"
+    fetch_all_pr_info "${all_branch_names[@]}"
+fi
 
 render_branch_tree $starting_branch 0
 
