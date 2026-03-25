@@ -11,15 +11,31 @@ bind-key n next-window
 bind-key C-p previous-window
 bind-key p previous-window
 
+bind c new-window -c "#{pane_current_path}"
+
+# Good for using wheel to scroll, but also forces you to use tmux selection (bad)
+# set -g mouse
+
 # Fix Home/End on iTerm2
 #bind-key -n Home send Escape "[H"
 #bind-key -n End send Escape "[F"
 
+# Start windows and panes at 1, not 0
+set -g base-index 1
+set -g pane-base-index 1
+set-window-option -g pane-base-index 1
+set-option -g renumber-windows on
+
 # Use 256 color
 set -g default-terminal xterm-256color
+set -ag terminal-overrides ",$TERM:RGB"
+
+set -s extended-keys on
+set -as terminal-features 'tmux-256color:extkeys'
 
 # Don't use a login shell
 #set -g default-command "${SHELL}"
+# Override shell in case the system doesn't allow chsh
 set-option -g default-shell /bin/zsh
 
 # Make control-arrows work
@@ -31,3 +47,8 @@ setenv -g SSH_AUTH_SOCK /tmp/$USER-ssh_auth_sock
 
 # Increase scrollback buffer size
 set-option -g history-limit 100000
+
+# Shift-PageUp and pagedown should pass through to tmux
+# Don't use without shift, it conflicts with apps like vim
+bind -n S-PageUp copy-mode -eu
+bind -n S-PageDown send-keys -X page-down

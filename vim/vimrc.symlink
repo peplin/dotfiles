@@ -212,6 +212,11 @@ autocmd!
     set spell
     set spellcapcheck=
 
+    " Less aggressive spellcheck highlighting
+    highlight clear SpellBad
+    highlight SpellBad cterm=underline ctermfg=red
+    " highlight SpellBad ctermfg=009 ctermbg=011 guifg=#ff0000 guibg=#ffff00
+
     " lines to scroll when cursor leaves screen
     set scrolljump=5
     " minimum lines to keep above and below cursor
@@ -418,7 +423,7 @@ autocmd!
     " vim-ale {
         let g:ale_linters = {
             \ 'ruby': ['rubocop'],
-            \ 'python': ['flake8', 'mypy'],
+            \ 'python': ['ruff', 'pyright'],
             \ 'c': ['clang'],
             \ 'cpp': ['clang', 'g++'],
             \ 'rust': ['cargo', 'analyzer'],
@@ -430,7 +435,6 @@ autocmd!
         let g:ale_fix_on_save = 1
         let g:ale_fixers = ['prettier', 'remove_trailing_lines']
 
-        let g:ale_python_flake8_options = '--max-line-length=88'
         let g:ale_javascript_eslint_options = '--no-warn-ignored'
     " }
 
@@ -446,7 +450,7 @@ autocmd!
 " Jump to Bazel BUILD file in same directory as this file
 " map <F3> :sp %:h/BUILD<CR>
 
-map <F2> :A<CR>
+"map <F2> :A<CR>
 
 " Stop shift-k from trying to open the man page
 map <S-k> <Nop>
@@ -456,13 +460,6 @@ map <S-k> <Nop>
 if filereadable($HOME . "/.vimrc-work")"
     source ~/.vimrc-work
 endif
-
-" highlight clear SpellBad
-" highlight SpellBad ctermfg=009 ctermbg=011 guifg=#ff0000 guibg=#ffff00
-" Workaround for vim bug to fix spell highlighting
-" https://github.com/vim/vim/issues/2424
-set t_Cs=
-hi SpellBad cterm=undercurl ctermbg=NONE
 
 map <leader>q :call QFixToggle()<CR>
 function! QFixToggle()
