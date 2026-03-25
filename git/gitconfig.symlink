@@ -120,3 +120,14 @@
     date = iso
 [credential "https://github.com"]
     helper = !/usr/bin/gh auth git-credential
+[core]
+    pager = delta
+[interactive]
+    diffFilter = delta --color-only
+[delta]
+    navigate = true  # use n and N to move between diff sections
+    # dark = true      # or light = true, or omit for auto-detection
+    syntax-theme = Monokai Extended
+    diff-so-fancy = true
+[merge]
+    conflictStyle = zdiff3
