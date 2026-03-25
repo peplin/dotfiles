@@ -11,12 +11,24 @@
 * Prefer using pathlib instead of os.path
 * Avoid unnecessary temporary variables, unless the code is particularly complex
     and would be hard to fit on 1-2 lines.
+* Don't use f-strings with the Python logging library. Let the logging library
+    itself handle string interpolation.
 
 ## Tools
 
 * Use ripgrep (the `rg` CLI) for searching instead of grep
+* Never run `bazel clean`
 
 ## Formatting and Linting
 
 Don't run formatting or linting tools until the very end of your task.
 For Python formatting, just run `ruff`. I have it installed on the PATH.
+
+## Testing
+
+When writing unit tests, prefer not to stub out internal implementation details.
+It's OK in limited use but we should first consider if the code can be
+refactored to support dependency injection.
+
+Balance the scope of that refactoring against the number of mocks or stubs that
+would be required. Be judicious in either approach.
