@@ -23,3 +23,6 @@ dist/*
 moved.tf
 *.regression*
 *nock.regression.testutil.ts
+.zsh_sessions
+*.DS_Store
+.vimundo
