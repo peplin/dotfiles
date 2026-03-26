@@ -17,7 +17,7 @@ if [ "$TERM" != "dumb" ]; then
     fi
 fi
 
-alias ls="ls -N$LS_SUFFIX"
+alias ls="ls $LS_SUFFIX"
 alias ll="ls -lh$LS_SUFFIX"
 alias la="ls -lha$LS_SUFFIX"
 
