@@ -15,18 +15,19 @@ export SHELL_ID
 
 if [[ "$SHELL_ID" =~ iterm2  ]]; then
     CONTROL_MODE_OPTIONS="-CC"
+    SESSION_NAME=si
 else
     CONTROL_MODE_OPTIONS=""
+    SESSION_NAME=s
 fi
 
 if [ $SSH_TTY ] && [ ! $WINDOW ] && [ ! $DISPLAY ]; then
     if [[ -z "$TMUX" ]] ;then
         if which tmux >/dev/null 2>&1; then
-            session=mysession$SHELL_ID
             if tmux has-session -t "$session" 2>/dev/null; then
-                tmux $CONTROL_MODE_OPTIONS attach-session -t "$session"_
+                tmux $CONTROL_MODE_OPTIONS attach-session -t "$SESSION_NAME"
             else
-                tmux $CONTROL_MODE_OPTIONS new-session -s "$session"
+                tmux $CONTROL_MODE_OPTIONS new-session -s "$SESSION_NAME"
             fi
         fi
     fi
