@@ -24,7 +24,7 @@ fi
 if [ $SSH_TTY ] && [ ! $WINDOW ] && [ ! $DISPLAY ]; then
     if [[ -z "$TMUX" ]] ;then
         if which tmux >/dev/null 2>&1; then
-            if tmux has-session -t "$session" 2>/dev/null; then
+            if tmux has-session -t "$SESSION_NAME" 2>/dev/null; then
                 tmux $CONTROL_MODE_OPTIONS attach-session -t "$SESSION_NAME"
             else
                 tmux $CONTROL_MODE_OPTIONS new-session -s "$SESSION_NAME"
