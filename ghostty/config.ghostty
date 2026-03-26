@@ -14,6 +14,8 @@ keybind = super+digit_9=text:\x11\x39
 # New tmux window on Cmd+t in tmux it is Ctrl+b+c
 keybind = super+t=text:\x11\x63
 
+keybind = shift+enter=text:\n
+
 # Close tmux pane on Cmd+w in tmux it is Ctrl+b+x (it is using a custom keybind in tmux to kill the pane)
 keybind = super+w=text:\x11\x78
 
