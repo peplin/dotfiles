@@ -11,7 +11,6 @@ bind-key n next-window
 bind-key C-p previous-window
 bind-key p previous-window
 
-bind c new-window -c "#{pane_current_path}"
 
 # Good for using wheel to scroll, but also forces you to use tmux selection (bad)
 # set -g mouse
@@ -52,3 +51,16 @@ set-option -g history-limit 100000
 # Don't use without shift, it conflicts with apps like vim
 bind -n S-PageUp copy-mode -eu
 bind -n S-PageDown send-keys -X page-down
+bind -n S-Up copy-mode -eu
+bind -n S-Down send-keys -X page-down
+
+# vim-like keybindings for moving between panes
+bind h select-pane -L
+bind j select-pane -D
+bind k select-pane -U
+bind l select-pane -R
+
+# Open split panes and new windows in the same path
+bind '"' split-window -v -c "#{pane_current_path}"
+bind % split-window -h -c "#{pane_current_path}"
+bind c new-window -c "#{pane_current_path}"
