@@ -14,6 +14,12 @@
 * Don't use f-strings with the Python logging library. Let the logging library
     itself handle string interpolation.
 
+## Documentation
+
+* Strive to write clear, self-documenting code. In docstrings for functions,
+    don't describe in detail how the function does what it does, just explain the
+    contract of the API for the user.
+
 ## Tools
 
 * Use ripgrep (the `rg` CLI) for searching instead of grep
