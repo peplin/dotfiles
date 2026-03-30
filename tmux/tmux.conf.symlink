@@ -55,12 +55,26 @@ bind -n S-Up copy-mode -eu
 bind -n S-Down send-keys -X page-down
 
 # vim-like keybindings for moving between panes
-bind h select-pane -L
-bind j select-pane -D
-bind k select-pane -U
-bind l select-pane -R
+bind h if -F '#{pane_at_left}' '' 'select-pane -L'
+bind j if -F '#{pane_at_bottom}' '' 'select-pane -D'
+bind k if -F '#{pane_at_top}' '' 'select-pane -U'
+bind l if -F '#{pane_at_right}' '' 'select-pane -R'
 
 # Open split panes and new windows in the same path
 bind '"' split-window -v -c "#{pane_current_path}"
 bind % split-window -h -c "#{pane_current_path}"
 bind c new-window -c "#{pane_current_path}"
+
+# Reload config
+bind r source-file ~/.tmux.conf \; display-message "Config reloaded"
+
+# Visual indicator when prefix key is pressed
+set -g status-style "bg=#{?client_prefix,#d8a657,#32302f},fg=#d4be98"
+set -g status-left "#{?client_prefix, COMMAND ,} "
+
+# Pane borders
+set -g pane-border-style 'fg=#504945'
+set -g pane-active-border-style 'fg=#d8a657'
+
+set -g window-style 'bg=#282828'
+set -g window-active-style 'bg=#1d2021'
