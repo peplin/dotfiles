@@ -23,6 +23,20 @@
   "sandbox": {
     "enabled": false,
     "autoAllowBashIfSandboxed": true,
+    "filesystem": {
+      "allowWrite": [
+        "."
+      ],
+      "denyWrite": [
+        "/"
+      ],
+      "denyRead": [
+        "~/"
+      ],
+      "allowRead": [
+        "."
+      ]
+    },
     "writePaths": [
       "/home/cpeplin/.cache/bazel",
       "/data/home/cpeplin/.cache/bazel",
