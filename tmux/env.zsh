@@ -7,7 +7,7 @@ export SSH_AUTH_SOCK=$HOME/.ssh/ssh_auth_sock.$HOSTNAME
 # Configure iTerm's ENQ answer back to be "iterm2" so we can identify what
 # when the client is using that terminal. Use that to determine if we should
 # enable tmux control mode.
-if [[ -t 1 ]]; then
+if [[ -t 1 ]] && [[ -z "$TMUX" ]]; then
     sleep 0.2
     SHELL_ID=$(stty raw min 0 time 1 < /dev/tty; echo -ne '\005' > /dev/tty; read -s REPLY < /dev/tty; stty cooked < /dev/tty; echo -n "$REPLY" | tr -d '[:cntrl:]')
 fi
