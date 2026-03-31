@@ -10,16 +10,18 @@ zmodload zsh/complist
 
 autoload colors
 autoload zsh/terminfo
-autoload -U url-quote-magic
 autoload -Uz zcalc
+autoload -U select-word-style
+select-word-style bash
+autoload -U url-quote-magic
 zle -N self-insert url-quote-magic
 
 autoload zmv
 
 DIRSTACKSIZE=15
 HISTFILE=~/.zsh_history
-HISTSIZE=10000
-SAVEHIST=10000
+HISTSIZE=100000
+SAVEHIST=100000
 
 # Set/unset shell options (case and underscore insensitive)
 setopt append_history
@@ -31,7 +33,7 @@ setopt hist_ignore_all_dups  # don't record dupes in history
 #setopt hist_reduce_blanks
 setopt hist_verify # allow confirmation before running with history subst.
 setopt no_share_history
-setopt no_inc_append_history
+setopt inc_append_history
 
 setopt extended_glob
 setopt notify
@@ -59,9 +61,9 @@ setopt complete_in_word
 setopt correct
 unsetopt ignore_eof
 
-# don't expand aliases _before_ completion has finished
-#   like: git comm-[tab]
-setopt complete_aliases
+# Allow completion to expand through aliases so e.g. `gs <tab>` completes
+# as if you typed `git status <tab>`
+unsetopt complete_aliases
 
 unsetopt bgnice
 unsetopt beep

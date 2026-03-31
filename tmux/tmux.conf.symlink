@@ -25,12 +25,18 @@ set -g pane-base-index 1
 set-window-option -g pane-base-index 1
 set-option -g renumber-windows on
 
+# Reduce escape-time for responsive Esc in vim/zsh (default 500ms is too slow)
+set -s escape-time 10
+
 # Use 256 color
 set -g default-terminal xterm-256color
 set -ag terminal-overrides ",$TERM:RGB"
 
 set -s extended-keys on
 set -as terminal-features 'tmux-256color:extkeys'
+
+set -g focus-events on
+set -g set-clipboard on
 
 # Don't use a login shell
 #set -g default-command "${SHELL}"
@@ -42,7 +48,6 @@ set-window-option -g xterm-keys on
 
 setenv -g SSH_AUTH_SOCK $HOME/.ssh/ssh_auth_sock.$HOSTNAME
 set -g update-environment -r
-setenv -g SSH_AUTH_SOCK /tmp/$USER-ssh_auth_sock
 
 # Increase scrollback buffer size
 set-option -g history-limit 100000
@@ -78,3 +83,5 @@ set -g pane-active-border-style 'fg=#d8a657'
 
 set -g window-style 'bg=#282828'
 set -g window-active-style 'bg=#1d2021'
+
+bind Space last-pane
