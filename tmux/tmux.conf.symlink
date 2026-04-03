@@ -28,6 +28,9 @@ set-option -g renumber-windows on
 # Reduce escape-time for responsive Esc in vim/zsh (default 500ms is too slow)
 set -s escape-time 10
 
+# Reduce repeat-time so prefix key doesn't "hold" waiting for repeatable bindings
+set -g repeat-time 200
+
 # Use 256 color
 set -g default-terminal xterm-256color
 set -ag terminal-overrides ",$TERM:RGB"
@@ -61,9 +64,17 @@ bind -n S-Down send-keys -X page-down
 
 # vim-like keybindings for moving between panes
 bind h if -F '#{pane_at_left}' '' 'select-pane -L'
+bind C-h if -F '#{pane_at_left}' '' 'select-pane -L'
 bind j if -F '#{pane_at_bottom}' '' 'select-pane -D'
+bind C-j if -F '#{pane_at_bottom}' '' 'select-pane -D'
 bind k if -F '#{pane_at_top}' '' 'select-pane -U'
+bind C-k if -F '#{pane_at_top}' '' 'select-pane -U'
 bind l if -F '#{pane_at_right}' '' 'select-pane -R'
+bind C-l if -F '#{pane_at_right}' '' 'select-pane -R'
+
+# Swap panes (also with Ctrl held)
+bind '{' swap-pane -U
+bind '}' swap-pane -D
 
 # Open split panes and new windows in the same path
 bind '"' split-window -v -c "#{pane_current_path}"
@@ -85,3 +96,4 @@ set -g window-style 'bg=#282828'
 set -g window-active-style 'bg=#1d2021'
 
 bind Space last-pane
+bind C-Space last-pane
