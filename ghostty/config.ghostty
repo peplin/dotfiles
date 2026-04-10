@@ -14,17 +14,16 @@ keybind = super+digit_9=text:\x11\x39
 # New tmux window on Cmd+t in tmux it is Ctrl+b+c
 keybind = super+t=text:\x11\x63
 
-keybind = shift+enter=text:\n
+# Only necessary of remote tmux is old and doesn't support extended keys
+#keybind = shift+enter=text:\n
 
 # Close tmux pane on Cmd+w in tmux it is Ctrl+b+x (it is using a custom keybind in tmux to kill the pane)
 keybind = super+w=text:\x11\x78
 
 mouse-hide-while-typing = true
-#macos-titlebar-style = hidden
-#window-decoration = none
 
 window-height = 50
-window-width = 120
+window-width = 110
 
 copy-on-select = clipboard
 
@@ -33,9 +32,18 @@ quit-after-last-window-closed = true
 # theme = dark:Rose Pine Moon,light:Rose Pine Dawn
 theme = dark:Monokai Pro,light:Monokai Pro Light
 
-keybind = shift+page_up=scroll_page_up
-keybind = shift+page_down=scroll_page_down
+# keybind = shift+arrow_up=scroll_page_up
+# keybind = shift+arrow_down=scroll_page_down
+
+keybind = shift+arrow_up=text:\x1b[1;2A
+keybind = shift+arrow_down=text:\x1b[1;2B
 
 # please why can't i just linux and xmonad
 keybind = alt+\=toggle_fullscreen
 keybind = alt+enter=new_window
+
+# Disable font ligatures
+font-feature = -calt
+font-feature = -liga
+font-feature = -dlig
+
