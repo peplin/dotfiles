@@ -18,7 +18,9 @@
 
 * Strive to write clear, self-documenting code. In docstrings for functions,
     don't describe in detail how the function does what it does, just explain the
-    contract of the API for the user.
+    contract of the API for the user. Say "what" we're doing and why, not so
+    much "how".
+
 
 ## Tools
 
