@@ -3,6 +3,9 @@
     "type": "command",
     "command": "~/.dotfiles/claude/file-suggestion.sh"
   },
+  "env": {
+    "ENABLE_LSP_TOOL": "1"
+  },
   "permissions": {
     "allow": [
       "Bash(chmod *)",
@@ -44,5 +47,8 @@
     ]
   },
   "alwaysThinkingEnabled": false,
-  "autoUpdatesChannel": "latest"
+  "autoUpdatesChannel": "latest",
+  "enabledPlugins": {
+    "pyright-lsp@claude-plugins-official": true
+  }
 }
