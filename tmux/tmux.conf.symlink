@@ -13,7 +13,8 @@ bind-key p previous-window
 
 
 # Good for using wheel to scroll, but also forces you to use tmux selection (bad)
-# set -g mouse
+set -g mouse
+set -as terminal-features ",*:hyperlinks"
 
 # Fix Home/End on iTerm2
 #bind-key -n Home send Escape "[H"
@@ -97,3 +98,6 @@ set -g window-active-style 'bg=#1d2021'
 
 bind Space last-pane
 bind C-Space last-pane
+
+bind -r Enter next-layout
+bind -r C-Enter next-layout
