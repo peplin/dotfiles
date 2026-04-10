@@ -108,6 +108,7 @@
     mnemonicPrefix = true
     renames = true
     colorMovedWS = allow-indentation-change
+    colorMoved = default
 [commit]
     verbose = true
 [pull]
@@ -126,8 +127,9 @@
     diffFilter = delta --color-only
 [delta]
     navigate = true  # use n and N to move between diff sections
-    # dark = true      # or light = true, or omit for auto-detection
     syntax-theme = Monokai Extended
     diff-so-fancy = true
+    line-numbers = true
+    hyperlinks = true
 [merge]
     conflictStyle = zdiff3
