@@ -3,8 +3,13 @@
 * Don't use excessive emoji in responses to me, in documentation or in code. I
     prefer minimalism over whimsy.
 * Never perform git operations that interact with a remote, like `push` or `fetch`
+* Never perform git operations that write unless explicitly instructed.
 * Never create pull requests, for example by using the `gh pr create` CLI command. I will always create PRs by hand.
 * Never add "Co-authored" by Claude to the description of any git commits
+
+## Code Review
+
+Use the /review skill for multi-persona code reviews.
 
 ## Python
 
