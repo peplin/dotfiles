@@ -103,10 +103,8 @@ aws_vault_profile() {
 }
 
 setopt PROMPT_SUBST
-export PROMPT=$'$(aws_vault_profile)$(directory_name) $(_get_project_name)$(_get_git_info)\n$ '
-
-local return_code="%(?..%{$fg[red]%}%?%{$reset_color%})"
-export RPS1="${return_code}"
+export PROMPT=$'$(aws_vault_profile)$(directory_name) $(_get_project_name)$(_get_git_info)%(?.. %F{red}(%?%)%f)\n%(?,%F{green},%F{red})$%f '
+export RPS1=""
 
 precmd() {
     title "zsh" "%55<...<%~"
