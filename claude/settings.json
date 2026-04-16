@@ -9,7 +9,8 @@
   "permissions": {
     "allow": [
       "Bash(chmod *)",
-      "Bash(find *)"
+      "Bash(find *)",
+      "Bash(git:*)"
     ],
     "defaultMode": "acceptEdits",
     "additionalDirectories": [

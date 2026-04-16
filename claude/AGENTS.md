@@ -25,6 +25,9 @@ Use the /review skill for multi-persona code reviews.
     don't describe in detail how the function does what it does, just explain the
     contract of the API for the user. Say "what" we're doing and why, not so
     much "how".
+* Don't use non-ASCII characters like `—`
+* Avoid overuse of emdash in ways that break up the flow of a sentence. Prefer
+    to rewrite for better flow, or just use separate sentences.
 
 
 ## Tools
@@ -45,3 +48,7 @@ refactored to support dependency injection.
 
 Balance the scope of that refactoring against the number of mocks or stubs that
 would be required. Be judicious in either approach.
+
+When running tests, prefer using `bazel test //path/to/package/...` or `bazel
+test //path/to/package:target` - don't try to run the tests manually out of
+the Bazel runfiles.
