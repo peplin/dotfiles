@@ -34,7 +34,7 @@ set -g repeat-time 200
 
 # Use 256 color
 set -g default-terminal xterm-256color
-set -ag terminal-overrides ",$TERM:RGB"
+set -ag terminal-overrides ",xterm-ghostty:RGB,xterm-256color:RGB"
 
 set -s extended-keys on
 set -as terminal-features 'tmux-256color:extkeys'
@@ -93,8 +93,11 @@ set -g status-left "#{?client_prefix, COMMAND ,} "
 set -g pane-border-style 'fg=#504945'
 set -g pane-active-border-style 'fg=#d8a657'
 
-set -g window-style 'bg=#282828'
-set -g window-active-style 'bg=#1d2021'
+# Inherit background from the terminal emulator's theme rather than
+# hardcoding Gruvbox colors. Hardcoding caused the active pane to render
+# darker than the Ghostty background in any non-Gruvbox theme.
+# set -g window-style 'bg=#282828'
+# set -g window-active-style 'bg=#1d2021'
 
 bind Space last-pane
 bind C-Space last-pane
