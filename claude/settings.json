@@ -24,6 +24,9 @@
     "command": "~/.dotfiles/claude/statusline.sh",
     "padding": 0
   },
+  "enabledPlugins": {
+    "pyright-lsp@claude-plugins-official": true
+  },
   "sandbox": {
     "enabled": false,
     "autoAllowBashIfSandboxed": true,
@@ -48,8 +51,5 @@
     ]
   },
   "alwaysThinkingEnabled": false,
-  "autoUpdatesChannel": "latest",
-  "enabledPlugins": {
-    "pyright-lsp@claude-plugins-official": true
-  }
+  "autoUpdatesChannel": "latest"
 }
