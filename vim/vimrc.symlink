@@ -42,6 +42,9 @@ autocmd!
         Plug 'dense-analysis/ale'
         Plug 'hashivim/vim-terraform'
 
+        " Programmer spellcheck dictionary
+        Plug 'psliwka/vim-dirtytalk', {'do': ':DirtytalkUpdate'}
+
         " Primary feature plugins
         Plug 'airblade/vim-gitgutter'
         Plug 'tpope/vim-fugitive'
@@ -208,9 +211,13 @@ autocmd!
 
     " don't search includes, takes too long to scan
     set complete-=i
-    " complete from spellcheck dictionary
-    set spell
+    " Spellcheck only in prose filetypes; split CamelCase identifiers so
+    " code-style words aren't flagged as one giant misspelling. The
+    " `programming` dictionary comes from vim-dirtytalk.
+    set spelloptions=camel
     set spellcapcheck=
+    set spelllang=en,programming
+    autocmd FileType markdown,gitcommit,text,human,rst,asciidoc setlocal spell
 
     " Less aggressive spellcheck highlighting
     highlight clear SpellBad
